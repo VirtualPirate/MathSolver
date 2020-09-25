@@ -90,6 +90,14 @@ Operand& Operand::operator=(Operand&& ref){
 //Destructor
 Operand::~Operand(){free(value);}
 
+
+//Operand to Operand comparison operators
+bool Operand::operator==(const Operand& other) const {	
+	return true;}
+
+bool Operand::operator!=(const Operand& other) const {
+	return false;}
+
 Operand::operator bool() const{
 	if((!is_null) && value)
 		return true;
