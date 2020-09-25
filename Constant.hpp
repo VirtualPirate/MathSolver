@@ -35,7 +35,7 @@ struct Constant{
 	//Unary operators 
 	Number operator+() const;
 	Number operator-() const;
-	friend ostream& operator<<(ostream&, const Number&);
+	friend ostream& operator<<(std::ostream&, const Number&);
 
 }
 
