@@ -21,6 +21,106 @@ bool Operand_neq_bool(const Operand& first, const Operand& second){
 }
 
 const unsigned O_ARRAY_SIZE = 18;
+Operand (*add_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
+	Operand_Operand_add<Constant, Constant>,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+};
+Operand (*sub_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
+	Operand_Operand_sub<Constant, Constant>,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+};
+Operand (*mul_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
+	Operand_Operand_mul<Constant, Constant>,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+};
+Operand (*div_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
+	Operand_Operand_div<Constant, Constant>,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+};
+Operand (*pow_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
+	Operand_Operand_pow<Constant, Constant>,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+	Operand_null,
+};
 
 void* allocate_n_return(const Operand& ref){
 	void* point = nullptr;
@@ -103,5 +203,22 @@ Operand::operator bool() const{
 		return true;
 	return false;
 }
+
+//Operand to Operand arithmetic operators
+Operand Operand::operator+(const Operand& other) const {
+	return add_functions[func_hash(this->type, other.type)](*this, other);}
+
+Operand Operand::operator-(const Operand& other) const {
+	return sub_functions[func_hash(this->type, other.type)](*this, other);}
+
+Operand Operand::operator*(const Operand& other) const {
+	// cout << "invoked Operand_Operand_mul func" << endl;
+	return mul_functions[func_hash(this->type, other.type)](*this, other);}
+
+Operand Operand::operator/(const Operand& other) const {
+	return div_functions[func_hash(this->type, other.type)](*this, other);}
+
+Operand Operand::raise_pow(const Operand& other) const {
+	return pow_functions[func_hash(this->type, other.type)](*this, other);}
 
 
