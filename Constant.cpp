@@ -29,7 +29,7 @@ bool Constant::operator!=(const Constant& other) const {return value != other.va
 
 // Some other functions
 std::string Constant::power_print() const{
-	ostringstream stream;
+	std::ostringstream stream;
 	stream << *this;
 	return stream.str();
 }
@@ -54,7 +54,7 @@ Constant Constant::operator+() const {return +value;}
 Constant Constant::operator-() const {return -value;}
 
 
-ostream& operator<<(ostream& os, const Constant& ref){
+ostream& operator<<(std::ostream& os, const Constant& ref){
 	os << ref.value;
 	return os;
 }
