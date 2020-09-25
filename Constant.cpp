@@ -54,7 +54,7 @@ Constant Constant::operator+() const {return +value;}
 Constant Constant::operator-() const {return -value;}
 
 
-ostream& operator<<(std::ostream& os, const Constant& ref){
+std::ostream& operator<<(std::ostream& os, const Constant& ref){
 	os << ref.value;
 	return os;
 }

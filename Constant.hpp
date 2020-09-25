@@ -33,10 +33,10 @@ struct Constant{
 	Constant raise_pow(const Constant&) const;
 
 	//Unary operators 
-	Number operator+() const;
-	Number operator-() const;
-	friend ostream& operator<<(std::ostream&, const Number&);
+	Constant operator+() const;
+	Constant operator-() const;
+	friend std::ostream& operator<<(std::ostream&, const Constant&);
 
-}
+};
 
 #endif
