@@ -132,8 +132,8 @@ void* allocate_n_return(const Operand& ref){
 		case DataType::Variable:
 			// point = (void *)(new Variable{Return_Internal_Ref<Variable>(ref)});
 			break;
-		case DataType::ConstVar:
-			// point = (void *)(new ConstVar{Return_Internal_Ref<ConstVar>(ref)});
+		case DataType::Term:
+			// point = (void *)(new Term{Return_Internal_Ref<Term>(ref)});
 			break;
 		case DataType::Expression:
 			// point = (void *)(new Expression{Return_Internal_Ref<Expression>(ref)});
@@ -155,12 +155,19 @@ unsigned func_hash(DataType first_type, DataType second_type){
 }
 
 Operand::Operand(): value{nullptr}, type{DataType::None}, is_null{true}{}
-Operand::Operand(const Constant& val): value{(void*)(new Constant{val})}, type{DataType::Constant}, is_null{false}{}
-Operand& Operand::operator=(const Constant& ref){
+
+Operand::Operand(double value): value{(void*)(new Constant{value})}, type{DataType::Constant}, is_null{false}{}
+Operand& Operand::operator=(double val){
 	if(value) free(value);
-	value = (void*)(new Constant{ref});
+	value = (void*)(new Constant{val});
 	type = DataType::Constant;
 	is_null = false;
+	return *this;
+}
+Operand::Operand(const Constant& val): value{(void*)(new Constant{val})}, type{DataType::Constant}, is_null{false}{}
+Operand& Operand::operator=(const Constant& ref){
+	// Invokes Operand::operator(double)
+	*this = ref.value;
 	return *this;
 }
 

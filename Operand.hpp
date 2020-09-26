@@ -2,7 +2,7 @@
 #define Operand_H
 
 enum class DataType
-{Constant=0, Variable=1, ConstVar=2, Expression=3, None=-1};
+{Constant=0, Variable=1, Term=2, Expression=3, None=-1};
 
 unsigned func_hash(DataType, DataType);
 
@@ -16,6 +16,8 @@ struct  Operand
 
 	Operand();
 
+	Operand(double);
+	Operand& operator=(double);
 	Operand(const Constant&);
 	Operand& operator=(const Constant&);
 
