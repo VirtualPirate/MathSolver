@@ -46,6 +46,7 @@ struct  Operand
 	bool operator!=(const Operand&) const;
 
 	operator bool() const;
+	bool same_type(const Operand&) const;
 
 	friend std::ostream& operator<<(std::ostream&, const Operand&);
 

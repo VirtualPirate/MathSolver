@@ -211,6 +211,10 @@ Operand::operator bool() const{
 	return false;
 }
 
+bool Operand::same_type(const Operand& other) const {
+	return type == other.type;
+}
+
 //Operand to Operand arithmetic operators
 Operand Operand::operator+(const Operand& other) const {
 	return add_functions[func_hash(this->type, other.type)](*this, other);}
