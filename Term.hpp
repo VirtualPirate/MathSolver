@@ -7,14 +7,23 @@ class Term{
 	bool is_simplified;
 	bool is_null;
 
+public:
 	Term();
 
+	//Copy and Move semantics
 	Term(const Term&);
 	Term& operator=(const Term&);
 	Term(Term&&);
 	Term& operator=(Term&&);
 
 	Term(std::string);
+
+
+	//Getter Methods
+	const std::vector<Operand>& getFields();
+	const Operand& getPower();
+	const bool& isSimplified();
+	const bool& isNull();
 
 	void insert(const Constant&);
 	void insert(const Variable&);
@@ -24,6 +33,7 @@ class Term{
 	bool is_Variable() const;
 	bool var_exist(const char&) const;
 
+	void simplify();
 	// Term to Constant comparison operators
 	bool operator==(const Constant&) const;
 	bool operator!=(const Constant&) const;
@@ -62,6 +72,6 @@ class Term{
 	operator bool() const;
 	friend std::ostream& operator<<(std::ostream&, const Term&);
 
-}
+};
 
 #endif
