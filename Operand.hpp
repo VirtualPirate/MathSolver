@@ -47,6 +47,7 @@ struct  Operand
 
 	operator bool() const;
 	bool same_type(const Operand&) const;
+	bool same_type(const DataType&) const;
 
 	friend std::ostream& operator<<(std::ostream&, const Operand&);
 
