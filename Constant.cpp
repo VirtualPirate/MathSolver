@@ -37,6 +37,15 @@ std::string Constant::power_print() const{
 Constant Constant::abs() const {return Constant{fabs(value)};}
 
 
+//Getter methods
+const double& Constant::getValue() const {
+	return value;
+}
+
+void Constant::setValue(const double& ref){
+	value = ref;
+}
+
 // Constant to Constant arithmetic operators
 Constant Constant::operator+(const Constant& other) const
 {return Constant_Constant_add(*this, other);}

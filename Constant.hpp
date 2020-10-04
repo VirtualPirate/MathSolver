@@ -22,6 +22,12 @@ struct Constant{
 	bool operator==(const Constant&)const;
 	bool operator!=(const Constant&)const;
 
+	//Getter Methods
+	const double& getValue() const;
+
+	//Setter Methods
+	void setValue(const double&);
+
 	std::string power_print() const;
 	Constant abs() const;
 
