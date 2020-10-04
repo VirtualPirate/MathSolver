@@ -44,3 +44,24 @@ const bool& Term::isSimplified(){
 const bool& Term::isNull(){
 	return is_null;
 }
+
+// Term::iterator definition
+Term::iterator::iterator(): index{0}{}
+Term::iterator& Term::iterator::operator=(const Term::iterator& ref){
+	this->ref = ref.ref;
+	index = ref.index;
+	return *this;
+}
+
+void Term::iterator::set_iterative(const DataType& type){
+	iterative = type;
+	index = 0;
+}
+
+//Term::iterator operations
+// Term::iterator Term::iterator::operator+(const int& other){
+// 	int index = this->index;
+// 	while(index < ref->fields.size()){
+		
+// 	}
+// }

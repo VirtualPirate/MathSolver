@@ -1,6 +1,10 @@
 #ifndef Term_H
 #define Term_H
 
+#include <vector>
+
+struct Constant;
+struct Variable;
 class Term{
 	std::vector<Operand> fields;
 	Operand power;
@@ -8,6 +12,28 @@ class Term{
 	bool is_null;
 
 public:
+	friend class iterator;
+	class iterator{
+		Term* ref;
+		int index;
+		DataType iterative;
+		iterator();
+	public:
+		iterator& operator=(const iterator&);
+		void set_iterative(const DataType&);
+
+		//operations
+		iterator operator+(int);
+		iterator operator-(int);
+		iterator operator+=(int);
+		iterator operator-=(int);
+
+		iterator operator++(int);
+		iterator operator--(int);
+
+		Operand operator*();
+
+	};
 	Term();
 
 	//Copy and Move semantics
