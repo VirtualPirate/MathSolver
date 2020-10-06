@@ -32,6 +32,22 @@ Variable::Variable(char var_name): name{var_name}, power{Constant{1}}{}
 Variable::Variable(char var_name, double pow): name{var_name}, power{Constant{pow}}{}
 Variable::Variable(char var_name, const Operand& pow): name{var_name}, power{pow}{}
 
+
+//Getter and setter Methods
+const char& Variable::getName() const {
+	return name;
+}
+void Variable::setName(const char& ref){
+	name = ref;
+}
+
+const Operand& Variable::getPower() const {
+	return power;
+}
+void Variable::setPower(const Operand& ref){
+	power = ref;
+}
+
 //Variable to Variable comparison operators
 bool Variable::operator==(const Variable& ref) const {
 	if(this->name == ref.name && this->power == ref.power)

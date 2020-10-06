@@ -12,6 +12,7 @@ struct Variable{
 	char name;
 	Operand power;
 
+public:
 	Variable(Variable&&) = default;
 	Variable(const Variable&) = default;
 	~Variable() = default;
@@ -23,6 +24,13 @@ struct Variable{
 	Variable(char, double);
 	Variable(char, const Operand&);
 	// Variable(char, Operand&&);
+
+	//Getter and Setter Methods
+	const char& getName() const;
+	void setName(const char&);
+
+	const Operand& getPower() const;
+	void setPower(const Operand&);
 
 	// Variable to Variable comparison operators
 	bool operator==(const Variable&) const;
