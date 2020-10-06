@@ -3,9 +3,10 @@
 
 #include <iostream>
 
-struct Constant{
+class Constant{
 	double value;
 
+public:
 	//Constructors
 	Constant(void);
 	Constant(double);

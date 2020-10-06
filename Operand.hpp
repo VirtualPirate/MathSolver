@@ -6,7 +6,7 @@ enum class DataType
 
 unsigned func_hash(DataType, DataType);
 
-struct Constant;
+class Constant;
 
 struct  Operand
 {

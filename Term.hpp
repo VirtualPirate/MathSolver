@@ -3,7 +3,7 @@
 
 #include <vector>
 
-struct Constant;
+class Constant;
 struct Variable;
 class Term{
 	std::vector<Operand> fields;

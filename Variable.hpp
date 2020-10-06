@@ -3,7 +3,7 @@
 
 #include <unordered_map>
 
-struct Constant;
+class Constant;
 struct Operand;
 
 extern std::unordered_map<char, Constant> var_values;
