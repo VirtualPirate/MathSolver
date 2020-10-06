@@ -4,7 +4,7 @@
 #include <vector>
 
 class Constant;
-struct Variable;
+class Variable;
 class Term{
 	std::vector<Operand> fields;
 	Operand power;

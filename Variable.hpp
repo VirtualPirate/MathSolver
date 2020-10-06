@@ -8,7 +8,7 @@ struct Operand;
 
 extern std::unordered_map<char, Constant> var_values;
 
-struct Variable{
+class Variable{
 	char name;
 	Operand power;
 
