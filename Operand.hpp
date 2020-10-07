@@ -68,32 +68,32 @@ public:
 //Operand to Operand operations
 template <class Type_1, class Type_2>
 Operand Operand_Operand_add(const Operand& first, const Operand& second){
-	return Operand{*(Type_1*)(first.value) + *(Type_2*)(second.value)};}
+	return Operand{first.get<Type_1>() + second.get<Type_2>()};}
 
 template <class Type_1, class Type_2>
 Operand Operand_Operand_sub(const Operand& first, const Operand& second){
-	return Operand{*(Type_1*)(first.value) - *(Type_2*)(second.value)};}
+	return Operand{first.get<Type_1>() - second.get<Type_2>()};}
 
 template <class Type_1, class Type_2>
 Operand Operand_Operand_mul(const Operand& first, const Operand& second){
-	return Operand{*(Type_1*)(first.value) * *(Type_2*)(second.value)};}
+	return Operand{first.get<Type_1>() * second.get<Type_2>()};}
 
 template <class Type_1, class Type_2>
 Operand Operand_Operand_div(const Operand& first, const Operand& second){
-	return Operand{*(Type_1*)(first.value) / *(Type_2*)(second.value)};}
+	return Operand{first.get<Type_1>() / second.get<Type_2>()};}
 
 template <class Type_1, class Type_2>
 Operand Operand_Operand_pow(const Operand& first, const Operand& second){
-	return Operand{(*(Type_1*)(first.value)).raise_pow(*(Type_2*)(second.value))};}
+	return Operand{(first.get<Type_1>()).raise_pow(second.get<Type_2>())};}
 
 //Operand to Operand comparison
 template <class Type_1, class Type_2>
 bool Operand_Operand_eq(const Operand& first, const Operand& second){
-	return (*(Type_1*)(first.value)) == (*(Type_2*)(second.value));}
+	return (first.get<Type_1>()) == (second.get<Type_2>());}
 
 template <class Type_1, class Type_2>
 bool Operand_Operand_neq(const Operand& first, const Operand& second){
-	return (*(Type_1*)(first.value)) != (*(Type_2*)(second.value));}
+	return (first.get<Type_1>()) != (second.get<Type_2>());}
 
 template <class Type>
 Type& Return_Internal_Ref(const Operand& ref){
