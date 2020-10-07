@@ -11,13 +11,11 @@ public:
 	Constant(void);
 	Constant(double);
 	Constant(const Constant&);
-	Constant(const Constant&&);
 	Constant(const Constant*);
 
 	// Assignment operators
 	Constant& operator=(double);
 	Constant& operator=(const Constant&);
-	Constant& operator=(const Constant&&);
 
 	//Constant to Constant comparison operator
 	bool operator==(const Constant&)const;

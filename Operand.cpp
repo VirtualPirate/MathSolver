@@ -197,6 +197,14 @@ Operand& Operand::operator=(Operand&& ref){
 //Destructor
 Operand::~Operand(){free(value);}
 
+//Getters setters
+
+const DataType& Operand::getType() const{
+	return type;
+}
+bool Operand::isNull() const{
+	return is_null;
+}
 
 //Operand to Operand comparison operators
 bool Operand::operator==(const Operand& other) const {	

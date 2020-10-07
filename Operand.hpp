@@ -14,6 +14,7 @@ struct  Operand
 	DataType type;
 	bool is_null;
 
+public:
 	Operand();
 
 	Operand(double);
@@ -29,6 +30,15 @@ struct  Operand
 
 	//Destructor
 	~Operand();
+
+	//Getters and Setters
+	const DataType& getType() const;
+	bool isNull() const;
+
+	template<typename Type>
+	const Type& get() const{
+		return *((Type*)value);
+	}
 
 	std::string power_print() const;
 	Operand substitute() const;

@@ -20,6 +20,11 @@ int main(){
 	Constant num3{num1};
 	Constant num4{1.5};
 
+	Operand operand_0{10};
+	Constant a = operand_0.get<Constant>();
+	std::cout << "operand_0.get<Constant>() = " << a << std::endl;
+
+
 	std::cout << "\n//Constant to Constant operations" << std::endl;
 	// std::cout << boolalpha;
 	std::cout << num1 << " * " << num2 << " = " << (num1 * num2) << std::endl;

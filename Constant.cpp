@@ -15,13 +15,11 @@
 Constant::Constant(void):value{0}{}
 Constant::Constant(double val): value{val}{}
 Constant::Constant(const Constant& ref): value{ref.value}{}
-Constant::Constant(const Constant&& ref): value{ref.value}{}
 Constant::Constant(const Constant* point): value{point->value}{}
 
 // Constant to Constant assignment operators
 Constant& Constant::operator=(double val){value = val;return *this;}
 Constant& Constant::operator=(const Constant& ref){value = ref.value;return *this;}
-Constant& Constant::operator=(const Constant&& ref){value = ref.value;return *this;}
 
 //Constant to Constant comparison operators
 bool Constant::operator==(const Constant& other) const {return value == other.value;}
