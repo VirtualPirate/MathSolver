@@ -127,7 +127,7 @@ void* allocate_n_return(const Operand& ref){
 	if(!ref.is_null){
 	switch(ref.type){
 		case DataType::Constant:
-			point = (void *)(new Constant{Return_Internal_Ref<Constant>(ref)});
+			point = (void *)(new Constant{ref.get<Constant>()});
 			break;
 		case DataType::Variable:
 			// point = (void *)(new Variable{Return_Internal_Ref<Variable>(ref)});
