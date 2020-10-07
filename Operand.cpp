@@ -124,8 +124,8 @@ Operand (*pow_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
 
 void* allocate_n_return(const Operand& ref){
 	void* point = nullptr;
-	if(!ref.is_null){
-	switch(ref.type){
+	if(!ref.isNull()){
+	switch(ref.getType()){
 		case DataType::Constant:
 			point = (void *)(new Constant{ref.get<Constant>()});
 			break;

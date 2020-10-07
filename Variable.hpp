@@ -4,7 +4,7 @@
 #include <unordered_map>
 
 class Constant;
-struct Operand;
+class Operand;
 
 extern std::unordered_map<char, Constant> var_values;
 

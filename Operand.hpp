@@ -8,7 +8,7 @@ unsigned func_hash(DataType, DataType);
 
 class Constant;
 class Variable;
-struct  Operand
+class Operand
 {
 	void* value;
 	DataType type;
