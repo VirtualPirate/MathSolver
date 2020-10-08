@@ -45,7 +45,7 @@ int main(){
 	Term::iterator iter_end = term_0.end(DataType::Variable);
 
 	std::cout << "TEsting TErm::iterator" << std::endl;
-	for(auto each=term_0.begin(DataType::NU); each!=term_0.end(DataType::Variable); each++)
+	for(auto each=term_0.begin(DataType::Variable); each!=term_0.end(DataType::Variable); each++)
 		std::cout << *each << std::endl;
 
 

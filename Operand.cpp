@@ -122,6 +122,48 @@ Operand (*pow_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
 	Operand_null,
 };
 
+bool (*eq_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+};
+
+bool (*neq_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+};
+
 void* allocate_n_return(const Operand& ref){
 	void* point = nullptr;
 	if(!ref.isNull()){
@@ -218,10 +260,10 @@ bool Operand::isNull() const{
 
 //Operand to Operand comparison operators
 bool Operand::operator==(const Operand& other) const {	
-	return true;}
+	return eq_functions[func_hash(this->type, other.type)](*this, other);}
 
 bool Operand::operator!=(const Operand& other) const {
-	return false;}
+	return neq_functions[func_hash(this->type, other.type)](*this, other);}
 
 Operand::operator bool() const{
 	if((!is_null) && value)
@@ -252,6 +294,18 @@ Operand Operand::operator/(const Operand& other) const {
 Operand Operand::raise_pow(const Operand& other) const {
 	return pow_functions[func_hash(this->type, other.type)](*this, other);}
 
+std::string Operand::power_print() const {
+	switch(type){
+		case DataType::Constant:
+			return this->get<Constant>().power_print();
+		case DataType::Variable:
+			return this->get<Variable>().power_print();
+		case DataType::Term:
+			return "stdout: Unknown Type power_print";
+		default:
+			return "stdout: Unknown Type power_print";
+		}
+}
 
 std::ostream& operator<<(std::ostream& os, const Operand& ref){
 	if(!ref.is_null){

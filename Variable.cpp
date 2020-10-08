@@ -61,10 +61,15 @@ bool Variable::operator!=(const Variable& ref) const {
 	return false;
 }
 
+std::string Variable::power_print() const{
+	std::ostringstream stream;
+	stream << *this;
+	return stream.str();
+}
 std::ostream& operator<<(std::ostream& os, const Variable& ref){
 	if(ref.power == Operand{Constant{1}})
 		os << ref.name;
 	else
-		os << ref.name;
+		os << ref.name << "^" << ref.getPower().power_print();
 	return os;
 }
