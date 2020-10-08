@@ -25,7 +25,7 @@ int main(){
 	Variable var_2{'x', 2};
 	Variable var_3{'y', 3};
 
-	Term term_0{};
+	Term term_0{Variable{'a'}};
 	term_0.setNull(false);
 	term_0.insert(num1);
 	term_0.insert(var_0);

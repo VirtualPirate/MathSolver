@@ -60,6 +60,8 @@ public:
 	Term& operator=(const Constant&);
 	Term(const Variable&);
 	Term& operator=(const Variable&);
+	Term(const Operand&);
+	Term& operator=(const Operand&);
 
 	Term(const std::vector<Operand>&);
 

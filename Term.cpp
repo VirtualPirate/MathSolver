@@ -31,6 +31,36 @@ Term& Term::operator=(Term&& ref){
 	return *this;
 }
 
+
+
+Term::Term(const Constant& ref): fields{{Operand{ref}}}, power{1}, is_simplified{true}, is_null{false}{}
+Term& Term::operator=(const Constant& ref){
+	fields.clear();
+	fields.push_back(Operand{ref});
+	power = 1;
+	is_simplified = true;
+	is_null = false;
+	return *this;
+}
+Term::Term(const Variable& ref): fields{{Operand{ref}}}, power{1}, is_simplified{true}, is_null{false}{}
+Term& Term::operator=(const Variable& ref){
+	fields.clear();
+	fields.push_back(Operand{ref});
+	power = 1;
+	is_simplified = true;
+	is_null = false;
+	return *this;
+}
+Term::Term(const Operand& ref): fields{{ref}}, power{1}, is_simplified{true}, is_null{false}{}
+Term& Term::operator=(const Operand& ref){
+	fields.clear();
+	fields.push_back(ref);
+	power = 1;
+	is_simplified = true;
+	is_null = false;
+	return *this;
+}
+
 Term::Term(const std::vector<Operand>& ref): fields{ref}, power{1}, is_simplified{false}, is_null{false}{}
 
 // Getter methods
