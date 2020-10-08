@@ -76,6 +76,7 @@ public:
 
 	//Setter Methods
 	void setNull(const bool&);
+	void setPower(const Operand&);
 
 	void insert(const Constant&);
 	void insert(const Variable&);
