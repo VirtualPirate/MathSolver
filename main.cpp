@@ -20,6 +20,21 @@ int main(){
 	Constant num3{num1};
 	Constant num4{1.5};
 
+	Variable var_0{'x'};
+	Variable var_1{'y'};
+	Variable var_2{'x', 2};
+	Variable var_3{'y', 3};
+
+	Term term_0{};
+	term_0.insert(num1);
+	term_0.insert(var_0);
+	term_0.insert(var_1);
+
+	std::cout << "Testing Term::operator<< " << std::endl;
+	// std::cout << term_0 << std::endl;
+	std::cout << term_0.getFields().at(2) << std::endl;
+	std::cout << term_0 << std::endl;
+
 	Operand operand_0{10};
 	Constant a = operand_0.get<Constant>();
 	std::cout << std::endl << std::endl;

@@ -130,6 +130,7 @@ void* allocate_n_return(const Operand& ref){
 			point = (void *)(new Constant{ref.get<Constant>()});
 			break;
 		case DataType::Variable:
+			point = (void *)(new Variable{ref.get<Variable>()});
 			// point = (void *)(new Variable{Return_Internal_Ref<Variable>(ref)});
 			break;
 		case DataType::Term:

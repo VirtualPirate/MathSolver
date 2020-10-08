@@ -56,15 +56,11 @@ void Term::insert(const Operand& ref){
 	fields.push_back(ref);
 }
 
-// std::ostream& operator<<(std::ostream& os, const Term& ref){
-// 	os << *(ref.fields.begin());
-// 	for(auto each=ref.fields.begin()+1; each!=ref.fields.end(); each++){
-// 		os << *each;
-// 		if((each+1)->getType() == DataType::Constant)
-// 			os << " * ";
-// 	}
-// 	return os;
-// }
+std::ostream& operator<<(std::ostream& os, const Term& ref){
+	for(auto each=ref.fields.begin(); each!=ref.fields.end(); each++)
+		os << *each;
+	return os;
+}
 
 // Term::iterator definition
 Term::iterator::iterator(): index{0}{}
