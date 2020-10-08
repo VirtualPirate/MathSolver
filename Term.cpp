@@ -71,6 +71,8 @@ Term::iterator Term::end(DataType type) {
 	return Term::iterator{this, (int)this->fields.size(), type};
 }
 
+Term::operator bool() const {return is_null;}
+
 std::ostream& operator<<(std::ostream& os, const Term& ref){
 	if(!ref.is_null){
 	os << *(ref.fields.begin());
