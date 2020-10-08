@@ -26,6 +26,7 @@ int main(){
 	Variable var_3{'y', 3};
 
 	Term term_0{};
+	term_0.setNull(false);
 	term_0.insert(num1);
 	term_0.insert(var_0);
 	term_0.insert(var_1);

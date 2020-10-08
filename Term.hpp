@@ -56,6 +56,11 @@ public:
 	Term(Term&&);
 	Term& operator=(Term&&);
 
+	Term(const Constant&);
+	Term& operator=(const Constant&);
+	Term(const Variable&);
+	Term& operator=(const Variable&);
+
 	Term(const std::vector<Operand>&);
 
 	Term(std::string);
@@ -66,6 +71,9 @@ public:
 	const Operand& getPower();
 	const bool& isSimplified();
 	const bool& isNull();
+
+	//Setter Methods
+	void setNull(const bool&);
 
 	void insert(const Constant&);
 	void insert(const Variable&);

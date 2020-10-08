@@ -47,6 +47,11 @@ const bool& Term::isNull(){
 	return is_null;
 }
 
+//Setter Methods
+void Term::setNull(const bool& ref){
+	is_null = ref;
+}
+
 //field modifiers
 void Term::insert(const Constant& ref){
 	fields.push_back(Operand{ref});
@@ -67,12 +72,17 @@ Term::iterator Term::end(DataType type) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Term& ref){
+	if(!ref.is_null){
 	os << *(ref.fields.begin());
 	for(auto each=ref.fields.begin()+1; each!=ref.fields.end(); each++)
 		if(each->getType() == DataType::Constant)
 			os << " * " << *each;
 		else
 			os << *each;
+	}
+	else{
+		os << "null_term{}";
+	}
 	return os;
 }
 

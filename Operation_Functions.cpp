@@ -25,3 +25,10 @@ Constant Constant_Constant_div(const Constant& first, const Constant& second){
 Constant Constant_Constant_pow(const Constant& first, const Constant& second){
 	return Constant{pow(first.getValue(), second.getValue())};
 }
+
+
+//Constant to Variable arithmetic operations
+
+Term Constant_Variable_add(const Constant& first, const Variable& second){
+	return Term{};
+}
