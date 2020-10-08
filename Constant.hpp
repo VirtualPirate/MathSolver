@@ -40,6 +40,7 @@ public:
 	//Unary operators 
 	Constant operator+() const;
 	Constant operator-() const;
+
 	friend std::ostream& operator<<(std::ostream&, const Constant&);
 
 };

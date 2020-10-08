@@ -60,3 +60,11 @@ bool Variable::operator!=(const Variable& ref) const {
 		return true;
 	return false;
 }
+
+std::ostream& operator<<(std::ostream& os, const Variable& ref){
+	if(ref.power == Operand{Constant{1}})
+		os << ref.name;
+	else
+		os << ref.name;
+	return os;
+}

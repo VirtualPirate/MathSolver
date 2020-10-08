@@ -45,6 +45,21 @@ const bool& Term::isNull(){
 	return is_null;
 }
 
+//field modifiers
+void Term::insert(const Constant& ref){
+	fields.push_back(Operand{ref});
+}
+void Term::insert(const Variable& ref){
+	fields.push_back(Operand{ref});
+}
+void Term::insert(const Operand& ref){
+	fields.push_back(ref);
+}
+
+// friend std::ostream& operator<<(std::ostream& os, const Term& ref){
+
+// }
+
 // Term::iterator definition
 Term::iterator::iterator(): index{0}{}
 Term::iterator::iterator(const Term::iterator& ref): ref{ref.ref}, index{ref.index}, iterative{ref.iterative}{}
