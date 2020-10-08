@@ -18,6 +18,9 @@ public:
 		Term* ref;
 		int index;
 		DataType iterative;
+
+		friend class Term;
+		
 		iterator();
 		iterator(const iterator&);
 		iterator(Term*, int, DataType);
@@ -37,6 +40,10 @@ public:
 		iterator& operator--();
 
 		Operand& operator*();
+
+		//Comparison operator
+		bool operator==(const iterator&) const;
+		bool operator!=(const iterator&) const;
 
 	};
 	Term();
@@ -65,6 +72,10 @@ public:
 	bool var_exist(const char&) const;
 
 	void simplify();
+
+	//Iterator functions
+	iterator begin(DataType);
+	iterator end();
 	// Term to Constant comparison operators
 	bool operator==(const Constant&) const;
 	bool operator!=(const Constant&) const;

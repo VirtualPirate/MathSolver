@@ -56,6 +56,11 @@ void Term::insert(const Operand& ref){
 	fields.push_back(ref);
 }
 
+//Iterator functions
+Term::iterator Term::begin(DataType type){
+	return Term::iterator{this, 0, type};
+}
+
 std::ostream& operator<<(std::ostream& os, const Term& ref){
 	os << *(ref.fields.begin());
 	for(auto each=ref.fields.begin()+1; each!=ref.fields.end(); each++)
@@ -134,4 +139,12 @@ Operand& Term::iterator::operator*(){
 	return ref->fields.at(index);
 }
 
+//Iterator comparison operators
+bool Term::iterator::operator==(const Term::iterator& ref) const {
+	return this->index == ref.index;
+}
+
+bool Term::iterator::operator!=(const Term::iterator& ref) const {
+	return this->index != ref.index;
+}
 // Term::iterator& Term::iterator::operator+=(const )
