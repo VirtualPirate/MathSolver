@@ -58,7 +58,10 @@ void Term::insert(const Operand& ref){
 
 //Iterator functions
 Term::iterator Term::begin(DataType type){
-	return Term::iterator{this, 0, type};
+	return Term::iterator{this, 0, type} + 1;
+}
+Term::iterator Term::end(DataType type) {
+	return Term::iterator{this, (int)this->fields.size(), type};
 }
 
 std::ostream& operator<<(std::ostream& os, const Term& ref){
@@ -89,21 +92,27 @@ void Term::iterator::set_iterative(const DataType& type){
 
 //Term::iterator operations
 int Term::iterator::operate_add(int other){
-	int abs_index = this->index;
+	int abs_index = this->index + 1;
 	int rel_index = 0;
 	while(abs_index < ref->fields.size() && rel_index < other){
-		if(this->ref->fields.at(index).getType() == iterative)
+		if(this->ref->fields.at(abs_index).getType() == iterative){
 			rel_index++;
+			if(rel_index == other)
+				break;
+		}
 		abs_index++;
 	}
 	return abs_index;
 }
 int Term::iterator::operate_sub(int other){
-	int abs_index = this->index;
+	int abs_index = this->index - 1;
 	int rel_index = 0;
 	while(abs_index > 0 && rel_index < other){
-		if(this->ref->fields.at(index).getType() == iterative)
+		if(this->ref->fields.at(abs_index).getType() == iterative){
 			rel_index++;
+			if(rel_index == other)
+				break;
+		}
 		abs_index--;
 	}
 	return abs_index;
@@ -126,6 +135,7 @@ Term::iterator& Term::iterator::operator-=(int other){
 	return *this;
 }
 
+//Pre-Increment methods
 Term::iterator& Term::iterator::operator++(){
 	this->index = operate_add(1);
 	return *this;
@@ -133,6 +143,16 @@ Term::iterator& Term::iterator::operator++(){
 Term::iterator& Term::iterator::operator--(){
 	this->index = operate_sub(1);
 	return *this;
+}
+
+//Post-Increment methods
+Term::iterator Term::iterator::operator++(int other){
+	++(*this);
+	return (*this) - 1;
+}
+Term::iterator Term::iterator::operator--(int other){
+	++(*this);
+	return (*this) + 1;
 }
 
 Operand& Term::iterator::operator*(){

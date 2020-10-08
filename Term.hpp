@@ -20,7 +20,7 @@ public:
 		DataType iterative;
 
 		friend class Term;
-		
+
 		iterator();
 		iterator(const iterator&);
 		iterator(Term*, int, DataType);
@@ -38,6 +38,8 @@ public:
 
 		iterator& operator++();
 		iterator& operator--();
+		iterator operator++(int);
+		iterator operator--(int);
 
 		Operand& operator*();
 
@@ -75,7 +77,7 @@ public:
 
 	//Iterator functions
 	iterator begin(DataType);
-	iterator end();
+	iterator end(DataType);
 	// Term to Constant comparison operators
 	bool operator==(const Constant&) const;
 	bool operator!=(const Constant&) const;
@@ -109,8 +111,12 @@ public:
 	Term operator/(const Term&) const;
 	Term raise_pow(const Term&) const;
 
-	Term operator+() const;
-	Term operator-() const;
+	//Pre-increment
+	Term operator++();
+	Term operator--();
+
+	//Post-increment
+
 	operator bool() const;
 
 	std::string power_print() const;

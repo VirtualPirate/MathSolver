@@ -41,6 +41,14 @@ int main(){
 	// std::cout << term_0.getFields().at(2) << std::endl;
 	std::cout << term_0 << std::endl;
 
+	Term::iterator iter_begin = term_0.begin(DataType::Variable);
+	Term::iterator iter_end = term_0.end(DataType::Variable);
+
+	std::cout << "TEsting TErm::iterator" << std::endl;
+	for(auto each=term_0.begin(DataType::NU); each!=term_0.end(DataType::Variable); each++)
+		std::cout << *each << std::endl;
+
+
 	Operand operand_0{10};
 	Constant a = operand_0.get<Constant>();
 	std::cout << std::endl << std::endl;
