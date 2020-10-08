@@ -32,3 +32,15 @@ Constant Constant_Constant_pow(const Constant& first, const Constant& second){
 Term Constant_Variable_add(const Constant& first, const Variable& second){
 	return Term{};
 }
+Term Constant_Variable_sub(const Constant& first, const Variable& second){
+	return Term{};
+}
+Term Constant_Variable_mul(const Constant& first, const Variable& second){
+	return Term{std::vector<Operand>{Operand{first}, Operand{second}}};
+}
+Term Constant_Variable_div(const Constant& first, const Variable& second){
+	return Term{};
+}
+Term Constant_Variable_pow(const Constant& first, const Variable& second){
+	return Term{};
+}
