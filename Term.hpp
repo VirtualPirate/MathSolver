@@ -5,6 +5,7 @@
 
 class Constant;
 class Variable;
+class Operand;
 class Term{
 	std::vector<Operand> fields;
 	Operand power;
@@ -18,6 +19,10 @@ public:
 		int index;
 		DataType iterative;
 		iterator();
+		iterator(const iterator&);
+		iterator(Term*, int, DataType);
+		int operate_add(int);
+		int operate_sub(int);
 	public:
 		iterator& operator=(const iterator&);
 		void set_iterative(const DataType&);
@@ -25,13 +30,13 @@ public:
 		//operations
 		iterator operator+(int);
 		iterator operator-(int);
-		iterator operator+=(int);
-		iterator operator-=(int);
+		iterator& operator+=(int);
+		iterator& operator-=(int);
 
-		iterator operator++(int);
-		iterator operator--(int);
+		iterator& operator++();
+		iterator& operator--();
 
-		Operand operator*();
+		Operand& operator*();
 
 	};
 	Term();

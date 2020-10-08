@@ -47,6 +47,9 @@ const bool& Term::isNull(){
 
 // Term::iterator definition
 Term::iterator::iterator(): index{0}{}
+Term::iterator::iterator(const Term::iterator& ref): ref{ref.ref}, index{ref.index}, iterative{ref.iterative}{}
+Term::iterator::iterator(Term* point, int index_, DataType type): ref{point}, index{index_}, iterative{type}{}
+
 Term::iterator& Term::iterator::operator=(const Term::iterator& ref){
 	this->ref = ref.ref;
 	index = ref.index;
@@ -59,9 +62,55 @@ void Term::iterator::set_iterative(const DataType& type){
 }
 
 //Term::iterator operations
-// Term::iterator Term::iterator::operator+(const int& other){
-// 	int index = this->index;
-// 	while(index < ref->fields.size()){
-		
-// 	}
-// }
+int Term::iterator::operate_add(int other){
+	int abs_index = this->index;
+	int rel_index = 0;
+	while(abs_index < ref->fields.size() && rel_index < other){
+		if(this->ref->fields.at(index).getType() == iterative)
+			rel_index++;
+		abs_index++;
+	}
+	return abs_index;
+}
+int Term::iterator::operate_sub(int other){
+	int abs_index = this->index;
+	int rel_index = 0;
+	while(abs_index > 0 && rel_index < other){
+		if(this->ref->fields.at(index).getType() == iterative)
+			rel_index++;
+		abs_index--;
+	}
+	return abs_index;
+}
+Term::iterator Term::iterator::operator+(int other){
+	return Term::iterator{this->ref, operate_add(other), this->iterative};
+}
+
+Term::iterator Term::iterator::operator-(int other){
+	return Term::iterator{this->ref, operate_sub(other), this->iterative};
+}
+
+Term::iterator& Term::iterator::operator+=(int other){
+	this->index = operate_add(other);
+	return *this;
+}
+
+Term::iterator& Term::iterator::operator-=(int other){
+	this->index = operate_sub(other);
+	return *this;
+}
+
+Term::iterator& Term::iterator::operator++(){
+	this->index = operate_add(1);
+	return *this;
+}
+Term::iterator& Term::iterator::operator--(){
+	this->index = operate_sub(1);
+	return *this;
+}
+
+Operand& Term::iterator::operator*(){
+	return ref->fields.at(index);
+}
+
+// Term::iterator& Term::iterator::operator+=(const )
