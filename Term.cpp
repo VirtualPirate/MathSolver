@@ -31,6 +31,8 @@ Term& Term::operator=(Term&& ref){
 	return *this;
 }
 
+Term::Term(const std::vector<Operand>& ref): fields{ref}, power{1}, is_simplified{false}, is_null{false}{}
+
 // Getter methods
 const std::vector<Operand>& Term::getFields(){
 	return fields;

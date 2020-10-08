@@ -56,6 +56,8 @@ public:
 	Term(Term&&);
 	Term& operator=(Term&&);
 
+	Term(const std::vector<Operand>&);
+
 	Term(std::string);
 
 
