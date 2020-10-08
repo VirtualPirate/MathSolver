@@ -252,3 +252,24 @@ Operand Operand::raise_pow(const Operand& other) const {
 	return pow_functions[func_hash(this->type, other.type)](*this, other);}
 
 
+std::ostream& operator<<(std::ostream& os, const Operand& ref){
+	if(!ref.is_null){
+		switch(ref.type){
+			case DataType::Constant:
+				os << ref.get<Constant>();
+				break;
+			case DataType::Variable:
+				os << ref.get<Variable>();
+				break;
+			case DataType::Term:
+				// os << Return_Internal_Ref<ConstVar>(ref);
+				break;
+			case DataType::Expression:
+				// os << Return_Internal_Ref<Expression>(ref);
+				break;
+			default:
+				os << "stdout: Unknown Type";
+		}
+	}else os << "stdout: nullptr";
+	return os;
+}
