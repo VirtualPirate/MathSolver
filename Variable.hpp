@@ -36,6 +36,7 @@ public:
 	bool operator==(const Variable&) const;
 	bool operator!=(const Variable&) const;
 
+	std::string power_print() const;
 	friend std::ostream& operator<<(std::ostream&, const Variable&);
 };
 

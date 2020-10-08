@@ -57,8 +57,12 @@ void Term::insert(const Operand& ref){
 }
 
 std::ostream& operator<<(std::ostream& os, const Term& ref){
-	for(auto each=ref.fields.begin(); each!=ref.fields.end(); each++)
-		os << *each;
+	os << *(ref.fields.begin());
+	for(auto each=ref.fields.begin()+1; each!=ref.fields.end(); each++)
+		if(each->getType() == DataType::Constant)
+			os << " * " << *each;
+		else
+			os << *each;
 	return os;
 }
 

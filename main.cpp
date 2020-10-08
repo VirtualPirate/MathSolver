@@ -30,9 +30,15 @@ int main(){
 	term_0.insert(var_0);
 	term_0.insert(var_1);
 
+	term_0.insert(num2);
+	term_0.insert(var_2);
+
+	term_0.insert(num3);
+	term_0.insert(var_3);
+
 	std::cout << "Testing Term::operator<< " << std::endl;
 	// std::cout << term_0 << std::endl;
-	std::cout << term_0.getFields().at(2) << std::endl;
+	// std::cout << term_0.getFields().at(2) << std::endl;
 	std::cout << term_0 << std::endl;
 
 	Operand operand_0{10};

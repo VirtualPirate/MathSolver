@@ -101,6 +101,8 @@ public:
 	Term operator+() const;
 	Term operator-() const;
 	operator bool() const;
+
+	std::string power_print() const;
 	friend std::ostream& operator<<(std::ostream&, const Term&);
 
 };
