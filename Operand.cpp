@@ -123,7 +123,7 @@ Operand (*pow_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
 };
 
 bool (*eq_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
-	Operand_bool,
+	Operand_Operand_eq<Constant, Constant>,
 	Operand_bool,
 	Operand_bool,
 	Operand_bool,
@@ -144,7 +144,7 @@ bool (*eq_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
 };
 
 bool (*neq_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
-	Operand_neq_bool,
+	Operand_Operand_neq<Constant, Constant>,
 	Operand_neq_bool,
 	Operand_neq_bool,
 	Operand_neq_bool,
