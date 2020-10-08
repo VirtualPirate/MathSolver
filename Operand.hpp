@@ -21,6 +21,8 @@ public:
 	Operand& operator=(double);
 	Operand(const Constant&);
 	Operand& operator=(const Constant&);
+	Operand(const Variable&);
+	Operand& operator=(const Variable&);
 
 	// Copy and Move semantics
 	Operand(const Operand&);

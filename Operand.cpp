@@ -171,6 +171,15 @@ Operand& Operand::operator=(const Constant& ref){
 	return *this;
 }
 
+Operand::Operand(const Variable& ref): value{(void*)(new Variable{ref})}, type{DataType::Variable}, is_null{false}{}
+Operand& Operand::operator=(const Variable& ref){
+	if(value) free(value);
+	value = (void*)(new Variable{ref});
+	type = DataType::Variable;
+	is_null = false;
+	return *this;
+}
+
 // Copy and move semantics
 Operand::Operand(const Operand& ref): value{allocate_n_return(ref)}, type{ref.type}, is_null{ref.is_null}{}
 Operand::Operand(Operand&& ref): value{ref.value}, type{ref.type}, is_null{ref.is_null}{
