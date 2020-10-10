@@ -9,7 +9,6 @@
 #include "Variable.hpp"
 #include "Term.hpp"
 #include "Expression.hpp"
-#include "SimpleExpression.hpp"
 #include "Operation_Functions.hpp"
 
 Operand Operand_null(const Operand& first, const Operand& second){

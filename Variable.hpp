@@ -5,6 +5,7 @@
 
 class Constant;
 class Operand;
+class Term;
 
 extern std::unordered_map<char, Constant> var_values;
 

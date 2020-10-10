@@ -6,7 +6,6 @@
 #include "Variable.hpp"
 #include "Term.hpp"
 #include "Expression.hpp"
-#include "SimpleExpression.hpp"
 #include "Operation_Functions.hpp"
 
 // Constant to Constant arithmetic operators

@@ -5,7 +5,6 @@
 #include "Variable.hpp"
 #include "Term.hpp"
 #include "Expression.hpp"
-#include "SimpleExpression.hpp"
 #include "Operation_Functions.hpp"
 
 Term::Term(): fields{}, power{1}, is_simplified{false}, is_null{true}{}

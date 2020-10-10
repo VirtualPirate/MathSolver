@@ -8,7 +8,6 @@
 #include "Variable.hpp"
 #include "Term.hpp"
 #include "Expression.hpp"
-#include "SimpleExpression.hpp"
 
 int main(){
 	std::cout << "This is the initial project version" << std::endl;
