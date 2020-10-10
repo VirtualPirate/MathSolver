@@ -36,6 +36,27 @@ public:
 	bool operator==(const Variable&) const;
 	bool operator!=(const Variable&) const;
 
+	//Variable to Constant operations
+	Term operator+(const Constant&) const;
+	Term operator-(const Constant&) const;
+	Term operator*(const Constant&) const;
+	Term operator/(const Constant&) const;
+	Term raise_pow(const Constant&) const;
+
+	//Variable to Variable operations
+	Term operator+(const Variable&) const;
+	Term operator-(const Variable&) const;
+	Term operator*(const Variable&) const;
+	Term operator/(const Variable&) const;
+	Term raise_pow(const Variable&) const;
+
+	//Variable to Term operations
+	Term operator+(const Term&) const;
+	Term operator-(const Term&) const;
+	Term operator*(const Term&) const;
+	Term operator/(const Term&) const;
+	Term raise_pow(const Term&) const;
+
 	std::string power_print() const;
 	friend std::ostream& operator<<(std::ostream&, const Variable&);
 };
