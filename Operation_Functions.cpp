@@ -36,11 +36,13 @@ Term Constant_Variable_sub(const Constant& first, const Variable& second){
 	return Term{};
 }
 Term Constant_Variable_mul(const Constant& first, const Variable& second){
-	return Term{std::vector<Operand>{Operand{first}, Operand{second}}};
+	return Term{std::vector<Operand>{first, second}};
 }
 Term Constant_Variable_div(const Constant& first, const Variable& second){
-	return Term{};
+	return Term{std::vector<Operand>{first, Variable{second.getName(), -1}}};
 }
 Term Constant_Variable_pow(const Constant& first, const Variable& second){
-	return Term{};
+	Term term{first};
+	term.setPower(second);
+	return term;
 }

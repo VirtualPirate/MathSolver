@@ -81,6 +81,9 @@ const bool& Term::isNull(){
 void Term::setNull(const bool& ref){
 	is_null = ref;
 }
+void Term::setPower(const Operand& ref){
+	power = ref;
+}
 
 //field modifiers
 void Term::insert(const Constant& ref){
