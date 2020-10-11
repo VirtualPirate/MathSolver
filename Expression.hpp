@@ -8,7 +8,7 @@ class Operand;
 class Variable;
 class OperandList;
 class Expression: public OperandList{
-
+	bool is_negative() const;
 };
 
 

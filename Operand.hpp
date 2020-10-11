@@ -43,6 +43,7 @@ public:
 	}
 
 	std::string power_print() const;
+	bool is_negative() const;
 	Operand substitute() const;
 
 	// Operand to Operand arithmetic operators

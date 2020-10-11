@@ -59,6 +59,7 @@ public:
 	Term raise_pow(const Term&) const;
 
 	std::string power_print() const;
+	bool is_negative() const;
 	friend std::ostream& operator<<(std::ostream&, const Variable&);
 };
 

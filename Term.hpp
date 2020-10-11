@@ -10,8 +10,9 @@ class Operand;
 class OperandList;
 
 class Term: public OperandList{
-
 	friend std::ostream& operator<<(std::ostream&, const Term&);
+public:
+	bool is_negative() const;
 };
 
 #endif
