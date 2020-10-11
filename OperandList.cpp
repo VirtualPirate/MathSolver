@@ -63,16 +63,16 @@ OperandList& OperandList::operator=(const Operand& ref){
 OperandList::OperandList(const std::vector<Operand>& ref): fields{ref}, power{1}, is_simplified{false}, is_null{false}{}
 
 // Getter methods
-const std::vector<Operand>& OperandList::getFields(){
+const std::vector<Operand>& OperandList::getFields() const {
 	return fields;
 }
-const Operand& OperandList::getPower(){
+const Operand& OperandList::getPower() const {
 	return power;
 }
-const bool& OperandList::isSimplified(){
+const bool& OperandList::isSimplified() const {
 	return is_simplified;
 }
-const bool& OperandList::isNull(){
+const bool& OperandList::isNull() const {
 	return is_null;
 }
 
@@ -105,20 +105,20 @@ OperandList::iterator OperandList::end(DataType type) {
 
 OperandList::operator bool() const {return is_null;}
 
-std::ostream& operator<<(std::ostream& os, const OperandList& ref){
-	if(!ref.is_null){
-	os << *(ref.fields.begin());
-	for(auto each=ref.fields.begin()+1; each!=ref.fields.end(); each++)
-		if(each->getType() == DataType::Constant)
-			os << " * " << *each;
-		else
-			os << *each;
-	}
-	else{
-		os << "null_term{}";
-	}
-	return os;
-}
+// std::ostream& operator<<(std::ostream& os, const OperandList& ref){
+// 	if(!ref.is_null){
+// 	os << *(ref.fields.begin());
+// 	for(auto each=ref.fields.begin()+1; each!=ref.fields.end(); each++)
+// 		if(each->getType() == DataType::Constant)
+// 			os << " * " << *each;
+// 		else
+// 			os << *each;
+// 	}
+// 	else{
+// 		os << "null_term{}";
+// 	}
+// 	return os;
+// }
 
 // OperandList::iterator definition
 OperandList::iterator::iterator(): index{0}{}

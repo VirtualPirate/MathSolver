@@ -69,10 +69,10 @@ public:
 
 
 	//Getter Methods
-	const std::vector<Operand>& getFields();
-	const Operand& getPower();
-	const bool& isSimplified();
-	const bool& isNull();
+	const std::vector<Operand>& getFields() const;
+	const Operand& getPower() const;
+	const bool& isSimplified() const;
+	const bool& isNull() const;
 
 	//Setter Methods
 	void setNull(const bool&);
@@ -133,7 +133,7 @@ public:
 	operator bool() const;
 
 	std::string power_print() const;
-	friend std::ostream& operator<<(std::ostream&, const OperandList&);
+	// friend std::ostream& operator<<(std::ostream&, const OperandList&);
 
 };
 
