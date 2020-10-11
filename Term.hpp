@@ -2,10 +2,12 @@
 #define Term_H
 
 #include <vector>
+#include "OperandList.hpp"
 
 class Constant;
 class Variable;
 class Operand;
+class OperandList;
 class Term{
 	std::vector<Operand> fields;
 	Operand power;
@@ -88,7 +90,7 @@ public:
 
 	void simplify();
 
-	//Iterator functions
+	//Iteratorfunctions
 	iterator begin(DataType);
 	iterator end(DataType);
 	// Term to Constant comparison operators
@@ -134,6 +136,20 @@ public:
 
 	std::string power_print() const;
 	friend std::ostream& operator<<(std::ostream&, const Term&);
+
+};
+
+class New: public OperandList{
+	// friend class iterator;
+	// Term();
+
+	// Term(const Term&);
+	// Term(Term&&);
+	// Term(const Constant&);
+	// Term(const Variable&);
+	// Term(const Operand&);
+	// Term(const std::vector<Operand>&);
+	// Term(std::string);
 
 };
 

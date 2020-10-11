@@ -6,6 +6,7 @@
 #include "Constant.hpp"
 #include "Operand.hpp"
 #include "Variable.hpp"
+#include "OperandList.hpp"
 #include "Term.hpp"
 #include "Expression.hpp"
 
@@ -64,5 +65,25 @@ int main(){
 	std::cout << num1 << " - " << num2 << " = " << (num1 - num2) << std::endl;
 	std::cout << num1 << " + " << num2 << " = " << (num1 + num2) << std::endl;
 	std::cout << num1 << " ^ " << num2 << " = " << num1.raise_pow(num2) << std::endl;
+
+	New new_1{Constant{1}};
+	new_1.setNull(false);
+	new_1.insert(num1);
+	new_1.insert(var_0);
+	new_1.insert(var_1);
+
+	new_1.insert(num2);
+	new_1.insert(var_2);
+
+	new_1.insert(num3);
+	new_1.insert(var_3);
+
+	// New::iterator iter_begin_ = term_0.begin(DataType::Variable);
+	// New::iterator iter_end_ = term_0.end(DataType::Variable);
+
+	std::cout << "TEsting New::iterator" << std::endl;
+	for(auto each=new_1.begin(DataType::Variable); each!=new_1.end(DataType::Variable); each++)
+		std::cout << *each << std::endl;
+	std::cout << "new_1 = " << new_1 << std::endl;
 	return 0;
 }

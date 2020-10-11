@@ -3,6 +3,7 @@
 #include "Constant.hpp"
 #include "Operand.hpp"
 #include "Variable.hpp"
+#include "OperandList.hpp"
 #include "Term.hpp"
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
@@ -213,4 +214,15 @@ bool Term::iterator::operator==(const Term::iterator& ref) const {
 bool Term::iterator::operator!=(const Term::iterator& ref) const {
 	return this->index != ref.index;
 }
+
 // Term::iterator& Term::iterator::operator+=(const )
+
+
+// New::New(): OperandList(){super();}
+// New::New(const New& ref): OperandList(ref){super(ref);}
+// New::New(New&& ref){super(ref);}
+// New::New(const Constant& ref){super(ref);}
+// New::New(const Variable& ref){super(ref);}
+// New::New(const Operand& ref){super(ref);}
+// New::New(const std::vector<Operand>& ref){super(ref);}
+// New::New(std::string){}
