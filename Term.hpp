@@ -8,6 +8,7 @@ class Constant;
 class Variable;
 class Operand;
 class OperandList;
+/*
 class Term{
 	std::vector<Operand> fields;
 	Operand power;
@@ -138,8 +139,9 @@ public:
 	friend std::ostream& operator<<(std::ostream&, const Term&);
 
 };
+//*/
 
-class New: public OperandList{
+class Term: public OperandList{
 	// friend class iterator;
 	// Term();
 

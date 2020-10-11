@@ -65,7 +65,7 @@ int main(){
 	std::cout << num1 << " - " << num2 << " = " << (num1 - num2) << std::endl;
 	std::cout << num1 << " + " << num2 << " = " << (num1 + num2) << std::endl;
 	std::cout << num1 << " ^ " << num2 << " = " << num1.raise_pow(num2) << std::endl;
-
+	/*
 	New new_1{Constant{1}};
 	new_1.setNull(false);
 	new_1.insert(num1);
@@ -85,5 +85,6 @@ int main(){
 	for(auto each=new_1.begin(DataType::Variable); each!=new_1.end(DataType::Variable); each++)
 		std::cout << *each << std::endl;
 	std::cout << "new_1 = " << new_1 << std::endl;
+	//*/
 	return 0;
 }

@@ -8,6 +8,7 @@
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
 
+/*
 Term::Term(): fields{}, power{1}, is_simplified{false}, is_null{true}{}
 
 Term::Term(const Term& ref): fields{ref.fields}, power{ref.power}, is_simplified{ref.is_simplified}, is_null{ref.is_null}{}
@@ -214,7 +215,7 @@ bool Term::iterator::operator==(const Term::iterator& ref) const {
 bool Term::iterator::operator!=(const Term::iterator& ref) const {
 	return this->index != ref.index;
 }
-
+//*/
 // Term::iterator& Term::iterator::operator+=(const )
 
 
