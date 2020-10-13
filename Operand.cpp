@@ -172,10 +172,9 @@ void* allocate_n_return(const Operand& ref){
 			break;
 		case DataType::Variable:
 			point = (void *)(new Variable{ref.get<Variable>()});
-			// point = (void *)(new Variable{Return_Internal_Ref<Variable>(ref)});
 			break;
 		case DataType::Term:
-			// point = (void *)(new Term{Return_Internal_Ref<Term>(ref)});
+			point = (void *)(new Term{ref.get<Term>()});
 			break;
 		case DataType::Expression:
 			// point = (void *)(new Expression{Return_Internal_Ref<Expression>(ref)});
@@ -219,6 +218,14 @@ Operand& Operand::operator=(const Variable& ref){
 	value = (void*)(new Variable{ref});
 	type = DataType::Variable;
 	is_null = false;
+	return *this;
+}
+Operand::Operand(const Term& ref): value{(void*)(new Term{ref})}, type{DataType::Term}, is_null{ref.isNull()}{}
+Operand& Operand::operator=(const Term& ref){
+	if(value) free(value);
+	value = (void*)(new Term{ref});
+	type = DataType::Term;
+	is_null = ref.isNull();
 	return *this;
 }
 
@@ -300,7 +307,7 @@ std::string Operand::power_print() const {
 		case DataType::Variable:
 			return this->get<Variable>().power_print();
 		case DataType::Term:
-			return "stdout: Unknown Type power_print";
+			return this->get<Term>().power_print();
 		default:
 			return "stdout: Unknown Type power_print";
 		}
@@ -316,10 +323,10 @@ std::ostream& operator<<(std::ostream& os, const Operand& ref){
 				os << ref.get<Variable>();
 				break;
 			case DataType::Term:
-				// os << Return_Internal_Ref<ConstVar>(ref);
+				os << ref.get<Term>();
 				break;
 			case DataType::Expression:
-				// os << Return_Internal_Ref<Expression>(ref);
+				os << "stdout: Operand::operator<< for Expression is not defined yet";
 				break;
 			default:
 				os << "stdout: Unknown Type";
