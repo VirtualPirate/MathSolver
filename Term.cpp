@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <sstream>
 
 #include "Constant.hpp"
 #include "Operand.hpp"
@@ -23,4 +24,12 @@ std::ostream& operator<<(std::ostream& os, const Term& ref){
 		os << "null_term{}";
 	}
 	return os;
+}
+
+std::string Term::power_print() const{
+	std::ostringstream stream;
+	stream << '(';
+	stream << *this;
+	stream << ')';
+	return stream.str();
 }

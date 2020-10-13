@@ -106,14 +106,6 @@ OperandList::iterator OperandList::end(DataType type) {
 }
 
 OperandList::operator bool() const {return is_null;}
-
-std::string OperandList::power_print() const{
-	std::ostringstream stream;
-	stream << '(';
-	stream << *this;
-	stream << ')';
-	return stream.str();
-}
 // std::ostream& operator<<(std::ostream& os, const OperandList& ref){
 // 	if(!ref.is_null){
 // 	os << *(ref.fields.begin());

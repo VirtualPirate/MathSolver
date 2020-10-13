@@ -51,10 +51,12 @@ int main(){
 
 
 	Operand operand_0{10};
+	Operand operand_1{term_0};
 	Constant a = operand_0.get<Constant>();
 	std::cout << std::endl << std::endl;
 	std::cout << "Testing Operand::operator<<" << std::endl;
 	std::cout << operand_0 << "\n\n";
+	std::cout << operand_1.power_print() << "\n\n";
 	std::cout << "operand_0.get<Constant>() = " << a << std::endl;
 
 
