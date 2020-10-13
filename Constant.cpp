@@ -30,6 +30,7 @@ std::string Constant::power_print() const{
 	stream << *this;
 	return stream.str();
 }
+bool Constant::is_negative() const {return value < 0;}
 
 Constant Constant::abs() const {return Constant{fabs(value)};}
 

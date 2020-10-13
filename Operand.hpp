@@ -8,6 +8,7 @@ unsigned func_hash(DataType, DataType);
 
 class Constant;
 class Variable;
+class Term;
 class Operand
 {
 	void* value;
