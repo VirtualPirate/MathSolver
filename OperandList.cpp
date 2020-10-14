@@ -137,6 +137,10 @@ void OperandList::iterator::set_iterative(const DataType& type){
 	index = 0;
 }
 
+int OperandList::iterator::getIndex() const {
+	return index;
+}
+
 //OperandList::iterator operations
 int OperandList::iterator::operate_add(int other){
 	int abs_index = this->index + 1;

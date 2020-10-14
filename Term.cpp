@@ -35,7 +35,7 @@ std::string Term::power_print() const{
 	return stream.str();
 }
 
-bool Term::is_negative(){
+bool Term::is_negative() const {
 	return false;
 }
 void Term::simplify() {

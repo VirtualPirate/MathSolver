@@ -30,7 +30,8 @@ public:
 	public:
 		iterator& operator=(const iterator&);
 		void set_iterative(const DataType&);
-
+		int getIndex() const;
+		
 		//operations
 		iterator operator+(int);
 		iterator operator-(int);
