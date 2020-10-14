@@ -62,6 +62,25 @@ public:
 	bool operator==(const Operand&) const;
 	bool operator!=(const Operand&) const;
 
+	//Operand to Constant comparison operators
+	bool operator==(const Constant&) const;
+	bool operator!=(const Constant&) const;
+
+	//Operand to Variable comparison operators
+	bool operator==(const Variable&) const;
+	bool operator!=(const Variable&) const;
+
+	//Operand to Term comparison operators
+	bool operator==(const Term&) const;
+	bool operator!=(const Term&) const;
+
+	//Operand to Expression comparison operators
+	bool operator==(const Expression&) const;
+	bool operator!=(const Expression&) const;
+
+	bool operator==(const double&) const;
+	bool operator!=(const double&) const;
+
 	operator bool() const;
 	bool same_type(const Operand&) const;
 	bool same_type(const DataType&) const;
