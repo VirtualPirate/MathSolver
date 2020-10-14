@@ -13,14 +13,24 @@
 
 std::ostream& operator<<(std::ostream& os, const Term& ref){
 	if(!ref.isNull()){
-	const std::vector<Operand>& fields = ref.getFields();
-	os << *(fields.begin());
-	for(auto each=fields.begin()+1; each!=fields.end(); each++)
-		if(each->getType() == DataType::Constant)
-			os << " * " << *each;
-		else
-			os << *each;
+		bool brace = false;
+		if(ref.getPower() != Operand{1})
+			brace = true;
+
+		const std::vector<Operand>& fields = ref.getFields();
+		if(brace)
+			os << '(';
+		os << *(fields.begin());
+		for(auto each=fields.begin()+1; each!=fields.end(); each++){
+			if(each->getType() == DataType::Constant)
+				os << " * " << *each;
+			else
+				os << *each;
+		}
+		if(brace)
+			os << ")^" << ref.getPower().power_print();
 	}
+
 	else{
 		os << "null_term{}";
 	}

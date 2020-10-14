@@ -10,13 +10,21 @@
 
 std::ostream& operator<<(std::ostream& os, const Expression& ref){
 	if(!ref.isNull()){
-	const std::vector<Operand>& fields = ref.getFields();
-	os << *(fields.begin());
-	for(auto each=fields.begin()+1; each!=fields.end(); each++)
-		if(!each->is_negative())
-			os << " + " << *each;
-		else
-			os << *each;
+		bool brace = false;
+		if(ref.getPower() != Operand{1})
+			brace = true;
+		if(brace)
+			os << '(';
+		const std::vector<Operand>& fields = ref.getFields();
+		os << *(fields.begin());
+		for(auto each=fields.begin()+1; each!=fields.end(); each++){
+			if(!each->is_negative())
+				os << " + " << *each;
+			else
+				os << *each;
+		}
+		if(brace)
+			os << ")^" << ref.getPower().power_print();
 	}
 	else{
 		os << "null_expression{}";
