@@ -313,6 +313,20 @@ std::string Operand::power_print() const {
 		}
 }
 
+bool Operand::is_negative() const {
+	switch(type){
+		case DataType::Constant:
+			return this->get<Constant>().is_negative();
+		case DataType::Variable:
+			return this->get<Variable>().is_negative();
+		case DataType::Term:
+			return this->get<Term>().is_negative();
+		default:
+			std::cout << "stdout: Unknown type is_negative";
+	}
+	return false;
+}
+
 std::ostream& operator<<(std::ostream& os, const Operand& ref){
 	if(!ref.is_null){
 		switch(ref.type){

@@ -99,6 +99,8 @@ void OperandList::insert(const Operand& ref){
 
 //Iterator functions
 OperandList::iterator OperandList::begin(DataType type){
+	if(fields.at(0).getType() == type)
+		return OperandList::iterator{this, 0, type};
 	return OperandList::iterator{this, 0, type} + 1;
 }
 OperandList::iterator OperandList::end(DataType type) {

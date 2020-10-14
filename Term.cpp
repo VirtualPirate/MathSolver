@@ -36,7 +36,7 @@ std::string Term::power_print() const{
 }
 
 bool Term::is_negative() const {
-	return false;
+	return fields.at(0).is_negative();
 }
 void Term::simplify() {
 	Operand result;
@@ -46,12 +46,15 @@ void Term::simplify() {
 			if(result){
 				fields.erase(i);
 				fields.erase(j-1);
-				std::cout << *this << std::endl;
 				fields.insert(fields.begin(), result);
 				i = fields.begin();
 				j = i+1;
 			}
 		}
 	}
+	// Moves the Constant(coefficient) to the first index of the fields.
+	auto swap_iter = fields.begin() + begin(DataType::Constant).getIndex();
+	if(swap_iter != fields.end())
+		std::iter_swap(fields.begin(), swap_iter);
 
 }
