@@ -8,7 +8,6 @@
 #include "Variable.hpp"
 #include "Term.hpp"
 #include "Expression.hpp"
-#include "SimpleExpression.hpp"
 #include "Operation_Functions.hpp"
 
 std::unordered_map<char, Constant> var_values;
@@ -65,6 +64,9 @@ std::string Variable::power_print() const{
 	std::ostringstream stream;
 	stream << *this;
 	return stream.str();
+}
+bool Variable::is_negative() const {
+	return false;
 }
 std::ostream& operator<<(std::ostream& os, const Variable& ref){
 	if(ref.power == Operand{Constant{1}})

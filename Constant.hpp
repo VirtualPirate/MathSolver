@@ -28,6 +28,7 @@ public:
 	void setValue(const double&);
 
 	std::string power_print() const;
+	bool is_negative() const;
 	Constant abs() const;
 
 	//Constant to Constant operations

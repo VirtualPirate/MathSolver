@@ -8,6 +8,7 @@ unsigned func_hash(DataType, DataType);
 
 class Constant;
 class Variable;
+class Term;
 class Operand
 {
 	void* value;
@@ -23,6 +24,8 @@ public:
 	Operand& operator=(const Constant&);
 	Operand(const Variable&);
 	Operand& operator=(const Variable&);
+	Operand(const Term&);
+	Operand& operator=(const Term&);
 
 	// Copy and Move semantics
 	Operand(const Operand&);
@@ -43,6 +46,7 @@ public:
 	}
 
 	std::string power_print() const;
+	bool is_negative() const;
 	Operand substitute() const;
 
 	// Operand to Operand arithmetic operators

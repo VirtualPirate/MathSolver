@@ -8,7 +8,6 @@
 #include "Variable.hpp"
 #include "Term.hpp"
 #include "Expression.hpp"
-#include "SimpleExpression.hpp"
 #include "Operation_Functions.hpp"
 
 //Constructors
@@ -31,6 +30,7 @@ std::string Constant::power_print() const{
 	stream << *this;
 	return stream.str();
 }
+bool Constant::is_negative() const {return value < 0;}
 
 Constant Constant::abs() const {return Constant{fabs(value)};}
 

@@ -9,7 +9,6 @@
 #include "Variable.hpp"
 #include "Term.hpp"
 #include "Expression.hpp"
-#include "SimpleExpression.hpp"
 #include "Operation_Functions.hpp"
 
 Operand Operand_null(const Operand& first, const Operand& second){
@@ -173,10 +172,9 @@ void* allocate_n_return(const Operand& ref){
 			break;
 		case DataType::Variable:
 			point = (void *)(new Variable{ref.get<Variable>()});
-			// point = (void *)(new Variable{Return_Internal_Ref<Variable>(ref)});
 			break;
 		case DataType::Term:
-			// point = (void *)(new Term{Return_Internal_Ref<Term>(ref)});
+			point = (void *)(new Term{ref.get<Term>()});
 			break;
 		case DataType::Expression:
 			// point = (void *)(new Expression{Return_Internal_Ref<Expression>(ref)});
@@ -220,6 +218,14 @@ Operand& Operand::operator=(const Variable& ref){
 	value = (void*)(new Variable{ref});
 	type = DataType::Variable;
 	is_null = false;
+	return *this;
+}
+Operand::Operand(const Term& ref): value{(void*)(new Term{ref})}, type{DataType::Term}, is_null{ref.isNull()}{}
+Operand& Operand::operator=(const Term& ref){
+	if(value) free(value);
+	value = (void*)(new Term{ref});
+	type = DataType::Term;
+	is_null = ref.isNull();
 	return *this;
 }
 
@@ -301,10 +307,24 @@ std::string Operand::power_print() const {
 		case DataType::Variable:
 			return this->get<Variable>().power_print();
 		case DataType::Term:
-			return "stdout: Unknown Type power_print";
+			return this->get<Term>().power_print();
 		default:
 			return "stdout: Unknown Type power_print";
 		}
+}
+
+bool Operand::is_negative() const {
+	switch(type){
+		case DataType::Constant:
+			return this->get<Constant>().is_negative();
+		case DataType::Variable:
+			return this->get<Variable>().is_negative();
+		case DataType::Term:
+			return this->get<Term>().is_negative();
+		default:
+			std::cout << "stdout: Unknown type is_negative";
+	}
+	return false;
 }
 
 std::ostream& operator<<(std::ostream& os, const Operand& ref){
@@ -317,10 +337,10 @@ std::ostream& operator<<(std::ostream& os, const Operand& ref){
 				os << ref.get<Variable>();
 				break;
 			case DataType::Term:
-				// os << Return_Internal_Ref<ConstVar>(ref);
+				os << ref.get<Term>();
 				break;
 			case DataType::Expression:
-				// os << Return_Internal_Ref<Expression>(ref);
+				os << "stdout: Operand::operator<< for Expression is not defined yet";
 				break;
 			default:
 				os << "stdout: Unknown Type";
