@@ -9,6 +9,7 @@ unsigned func_hash(DataType, DataType);
 class Constant;
 class Variable;
 class Term;
+class Expression;
 class Operand
 {
 	void* value;
@@ -75,8 +76,8 @@ public:
 	bool operator!=(const Term&) const;
 
 	//Operand to Expression comparison operators
-	bool operator==(const Expression&) const;
-	bool operator!=(const Expression&) const;
+	// bool operator==(const Expression&) const;
+	// bool operator!=(const Expression&) const;
 
 	bool operator==(const double&) const;
 	bool operator!=(const double&) const;
