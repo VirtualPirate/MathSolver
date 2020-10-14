@@ -7,6 +7,7 @@ class Constant;
 class Variable;
 class Operand;
 class OperandList{
+protected:
 	std::vector<Operand> fields;
 	Operand power;
 	bool is_simplified;
@@ -91,6 +92,7 @@ public:
 	//Iterator functions
 	iterator begin(DataType);
 	iterator end(DataType);
+	/*
 	// OperandList to Constant comparison operators
 	bool operator==(const Constant&) const;
 	bool operator!=(const Constant&) const;
@@ -129,7 +131,7 @@ public:
 	OperandList operator--();
 
 	//Post-increment
-
+	*/
 	operator bool() const;
 
 	// std::string power_print() const;

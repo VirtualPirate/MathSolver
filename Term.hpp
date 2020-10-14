@@ -14,6 +14,7 @@ class Term: public OperandList{
 public:
 	bool is_negative() const;
 	std::string power_print() const;
+	void simplify();
 };
 
 #endif

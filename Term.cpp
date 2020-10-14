@@ -33,3 +33,19 @@ std::string Term::power_print() const{
 	stream << ')';
 	return stream.str();
 }
+
+void Term::simplify() {
+	Operand result;
+	for(auto i=fields.begin(); i != fields.end(); i++){
+		for(auto j=fields.begin()+1; i != fields.end(); j++){
+			result = (*i) * (*j);
+			if(result){
+				fields.erase(i);
+				fields.erase(j);
+				fields.insert(fields.begin(), result);
+				i = fields.begin();
+				j = i+1;
+			}
+		}
+	}
+}
