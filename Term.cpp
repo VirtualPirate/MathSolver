@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
 #include "Constant.hpp"
 #include "Operand.hpp"
@@ -34,18 +35,23 @@ std::string Term::power_print() const{
 	return stream.str();
 }
 
+bool Term::is_negative(){
+	return false;
+}
 void Term::simplify() {
 	Operand result;
 	for(auto i=fields.begin(); i != fields.end(); i++){
-		for(auto j=fields.begin()+1; i != fields.end(); j++){
+		for(auto j=i+1; j != fields.end(); j++){
 			result = (*i) * (*j);
 			if(result){
 				fields.erase(i);
-				fields.erase(j);
+				fields.erase(j-1);
+				std::cout << *this << std::endl;
 				fields.insert(fields.begin(), result);
 				i = fields.begin();
 				j = i+1;
 			}
 		}
 	}
+
 }

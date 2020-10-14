@@ -41,6 +41,9 @@ int main(){
 	// std::cout << term_0 << std::endl;
 	// std::cout << term_0.getFields().at(2) << std::endl;
 	std::cout << term_0 << std::endl;
+	term_0.simplify();
+	std::cout << term_0 << std::endl;
+	std::cout << std::endl << std::endl;
 
 	Term::iterator iter_begin = term_0.begin(DataType::Variable);
 	Term::iterator iter_end = term_0.end(DataType::Variable);
