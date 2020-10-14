@@ -68,6 +68,9 @@ std::string Variable::power_print() const{
 bool Variable::is_negative() const {
 	return false;
 }
+bool Variable::negative_power() const {
+	return power.is_negative();
+}
 std::ostream& operator<<(std::ostream& os, const Variable& ref){
 	if(ref.power == Operand{Constant{1}})
 		os << ref.name;

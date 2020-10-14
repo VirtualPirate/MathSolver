@@ -31,7 +31,7 @@ std::string Constant::power_print() const{
 	return stream.str();
 }
 bool Constant::is_negative() const {return value < 0;}
-
+bool Constant::negative_power() const {return false;}
 Constant Constant::abs() const {return Constant{fabs(value)};}
 
 

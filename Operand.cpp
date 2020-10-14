@@ -326,6 +326,19 @@ bool Operand::is_negative() const {
 	}
 	return false;
 }
+bool Operand::negative_power() const {
+	switch(type){
+		case DataType::Constant:
+			return this->get<Constant>().negative_power();
+		case DataType::Variable:
+			return this->get<Variable>().negative_power();
+		case DataType::Term:
+			return this->get<Term>().negative_power();
+		default:
+			std::cout << "stdout: Unknown type negative_power";
+	}
+	return false;
+}
 
 std::ostream& operator<<(std::ostream& os, const Operand& ref){
 	if(!ref.is_null){

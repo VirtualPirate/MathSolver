@@ -38,6 +38,9 @@ std::string Term::power_print() const{
 bool Term::is_negative() const {
 	return fields.at(0).is_negative();
 }
+bool Term::negative_power() const {
+	return power.is_negative();
+}
 void Term::simplify() {
 	Operand result;
 	for(auto i=fields.begin(); i != fields.end(); i++){
