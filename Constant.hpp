@@ -29,6 +29,7 @@ public:
 
 	std::string power_print() const;
 	bool is_negative() const;
+	bool negative_power() const;
 	Constant abs() const;
 
 	//Constant to Constant operations

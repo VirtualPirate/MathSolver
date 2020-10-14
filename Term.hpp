@@ -13,6 +13,7 @@ class Term: public OperandList{
 	friend std::ostream& operator<<(std::ostream&, const Term&);
 public:
 	bool is_negative() const;
+	bool negative_power() const;
 	std::string power_print() const;
 	void simplify();
 };
