@@ -53,7 +53,9 @@ int main(){
 		std::cout << *each << std::endl;
 
 
-	// Expression exp_0
+	Expression exp_0{{num1, var_0, var_1}};
+	std::cout << "Testing Expression::operator<<" << std::endl;
+	std::cout << exp_0 << std::endl;
 	Operand operand_0{10};
 	Operand operand_1{term_0};
 	Constant a = operand_0.get<Constant>();

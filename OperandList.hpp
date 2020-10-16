@@ -68,6 +68,7 @@ public:
 
 	OperandList(const std::vector<Operand>&);
 	OperandList(std::initializer_list<Operand>);
+	OperandList& operator=(std::initializer_list<Operand>);
 
 	OperandList(std::string);
 
