@@ -22,7 +22,7 @@ int main(){
 
 	Variable var_0{'x'};
 	Variable var_1{'y'};
-	Variable var_2{'x', 2};
+	Variable var_2{'x', -2};
 	Variable var_3{'y', 3};
 
 	Term term_0{Variable{'a'}};
@@ -53,7 +53,7 @@ int main(){
 		std::cout << *each << std::endl;
 
 
-	Expression exp_0{{num1, var_0, var_1}};
+	Expression exp_0{{num1, var_0, var_1, term_0}};
 	std::cout << "Testing Expression::operator<<" << std::endl;
 	std::cout << exp_0 << std::endl;
 	Operand operand_0{10};

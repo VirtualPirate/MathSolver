@@ -57,11 +57,51 @@ public:
 	Operand operator*(const Operand&) const;
 	Operand operator/(const Operand&) const;
 	Operand raise_pow(const Operand&) const;
+
+	// Operand to double arithmetic operators
+	Operand operator+(const double&) const;
+	Operand operator-(const double&) const;
+	Operand operator*(const double&) const;
+	Operand operator/(const double&) const;
+	Operand raise_pow(const double&) const;
+
+	// Operand to Constant arithmetic operators
+	Operand operator+(const Constant&) const;
+	Operand operator-(const Constant&) const;
+	Operand operator*(const Constant&) const;
+	Operand operator/(const Constant&) const;
+	Operand raise_pow(const Constant&) const;
+
+	// Operand to Variable arithmetic operators
+	Operand operator+(const Variable&) const;
+	Operand operator-(const Variable&) const;
+	Operand operator*(const Variable&) const;
+	Operand operator/(const Variable&) const;
+	Operand raise_pow(const Variable&) const;
+
+	//Operand to Term arithmetic operators
+	Operand operator+(const Term&) const;
+	Operand operator-(const Term&) const;
+	Operand operator*(const Term&) const;
+	Operand operator/(const Term&) const;
+	Operand raise_pow(const Term&) const;
+
+	//Operand to Expression arithmetic operators
+	Operand operator+(const Expression&) const;
+	Operand operator-(const Expression&) const;
+	Operand operator*(const Expression&) const;
+	Operand operator/(const Expression&) const;
+	Operand raise_pow(const Expression&) const;
+
 	Operand operator+() const;
 	Operand operator-() const;
 	//Operand to Operand comparison operators
 	bool operator==(const Operand&) const;
 	bool operator!=(const Operand&) const;
+
+	//Operand to double comparison operators
+	bool operator==(const double&) const;
+	bool operator!=(const double&) const;
 
 	//Operand to Constant comparison operators
 	bool operator==(const Constant&) const;
@@ -78,9 +118,6 @@ public:
 	//Operand to Expression comparison operators
 	// bool operator==(const Expression&) const;
 	// bool operator!=(const Expression&) const;
-
-	bool operator==(const double&) const;
-	bool operator!=(const double&) const;
 
 	operator bool() const;
 	bool same_type(const Operand&) const;
