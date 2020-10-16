@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <initializer_list>
 
 #include "Constant.hpp"
 #include "Operand.hpp"
@@ -63,6 +64,7 @@ OperandList& OperandList::operator=(const Operand& ref){
 }
 
 OperandList::OperandList(const std::vector<Operand>& ref): fields{ref}, power{1}, is_simplified{false}, is_null{false}{}
+OperandList::OperandList(std::initializer_list<Operand> list): fields{list}, power{1}, is_simplified{false}, is_null{false}{}
 
 // Getter methods
 const std::vector<Operand>& OperandList::getFields() const {

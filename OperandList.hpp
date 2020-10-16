@@ -2,6 +2,7 @@
 #define OperandList_H
 
 #include <vector>
+#include <initializer_list>
 
 class Constant;
 class Variable;
@@ -66,6 +67,7 @@ public:
 	OperandList& operator=(const Operand&);
 
 	OperandList(const std::vector<Operand>&);
+	OperandList(std::initializer_list<Operand>);
 
 	OperandList(std::string);
 

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include <initializer_list>
 
 #include "Constant.hpp"
 #include "Operand.hpp"
