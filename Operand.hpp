@@ -27,6 +27,8 @@ public:
 	Operand& operator=(const Variable&);
 	Operand(const Term&);
 	Operand& operator=(const Term&);
+	Operand(const Expression&);
+	Operand& operator=(const Expression&);
 
 	// Copy and Move semantics
 	Operand(const Operand&);
@@ -116,8 +118,8 @@ public:
 	bool operator!=(const Term&) const;
 
 	//Operand to Expression comparison operators
-	// bool operator==(const Expression&) const;
-	// bool operator!=(const Expression&) const;
+	bool operator==(const Expression&) const;
+	bool operator!=(const Expression&) const;
 
 	operator bool() const;
 	bool same_type(const Operand&) const;
