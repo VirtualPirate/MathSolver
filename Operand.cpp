@@ -177,7 +177,7 @@ void* allocate_n_return(const Operand& ref){
 			point = (void *)(new Term{ref.get<Term>()});
 			break;
 		case DataType::Expression:
-			// point = (void *)(new Expression{Return_Internal_Ref<Expression>(ref)});
+			point = (void *)(new Expression{ref.get<Expression>()});
 			break;
 		default:
 			std::cout << "allocate_n_return() : Unknown Type";
@@ -225,6 +225,14 @@ Operand& Operand::operator=(const Term& ref){
 	if(value) free(value);
 	value = (void*)(new Term{ref});
 	type = DataType::Term;
+	is_null = ref.isNull();
+	return *this;
+}
+Operand::Operand(const Expression& ref): value{(void*)(new Expression{ref})}, type{DataType::Expression}, is_null{ref.isNull()}{}
+Operand& Operand::operator=(const Expression& ref){
+	if(value) free(value);
+	value = (void*)(new Expression{ref});
+	type = DataType::Expression;
 	is_null = ref.isNull();
 	return *this;
 }
@@ -308,6 +316,8 @@ std::string Operand::power_print() const {
 			return this->get<Variable>().power_print();
 		case DataType::Term:
 			return this->get<Term>().power_print();
+		case DataType::Expression:
+			return this->get<Expression>().power_print();
 		default:
 			return "stdout: Unknown Type power_print";
 		}
@@ -321,6 +331,8 @@ bool Operand::is_negative() const {
 			return this->get<Variable>().is_negative();
 		case DataType::Term:
 			return this->get<Term>().is_negative();
+		case DataType::Expression:
+			return this->get<Expression>().is_negative();
 		default:
 			std::cout << "stdout: Unknown type is_negative";
 	}
@@ -334,6 +346,8 @@ bool Operand::negative_power() const {
 			return this->get<Variable>().negative_power();
 		case DataType::Term:
 			return this->get<Term>().negative_power();
+		case DataType::Expression:
+			return this->get<Expression>().negative_power();
 		default:
 			std::cout << "stdout: Unknown type negative_power";
 	}
@@ -353,7 +367,7 @@ std::ostream& operator<<(std::ostream& os, const Operand& ref){
 				os << ref.get<Term>();
 				break;
 			case DataType::Expression:
-				os << "stdout: Operand::operator<< for Expression is not defined yet";
+				os << ref.get<Expression>();
 				break;
 			default:
 				os << "stdout: Unknown Type";

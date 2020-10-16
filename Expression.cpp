@@ -1,4 +1,6 @@
 #include <vector>
+#include <iostream>
+#include <sstream>
 
 #include "Constant.hpp"
 #include "Operand.hpp"
@@ -32,6 +34,13 @@ std::ostream& operator<<(std::ostream& os, const Expression& ref){
 	return os;
 }
 
+std::string Expression::power_print() const{
+	std::ostringstream stream;
+	stream << '(';
+	stream << *this;
+	stream << ')';
+	return stream.str();
+}
 bool Expression::is_negative() const {
 	return false;
 }
