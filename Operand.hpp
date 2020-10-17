@@ -59,6 +59,7 @@ class Operand
 	void* allocate() const {
 		return (void *)(new Type{get<Type>()});
 	}
+	void* allocate() const;
 public:
 	Operand();
 

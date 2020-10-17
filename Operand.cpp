@@ -338,7 +338,7 @@ Operand Operand::raise_pow(const Operand& other) const {
 	return pow_functions[func_hash(this->type, other.type)](*this, other);}
 
 std::string Operand::power_print() const {
-	switch(type){
+	/*switch(type){
 		case DataType::Constant:
 			return this->get<Constant>().power_print();
 		case DataType::Variable:
@@ -350,9 +350,16 @@ std::string Operand::power_print() const {
 		default:
 			return "stdout: Unknown Type power_print";
 		}
-}
+*/	
+	int index = (int)type;
+	if (index > -1)
+		return power_print_functions[index](this);
+	return "stdout: Unknown type power_print";
+
+	}
 
 bool Operand::is_negative() const {
+	/*
 	switch(type){
 		case DataType::Constant:
 			return this->get<Constant>().is_negative();
@@ -366,9 +373,17 @@ bool Operand::is_negative() const {
 			std::cout << "stdout: Unknown type is_negative";
 	}
 	return false;
+	*/
+	int index = (int)type;
+	if (index > -1)
+		return is_negative_functions[index](this);
+	else
+		std::cout << "stdout: Unknown type is_negative";
+	return false;
+
 }
 bool Operand::negative_power() const {
-	switch(type){
+/*	switch(type){
 		case DataType::Constant:
 			return this->get<Constant>().negative_power();
 		case DataType::Variable:
@@ -380,6 +395,12 @@ bool Operand::negative_power() const {
 		default:
 			std::cout << "stdout: Unknown type negative_power";
 	}
+	return false;*/
+	int index = (int)type;
+	if (index > -1)
+		return is_negative_functions[index](this);
+	else
+		std::cout << "stdout: Unknown type negative_power";
 	return false;
 }
 
