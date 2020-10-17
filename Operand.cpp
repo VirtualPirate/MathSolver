@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <functional>
 
 #include "Constant.hpp"
 #include "Operand.hpp"
@@ -161,6 +162,34 @@ ComparisonFunction Operand::neq_functions[] = {
 	Operand_neq_bool,
 	Operand_neq_bool,
 	Operand_neq_bool,
+};
+
+CheckFunction Operand::is_negative_functions[] = {
+	is_negative<Constant>,
+	is_negative<Variable>,
+	is_negative<Term>,
+	is_negative<Expression>
+};
+
+CheckFunction Operand::negative_power_functions[] = {
+	negative_power<Constant>,
+	negative_power<Variable>,
+	negative_power<Term>,
+	negative_power<Expression>
+};
+
+PowerPrintFunc Operand::power_print_functions[] = {
+	power_print<Constant>,
+	power_print<Variable>,
+	power_print<Term>,
+	power_print<Expression>
+};
+
+AllocateFunction Operand::allocate_functions[] = {
+	allocate<Constant>,
+	allocate<Variable>,
+	allocate<Term>,
+	allocate<Expression>
 };
 
 void* allocate_n_return(const Operand& ref){
