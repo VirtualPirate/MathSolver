@@ -67,6 +67,13 @@ public:
 	Expression operator/(const Expression&) const;
 	Term raise_pow(const Expression&) const;
 
+	//Constant to Operand arithmetic operations
+	Operand operator+(const Operand&) const;
+	Operand operator-(const Operand&) const;
+	Operand operator*(const Operand&) const;
+	Operand operator/(const Operand&) const;
+	Operand raise_pow(const Operand&) const;
+
 
 	bool operator==(const double&) const;
 	bool operator!=(const double&) const;
