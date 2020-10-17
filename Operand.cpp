@@ -19,8 +19,8 @@ bool Operand_neq_bool(const Operand& first, const Operand& second){
 	return true;
 }
 
-const unsigned O_ARRAY_SIZE = 18;
-Operand (*add_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
+// const unsigned O_ARRAY_SIZE = 18;
+OperationFunction Operand::add_functions[] = {
 	Operand_Operand_add<Constant, Constant>,
 	Operand_null,
 	Operand_null,
@@ -40,7 +40,7 @@ Operand (*add_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
 	Operand_null,
 	Operand_null,
 };
-Operand (*sub_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
+OperationFunction Operand::sub_functions[] = {
 	Operand_Operand_sub<Constant, Constant>,
 	Operand_null,
 	Operand_null,
@@ -60,7 +60,7 @@ Operand (*sub_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
 	Operand_null,
 	Operand_null,
 };
-Operand (*mul_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
+OperationFunction Operand::mul_functions[] = {
 	Operand_Operand_mul<Constant, Constant>,
 	Operand_null,
 	Operand_null,
@@ -80,7 +80,7 @@ Operand (*mul_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
 	Operand_null,
 	Operand_null,
 };
-Operand (*div_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
+OperationFunction Operand::div_functions[] = {
 	Operand_Operand_div<Constant, Constant>,
 	Operand_null,
 	Operand_null,
@@ -100,7 +100,7 @@ Operand (*div_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
 	Operand_null,
 	Operand_null,
 };
-Operand (*pow_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
+OperationFunction Operand::pow_functions[] = {
 	Operand_Operand_pow<Constant, Constant>,
 	Operand_null,
 	Operand_null,

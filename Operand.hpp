@@ -1,10 +1,18 @@
 #ifndef Operand_H
 #define Operand_H
 
+#define O_ARRAY_SIZE 18
+#define TYPE_COUNT 4
+
 enum class DataType
 {Constant=0, Variable=1, Term=2, Expression=3, None=-1};
-
+// const unsigned O_ARRAY_SIZE = 18;
 unsigned func_hash(DataType, DataType);
+
+using OperationFunction = Operand (*)(const Operand&, const Operand&);
+using CheckFunction = bool (*)(const Operand&);
+using PowerPrintFunc = std::string (*)(const Operand&);
+using AllocateFunction = void* (*)(const Operand&);
 
 class Constant;
 class Variable;
@@ -16,6 +24,17 @@ class Operand
 	DataType type;
 	bool is_null;
 
+	static OperationFunction add_functions[O_ARRAY_SIZE];
+	static OperationFunction sub_functions[O_ARRAY_SIZE];
+	static OperationFunction mul_functions[O_ARRAY_SIZE];
+	static OperationFunction div_functions[O_ARRAY_SIZE];
+	static OperationFunction pow_functions[O_ARRAY_SIZE];
+
+	static CheckFunction is_negative_functions[TYPE_COUNT];
+	static CheckFunction negative_power_functions[TYPE_COUNT];
+	static PowerPrintFunc power_print_functions[TYPE_COUNT];
+
+	static AllocateFunction allocate_functions[TYPE_COUNT];
 public:
 	Operand();
 
