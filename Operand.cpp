@@ -192,6 +192,12 @@ AllocateFunction Operand::allocate_functions[] = {
 	allocate<Expression>
 };
 
+CoutFunction Operand::operator_cout_functions[] = {
+	cout_<Constant>,
+	cout_<Variable>,
+	cout_<Term>,
+	cout_<Expression>
+};
 void* allocate_n_return(const Operand& ref){
 	void* point = nullptr;
 	if(!ref.isNull()){

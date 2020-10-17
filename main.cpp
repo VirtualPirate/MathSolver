@@ -57,6 +57,7 @@ int main(){
 	std::cout << "Testing Expression::operator<<" << std::endl;
 	std::cout << exp_0 << std::endl;
 	Operand operand_0{10};
+	std::cout << "operand_0.is_negative() = " << operand_0.is_negative() << std::endl; 
 	Operand operand_1{term_0};
 	Constant a = operand_0.get<Constant>();
 	std::cout << std::endl << std::endl;

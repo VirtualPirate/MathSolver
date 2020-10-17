@@ -16,6 +16,7 @@ using ComparisonFunction = bool (*)(const Operand&, const Operand&);
 using CheckFunction = std::function<bool(const Operand*)>;
 using PowerPrintFunc = std::function<std::string(const Operand*)>;
 using AllocateFunction = std::function<void*(const Operand*)>;
+using CoutFunction = std::function<std::ostream&(std::ostream&, const Operand&)>;
 
 class Constant;
 class Variable;
@@ -43,6 +44,8 @@ class Operand
 
 	static AllocateFunction allocate_functions[TYPE_COUNT];
 
+	static CoutFunction operator_cout_functions[TYPE_COUNT];
+
 	template <typename Type>
 	bool is_negative() const {
 		return get<Type>().is_negative();
@@ -58,6 +61,11 @@ class Operand
 	template <typename Type>
 	void* allocate() const {
 		return (void *)(new Type{get<Type>()});
+	}
+	template <typename Type>
+	static std::ostream& cout_(std::ostream& os, const Operand& ref){
+		os << ref.get<Type>();
+		return os;
 	}
 	void* allocate() const;
 public:
