@@ -198,6 +198,7 @@ CoutFunction Operand::operator_cout_functions[] = {
 	cout_<Term>,
 	cout_<Expression>
 };
+/*
 void* allocate_n_return(const Operand& ref){
 	void* point = nullptr;
 	if(!ref.isNull()){
@@ -220,6 +221,7 @@ void* allocate_n_return(const Operand& ref){
 	}
 	return point;
 }
+*/
 
 unsigned func_hash(DataType first_type, DataType second_type){
 	int first_num = (int)first_type;
@@ -391,8 +393,7 @@ bool Operand::is_negative() const {
 	int index = (int)type;
 	if (index > -1)
 		return is_negative_functions[index](this);
-	else
-		std::cout << "stdout: Unknown type is_negative";
+	std::cout << "stdout: Unknown type is_negative";
 	return false;
 
 }
@@ -413,8 +414,7 @@ bool Operand::negative_power() const {
 	int index = (int)type;
 	if (index > -1)
 		return is_negative_functions[index](this);
-	else
-		std::cout << "stdout: Unknown type negative_power";
+	std::cout << "stdout: Unknown type negative_power";
 	return false;
 }
 
@@ -442,10 +442,8 @@ std::ostream& operator<<(std::ostream& os, const Operand& ref){
 		int index = (int)ref.type;
 		if (index > -1)
 			return Operand::operator_cout_functions[index](os, ref);
-		else
-			os << "stdout: Unknown type operator<<";
-	}else{
+		os << "stdout: Unknown type operator<<";
+	}else
 		os << "stdout: nullptr in operator<<";
-	}
 	return os;
 }
