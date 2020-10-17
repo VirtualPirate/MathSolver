@@ -9,39 +9,39 @@
 #include "Operation_Functions.hpp"
 
 // Constant to Constant arithmetic operators
-Constant Constant_Constant_add(const Constant& first, const Constant& second){
-	return Constant{first.getValue() + second.getValue()};
+Constant Constant::operator+(const Constant& other) const {
+	return Constant{value + other.value};
 }
-Constant Constant_Constant_sub(const Constant& first, const Constant& second){
-	return Constant{first.getValue() - second.getValue()};
+Constant Constant::operator-(const Constant& other) const {
+	return Constant{value - other.value};
 }
-Constant Constant_Constant_mul(const Constant& first, const Constant& second){
-	return Constant{first.getValue() * second.getValue()};
+Constant Constant::operator*(const Constant& other) const {
+	return Constant{value * other.value};
 }
-Constant Constant_Constant_div(const Constant& first, const Constant& second){
-	return Constant{first.getValue() / second.getValue()};
+Constant Constant::operator/(const Constant& other) const {
+	return Constant{value / other.value};
 }
-Constant Constant_Constant_pow(const Constant& first, const Constant& second){
-	return Constant{pow(first.getValue(), second.getValue())};
+Constant Constant::raise_pow(const Constant& other) const {
+	return Constant{pow(value, other.value)};
 }
 
 
 //Constant to Variable arithmetic operations
 
-Term Constant_Variable_add(const Constant& first, const Variable& second){
+Term Constant::operator+(const Variable& other) const {
 	return Term{};
 }
-Term Constant_Variable_sub(const Constant& first, const Variable& second){
+Term Constant::operator-(const Variable& other) const {
 	return Term{};
 }
-Term Constant_Variable_mul(const Constant& first, const Variable& second){
-	return Term{std::vector<Operand>{first, second}};
+Term Constant::operator*(const Variable& other) const {
+	return Term{{*this, other}};
 }
-Term Constant_Variable_div(const Constant& first, const Variable& second){
-	return Term{std::vector<Operand>{first, Variable{second.getName(), -1}}};
+Term Constant::operator/(const Variable& other) const {
+	return Term{{*this, Variable{other.getName(), -1}}};
 }
-Term Constant_Variable_pow(const Constant& first, const Variable& second){
-	Term term{first};
-	term.setPower(second);
+Term Constant::raise_pow(const Variable& other) const {
+	Term term{*this};
+	term.setPower(other);
 	return term;
 }

@@ -44,18 +44,6 @@ void Constant::setValue(const double& ref){
 	value = ref;
 }
 
-// Constant to Constant arithmetic operators
-Constant Constant::operator+(const Constant& other) const
-{return Constant_Constant_add(*this, other);}
-Constant Constant::operator-(const Constant& other) const
-{return Constant_Constant_sub(*this, other);}
-Constant Constant::operator*(const Constant& other) const
-{return Constant_Constant_mul(*this, other);}
-Constant Constant::operator/(const Constant& other) const
-{return Constant_Constant_div(*this, other);}
-Constant Constant::raise_pow(const Constant& other) const
-{return Constant_Constant_pow(*this, other);}
-
 
 Constant Constant::operator+() const {return +value;}
 Constant Constant::operator-() const {return -value;}
