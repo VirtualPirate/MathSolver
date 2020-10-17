@@ -43,6 +43,22 @@ class Operand
 
 	static AllocateFunction allocate_functions[TYPE_COUNT];
 
+	template <typename Type>
+	bool is_negative() const {
+		return get<Type>().is_negative();
+	}
+	template <typename Type>
+	bool negative_power() const {
+		return get<Type>().negative_power();
+	}
+	template <typename Type>
+	std::string power_print() const {
+		return get<Type>().power_print();
+	}
+	template <typename Type>
+	void* allocate() const {
+		return (void *)(new Type{get<Type>()});
+	}
 public:
 	Operand();
 
@@ -73,22 +89,6 @@ public:
 	template<typename Type>
 	const Type& get() const{
 		return *((Type*)value);
-	}
-	template <typename Type>
-	bool is_negative() const {
-		return get<Type>().is_negative();
-	}
-	template <typename Type>
-	bool negative_power() const {
-		return get<Type>().negative_power();
-	}
-	template <typename Type>
-	std::string power_print() const {
-		return get<Type>().power_print();
-	}
-	template <typename Type>
-	void* allocate() const {
-		return (void *)(new Type{get<Type>()});
 	}
 
 	std::string power_print() const;
