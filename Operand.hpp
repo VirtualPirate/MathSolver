@@ -47,6 +47,22 @@ public:
 	const Type& get() const{
 		return *((Type*)value);
 	}
+	template <typename Type>
+	bool is_negative() const {
+		return get<Type>().is_negative();
+	}
+	template <typename Type>
+	bool negative_power() const {
+		return get<Type>().negative_power();
+	}
+	template <typename Type>
+	std::string power_print() const {
+		return get<Type>().power_print();
+	}
+	template <typename Type>
+	void* allocate() const {
+		return (void *)(new Type{get<Type>()});
+	}
 
 	std::string power_print() const;
 	bool is_negative() const;
@@ -160,6 +176,9 @@ bool Operand_Operand_eq(const Operand& first, const Operand& second){
 template <class Type_1, class Type_2>
 bool Operand_Operand_neq(const Operand& first, const Operand& second){
 	return (first.get<Type_1>()) != (second.get<Type_2>());}
+
+
+//Operand is_negative template
 
 template <class Type>
 Type& Return_Internal_Ref(const Operand& ref){
