@@ -97,7 +97,9 @@ public:
 
 	template<typename Type>
 	const Type& get() const{
-		return *((Type*)value);
+		if(value != nullptr)
+			return *((Type*)value);
+		throw std::runtime_error{"get<Type>() on nullptr"};
 	}
 
 	std::string power_print() const;
