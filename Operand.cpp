@@ -364,6 +364,14 @@ std::string Operand::power_print() const {
 
 	}
 
+void* Operand::allocate() const {
+	int index = (int)type;
+	if (index > -1)
+		return allocate_functions[index](this);
+	std::cout << "stdout: Unknown type allocate()";
+	return nullptr;
+}
+
 bool Operand::is_negative() const {
 	/*
 	switch(type){
