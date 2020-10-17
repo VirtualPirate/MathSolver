@@ -273,14 +273,14 @@ Operand& Operand::operator=(const Expression& ref){
 }
 
 // Copy and move semantics
-Operand::Operand(const Operand& ref): value{allocate_n_return(ref)}, type{ref.type}, is_null{ref.is_null}{}
+Operand::Operand(const Operand& ref): value{ref.allocate()}, type{ref.type}, is_null{ref.is_null}{}
 Operand::Operand(Operand&& ref): value{ref.value}, type{ref.type}, is_null{ref.is_null}{
 	ref.value = nullptr;
 	ref.is_null = true;
 }
 Operand& Operand::operator=(const Operand& ref){
 	if(value) free(value);
-	value = allocate_n_return(ref);
+	value = ref.allocate();
 	type = ref.type;
 	is_null = ref.is_null;
 	return *this;
