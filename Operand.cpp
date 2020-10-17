@@ -411,23 +411,33 @@ bool Operand::negative_power() const {
 }
 
 std::ostream& operator<<(std::ostream& os, const Operand& ref){
+	// if(!ref.is_null){
+	// 	switch(ref.type){
+	// 		case DataType::Constant:
+	// 			os << ref.get<Constant>();
+	// 			break;
+	// 		case DataType::Variable:
+	// 			os << ref.get<Variable>();
+	// 			break;
+	// 		case DataType::Term:
+	// 			os << ref.get<Term>();
+	// 			break;
+	// 		case DataType::Expression:
+	// 			os << ref.get<Expression>();
+	// 			break;
+	// 		default:
+	// 			os << "stdout: Unknown Type";
+	// 	}
+	// }else os << "stdout: nullptr";
+	// return os;
 	if(!ref.is_null){
-		switch(ref.type){
-			case DataType::Constant:
-				os << ref.get<Constant>();
-				break;
-			case DataType::Variable:
-				os << ref.get<Variable>();
-				break;
-			case DataType::Term:
-				os << ref.get<Term>();
-				break;
-			case DataType::Expression:
-				os << ref.get<Expression>();
-				break;
-			default:
-				os << "stdout: Unknown Type";
-		}
-	}else os << "stdout: nullptr";
+		int index = (int)ref.type;
+		if (index > -1)
+			return Operand::operator_cout_functions[index](os, ref);
+		else
+			os << "stdout: Unknown type operator<<";
+	}else{
+		os << "stdout: nullptr in operator<<";
+	}
 	return os;
 }
