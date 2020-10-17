@@ -121,7 +121,7 @@ OperationFunction Operand::pow_functions[] = {
 	Operand_null,
 };
 
-bool (*eq_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
+ComparisonFunction Operand::eq_functions[] = {
 	Operand_Operand_eq<Constant, Constant>,
 	Operand_bool,
 	Operand_bool,
@@ -142,7 +142,7 @@ bool (*eq_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
 	Operand_bool,
 };
 
-bool (*neq_functions[O_ARRAY_SIZE])(const Operand&, const Operand&) = {
+ComparisonFunction Operand::neq_functions[] = {
 	Operand_Operand_neq<Constant, Constant>,
 	Operand_neq_bool,
 	Operand_neq_bool,

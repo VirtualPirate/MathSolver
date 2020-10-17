@@ -10,6 +10,7 @@ enum class DataType
 unsigned func_hash(DataType, DataType);
 
 using OperationFunction = Operand (*)(const Operand&, const Operand&);
+using ComparisonFunction = bool (*)(const Operand&, const Operand&);
 using CheckFunction = bool (*)(const Operand&);
 using PowerPrintFunc = std::string (*)(const Operand&);
 using AllocateFunction = void* (*)(const Operand&);
@@ -30,11 +31,32 @@ class Operand
 	static OperationFunction div_functions[O_ARRAY_SIZE];
 	static OperationFunction pow_functions[O_ARRAY_SIZE];
 
+	static ComparisonFunction eq_functions[O_ARRAY_SIZE];
+	static ComparisonFunction neq_functions[O_ARRAY_SIZE];
+
 	static CheckFunction is_negative_functions[TYPE_COUNT];
 	static CheckFunction negative_power_functions[TYPE_COUNT];
+
 	static PowerPrintFunc power_print_functions[TYPE_COUNT];
 
 	static AllocateFunction allocate_functions[TYPE_COUNT];
+
+	template <typename Type>
+	bool is_negative() const {
+		return get<Type>().is_negative();
+	}
+	template <typename Type>
+	bool negative_power() const {
+		return get<Type>().negative_power();
+	}
+	template <typename Type>
+	std::string power_print() const {
+		return get<Type>().power_print();
+	}
+	template <typename Type>
+	void* allocate() const {
+		return (void *)(new Type{get<Type>()});
+	}
 public:
 	Operand();
 
@@ -65,22 +87,6 @@ public:
 	template<typename Type>
 	const Type& get() const{
 		return *((Type*)value);
-	}
-	template <typename Type>
-	bool is_negative() const {
-		return get<Type>().is_negative();
-	}
-	template <typename Type>
-	bool negative_power() const {
-		return get<Type>().negative_power();
-	}
-	template <typename Type>
-	std::string power_print() const {
-		return get<Type>().power_print();
-	}
-	template <typename Type>
-	void* allocate() const {
-		return (void *)(new Type{get<Type>()});
 	}
 
 	std::string power_print() const;
