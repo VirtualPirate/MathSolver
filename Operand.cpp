@@ -198,30 +198,6 @@ CoutFunction Operand::operator_cout_functions[] = {
 	cout_<Term>,
 	cout_<Expression>
 };
-/*
-void* allocate_n_return(const Operand& ref){
-	void* point = nullptr;
-	if(!ref.isNull()){
-	switch(ref.getType()){
-		case DataType::Constant:
-			point = (void *)(new Constant{ref.get<Constant>()});
-			break;
-		case DataType::Variable:
-			point = (void *)(new Variable{ref.get<Variable>()});
-			break;
-		case DataType::Term:
-			point = (void *)(new Term{ref.get<Term>()});
-			break;
-		case DataType::Expression:
-			point = (void *)(new Expression{ref.get<Expression>()});
-			break;
-		default:
-			std::cout << "allocate_n_return() : Unknown Type";
-		}
-	}
-	return point;
-}
-*/
 
 unsigned func_hash(DataType first_type, DataType second_type){
 	int first_num = (int)first_type;
@@ -346,19 +322,6 @@ Operand Operand::raise_pow(const Operand& other) const {
 	return pow_functions[func_hash(this->type, other.type)](*this, other);}
 
 std::string Operand::power_print() const {
-	/*switch(type){
-		case DataType::Constant:
-			return this->get<Constant>().power_print();
-		case DataType::Variable:
-			return this->get<Variable>().power_print();
-		case DataType::Term:
-			return this->get<Term>().power_print();
-		case DataType::Expression:
-			return this->get<Expression>().power_print();
-		default:
-			return "stdout: Unknown Type power_print";
-		}
-*/	
 	int index = (int)type;
 	if (index > -1)
 		return power_print_functions[index](this);
@@ -375,21 +338,6 @@ void* Operand::allocate() const {
 }
 
 bool Operand::is_negative() const {
-	/*
-	switch(type){
-		case DataType::Constant:
-			return this->get<Constant>().is_negative();
-		case DataType::Variable:
-			return this->get<Variable>().is_negative();
-		case DataType::Term:
-			return this->get<Term>().is_negative();
-		case DataType::Expression:
-			return this->get<Expression>().is_negative();
-		default:
-			std::cout << "stdout: Unknown type is_negative";
-	}
-	return false;
-	*/
 	int index = (int)type;
 	if (index > -1)
 		return is_negative_functions[index](this);
@@ -398,19 +346,6 @@ bool Operand::is_negative() const {
 
 }
 bool Operand::negative_power() const {
-/*	switch(type){
-		case DataType::Constant:
-			return this->get<Constant>().negative_power();
-		case DataType::Variable:
-			return this->get<Variable>().negative_power();
-		case DataType::Term:
-			return this->get<Term>().negative_power();
-		case DataType::Expression:
-			return this->get<Expression>().negative_power();
-		default:
-			std::cout << "stdout: Unknown type negative_power";
-	}
-	return false;*/
 	int index = (int)type;
 	if (index > -1)
 		return is_negative_functions[index](this);
@@ -419,25 +354,6 @@ bool Operand::negative_power() const {
 }
 
 std::ostream& operator<<(std::ostream& os, const Operand& ref){
-	// if(!ref.is_null){
-	// 	switch(ref.type){
-	// 		case DataType::Constant:
-	// 			os << ref.get<Constant>();
-	// 			break;
-	// 		case DataType::Variable:
-	// 			os << ref.get<Variable>();
-	// 			break;
-	// 		case DataType::Term:
-	// 			os << ref.get<Term>();
-	// 			break;
-	// 		case DataType::Expression:
-	// 			os << ref.get<Expression>();
-	// 			break;
-	// 		default:
-	// 			os << "stdout: Unknown Type";
-	// 	}
-	// }else os << "stdout: nullptr";
-	// return os;
 	if(!ref.is_null){
 		int index = (int)ref.type;
 		if (index > -1)
