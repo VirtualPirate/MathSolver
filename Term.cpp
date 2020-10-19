@@ -70,5 +70,6 @@ void Term::simplify() {
 	auto swap_iter = fields.begin() + begin(DataType::Constant).getIndex();
 	if(swap_iter != fields.end())
 		std::iter_swap(fields.begin(), swap_iter);
+	is_simplified = true;
 
 }
