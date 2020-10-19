@@ -53,23 +53,25 @@ bool Term::negative_power() const {
 	return power.is_negative();
 }
 void Term::simplify() {
-	Operand result;
-	for(auto i=fields.begin(); i != fields.end(); i++){
-		for(auto j=i+1; j != fields.end(); j++){
-			result = (*i) * (*j);
-			if(result){
-				fields.erase(i);
-				fields.erase(j-1);
-				fields.insert(fields.begin(), result);
-				i = fields.begin();
-				j = i+1;
+	if(!is_simplified){
+		Operand result;
+		for(auto i=fields.begin(); i != fields.end(); i++){
+			for(auto j=i+1; j != fields.end(); j++){
+				result = (*i) * (*j);
+				if(result){
+					fields.erase(i);
+					fields.erase(j-1);
+					fields.insert(fields.begin(), result);
+					i = fields.begin();
+					j = i+1;
+				}
 			}
 		}
+		// Moves the Constant(coefficient) to the first index of the fields.
+		auto swap_iter = fields.begin() + begin(DataType::Constant).getIndex();
+		if(swap_iter != fields.end())
+			std::iter_swap(fields.begin(), swap_iter);
+		is_simplified = true;
 	}
-	// Moves the Constant(coefficient) to the first index of the fields.
-	auto swap_iter = fields.begin() + begin(DataType::Constant).getIndex();
-	if(swap_iter != fields.end())
-		std::iter_swap(fields.begin(), swap_iter);
-	is_simplified = true;
 
 }
