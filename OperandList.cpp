@@ -92,17 +92,21 @@ void OperandList::setNull(const bool& ref){
 	is_null = ref;
 }
 void OperandList::setPower(const Operand& ref){
+	is_simplified = false;
 	power = ref;
 }
 
 //field modifiers
 void OperandList::insert(const Constant& ref){
+	is_simplified = false;
 	fields.push_back(Operand{ref});
 }
 void OperandList::insert(const Variable& ref){
+	is_simplified = false;
 	fields.push_back(Operand{ref});
 }
 void OperandList::insert(const Operand& ref){
+	is_simplified = false;
 	fields.push_back(ref);
 }
 
