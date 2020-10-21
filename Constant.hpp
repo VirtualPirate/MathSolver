@@ -27,7 +27,7 @@ public:
 	//Setter Methods
 	void setValue(const double&);
 
-	Constant simplify() const;
+	Operand simplify() const;
 	std::string power_print() const;
 	bool is_negative() const;
 	bool negative_power() const;
