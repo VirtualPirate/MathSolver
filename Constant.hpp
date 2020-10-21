@@ -33,39 +33,39 @@ public:
 	Constant abs() const;
 
 	//Constant to double arithmetic operations
-	Constant operator+(const double&) const;
-	Constant operator-(const double&) const;
-	Constant operator*(const double&) const;
-	Constant operator/(const double&) const;
-	Constant raise_pow(const double&) const;
+	Operand operator+(const double&) const;
+	Operand operator-(const double&) const;
+	Operand operator*(const double&) const;
+	Operand operator/(const double&) const;
+	Operand raise_pow(const double&) const;
 
 	//Constant to Constant operations
-	Constant operator+(const Constant&) const;
-	Constant operator-(const Constant&) const;
-	Constant operator*(const Constant&) const;
-	Constant operator/(const Constant&) const;
-	Constant raise_pow(const Constant&) const;
+	Operand operator+(const Constant&) const;
+	Operand operator-(const Constant&) const;
+	Operand operator*(const Constant&) const;
+	Operand operator/(const Constant&) const;
+	Operand raise_pow(const Constant&) const;
 
 	//Constant to Variable arithmetic operations
-	Term operator+(const Variable&) const;
-	Term operator-(const Variable&) const;
-	Term operator*(const Variable&) const;
-	Term operator/(const Variable&) const;
-	Term raise_pow(const Variable&) const;
+	Operand operator+(const Variable&) const;
+	Operand operator-(const Variable&) const;
+	Operand operator*(const Variable&) const;
+	Operand operator/(const Variable&) const;
+	Operand raise_pow(const Variable&) const;
 
 	//Constant to Term arithmetic operations
-	Term operator+(const Term&) const;
-	Term operator-(const Term&) const;
-	Term operator*(const Term&) const;
-	Term operator/(const Term&) const;
-	Term raise_pow(const Term&) const;
+	Operand operator+(const Term&) const;
+	Operand operator-(const Term&) const;
+	Operand operator*(const Term&) const;
+	Operand operator/(const Term&) const;
+	Operand raise_pow(const Term&) const;
 
 	//Constant to Expression arithmetic operations
-	Expression operator+(const Expression&) const;
-	Expression operator-(const Expression&) const;
-	Expression operator*(const Expression&) const;
-	Expression operator/(const Expression&) const;
-	Term raise_pow(const Expression&) const;
+	Operand operator+(const Expression&) const;
+	Operand operator-(const Expression&) const;
+	Operand operator*(const Expression&) const;
+	Operand operator/(const Expression&) const;
+	Operand raise_pow(const Expression&) const;
 
 	//Constant to Operand arithmetic operations
 	Operand operator+(const Operand&) const;
