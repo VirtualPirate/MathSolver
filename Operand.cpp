@@ -292,6 +292,26 @@ bool Operand::operator==(const Operand& other) const {
 bool Operand::operator!=(const Operand& other) const {
 	return neq_functions[func_hash(this->type, other.type)](*this, other);}
 
+//Operand to double comparison operators
+bool Operand::operator==(const double& other) const {return *this == Operand{other};}
+bool Operand::operator!=(const double& other) const {return *this != Operand{other};}
+
+//Operand to Constant comparison operators
+bool Operand::operator==(const Constant& other) const {return *this == Operand{other};}
+bool Operand::operator!=(const Constant& other) const {return *this != Operand{other};}
+
+//Operand to Variable comparison operators
+bool Operand::operator==(const Variable& other) const {return *this == Operand{other};}
+bool Operand::operator!=(const Variable& other) const {return *this != Operand{other};}
+
+//Operand to Term comparison operators
+bool Operand::operator==(const Term& other) const {return *this == Operand{other};}
+bool Operand::operator!=(const Term& other) const {return *this != Operand{other};}
+
+//Operand to Expression comparison operators
+bool Operand::operator==(const Expression& other) const {return *this == Operand{other};}
+bool Operand::operator!=(const Expression& other) const {return *this != Operand{other};}
+
 Operand::operator bool() const{
 	if((!is_null) && value)
 		return true;
