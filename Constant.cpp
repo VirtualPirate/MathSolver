@@ -25,6 +25,7 @@ bool Constant::operator==(const Constant& other) const {return value == other.va
 bool Constant::operator!=(const Constant& other) const {return value != other.value;}
 
 // Some other functions
+Constant Constant::simplify() const {return *this;}
 std::string Constant::power_print() const{
 	std::ostringstream stream;
 	stream << *this;

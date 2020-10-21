@@ -60,6 +60,12 @@ bool Variable::operator!=(const Variable& ref) const {
 	return false;
 }
 
+Operand Variable::simplify() const {
+	if(power == (double)0)
+		return 1;
+	else
+		return *this;
+}
 std::string Variable::power_print() const{
 	std::ostringstream stream;
 	stream << *this;
