@@ -320,7 +320,7 @@ bool Operand::operator==(const Expression& other) const {return *this == Operand
 bool Operand::operator!=(const Expression& other) const {return *this != Operand{other};}
 
 Operand::operator bool() const{
-	if((!is_null) && value)
+	if((!is_null) && value && type != DataType::None)
 		return true;
 	return false;
 }
