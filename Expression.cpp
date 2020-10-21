@@ -51,3 +51,10 @@ bool Expression::negative_power() const {
 Operand Expression::simplify() const {
 	return *this;
 }
+
+//Expression to Operand arithmetic operators
+Operand Expression::operator+(const Operand& other) const {return Operand{*this} + other;}
+Operand Expression::operator-(const Operand& other) const {return Operand{*this} - other;}
+Operand Expression::operator*(const Operand& other) const {return Operand{*this} * other;}
+Operand Expression::operator/(const Operand& other) const {return Operand{*this} / other;}
+Operand Expression::raise_pow(const Operand& other) const {return Operand{*this}.raise_pow(other);}

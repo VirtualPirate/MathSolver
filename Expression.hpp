@@ -17,6 +17,12 @@ public:
 	void simplify_();
 	Operand simplify() const;
 
+	Operand operator+(const Operand&) const;
+	Operand operator-(const Operand&) const;
+	Operand operator*(const Operand&) const;
+	Operand operator/(const Operand&) const;
+	Operand raise_pow(const Operand&) const;
+
 };
 
 #endif

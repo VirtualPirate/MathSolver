@@ -60,6 +60,13 @@ bool Variable::operator!=(const Variable& ref) const {
 	return false;
 }
 
+//Variable to Operand arithmetic operators
+Operand Variable::operator+(const Operand& other) const {return Operand{*this} + other;}
+Operand Variable::operator-(const Operand& other) const {return Operand{*this} - other;}
+Operand Variable::operator*(const Operand& other) const {return Operand{*this} * other;}
+Operand Variable::operator/(const Operand& other) const {return Operand{*this} / other;}
+Operand Variable::raise_pow(const Operand& other) const {return Operand{*this}.raise_pow(other);}
+
 Operand Variable::simplify() const {
 	if(power == (double)0)
 		return 1;

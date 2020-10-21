@@ -95,3 +95,10 @@ bool Term::is_Variable() const {
 		return true;
 	return false;
 }
+
+//Term to Operand arithmetic operators
+Operand Term::operator+(const Operand& other) const {return Operand{*this} + other;}
+Operand Term::operator-(const Operand& other) const {return Operand{*this} - other;}
+Operand Term::operator*(const Operand& other) const {return Operand{*this} * other;}
+Operand Term::operator/(const Operand& other) const {return Operand{*this} / other;}
+Operand Term::raise_pow(const Operand& other) const {return Operand{*this}.raise_pow(other);}

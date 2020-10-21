@@ -20,6 +20,12 @@ public:
 
 	bool is_Constant() const;
 	bool is_Variable() const;
+
+	Operand operator+(const Operand&) const;
+	Operand operator-(const Operand&) const;
+	Operand operator*(const Operand&) const;
+	Operand operator/(const Operand&) const;
+	Operand raise_pow(const Operand&) const;
 };
 
 #endif

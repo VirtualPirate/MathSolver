@@ -87,8 +87,8 @@ public:
 	void insert(const Variable&);
 	void insert(const Operand&);
 
-	bool is_Constant() const;
-	bool is_Variable() const;
+	// bool is_Constant() const;
+	// bool is_Variable() const;
 	bool var_exist(const char&) const;
 
 	void simplify();

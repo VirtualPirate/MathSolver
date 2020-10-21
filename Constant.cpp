@@ -24,6 +24,22 @@ Constant& Constant::operator=(const Constant& ref){value = ref.value;return *thi
 bool Constant::operator==(const Constant& other) const {return value == other.value;}
 bool Constant::operator!=(const Constant& other) const {return value != other.value;}
 
+//Constant to double arithmetic operators
+Operand Constant::operator+(const double& other) const {return *this + Constant{other};}
+Operand Constant::operator-(const double& other) const {return *this + Constant{other};}
+Operand Constant::operator*(const double& other) const {return *this + Constant{other};}
+Operand Constant::operator/(const double& other) const {return *this + Constant{other};}
+Operand Constant::raise_pow(const double& other) const {return *this + Constant{other};}
+
+
+//Constant to Operand arithmetic operators
+Operand Constant::operator+(const Operand& other) const {return Operand{*this} + other;}
+Operand Constant::operator-(const Operand& other) const {return Operand{*this} - other;}
+Operand Constant::operator*(const Operand& other) const {return Operand{*this} * other;}
+Operand Constant::operator/(const Operand& other) const {return Operand{*this} / other;}
+Operand Constant::raise_pow(const Operand& other) const {return Operand{*this}.raise_pow(other);}
+
+
 // Some other functions
 Operand Constant::simplify() const {return *this;}
 std::string Constant::power_print() const{
