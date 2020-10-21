@@ -49,6 +49,23 @@ Operand Constant::raise_pow(const Variable& other) const {
 
 //Constant to Term arithmetic operations
 
-// Operand Constant::operator+(const Term& other) const {
-// 	Operand second{other.simplify()}
-// }
+Operand Constant::operator+(const Term& other) const {
+	Term second{other.simplify()};
+	if(second.is_Constant() || second.is_Variable())
+		return *this + second;
+	return Term{};
+}
+
+Operand Constant::operator-(const Term& other) const {
+	Term second{other.simplify()};
+	if(second.is_Constant() || second.is_Variable())
+		return *this - second;
+	return Term{};
+}
+
+Operand Constant::operator*(const Term& other) const {
+	Term second{other};
+	second.insert(*this);
+	second.simplify_();
+	return second;
+}
