@@ -348,6 +348,42 @@ Operand Operand::operator/(const Operand& other) const {
 Operand Operand::raise_pow(const Operand& other) const {
 	return pow_functions[func_hash(this->type, other.type)](*this, other);}
 
+//Operand to double arithmetic operators
+Operand Operand::operator+(const double& other) const {return *this + Operand{other};}
+Operand Operand::operator-(const double& other) const {return *this - Operand{other};}
+Operand Operand::operator*(const double& other) const {return *this * Operand{other};}
+Operand Operand::operator/(const double& other) const {return *this / Operand{other};}
+Operand Operand::raise_pow(const double& other) const {return this->raise_pow(Operand{other});}
+
+//Operand to Constant arithmetic operators
+Operand Operand::operator+(const Constant& other) const {return *this + Operand{other};}
+Operand Operand::operator-(const Constant& other) const {return *this - Operand{other};}
+Operand Operand::operator*(const Constant& other) const {return *this * Operand{other};}
+Operand Operand::operator/(const Constant& other) const {return *this / Operand{other};}
+Operand Operand::raise_pow(const Constant& other) const {return this->raise_pow(Operand{other});}
+
+//Operand to Variable arithmetic operators
+Operand Operand::operator+(const Variable& other) const {return *this + Operand{other};}
+Operand Operand::operator-(const Variable& other) const {return *this - Operand{other};}
+Operand Operand::operator*(const Variable& other) const {return *this * Operand{other};}
+Operand Operand::operator/(const Variable& other) const {return *this / Operand{other};}
+Operand Operand::raise_pow(const Variable& other) const {return this->raise_pow(Operand{other});}
+
+//Operand to Term arithmetic operators
+Operand Operand::operator+(const Term& other) const {return *this + Operand{other};}
+Operand Operand::operator-(const Term& other) const {return *this - Operand{other};}
+Operand Operand::operator*(const Term& other) const {return *this * Operand{other};}
+Operand Operand::operator/(const Term& other) const {return *this / Operand{other};}
+Operand Operand::raise_pow(const Term& other) const {return this->raise_pow(Operand{other});}
+
+//Operand to Expression arithmetic operators
+Operand Operand::operator+(const Expression& other) const {return *this + Operand{other};}
+Operand Operand::operator-(const Expression& other) const {return *this - Operand{other};}
+Operand Operand::operator*(const Expression& other) const {return *this * Operand{other};}
+Operand Operand::operator/(const Expression& other) const {return *this / Operand{other};}
+Operand Operand::raise_pow(const Expression& other) const {return this->raise_pow(Operand{other});}
+
+
 std::string Operand::power_print() const {
 	int index = (int)type;
 	if (index > -1)
