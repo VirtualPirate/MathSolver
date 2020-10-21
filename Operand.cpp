@@ -379,7 +379,13 @@ bool Operand::negative_power() const {
 	std::cout << "stdout: Unknown type negative_power";
 	return false;
 }
-
+Operand Operand::simplify() const {
+	int index = (int)type;
+	if (index > -1)
+		return simplify_functions[index](this);
+	std::cout << "stdout: Unknown type simplify";
+	return *this;
+}
 std::ostream& operator<<(std::ostream& os, const Operand& ref){
 	if(!ref.is_null){
 		int index = (int)ref.type;

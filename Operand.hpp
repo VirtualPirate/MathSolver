@@ -113,6 +113,7 @@ public:
 	bool is_negative() const;
 	bool negative_power() const;
 	Operand substitute() const;
+	Operand simplify() const;
 
 	// Operand to Operand arithmetic operators
 	Operand operator+(const Operand&) const;
