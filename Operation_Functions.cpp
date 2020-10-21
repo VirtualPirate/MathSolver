@@ -35,13 +35,13 @@ Operand Constant::operator-(const Variable& other) const {
 	return Term{};
 }
 Operand Constant::operator*(const Variable& other) const {
-	return Term{{*this, other}};
+	return Term{{*this, other.simplify()}};
 }
 Operand Constant::operator/(const Variable& other) const {
-	return Term{{*this, Variable{other.getName(), -1}}};
+	return Term{{*this, Variable{other.getName(), -1}.simplify()}};
 }
 Operand Constant::raise_pow(const Variable& other) const {
 	Term term{*this};
-	term.setPower(other);
+	term.setPower(other.simplify());
 	return term;
 }
