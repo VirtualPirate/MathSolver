@@ -61,6 +61,7 @@ public:
 	std::string power_print() const;
 	bool is_negative() const;
 	bool negative_power() const;
+	Operand simplify() const;
 	friend std::ostream& operator<<(std::ostream&, const Variable&);
 };
 
