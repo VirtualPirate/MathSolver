@@ -17,6 +17,7 @@ using CheckFunction = std::function<bool(const Operand*)>;
 using PowerPrintFunc = std::function<std::string(const Operand*)>;
 using AllocateFunction = std::function<void*(const Operand*)>;
 using CoutFunction = std::function<std::ostream&(std::ostream&, const Operand&)>;
+using SimplifyFunction = std::function<Operand(const Operand*)>;
 
 class Constant;
 class Variable;
@@ -46,6 +47,8 @@ class Operand
 
 	static CoutFunction operator_cout_functions[TYPE_COUNT];
 
+	static SimplifyFunction simplify_functions[TYPE_COUNT];
+
 	template <typename Type>
 	bool is_negative() const {
 		return get<Type>().is_negative();
@@ -66,6 +69,10 @@ class Operand
 	static std::ostream& cout_(std::ostream& os, const Operand& ref){
 		os << ref.get<Type>();
 		return os;
+	}
+	template <typename Type>
+	Operand simplify() const {
+		return get<Type>().simplify();
 	}
 	void* allocate() const;
 public:

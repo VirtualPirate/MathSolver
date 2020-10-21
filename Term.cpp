@@ -76,8 +76,9 @@ void Term::simplify_() {
 
 }
 
-// Operand Term::simplify() const {
-// 	Term copy{*this};
-// 	copy.simplify();
-// 	return Operand{copy};
-// }
+Operand Term::simplify() const {
+	// Term copy{*this};
+	// copy.simplify();
+	// return Operand{copy};
+	return *this;
+}

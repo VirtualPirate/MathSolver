@@ -199,6 +199,13 @@ CoutFunction Operand::operator_cout_functions[] = {
 	cout_<Expression>
 };
 
+SimplifyFunction Operand::simplify_functions[] = {
+	simplify<Constant>,
+	simplify<Variable>,
+	simplify<Term>,
+	simplify<Expression>
+};
+
 unsigned func_hash(DataType first_type, DataType second_type){
 	int first_num = (int)first_type;
 	int second_num = (int)second_type;

@@ -47,3 +47,7 @@ bool Expression::is_negative() const {
 bool Expression::negative_power() const {
 	return power.is_negative();
 }
+
+Operand Expression::simplify() const {
+	return *this;
+}
