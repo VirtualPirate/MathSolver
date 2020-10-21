@@ -45,3 +45,10 @@ Operand Constant::raise_pow(const Variable& other) const {
 	term.setPower(other.simplify());
 	return term;
 }
+
+
+//Constant to Term arithmetic operations
+
+// Operand Constant::operator+(const Term& other) const {
+// 	Operand second{other.simplify()}
+// }
