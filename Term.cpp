@@ -79,9 +79,19 @@ void Term::simplify_() {
 Operand Term::simplify() const {
 	Term copy{*this};
 	copy.simplify_();
-	for(auto i = copy.fields.begin(); i != copy.fields.end(); i++)
-		*i = i->simplify();
 	if(copy.fields.size() == 1)
 		return copy.fields.at(0);
 	return *this;
+}
+
+bool Term::is_Constant() const {
+	if(fields.size() == 1 && fields.at(0).getType() == DataType::Constant)
+		return true;
+	return false;
+}
+
+bool Term::is_Variable() const {
+	if(fields.size() == 1 && fields.at(0).getType() == DataType::Variable)
+		return true;
+	return false;
 }

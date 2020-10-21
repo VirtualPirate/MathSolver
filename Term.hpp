@@ -17,6 +17,9 @@ public:
 	std::string power_print() const;
 	void simplify_();
 	Operand simplify() const;
+
+	bool is_Constant() const;
+	bool is_Variable() const;
 };
 
 #endif
