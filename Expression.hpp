@@ -14,7 +14,7 @@ public:
 	bool is_negative() const;
 	bool negative_power() const;
 
-	void simplify();
+	void simplify_();
 	Operand simplify() const;
 
 };

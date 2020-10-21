@@ -41,7 +41,7 @@ int main(){
 	// std::cout << term_0 << std::endl;
 	// std::cout << term_0.getFields().at(2) << std::endl;
 	std::cout << term_0 << std::endl;
-	term_0.simplify();
+	term_0.simplify_();
 	std::cout << term_0 << std::endl;
 	std::cout << std::endl << std::endl;
 

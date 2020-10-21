@@ -52,7 +52,7 @@ bool Term::is_negative() const {
 bool Term::negative_power() const {
 	return power.is_negative();
 }
-void Term::simplify() {
+void Term::simplify_() {
 	if(!is_simplified){
 		Operand result;
 		for(auto i=fields.begin(); i != fields.end(); i++){

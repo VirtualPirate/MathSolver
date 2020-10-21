@@ -15,7 +15,7 @@ public:
 	bool is_negative() const;
 	bool negative_power() const;
 	std::string power_print() const;
-	void simplify();
+	void simplify_();
 	Operand simplify() const;
 };
 
