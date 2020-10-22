@@ -35,10 +35,10 @@ Operand Constant::operator-(const Variable& other) const {
 	return Term{};
 }
 Operand Constant::operator*(const Variable& other) const {
-	return Term{{*this, other.simplify()}};
+	return Term{{*this, other.simplify()}}.simplify();
 }
 Operand Constant::operator/(const Variable& other) const {
-	return Term{{*this, Variable{other.getName(), -1}.simplify()}};
+	return Term{{*this, Variable{other.getName(), other.getPower() * (double)-1}.simplify()}};
 }
 Operand Constant::raise_pow(const Variable& other) const {
 	Term term{*this};
@@ -69,3 +69,34 @@ Operand Constant::operator*(const Term& other) const {
 	second.simplify_();
 	return second;
 }
+
+//Constant to Expression arithmetic operations
+
+
+//Variable to Constant artihmetic operations
+// Operand Variable::operator
+
+//Variable to Variable arithmetic operations
+
+//Variable to Term arithmetic operations
+
+//Variable to Expression arithmetic operations
+
+
+
+//Term to Constant arithmetic operations
+
+//Term to Variable arithmetic operations
+
+//Term to Term arithmetic operations
+
+//Term to Expression arithmetic operations
+
+
+//Expression to Constant arithmetic operations
+
+//Expression to Variable arithmetic operations
+
+//Expression to Term arithmetic operations
+
+//Expression to Expression arithmetic operations

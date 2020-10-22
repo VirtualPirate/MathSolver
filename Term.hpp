@@ -21,6 +21,32 @@ public:
 	bool is_Constant() const;
 	bool is_Variable() const;
 
+	Operand operator+(const Constant&) const;
+	Operand operator-(const Constant&) const;
+	Operand operator*(const Constant&) const;
+	Operand operator/(const Constant&) const;
+	Operand raise_pow(const Constant&) const;
+
+	//Term to Variable arithmetic operators
+	Operand operator+(const Variable&) const;
+	Operand operator-(const Variable&) const;
+	Operand operator*(const Variable&) const;
+	Operand operator/(const Variable&) const;
+	Operand raise_pow(const Variable&) const;
+
+	//Variable to Term operations
+	Operand operator+(const Term&) const;
+	Operand operator-(const Term&) const;
+	Operand operator*(const Term&) const;
+	Operand operator/(const Term&) const;
+	Operand raise_pow(const Term&) const;
+
+	Operand operator+(const Expression&) const;
+	Operand operator-(const Expression&) const;
+	Operand operator*(const Expression&) const;
+	Operand operator/(const Expression&) const;
+	Operand raise_pow(const Expression&) const;
+
 	Operand operator+(const Operand&) const;
 	Operand operator-(const Operand&) const;
 	Operand operator*(const Operand&) const;

@@ -17,6 +17,30 @@ public:
 	void simplify_();
 	Operand simplify() const;
 
+	Operand operator+(const Constant&) const;
+	Operand operator-(const Constant&) const;
+	Operand operator*(const Constant&) const;
+	Operand operator/(const Constant&) const;
+	Operand raise_pow(const Constant&) const;
+
+	Operand operator+(const Variable&) const;
+	Operand operator-(const Variable&) const;
+	Operand operator*(const Variable&) const;
+	Operand operator/(const Variable&) const;
+	Operand raise_pow(const Variable&) const;
+
+	Operand operator+(const Term&) const;
+	Operand operator-(const Term&) const;
+	Operand operator*(const Term&) const;
+	Operand operator/(const Term&) const;
+	Operand raise_pow(const Term&) const;
+
+	Operand operator+(const Expression&) const;
+	Operand operator-(const Expression&) const;
+	Operand operator*(const Expression&) const;
+	Operand operator/(const Expression&) const;
+	Operand raise_pow(const Expression&) const;
+
 	Operand operator+(const Operand&) const;
 	Operand operator-(const Operand&) const;
 	Operand operator*(const Operand&) const;

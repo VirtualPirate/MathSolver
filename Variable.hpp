@@ -58,6 +58,11 @@ public:
 	Operand operator/(const Term&) const;
 	Operand raise_pow(const Term&) const;
 
+	Operand operator+(const Expression&) const;
+	Operand operator-(const Expression&) const;
+	Operand operator*(const Expression&) const;
+	Operand operator/(const Expression&) const;
+	Operand raise_pow(const Expression&) const;
 
 	Operand operator+(const Operand&) const;
 	Operand operator-(const Operand&) const;
