@@ -383,7 +383,14 @@ Operand Operand::raise_pow(const Term& other) const {return this->raise_pow(Oper
 //Operand to Expression arithmetic operators
 Operand Operand::operator+(const Expression& other) const {return *this + Operand{other};}
 Operand Operand::operator-(const Expression& other) const {return *this - Operand{other};}
-Operand Operand::operator*(const Expression& other) const {return *this * Operand{other};}
+Operand Operand::operator*(const Expression& other) const {
+	Expression exp{};
+	exp.setNull(false);
+	for(auto iter=other.getFields().begin();iter!=other.getFields().end();iter++){
+		exp.insert((*this) * (*iter));
+	}
+	return exp;
+}
 Operand Operand::operator/(const Expression& other) const {return *this / Operand{other};}
 Operand Operand::raise_pow(const Expression& other) const {return this->raise_pow(Operand{other});}
 

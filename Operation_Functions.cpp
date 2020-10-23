@@ -69,12 +69,7 @@ Operand Constant::operator*(const Term& other) const {
 
 //Constant to Expression arithmetic operations
 Operand Constant::operator*(const Expression& other) const {
-	Expression exp{};
-	exp.setNull(false);
-	for(auto iter=other.getFields().begin();iter!=other.getFields().end();iter++){
-		exp.insert((*this) * (*iter));
-	}
-	return exp;
+	return Operand{*this} * other;
 }
 
 //Variable to Constant artihmetic operations
