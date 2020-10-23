@@ -6,12 +6,18 @@
 class Constant;
 class Operand;
 class Term;
+class Expression;
 
 extern std::unordered_map<char, Constant> var_values;
 
 class Variable{
 	char name;
 	Operand power;
+
+	friend class Constant;
+	friend class Operand;
+	friend class Term;
+	friend class Expression;
 
 public:
 	Variable(Variable&&) = default;

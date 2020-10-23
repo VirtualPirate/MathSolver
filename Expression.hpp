@@ -6,8 +6,13 @@
 class Constant;
 class Operand;
 class Variable;
+class Term;
 class OperandList;
 class Expression: public OperandList{
+	friend class Constant;
+	friend class Operand;
+	friend class Variable;
+	friend class Term;
 	friend std::ostream& operator<<(std::ostream&, const Expression&);
 public:
 	std::string power_print() const;

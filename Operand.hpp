@@ -29,6 +29,11 @@ class Operand
 	DataType type;
 	bool is_null;
 
+	friend class Constant;
+	friend class Variable;
+	friend class Term;
+	friend class Expression;
+
 	static OperationFunction add_functions[O_ARRAY_SIZE];
 	static OperationFunction sub_functions[O_ARRAY_SIZE];
 	static OperationFunction mul_functions[O_ARRAY_SIZE];

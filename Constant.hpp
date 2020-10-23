@@ -10,6 +10,10 @@ class Expression;
 class Constant{
 	double value;
 
+	friend class Operand;
+	friend class Variable;
+	friend class Term;
+	friend class Expression;
 public:
 	//Constructors
 	Constant(void);

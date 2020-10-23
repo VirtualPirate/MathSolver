@@ -6,10 +6,15 @@
 
 class Constant;
 class Variable;
+class Expression;
 class Operand;
 class OperandList;
 
 class Term: public OperandList{
+	friend class Constant;
+	friend class Variable;
+	friend class Operand;
+	friend class Expression;
 	friend std::ostream& operator<<(std::ostream&, const Term&);
 public:
 	bool is_negative() const;

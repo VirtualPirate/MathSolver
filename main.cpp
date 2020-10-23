@@ -65,6 +65,14 @@ int main(){
 		cout << num1 << " / " << var_3 << " = " << (num1 / var_3) << endl;
 		cout << num1 << " ^ " << var_3 << " = " << num1.raise_pow(var_3) << endl;
 		cout << endl;
+		cout << "Constant to Term arithmetic - " << endl;
+		cout << num1 << " + " << term_1 << " = " << (num1 + term_1) << endl;
+		cout << num1 << " + " << term_0 << " = " << (num1 + term_0) << endl;
+		cout << num1 << " - " << term_1 << " = " << (num1 - term_1) << endl;
+		cout << num1 << " - " << term_1 << " = " << (num1 - term_1) << endl;
+		cout << num1 << " * " << term_0 << " = " << (num1 * term_0) << endl;
+
+		cout << endl;
 
 		cout << "var_0 = " << var_0 << endl;
 		cout << "var_1 = " << var_1 << endl;
