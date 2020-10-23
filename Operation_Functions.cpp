@@ -66,21 +66,46 @@ Operand Constant::operator-(const Term& other) const {
 Operand Constant::operator*(const Term& other) const {
 	Term second{other};
 	second.insert(*this);
-	second.simplify_();
+	// second.simplify_();
 	return second;
 }
 
 //Constant to Expression arithmetic operations
-
+Operand Constant::operator*(const Expression& other) const {
+	Expression exp{};
+	exp.setNull(true);
+	for(auto iter=other.getFields().begin();iter!=other.getFields().end();iter++){
+		exp.insert((*this) * (*iter));
+	}
+	return exp;
+}
 
 //Variable to Constant artihmetic operations
-// Operand Variable::operator
+Operand Variable::operator*(const Constant& other) const {
+	return other * (*this);
+}
 
 //Variable to Variable arithmetic operations
+Operand Variable::operator*(const Variable& other) const {
+	if(this->name == other.name){
+	Operand power{this->power + other.power};
+		if(power)
+			return Variable{this->name, power};
+	}
+	return Term{{*this, other}};
+}
 
 //Variable to Term arithmetic operations
+Operand Variable::operator*(const Term& other) const {
+	Term second{other};
+	second.insert(*this);
+	return second;
+}
 
 //Variable to Expression arithmetic operations
+// Operand Variable::operator*(const Expression& other) const {
+	
+// }
 
 
 

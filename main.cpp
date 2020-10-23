@@ -10,6 +10,8 @@
 #include "Term.hpp"
 #include "Expression.hpp"
 
+using namespace std;
+
 int main(){
 	std::cout << "This is the initial project version" << std::endl;
 
@@ -37,6 +39,44 @@ int main(){
 	term_0.insert(num3);
 	term_0.insert(var_3);
 
+	Term term_1{num1};
+	Term term_2{var_1};
+	Term term_3{var_2};
+
+	//Displaying all the operands
+
+		cout << "num1 = " << num1 << endl;
+		cout << "num2 = " << num2 << endl;
+		cout << "num3 = " << num3 << endl;
+		cout << "num4 = " << num4 << endl;
+		cout << endl;
+
+		cout << "var_0 = " << var_0 << endl;
+		cout << "var_1 = " << var_1 << endl;
+		cout << "var_2 = " << var_2 << endl;
+		cout << "var_3 = " << var_3 << endl;
+		cout << endl;
+
+
+		cout << "term_0 = " << term_0 << endl;
+		cout << "term_1 = " << term_1 << endl;
+		cout << "term_2 = " << term_2 << endl;
+		cout << "term_3 = " << term_3 << endl;
+
+		cout << endl;
+		cout << "term_0.is_Constant() = " << term_0.is_Constant() << endl;
+		cout << "term_1.is_Constant() = " << term_1.is_Constant() << endl;
+		cout << "term_2.is_Constant() = " << term_2.is_Constant() << endl;
+		cout << "term_3.is_Constant() = " << term_3.is_Constant() << endl;
+		cout << "term_0.is_Variable() = " << term_0.is_Variable() << endl;
+		cout << "term_1.is_Variable() = " << term_1.is_Variable() << endl;
+		cout << "term_2.is_Variable() = " << term_2.is_Variable() << endl;
+		cout << "term_3.is_Variable() = " << term_3.is_Variable() << endl;
+
+		cout << endl;
+
+
+	/*
 	std::cout << "Testing Term::operator<< " << std::endl;
 	// std::cout << term_0 << std::endl;
 	// std::cout << term_0.getFields().at(2) << std::endl;
@@ -65,7 +105,7 @@ int main(){
 	std::cout << operand_0 << "\n\n";
 	std::cout << operand_1.power_print() << "\n\n";
 	std::cout << "operand_0.get<Constant>() = " << a << std::endl;
-
+`*/
 
 	std::cout << "\n//Constant to Constant operations" << std::endl;
 	// std::cout << boolalpha;
