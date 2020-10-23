@@ -109,6 +109,10 @@ void OperandList::insert(const Operand& ref){
 	is_simplified = false;
 	fields.push_back(ref);
 }
+void OperandList::insert(Operand&& ref){
+	is_simplified = false;
+	fields.push_back(ref);
+}
 
 //Iterator functions
 OperandList::iterator OperandList::begin(DataType type){

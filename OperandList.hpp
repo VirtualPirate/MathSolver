@@ -86,6 +86,7 @@ public:
 	void insert(const Constant&);
 	void insert(const Variable&);
 	void insert(const Operand&);
+	void insert(Operand&&);
 
 	// bool is_Constant() const;
 	// bool is_Variable() const;
