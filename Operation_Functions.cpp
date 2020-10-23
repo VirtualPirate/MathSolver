@@ -35,7 +35,7 @@ Operand Constant::operator-(const Variable& other) const {
 	return Term{};
 }
 Operand Constant::operator*(const Variable& other) const {
-	return Term{{*this, other.simplify()}}.simplify();
+	return Term{{*this, other.simplify()}};
 }
 Operand Constant::operator/(const Variable& other) const {
 	return Term{{*this, Variable{other.getName(), other.getPower() * (double)-1}.simplify()}};
