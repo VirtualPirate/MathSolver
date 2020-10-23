@@ -372,7 +372,11 @@ Operand Operand::raise_pow(const Variable& other) const {return this->raise_pow(
 //Operand to Term arithmetic operators
 Operand Operand::operator+(const Term& other) const {return *this + Operand{other};}
 Operand Operand::operator-(const Term& other) const {return *this - Operand{other};}
-Operand Operand::operator*(const Term& other) const {return *this * Operand{other};}
+Operand Operand::operator*(const Term& other) const {
+	Term second{other};
+	second.insert(*this);
+	return second;
+}
 Operand Operand::operator/(const Term& other) const {return *this / Operand{other};}
 Operand Operand::raise_pow(const Term& other) const {return this->raise_pow(Operand{other});}
 

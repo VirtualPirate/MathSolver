@@ -64,16 +64,13 @@ Operand Constant::operator-(const Term& other) const {
 }
 
 Operand Constant::operator*(const Term& other) const {
-	Term second{other};
-	second.insert(*this);
-	// second.simplify_();
-	return second;
+	return Operand{*this} * other; //Invokes Operand::operator*(const Term&)
 }
 
 //Constant to Expression arithmetic operations
 Operand Constant::operator*(const Expression& other) const {
 	Expression exp{};
-	exp.setNull(true);
+	exp.setNull(false);
 	for(auto iter=other.getFields().begin();iter!=other.getFields().end();iter++){
 		exp.insert((*this) * (*iter));
 	}
@@ -104,7 +101,7 @@ Operand Variable::operator*(const Term& other) const {
 
 //Variable to Expression arithmetic operations
 // Operand Variable::operator*(const Expression& other) const {
-	
+
 // }
 
 
