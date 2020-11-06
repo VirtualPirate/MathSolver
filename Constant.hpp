@@ -22,15 +22,20 @@ public:
 	Constant(const Constant&);
 	Constant(const Constant*);
 
+	Constant(double, const Operand&);
+	Constant(const Constant&, const Operand&);
+
 	// Assignment operators
 	Constant& operator=(double);
 	Constant& operator=(const Constant&);
 
 	//Getter Methods
 	const double& getValue() const;
+	const Operand& getPower() const;
 
 	//Setter Methods
 	void setValue(const double&);
+	void setPower(const Operand&);
 
 	Operand simplify() const;
 	std::string power_print() const;
