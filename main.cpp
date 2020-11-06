@@ -21,6 +21,7 @@ int main(){
 	Constant num2{2};
 	Constant num3{num1};
 	Constant num4{1.5};
+	Constant num5{-1};
 
 	Variable var_0{'x'};
 	Variable var_1{'y'};
@@ -50,14 +51,14 @@ int main(){
 		cout << "num3 = " << num3 << endl;
 		cout << "num4 = " << num4 << endl;
 		cout << endl;
-		// cout << "\n//Constant to Constant operations" << endl;
-		// // std::cout << boolalpha;
-		// cout << num1 << " * " << num2 << " = " << (num1 * num2) << endl;
-		// cout << num1 << " / " << num2 << " = " << (num1 / num2) << endl;
-		// cout << num1 << " - " << num2 << " = " << (num1 - num2) << endl;
-		// cout << num1 << " + " << num2 << " = " << (num1 + num2) << endl;
-		// cout << num1 << " ^ " << num2 << " = " << num1.raise_pow(num2) << endl;
-		// cout << endl;
+		cout << "\n//Constant to Constant operations" << endl;
+		// std::cout << boolalpha;
+		cout << num1 << " * " << num5 << " = " << (num1 * num5) << endl;
+		cout << num1 << " / " << num2 << " = " << (num1 / num2) << endl;
+		cout << num1 << " - " << num2 << " = " << (num1 - num2) << endl;
+		cout << num1 << " + " << num2 << " = " << (num1 + num2) << endl;
+		cout << num1 << " ^ " << num5 << " = " << num1.raise_pow(num5) << endl;
+		cout << endl;
 		// cout << "Constant to Variable arithmetic -" << endl << endl;
 		// cout << num1 << " + " << var_3 << " = " << (num1 + var_3) << endl;
 		// cout << num1 << " - " << var_3 << " = " << (num1 - var_3) << endl;

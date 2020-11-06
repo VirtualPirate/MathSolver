@@ -10,25 +10,43 @@
 
 // Constant to Constant arithmetic operators
 Operand Constant::operator+(const Constant& other) const {
+	Operand first = this->simplify();
+	Operand second = other.simplify();
+	double first_ = first.get<Constant>().value;
+	double second_ = second.get<Constant>().value;
+	if(first.getPower() == Constant::power_one && second.getPower() == Constant::power_one)
+		return Constant{first_ + second_};
 	return Operand{};
 }
 Operand Constant::operator-(const Constant& other) const {
-	return Operand{};
+	Operand second = other * (double)-1;
+	return *this + second;
 }
 Operand Constant::operator*(const Constant& other) const {
-	return Operand{};
+	Operand first = this->simplify();
+	Operand second = other.simplify();
+	double first_ = first.get<Constant>().value;
+	double second_ = second.get<Constant>().value;
+	if(first_ == second_)
+		return Constant{first_, first.getPower() + second.getPower()};
+	else if(first.getPower() == second.getPower())
+		return Constant{first_ * second_, first.getPower()};
+	else
+		return Term{{first, second}};
 }
 Operand Constant::operator/(const Constant& other) const {
-	return Operand{};
+	Operand second = other.raise_pow(-1);
+	return *this * second;
 }
 Operand Constant::raise_pow(const Constant& other) const {
-	// Operand first = this->simplify();
-	// Operand second = other.simplify();
-	// if(second.getPower() == Constant::power_one)
-	// 	return Constant{pow(value, getPower() * second)};
-	
+	Operand first = this->simplify();
+	Operand second = other.simplify();
+	if(second.getPower() == Constant::power_one){
+		Operand final = (getPower() * second).simplify();
+		if(final.getType() == DataType::Constant && final.getPower() == Constant::power_one)
+			return Constant{pow(value, final.get<Constant>().value)};
+	}
 	return Operand{};
-	// return Constant{pow(value, other.simplify())};
 }
 
 
