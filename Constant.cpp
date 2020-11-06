@@ -49,7 +49,12 @@ Operand Constant::raise_pow(const Operand& other) const {return Operand{*this}.r
 
 
 // Some other functions
-Operand Constant::simplify() const {return *this;}
+Operand Constant::simplify() const {
+	if(!power)
+		return *this;
+	else
+		return Constant{this->value}.raise_pow(power.simplify());
+}
 std::string Constant::power_print() const{
 	std::ostringstream stream;
 	stream << *this;
