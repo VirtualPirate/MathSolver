@@ -12,6 +12,7 @@ enum class DataType
 unsigned func_hash(DataType, DataType);
 class Operand;
 
+using GetPowerFunction = std::function<const Operand&(const Operand*)>;
 using OperationFunction = Operand (*)(const Operand&, const Operand&);
 using ComparisonFunction = bool (*)(const Operand&, const Operand&);
 using CheckFunction = std::function<bool(const Operand*)>;
@@ -44,17 +45,18 @@ class Operand
 	static ComparisonFunction eq_functions[O_ARRAY_SIZE];
 	static ComparisonFunction neq_functions[O_ARRAY_SIZE];
 
+	static GetPowerFunction get_power_functions[TYPE_COUNT];
 	static CheckFunction is_negative_functions[TYPE_COUNT];
 	static CheckFunction negative_power_functions[TYPE_COUNT];
-
 	static PowerPrintFunc power_print_functions[TYPE_COUNT];
-
 	static AllocateFunction allocate_functions[TYPE_COUNT];
-
 	static CoutFunction operator_cout_functions[TYPE_COUNT];
-
 	static SimplifyFunction simplify_functions[TYPE_COUNT];
 
+	template <typename Type>
+	const Operand& getPower() const {
+		return get<Type>().getPower();
+	}
 	template <typename Type>
 	bool is_negative() const {
 		return get<Type>().is_negative();
@@ -115,6 +117,7 @@ public:
 		throw std::runtime_error{"get<Type>() on nullptr"};
 	}
 
+	const Operand& getPower() const;
 	std::string power_print() const;
 	bool is_negative() const;
 	bool negative_power() const;

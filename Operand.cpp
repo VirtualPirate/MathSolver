@@ -164,6 +164,13 @@ ComparisonFunction Operand::neq_functions[] = {
 	Operand_neq_bool,
 };
 
+GetPowerFunction Operand::get_power_functions[] = {
+	getPower<Constant>,
+	getPower<Variable>,
+	getPower<Term>,
+	getPower<Expression>
+};
+
 CheckFunction Operand::is_negative_functions[] = {
 	is_negative<Constant>,
 	is_negative<Variable>,
@@ -396,7 +403,13 @@ Operand Operand::operator*(const Expression& other) const {
 Operand Operand::operator/(const Expression& other) const {return *this / Operand{other};}
 Operand Operand::raise_pow(const Expression& other) const {return this->raise_pow(Operand{other});}
 
-
+const Operand& Operand::getPower() const {
+	int index = (int)type;
+	if (index > -1)
+		return get_power_functions[index](this);
+	std::cout << "stdout: Operand::getPower() on nulltype" << std::endl;
+	
+}
 std::string Operand::power_print() const {
 	int index = (int)type;
 	if (index > -1)
