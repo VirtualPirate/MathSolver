@@ -63,6 +63,10 @@ public:
 	OperandList& operator=(const Constant&);
 	OperandList(const Variable&);
 	OperandList& operator=(const Variable&);
+	OperandList(const Term&);
+	OperandList& operator=(const Term&);
+	OperandList(const Expression&);
+	OperandList& operator=(const Expression&);
 	OperandList(const Operand&);
 	OperandList& operator=(const Operand&);
 
@@ -85,6 +89,8 @@ public:
 
 	void insert(const Constant&);
 	void insert(const Variable&);
+	void insert(const Term&);
+	void insert(const Expression&);
 	void insert(const Operand&);
 	void insert(Operand&&);
 

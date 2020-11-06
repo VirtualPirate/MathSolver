@@ -69,7 +69,7 @@ int main(){
 		cout << num1 << " + " << term_1 << " = " << (num1 + term_1) << endl;
 		cout << num1 << " + " << term_0 << " = " << (num1 + term_0) << endl;
 		cout << num1 << " - " << term_1 << " = " << (num1 - term_1) << endl;
-		cout << num1 << " - " << term_1 << " = " << (num1 - term_1) << endl;
+		cout << num1 << " - " << term_0 << " = " << (num1 - term_0) << endl;
 		cout << num1 << " * " << term_0 << " = " << (num1 * term_0) << endl;
 
 		cout << endl;

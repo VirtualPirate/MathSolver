@@ -51,17 +51,15 @@ Operand Constant::raise_pow(const Variable& other) const {
 
 Operand Constant::operator+(const Term& other) const {
 	Term second{other.simplify()};
-	std::cout << "other is simplified" << std::endl;
-	std::cout << second << std::endl;
 	if(second.is_Constant() || second.is_Variable())
-		return *this + second.fields.at(0);
+		return (*this + second.fields.at(0)).simplify();
 	return Term{};
 }
 
 Operand Constant::operator-(const Term& other) const {
 	Term second{other.simplify()};
 	if(second.is_Constant() || second.is_Variable())
-		return *this - second.fields.at(0);
+		return (*this - second.fields.at(0)).simplify();
 	return Term{};
 }
 
@@ -97,15 +95,21 @@ Operand Variable::operator*(const Term& other) const {
 }
 
 //Variable to Expression arithmetic operations
-// Operand Variable::operator*(const Expression& other) const {
-
-// }
+Operand Variable::operator*(const Expression& other) const {
+	return Operand{*this} * other;
+}
 
 
 
 //Term to Constant arithmetic operations
+Operand Term::operator*(const Constant& other) const {
+	return other * (*this);
+}
 
 //Term to Variable arithmetic operations
+Operand Term::operator*(const Variable& other) const {
+	return other * (*this);
+}
 
 //Term to Term arithmetic operations
 
