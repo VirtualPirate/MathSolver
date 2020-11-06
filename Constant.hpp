@@ -18,6 +18,7 @@ class Constant{
 public:
 	static Operand const power_one;
 	static Operand const power_zero;
+	static Operand const power_null;
 	//Constructors
 	Constant(void);
 	Constant(double);

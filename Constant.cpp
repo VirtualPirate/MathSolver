@@ -12,6 +12,7 @@
 
 Operand const Constant::power_one{1};
 Operand const Constant::power_zero{0};
+Operand const Constant::power_null{};
 //Constructors
 Constant::Constant(void):value{0}{}
 Constant::Constant(double val): value{val}, power{}{}

@@ -408,7 +408,8 @@ const Operand& Operand::getPower() const {
 	if (index > -1)
 		return get_power_functions[index](this);
 	std::cout << "stdout: Operand::getPower() on nulltype" << std::endl;
-	
+	return Constant::power_null;
+
 }
 std::string Operand::power_print() const {
 	int index = (int)type;
