@@ -10,11 +10,19 @@
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
 
+Operand const Constant::power_one{1};
+Operand const Constant::power_zero{0};
 //Constructors
 Constant::Constant(void):value{0}{}
-Constant::Constant(double val): value{val}{}
-Constant::Constant(const Constant& ref): value{ref.value}{}
-Constant::Constant(const Constant* point): value{point->value}{}
+Constant::Constant(double val): value{val}, power{}{}
+Constant::Constant(const Constant& ref): value{ref.value}, power{}{}
+Constant::Constant(const Constant* point): value{point->value}, power{}{}
+
+Constant::Constant(double val, const Operand& pow): value{val}{
+	if(pow == (double)1)
+		power = Operand{};
+	power = pow;
+}
 
 // Constant to Constant assignment operators
 Constant& Constant::operator=(double val){value = val;return *this;}
@@ -56,9 +64,20 @@ Constant Constant::abs() const {return Constant{fabs(value)};}
 const double& Constant::getValue() const {
 	return value;
 }
+const Operand& Constant::getPower() const {
+	if(power)
+		return power_one;
+	return power;
+}
 
 void Constant::setValue(const double& ref){
 	value = ref;
+}
+void Constant::setPower(const Operand& ref){
+	if(ref == power_one)
+		power = Operand{};
+	else
+		power = ref;
 }
 
 

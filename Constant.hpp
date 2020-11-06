@@ -16,6 +16,8 @@ class Constant{
 	friend class Term;
 	friend class Expression;
 public:
+	static Operand const power_one;
+	static Operand const power_zero;
 	//Constructors
 	Constant(void);
 	Constant(double);
@@ -23,7 +25,6 @@ public:
 	Constant(const Constant*);
 
 	Constant(double, const Operand&);
-	Constant(const Constant&, const Operand&);
 
 	// Assignment operators
 	Constant& operator=(double);
