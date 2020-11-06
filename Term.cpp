@@ -71,6 +71,10 @@ void Term::simplify_() {
 		if(swap_iter != fields.end())
 			std::iter_swap(fields.begin(), swap_iter);
 		is_simplified = true;
+		if(power != Constant::power_one){
+			for(auto i=fields.begin(); i != fields.end(); i++)
+				*i = i->raise_pow(power);
+		}
 	}
 
 }
