@@ -66,8 +66,8 @@ const double& Constant::getValue() const {
 }
 const Operand& Constant::getPower() const {
 	if(power)
-		return power_one;
-	return power;
+		return power;
+	return power_one;
 }
 
 void Constant::setValue(const double& ref){
