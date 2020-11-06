@@ -35,10 +35,10 @@ bool Constant::operator!=(const Constant& other) const {return !(*this == other)
 
 //Constant to double arithmetic operators
 Operand Constant::operator+(const double& other) const {return *this + Constant{other};}
-Operand Constant::operator-(const double& other) const {return *this + Constant{other};}
-Operand Constant::operator*(const double& other) const {return *this + Constant{other};}
-Operand Constant::operator/(const double& other) const {return *this + Constant{other};}
-Operand Constant::raise_pow(const double& other) const {return *this + Constant{other};}
+Operand Constant::operator-(const double& other) const {return *this - Constant{other};}
+Operand Constant::operator*(const double& other) const {return *this * Constant{other};}
+Operand Constant::operator/(const double& other) const {return *this / Constant{other};}
+Operand Constant::raise_pow(const double& other) const {return this->raise_pow(Constant{other});}
 
 
 //Constant to Operand arithmetic operators
