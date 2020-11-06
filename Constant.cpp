@@ -29,8 +29,8 @@ Constant& Constant::operator=(double val){value = val;return *this;}
 Constant& Constant::operator=(const Constant& ref){value = ref.value;return *this;}
 
 //Constant to Constant comparison operators
-bool Constant::operator==(const Constant& other) const {return value == other.value;}
-bool Constant::operator!=(const Constant& other) const {return value != other.value;}
+bool Constant::operator==(const Constant& other) const {return (value == other.value) && (power == other.power);}
+bool Constant::operator!=(const Constant& other) const {return (value != other.value) || (power != other.power);}
 
 //Constant to double arithmetic operators
 Operand Constant::operator+(const double& other) const {return *this + Constant{other};}
@@ -86,6 +86,9 @@ Constant Constant::operator-() const {return -value;}
 
 
 std::ostream& operator<<(std::ostream& os, const Constant& ref){
-	os << ref.value;
+	if(ref.power)
+		os << ref.value << " ^ " << ref.power;
+	else
+		os << ref.value;
 	return os;
 }

@@ -17,7 +17,6 @@ std::ostream& operator<<(std::ostream& os, const Term& ref){
 		bool brace = false;
 		if(ref.getPower() != Operand{1})
 			brace = true;
-
 		const std::vector<Operand>& fields = ref.getFields();
 		if(brace)
 			os << '(';

@@ -227,8 +227,10 @@ Operand& Operand::operator=(double val){
 }
 Operand::Operand(const Constant& val): value{(void*)(new Constant{val})}, type{DataType::Constant}, is_null{false}{}
 Operand& Operand::operator=(const Constant& ref){
-	// Invokes Operand::operator(double)
-	*this = ref.getValue();
+	if(value) free(value);
+	value = (void*)(new Constant{ref});
+	type = DataType::Constant;
+	is_null = false;
 	return *this;
 }
 
