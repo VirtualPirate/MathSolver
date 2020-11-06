@@ -10,6 +10,7 @@ enum class DataType
 {Constant=0, Variable=1, Term=2, Expression=3, None=-1};
 // const unsigned O_ARRAY_SIZE = 18;
 unsigned func_hash(DataType, DataType);
+class Operand;
 
 using OperationFunction = Operand (*)(const Operand&, const Operand&);
 using ComparisonFunction = bool (*)(const Operand&, const Operand&);

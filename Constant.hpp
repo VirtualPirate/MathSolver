@@ -9,6 +9,7 @@ class Term;
 class Expression;
 class Constant{
 	double value;
+	Operand power;
 
 	friend class Operand;
 	friend class Variable;

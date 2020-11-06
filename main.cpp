@@ -3,8 +3,8 @@
 #include <string>
 #include <algorithm>
 
-#include "Constant.hpp"
 #include "Operand.hpp"
+#include "Constant.hpp"
 #include "Variable.hpp"
 #include "OperandList.hpp"
 #include "Term.hpp"

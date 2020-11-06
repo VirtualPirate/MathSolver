@@ -1,8 +1,8 @@
 #include <cmath>
 #include <functional>
 
-#include "Constant.hpp"
 #include "Operand.hpp"
+#include "Constant.hpp"
 #include "Variable.hpp"
 #include "Term.hpp"
 #include "Expression.hpp"

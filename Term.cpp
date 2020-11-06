@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <initializer_list>
 
-#include "Constant.hpp"
 #include "Operand.hpp"
+#include "Constant.hpp"
 #include "Variable.hpp"
 #include "OperandList.hpp"
 #include "Term.hpp"

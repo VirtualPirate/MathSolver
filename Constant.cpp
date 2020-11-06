@@ -3,8 +3,8 @@
 #include <sstream>
 #include <cmath>
 
-#include "Constant.hpp"
 #include "Operand.hpp"
+#include "Constant.hpp"
 #include "Variable.hpp"
 #include "Term.hpp"
 #include "Expression.hpp"
