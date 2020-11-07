@@ -43,6 +43,12 @@ public:
 	bool operator==(const Variable&) const;
 	bool operator!=(const Variable&) const;
 
+	Operand operator+(const double&) const;
+	Operand operator-(const double&) const;
+	Operand operator*(const double&) const;
+	Operand operator/(const double&) const;
+	Operand raise_pow(const double&) const;
+
 	//Variable to Constant operations
 	Operand operator+(const Constant&) const;
 	Operand operator-(const Constant&) const;

@@ -60,6 +60,14 @@ bool Variable::operator!=(const Variable& ref) const {
 	return false;
 }
 
+//Variable to double arithmetic operators
+Operand Variable::operator+(const double& other) const {return *this + Constant{other};}
+Operand Variable::operator-(const double& other) const {return *this - Constant{other};}
+Operand Variable::operator*(const double& other) const {return *this * Constant{other};}
+Operand Variable::operator/(const double& other) const {return *this / Constant{other};}
+Operand Variable::raise_pow(const double& other) const {return this->raise_pow(Constant{other});};
+
+
 //Variable to Operand arithmetic operators
 Operand Variable::operator+(const Operand& other) const {return Operand{*this} + other;}
 Operand Variable::operator-(const Operand& other) const {return Operand{*this} - other;}
