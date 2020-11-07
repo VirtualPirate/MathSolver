@@ -13,6 +13,7 @@ unsigned func_hash(DataType, DataType);
 class Operand;
 
 using GetPowerFunction = std::function<const Operand&(const Operand*)>;
+using SetPowerFunction = std::function<void(Operand*, const Operand&)>;
 using OperationFunction = Operand (*)(const Operand&, const Operand&);
 using ComparisonFunction = bool (*)(const Operand&, const Operand&);
 using CheckFunction = std::function<bool(const Operand*)>;
@@ -46,6 +47,7 @@ class Operand
 	static ComparisonFunction neq_functions[O_ARRAY_SIZE];
 
 	static GetPowerFunction get_power_functions[TYPE_COUNT];
+	static SetPowerFunction set_power_functions[TYPE_COUNT];
 	static CheckFunction is_negative_functions[TYPE_COUNT];
 	static CheckFunction negative_power_functions[TYPE_COUNT];
 	static PowerPrintFunc power_print_functions[TYPE_COUNT];
@@ -53,9 +55,20 @@ class Operand
 	static CoutFunction operator_cout_functions[TYPE_COUNT];
 	static SimplifyFunction simplify_functions[TYPE_COUNT];
 
+	template<typename Type>
+	Type& get_nonconst() const{
+		if(value != nullptr)
+			return *((Type*)value);
+		throw std::runtime_error{"get<Type>() on nullptr"};
+	}
+
 	template <typename Type>
 	const Operand& getPower() const {
 		return get<Type>().getPower();
+	}
+	template <typename Type>
+	void setPower(const Operand& pow){
+		return get_nonconst<Type>().setPower(pow);
 	}
 	template <typename Type>
 	bool is_negative() const {
@@ -118,6 +131,7 @@ public:
 	}
 
 	const Operand& getPower() const;
+	void setPower(const Operand&);
 	std::string power_print() const;
 	bool is_negative() const;
 	bool negative_power() const;

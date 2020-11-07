@@ -171,6 +171,13 @@ GetPowerFunction Operand::get_power_functions[] = {
 	getPower<Expression>
 };
 
+SetPowerFunction Operand::set_power_functions[] = {
+	setPower<Constant>,
+	setPower<Variable>,
+	setPower<Term>,
+	setPower<Expression>
+};
+
 CheckFunction Operand::is_negative_functions[] = {
 	is_negative<Constant>,
 	is_negative<Variable>,
@@ -410,6 +417,13 @@ const Operand& Operand::getPower() const {
 	std::cout << "stdout: Operand::getPower() on nulltype" << std::endl;
 	return Constant::power_null;
 
+}
+void Operand::setPower(const Operand& pow){
+	int index = (int)type;
+	if(index > -1)
+		set_power_functions[index](this, pow);
+	std::cout << "stdout: Operand::setPower() on nulltype" << std::endl;
+	
 }
 std::string Operand::power_print() const {
 	int index = (int)type;

@@ -46,7 +46,8 @@ Operand Constant::raise_pow(const Constant& other) const {
 		if(final.getType() == DataType::Constant && final.getPower() == Constant::power_one)
 			return Constant{pow(value, final.get<Constant>().value)};
 	}
-	return Operand{};
+	first.setPower((getPower() * second).simplify());
+	return first;
 }
 
 
@@ -65,6 +66,9 @@ Operand Constant::operator/(const Variable& other) const {
 	return Operand{};
 }
 Operand Constant::raise_pow(const Variable& other) const {
+	Operand first = this->simplify();
+	Operand second = other.simplify();
+	first.setPower((first.getPower() * second).simplify());
 	return Operand{};
 }
 
