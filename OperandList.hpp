@@ -94,6 +94,9 @@ public:
 	void insert(const Operand&);
 	void insert(Operand&&);
 
+	void insert_front(const Operand&);
+	void insert_front(Operand&&);
+
 	// bool is_Constant() const;
 	// bool is_Variable() const;
 	bool var_exist(const char&) const;

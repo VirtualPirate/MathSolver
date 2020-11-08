@@ -114,6 +114,15 @@ void OperandList::insert(Operand&& ref){
 	fields.push_back(ref);
 }
 
+void OperandList::insert_front(const Operand& ref){
+	is_simplified = false;
+	fields.insert(fields.begin(), ref);
+}
+void OperandList::insert_front(Operand&& ref){
+	is_simplified = false;
+	fields.insert(fields.begin(), std::move(ref));
+}
+
 //Iterator functions
 OperandList::iterator OperandList::begin(DataType type){
 	if(fields.at(0).getType() == type)
