@@ -70,13 +70,15 @@ Operand Constant::operator-(const Term& other) const {
 	return Expression{{*this, other * (double)-1}};
 }
 Operand Constant::operator*(const Term& other) const {
-	Term result = other;
-	result.insert(*this);
-	return result;
+	if(other.power == Constant::power_one){
+		Term result = other;
+		result.insert(*this);
+		return result;
+	}else
+		return Term{{*this, other}};
 }
 Operand Constant::operator/(const Term& other) const {
-	Operand result = other.raise_pow(-1);
-	return *this * result;
+	return *this * other.raise_pow(-1);
 }
 Operand Constant::raise_pow(const Term& other) const {
 	return Constant{this->value, this->getPower() * other};
@@ -84,15 +86,24 @@ Operand Constant::raise_pow(const Term& other) const {
 
 //Constant to Expression arithmetic operations
 Operand Constant::operator+(const Expression& other) const {
-	return Operand{};
+	Expression result = other;
+	result.insert_front(*this);
+	return result;
+	// return Operand{};
 }
 Operand Constant::operator-(const Expression& other) const {
-	return Operand{};
+	Operand result = other * (double)-1;
+	result.get_nonconst<Expression>().insert_front(*this);
+	return result;
+	// return Operand{};
 }
 Operand Constant::operator*(const Expression& other) const {
 	return Operand{};
 }
 Operand Constant::operator/(const Expression& other) const {
+	return Operand{};
+}
+Operand Constant::raise_pow(const Expression& other) const {
 	return Operand{};
 }
 
