@@ -48,7 +48,7 @@ Operand Constant::operator+(const Variable& other) const {
 	return Expression{{*this, other}};
 }
 Operand Constant::operator-(const Variable& other) const {
-	return Expression{{*this, other * -1}};
+	return Expression{{*this, other * (double)-1}};
 }
 Operand Constant::operator*(const Variable& other) const {
 	return Term{{*this, other}};
@@ -64,19 +64,22 @@ Operand Constant::raise_pow(const Variable& other) const {
 //Constant to Term arithmetic operations
 
 Operand Constant::operator+(const Term& other) const {
-	return Operand{};
+	return Expression{{*this, other}};
 }
 Operand Constant::operator-(const Term& other) const {
-	return Operand{};
+	return Expression{{*this, other * (double)-1}};
 }
 Operand Constant::operator*(const Term& other) const {
-	return Operand{};
+	Term result = other;
+	result.insert(*this);
+	return result;
 }
 Operand Constant::operator/(const Term& other) const {
-	return Operand{};
+	Operand result = other.raise_pow(-1);
+	return *this * result;
 }
 Operand Constant::raise_pow(const Term& other) const {
-	return Operand{};
+	return Constant{this->value, this->getPower() * other};
 }
 
 //Constant to Expression arithmetic operations
