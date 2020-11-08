@@ -26,6 +26,12 @@ public:
 	bool is_Constant() const;
 	bool is_Variable() const;
 
+	Operand operator+(const double&) const;
+	Operand operator-(const double&) const;
+	Operand operator*(const double&) const;
+	Operand operator/(const double&) const;
+	Operand raise_pow(const double&) const;
+
 	Operand operator+(const Constant&) const;
 	Operand operator-(const Constant&) const;
 	Operand operator*(const Constant&) const;

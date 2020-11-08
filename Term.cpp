@@ -100,6 +100,13 @@ bool Term::is_Variable() const {
 	return false;
 }
 
+//Term to double arithmetic operators
+Operand Term::operator+(const double& other) const {return *this + Constant{other};};
+Operand Term::operator-(const double& other) const {return *this - Constant{other};};
+Operand Term::operator*(const double& other) const {return *this * Constant{other};};
+Operand Term::operator/(const double& other) const {return *this / Constant{other};};
+Operand Term::raise_pow(const double& other) const {return this->raise_pow(Constant{other});};
+
 //Term to Operand arithmetic operators
 Operand Term::operator+(const Operand& other) const {return Operand{*this} + other;}
 Operand Term::operator-(const Operand& other) const {return Operand{*this} - other;}
