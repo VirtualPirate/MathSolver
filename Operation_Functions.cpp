@@ -131,69 +131,92 @@ Operand Variable::raise_pow(const Constant& other) const {
 
 //Variable to Variable arithmetic operations
 Operand Variable::operator+(const Variable& other) const {
-	return Operand{};
+	if(*this == other)
+		return Term{{(double)2, *this}};
+	return Expression{{*this, other}};
 }
 Operand Variable::operator-(const Variable& other) const {
-	return Operand{};
+	if(*this == other)
+		return Constant{(double)0};
+	return Expression{{(double)2, *this}};
 }
 Operand Variable::operator*(const Variable& other) const {
-	return Operand{};
+	if(this->name == other.name)
+		return Variable{this->name, this->power + other.power};
+	return Term{{*this, other}};
 }
 Operand Variable::operator/(const Variable& other) const {
-	return Operand{};
+	return *this * other.raise_pow((double)-1);
 }
 Operand Variable::raise_pow(const Variable& other) const {
-	return Operand{};
+	return Variable{this->name, this->getPower() * other};;
 }
 
 
 //Variable to Term arithmetic operations
 Operand Variable::operator+(const Term& other) const {
-	return Operand{};
+	return Expression{{*this, other}};
 }
 Operand Variable::operator-(const Term& other) const {
-	return Operand{};
+	return Expression{{*this, other * (double)-1}};
 }
 Operand Variable::operator*(const Term& other) const {
-	return Operand{};
+	if(other.power == Constant::power_one){
+		Term result = other;
+		result.insert(*this);
+		return result;
+	}else
+		return Term{{*this, other}};
 }
 Operand Variable::operator/(const Term& other) const {
-	return Operand{};
+	return *this * other.raise_pow(-1);
 }
 Operand Variable::raise_pow(const Term& other) const {
-	return Operand{};
+	return Variable{this->name, this->getPower() * other};;;
 }
 
 //Variable to Expression arithmetic operations
 Operand Variable::operator+(const Expression& other) const {
-	return Operand{};
+	Expression result = other;
+	result.insert_front(*this);
+	return result;
 }
 Operand Variable::operator-(const Expression& other) const {
-	return Operand{};
+	Operand result = other * (double)-1;
+	result.get_nonconst<Expression>().insert_front(*this);
+	return result;
 }
 Operand Variable::operator*(const Expression& other) const {
-	return Operand{};
+	Expression result = other;
+	for(auto each=result.fields.begin(); each != result.fields.end(); each++)
+		*each = *this * *each;
+	return result;
 }
 Operand Variable::operator/(const Expression& other) const {
-	return Operand{};
+	Operand result = other.raise_pow(-1);
+	return *this * result;
 }
 Operand Variable::raise_pow(const Expression& other) const {
-	return Operand{};
+	return Variable{this->name, this->getPower() * other};
 }
 
 
 //Term to Constant arithmetic operations
 Operand Term::operator+(const Constant& other) const {
-	return Operand{};
+	return Expression{{*this, other}};
 }
 Operand Term::operator-(const Constant& other) const {
-	return Operand{};
+	return Expression{{*this, other * (double)-1}};
 }
 Operand Term::operator*(const Constant& other) const {
-	return Operand{};
+	Term result = *this;
+	result.insert(other);
+	return result;
 }
 Operand Term::operator/(const Constant& other) const {
-	return Operand{};
+	Term result = *this;
+	result.insert(other.raise_pow(-1));
+	return result;
 }
 Operand Term::raise_pow(const Constant& other) const {
 	return Operand{};
