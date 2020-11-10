@@ -98,30 +98,35 @@ Operand Constant::operator-(const Expression& other) const {
 	// return Operand{};
 }
 Operand Constant::operator*(const Expression& other) const {
-	return Operand{};
+	Expression result = other;
+	for(auto each=result.fields.begin(); each != result.fields.end(); each++)
+		*each = *this * *each;
+	return result;
 }
 Operand Constant::operator/(const Expression& other) const {
-	return Operand{};
+	Operand result = other.raise_pow(-1);
+	return *this * result;
+	// return Operand{};
 }
 Operand Constant::raise_pow(const Expression& other) const {
-	return Operand{};
+	return Constant{this->value, this->getPower() * other};
 }
 
 //Variable to Constant artihmetic operations
 Operand Variable::operator+(const Constant& other) const {
-	return Operand{};
+	return Expression{{*this, other}};;
 }
 Operand Variable::operator-(const Constant& other) const {
-	return Operand{};
+	return Expression{{*this, other * -1}};;
 }
 Operand Variable::operator*(const Constant& other) const {
-	return Operand{};
+	return other * *this;
 }
 Operand Variable::operator/(const Constant& other) const {
-	return Operand{};
+	return Term{{*this, other.raise_pow((double)-1)}};;
 }
 Operand Variable::raise_pow(const Constant& other) const {
-	return Operand{};
+	return Variable{this->name, this->getPower() * other};
 }
 
 //Variable to Variable arithmetic operations

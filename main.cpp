@@ -43,6 +43,13 @@ int main(){
 	Term term_1{num1};
 	Term term_2{var_1};
 	Term term_3{var_2};
+	Term term_4{num2};
+	term_4.insert(var_0);
+	term_4.insert(var_1);
+
+	Expression exp_0{var_0};
+	exp_0.insert(num1);
+	exp_0.insert(var_3);
 
 	//Displaying all the operands
 
@@ -65,6 +72,26 @@ int main(){
 		cout << num1 << " * " << var_3 << " = " << (num1 * var_3) << endl;
 		cout << num1 << " / " << var_3 << " = " << (num1 / var_3) << endl;
 		cout << num1 << " ^ " << var_3 << " = " << num1.raise_pow(var_3) << endl;
+		cout << endl;
+		cout << "Constant to Term arithmetic - " << endl << endl;
+		cout << num1 << " + " << term_4 << " = " << (num1 + term_4) << endl;
+		cout << num1 << " - " << term_4 << " = " << (num1 - term_4) << endl;
+		cout << num1 << " * " << term_4 << " = " << (num1 * term_4) << endl;
+		cout << num1 << " / " << term_4 << " = " << (num1 / term_4) << endl;
+		cout << num1 << " ^ " << term_4 << " = " << (num1.raise_pow(term_4) ) << endl;
+ 		cout << "Constant to Expression arithmetic - " << endl << endl;
+ 		cout << num1 << " + " << exp_0 << " = " << (num1 + exp_0) << endl;
+ 		// cout << num1 << " - " << term_4 << " = " << (num1 - exp_0) << endl;
+		cout << num1 << " * " << exp_0 << " = " << (num1 * exp_0) << endl;
+		cout << num1 << " / " << exp_0 << " = " << (num1 / exp_0) << endl;
+		cout << num1 << " ^ " << exp_0 << " = " << num1.raise_pow(exp_0) << endl;
+		cout << endl;
+		cout << "Variable to Constant arithemtic - " << endl << endl;
+		cout << var_3 << " + " << num2 << " = " << (var_3 + num2) << endl;
+		cout << var_3 << " - " << num2 << " = " << (var_3 - num2) << endl;
+		cout << var_3 << " * " << num2 << " = " << (var_3 * num2) << endl;
+		cout << var_3 << " / " << num2 << " = " << (var_3 / num2) << endl;
+		cout << var_3 << " ^ " << num2 << " = " << (var_3.raise_pow(num2)) << endl;
 		cout << endl;
 		// cout << "Constant to Term arithmetic - " << endl;
 		// cout << num1 << " + " << term_1 << " = " << (num1 + term_1) << endl;
