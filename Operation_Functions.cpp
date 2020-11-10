@@ -138,7 +138,7 @@ Operand Variable::operator+(const Variable& other) const {
 Operand Variable::operator-(const Variable& other) const {
 	if(*this == other)
 		return Constant{(double)0};
-	return Expression{{(double)2, *this}};
+	return Expression{{*this, other * (double)-1}};
 }
 Operand Variable::operator*(const Variable& other) const {
 	if(this->name == other.name)
@@ -219,24 +219,32 @@ Operand Term::operator/(const Constant& other) const {
 	return result;
 }
 Operand Term::raise_pow(const Constant& other) const {
-	return Operand{};
+	Term result = *this;
+	result.power = result.power * other;
+	return result;
 }
 
 //Term to Variable arithmetic operations
 Operand Term::operator+(const Variable& other) const {
-	return Operand{};
+	return Expression{{*this, other}};
 }
 Operand Term::operator-(const Variable& other) const {
-	return Operand{};
+	return Expression{{*this, other * (double)-1}};
 }
 Operand Term::operator*(const Variable& other) const {
-	return Operand{};
+	Term result = *this;
+	result.insert(other);
+	return result;
 }
 Operand Term::operator/(const Variable& other) const {
-	return Operand{};
+	Term result = *this;
+	result.insert(other.raise_pow(-1));
+	return result;
 }
 Operand Term::raise_pow(const Variable& other) const {
-	return Operand{};
+	Term result = *this;
+	result.power = result.power * other;
+	return result;
 }
 
 //Term to Term arithmetic operations

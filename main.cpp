@@ -12,6 +12,31 @@
 
 using namespace std;
 
+void add_test(const Operand& first, const Operand& second){
+	cout << first << " + " << second << " = " << (first + second) << endl;
+}
+void sub_test(const Operand& first, const Operand& second){
+	cout << first << " - " << second << " = " << (first - second) << endl;
+}
+void mul_test(const Operand& first, const Operand& second){
+	cout << first << " * " << second << " = " << (first * second) << endl;
+}
+void div_test(const Operand& first, const Operand& second){
+	cout << first << " / " << second << " = " << (first / second) << endl;
+}
+void pow_test(const Operand& first, const Operand& second){
+	cout << first << " ^ " << second << " = " << first.raise_pow(second) << endl;
+}
+
+void integrated_test(const Operand& first, const Operand& second){
+	add_test(first, second);
+	sub_test(first, second);
+	mul_test(first, second);
+	div_test(first, second);
+	pow_test(first, second);
+	cout << endl;
+}
+
 int main(){
 	std::cout << "This is the initial project version" << std::endl;
 
@@ -93,6 +118,12 @@ int main(){
 		cout << var_3 << " / " << num2 << " = " << (var_3 / num2) << endl;
 		cout << var_3 << " ^ " << num2 << " = " << (var_3.raise_pow(num2)) << endl;
 		cout << endl;
+		cout << "Variable to Variable arithemtic - " << endl << endl;
+		integrated_test(var_0, var_1);
+		integrated_test(var_1, var_3);
+		cout << "Variable to Term arithmetic - " << endl << endl;
+		integrated_test(var_0, term_4);
+		integrated_test(var_1, term_0);
 		// cout << "Constant to Term arithmetic - " << endl;
 		// cout << num1 << " + " << term_1 << " = " << (num1 + term_1) << endl;
 		// cout << num1 << " + " << term_0 << " = " << (num1 + term_0) << endl;
