@@ -100,6 +100,13 @@ bool Term::is_Variable() const {
 	return false;
 }
 
+std::vector<Variable> Term::getVars() {
+	std::vector<Variable> result;
+	for(auto each=begin(DataType::Variable); each != end(DataType::Variable); each++)
+		result.push_back((*each).get<Variable>());
+	return result;
+}
+
 //Term to double arithmetic operators
 Operand Term::operator+(const double& other) const {return *this + Constant{other};};
 Operand Term::operator-(const double& other) const {return *this - Constant{other};};

@@ -26,6 +26,8 @@ public:
 	bool is_Constant() const;
 	bool is_Variable() const;
 
+	std::vector<Variable> getVars();
+
 	Operand operator+(const double&) const;
 	Operand operator-(const double&) const;
 	Operand operator*(const double&) const;
