@@ -9,6 +9,7 @@
 #include "OperandList.hpp"
 #include "Term.hpp"
 #include "Expression.hpp"
+#include "Operation_Functions.hpp"
 
 using namespace std;
 
@@ -68,9 +69,14 @@ int main(){
 	Term term_1{num1};
 	Term term_2{var_1};
 	Term term_3{var_2};
+
 	Term term_4{num2};
 	term_4.insert(var_0);
 	term_4.insert(var_1);
+
+	Term term_5{num1};
+	term_5.insert(var_0);
+	term_5.insert(var_1);
 
 	Expression exp_0{var_0};
 	exp_0.insert(num1);
@@ -124,6 +130,7 @@ int main(){
 		cout << "Variable to Term arithmetic - " << endl << endl;
 		integrated_test(var_0, term_4);
 		integrated_test(var_1, term_0);
+		cout << "same_varset(term_4, term_5)  = " << same_varset(term_4, term_5) << endl;
 		// cout << "Constant to Term arithmetic - " << endl;
 		// cout << num1 << " + " << term_1 << " = " << (num1 + term_1) << endl;
 		// cout << num1 << " + " << term_0 << " = " << (num1 + term_0) << endl;

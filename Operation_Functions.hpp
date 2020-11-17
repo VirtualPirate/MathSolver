@@ -5,6 +5,6 @@ class Constant;
 class Variable;
 class Term;
 
-
+bool same_varset(Term&, Term&);
 
 #endif

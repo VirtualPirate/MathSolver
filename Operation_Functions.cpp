@@ -1,5 +1,6 @@
 #include <cmath>
 #include <functional>
+#include <algorithm>
 
 #include "Operand.hpp"
 #include "Constant.hpp"
@@ -347,4 +348,23 @@ Operand Expression::operator/(const Expression& other) const {
 }
 Operand Expression::raise_pow(const Expression& other) const {
 	return Operand{};
+}
+
+bool same_varset(Term& first, Term& second) {
+	std::vector<Variable> first_vec = first.getVars();
+	std::vector<Variable> second_vec = second.getVars();
+	if(first_vec.size() == second_vec.size()){
+		auto iter = first_vec.begin();
+		std::vector<Variable>::iterator element;
+		while(iter != first_vec.end()){
+			element = std::find(second_vec.begin(), second_vec.end(), *iter);
+			if(element != second_vec.end())
+				second_vec.erase(element);
+			else
+				return false;
+			iter++;
+		}
+		return true;
+	}
+	return false;
 }
