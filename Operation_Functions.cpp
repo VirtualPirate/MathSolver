@@ -350,7 +350,8 @@ Operand Expression::raise_pow(const Expression& other) const {
 	return Operand{};
 }
 
-bool same_varset(Term& first, Term& second) {
+bool is_constvar(Term& first, Term& second) {
+	// first.begin(DataType::Term) == first.end(DataType::Term) && first.begin(DataType::Expression) == first.end(DataType::Expression)
 	std::vector<Variable> first_vec = first.getVars();
 	std::vector<Variable> second_vec = second.getVars();
 	if(first_vec.size() == second_vec.size()){

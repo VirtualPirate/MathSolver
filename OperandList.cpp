@@ -133,6 +133,13 @@ OperandList::iterator OperandList::end(DataType type) {
 	return OperandList::iterator{this, (int)this->fields.size(), type};
 }
 
+unsigned int OperandList::count(DataType type) {
+	unsigned int count = 0;
+	for(auto each=begin(type); each!=end(type); each++)
+		count++;
+	return count;
+}
+
 OperandList::operator bool() const {return is_null;}
 // std::ostream& operator<<(std::ostream& os, const OperandList& ref){
 // 	if(!ref.is_null){

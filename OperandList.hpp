@@ -106,6 +106,7 @@ public:
 	//Iterator functions
 	iterator begin(DataType);
 	iterator end(DataType);
+	unsigned int count(DataType);
 	/*
 	// OperandList to Constant comparison operators
 	bool operator==(const Constant&) const;

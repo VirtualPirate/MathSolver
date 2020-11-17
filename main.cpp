@@ -130,7 +130,7 @@ int main(){
 		cout << "Variable to Term arithmetic - " << endl << endl;
 		integrated_test(var_0, term_4);
 		integrated_test(var_1, term_0);
-		cout << "same_varset(term_4, term_5)  = " << same_varset(term_4, term_5) << endl;
+		cout << "is_constvar(term_4, term_5)  = " << is_constvar(term_4, term_5) << endl;
 		// cout << "Constant to Term arithmetic - " << endl;
 		// cout << num1 << " + " << term_1 << " = " << (num1 + term_1) << endl;
 		// cout << num1 << " + " << term_0 << " = " << (num1 + term_0) << endl;
@@ -151,6 +151,8 @@ int main(){
 		cout << "term_1 = " << term_1 << endl;
 		cout << "term_2 = " << term_2 << endl;
 		cout << "term_3 = " << term_3 << endl;
+
+		cout << "term_0.count(DataType::Variable) = " << term_0.count(DataType::Variable) << endl;
 
 		cout << endl;
 		cout << "term_0.is_Constant() = " << term_0.is_Constant() << endl;
