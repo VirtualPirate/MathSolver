@@ -5,6 +5,6 @@ class Constant;
 class Variable;
 class Term;
 
-bool is_constvar(Term&, Term&);
+bool is_addable(Term&, Term&);
 
 #endif

@@ -350,11 +350,14 @@ Operand Expression::raise_pow(const Expression& other) const {
 	return Operand{};
 }
 
-bool is_constvar(Term& first, Term& second) {
-	// first.begin(DataType::Term) == first.end(DataType::Term) && first.begin(DataType::Expression) == first.end(DataType::Expression)
+bool is_addable(Term& first, Term& second) {
+	bool criteria = first.begin(DataType::Term) == first.end(DataType::Term)
+	&& first.begin(DataType::Expression) == first.end(DataType::Expression)
+	&& first.count(DataType::Constant) == 1;
+
 	std::vector<Variable> first_vec = first.getVars();
 	std::vector<Variable> second_vec = second.getVars();
-	if(first_vec.size() == second_vec.size()){
+	if(first_vec.size() == second_vec.size() && criteria){
 		auto iter = first_vec.begin();
 		std::vector<Variable>::iterator element;
 		while(iter != first_vec.end()){
