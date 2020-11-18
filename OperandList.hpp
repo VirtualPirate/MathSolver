@@ -141,6 +141,8 @@ public:
 	//Iterator functions
 	iterator begin(DataType);
 	iterator end(DataType);
+	const_iterator cbegin(DataType) const;
+	const_iterator cend(DataType) const;
 	unsigned int count(DataType);
 	/*
 	// OperandList to Constant comparison operators

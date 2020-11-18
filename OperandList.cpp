@@ -133,6 +133,15 @@ OperandList::iterator OperandList::end(DataType type) {
 	return OperandList::iterator{this, (int)this->fields.size(), type};
 }
 
+OperandList::const_iterator OperandList::cbegin(DataType type) const {
+	if(fields.at(0).getType() == type)
+		return OperandList::const_iterator{this, 0, type};
+	return OperandList::const_iterator(this, 0, type) + 1;
+}
+OperandList::const_iterator OperandList::cend(DataType type) const {
+	return OperandList::const_iterator{this, (int)this->fields.size(), type};
+}
+
 unsigned int OperandList::count(DataType type) {
 	unsigned int count = 0;
 	for(auto each=begin(type); each!=end(type); each++)
