@@ -16,6 +16,7 @@ class Term: public OperandList{
 	friend class Operand;
 	friend class Expression;
 	friend std::ostream& operator<<(std::ostream&, const Term&);
+	friend bool same_operand_set(const Term&, const Term&);
 
 	void extend(const Term&);
 public:
@@ -71,5 +72,7 @@ public:
 	bool operator==(const Term&) const;
 	bool operator!=(const Term&) const;
 };
+
+bool same_operand_set(const Term&, const Term&);
 
 #endif

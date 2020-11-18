@@ -126,16 +126,22 @@ Operand Term::operator/(const Operand& other) const {return Operand{*this} / oth
 Operand Term::raise_pow(const Operand& other) const {return Operand{*this}.raise_pow(other);}
 
 bool Term::operator==(const Term& ref) const {
-	if(fields.size() == ref.fields.size()){
-		for(auto each=fields.cbegin(); each!=fields.cend(); each++){
-			if(std::find(ref.fields.begin(), ref.fields.end(), *each) == ref.fields.end())
-				return false;
-		}
+	if(same_operand_set(*this, ref) && power == ref.power)
 		return true;
-	}
 	return false;
 }
 
 bool Term::operator!=(const Term& ref) const {
 	return !(*this == ref);
+}
+
+bool same_operand_set(const Term& first, const Term& second){
+	if(first.fields.size() == second.fields.size()){
+		for(auto each=first.fields.cbegin(); each!=first.fields.cend(); each++){
+			if(std::find(second.fields.cbegin(), second.fields.cend(), *each) == second.fields.cend())
+				return false;
+		}
+		return true;
+	}
+	return false;
 }
