@@ -128,7 +128,7 @@ Operand Term::raise_pow(const Operand& other) const {return Operand{*this}.raise
 bool Term::operator==(const Term& ref) const {
 	if(fields.size() == ref.fields.size()){
 		for(auto each=fields.cbegin(); each!=fields.cend(); each++){
-			if(std::find(ref.fields.cbegin(), ref.fields.cend(), *each) == ref.fields.cend())
+			if(std::find(ref.fields.begin(), ref.fields.end(), *each) == ref.fields.end())
 				return false;
 		}
 		return true;

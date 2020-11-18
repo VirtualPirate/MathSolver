@@ -123,19 +123,18 @@ ComparisonFunction Operand::eq_functions[] = {
 	Operand_bool,
 	Operand_bool,
 	Operand_bool,
+	Operand_Operand_eq<Variable, Variable>,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_bool,
+	Operand_Operand_eq<Term, Term>,
 	Operand_bool,
 	Operand_bool,
 	Operand_bool,
 	Operand_bool,
 	Operand_bool,
-	Operand_bool,
-	Operand_bool,
-	Operand_bool,
-	Operand_bool,
-	Operand_bool,
-	Operand_bool,
-	Operand_bool,
-	Operand_bool,
+	Operand_bool
 };
 
 ComparisonFunction Operand::neq_functions[] = {
@@ -144,19 +143,18 @@ ComparisonFunction Operand::neq_functions[] = {
 	Operand_neq_bool,
 	Operand_neq_bool,
 	Operand_neq_bool,
+	Operand_Operand_neq<Variable, Variable>,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_neq_bool,
+	Operand_Operand_neq<Term, Term>,
 	Operand_neq_bool,
 	Operand_neq_bool,
 	Operand_neq_bool,
 	Operand_neq_bool,
 	Operand_neq_bool,
-	Operand_neq_bool,
-	Operand_neq_bool,
-	Operand_neq_bool,
-	Operand_neq_bool,
-	Operand_neq_bool,
-	Operand_neq_bool,
-	Operand_neq_bool,
-	Operand_neq_bool,
+	Operand_neq_bool
 };
 
 GetPowerFunction Operand::get_power_functions[] = {

@@ -28,6 +28,12 @@ void div_test(const Operand& first, const Operand& second){
 void pow_test(const Operand& first, const Operand& second){
 	cout << first << " ^ " << second << " = " << first.raise_pow(second) << endl;
 }
+void eq_test(const Operand& first, const Operand& second){
+	cout << first << " == " << second << " = " << (first == second) << endl;
+}
+void neq_test(const Operand& first, const Operand& second){
+	cout << first << " != " << second << " = " << (first != second) << endl;
+}
 
 void integrated_test(const Operand& first, const Operand& second){
 	add_test(first, second);
@@ -134,7 +140,13 @@ int main(){
 		cout << "Term to Term arithmetic - " << endl << endl;
 		add_test(term_4, term_5);
 		sub_test(term_4, term_5);
-		cout << "is_addable(term_4, term_5)  = " << is_addable(term_4, term_5) << endl;
+		cout << "is_addable(term_4, term_5)  = " << is_addable(term_4, term_5) << endl << endl;
+		cout << "Term to Term eq " << endl;
+		eq_test(term_0, term_0);
+		eq_test(term_4, term_5);
+		eq_test(term_2, term_2);
+		eq_test(var_2, var_2);
+		eq_test(var_1, var_1);
 		// cout << "Constant to Term arithmetic - " << endl;
 		// cout << num1 << " + " << term_1 << " = " << (num1 + term_1) << endl;
 		// cout << num1 << " + " << term_0 << " = " << (num1 + term_0) << endl;
