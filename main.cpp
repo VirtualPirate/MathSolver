@@ -130,6 +130,10 @@ int main(){
 		cout << "Variable to Term arithmetic - " << endl << endl;
 		integrated_test(var_0, term_4);
 		integrated_test(var_1, term_0);
+
+		cout << "Term to Term arithmetic - " << endl << endl;
+		add_test(term_4, term_5);
+		sub_test(term_4, term_5);
 		cout << "is_addable(term_4, term_5)  = " << is_addable(term_4, term_5) << endl;
 		// cout << "Constant to Term arithmetic - " << endl;
 		// cout << num1 << " + " << term_1 << " = " << (num1 + term_1) << endl;

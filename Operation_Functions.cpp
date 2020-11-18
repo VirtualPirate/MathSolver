@@ -250,10 +250,20 @@ Operand Term::raise_pow(const Variable& other) const {
 
 //Term to Term arithmetic operations
 Operand Term::operator+(const Term& other) const {
-	return Operand{};
+	if(is_addable(*this, other)){
+		Term result{*this};
+		*result.begin(DataType::Constant) += *other.cbegin(DataType::Constant);
+		return result;
+	}
+	return Expression{{*this, other}};
 }
 Operand Term::operator-(const Term& other) const {
-	return Operand{};
+	if(is_addable(*this, other)){
+		Term result{*this};
+		*result.begin(DataType::Constant) -= *other.cbegin(DataType::Constant);
+		return result;
+	}
+	return Expression{{*this, other * (double)-1}};
 }
 Operand Term::operator*(const Term& other) const {
 	return Operand{};
