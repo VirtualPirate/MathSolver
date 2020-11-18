@@ -51,6 +51,41 @@ public:
 		bool operator!=(const iterator&) const;
 
 	};
+	class const_iterator{
+		const OperandList* ref;
+		int index;
+		DataType iterative;
+
+		friend class OperandList;
+
+		const_iterator();
+		const_iterator(const const_iterator&);
+		const_iterator(const OperandList*, int, DataType);
+		int operate_add(int);
+		int operate_sub(int);
+	public:
+		const_iterator& operator=(const const_iterator&);
+		void set_iterative(const DataType&);
+		int getIndex() const;
+
+		//operations
+		const_iterator operator+(int);
+		const_iterator operator-(int);
+		const_iterator& operator+=(int);
+		const_iterator& operator-=(int);
+
+		const_iterator& operator++();
+		const_iterator& operator--();
+		const_iterator operator++(int);
+		const_iterator operator--(int);
+
+		const Operand& operator*();
+
+		//Comparison operator
+		bool operator==(const const_iterator&) const;
+		bool operator!=(const const_iterator&) const;
+	};
+
 	OperandList();
 
 	//Copy and Move semantics

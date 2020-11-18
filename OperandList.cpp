@@ -158,10 +158,18 @@ OperandList::operator bool() const {return is_null;}
 
 // OperandList::iterator definition
 OperandList::iterator::iterator(): index{0}{}
+OperandList::const_iterator::const_iterator(): index{0}{}
 OperandList::iterator::iterator(const OperandList::iterator& ref): ref{ref.ref}, index{ref.index}, iterative{ref.iterative}{}
+OperandList::const_iterator::const_iterator(const OperandList::const_iterator& ref): ref{ref.ref}, index{ref.index}, iterative{ref.iterative}{}
 OperandList::iterator::iterator(OperandList* point, int index_, DataType type): ref{point}, index{index_}, iterative{type}{}
+OperandList::const_iterator::const_iterator(const OperandList* point, int index_, DataType type): ref{point}, index{index_}, iterative{type}{}
 
 OperandList::iterator& OperandList::iterator::operator=(const OperandList::iterator& ref){
+	this->ref = ref.ref;
+	index = ref.index;
+	return *this;
+}
+OperandList::const_iterator& OperandList::const_iterator::operator=(const OperandList::const_iterator& ref){
 	this->ref = ref.ref;
 	index = ref.index;
 	return *this;
@@ -171,13 +179,33 @@ void OperandList::iterator::set_iterative(const DataType& type){
 	iterative = type;
 	index = 0;
 }
+void OperandList::const_iterator::set_iterative(const DataType& type){
+	iterative = type;
+	index = 0;
+}
 
 int OperandList::iterator::getIndex() const {
+	return index;
+}
+int OperandList::const_iterator::getIndex() const {
 	return index;
 }
 
 //OperandList::iterator operations
 int OperandList::iterator::operate_add(int other){
+	int abs_index = this->index + 1;
+	int rel_index = 0;
+	while(abs_index < ref->fields.size() && rel_index < other){
+		if(this->ref->fields.at(abs_index).getType() == iterative){
+			rel_index++;
+			if(rel_index == other)
+				break;
+		}
+		abs_index++;
+	}
+	return abs_index;
+}
+int OperandList::const_iterator::operate_add(int other){
 	int abs_index = this->index + 1;
 	int rel_index = 0;
 	while(abs_index < ref->fields.size() && rel_index < other){
@@ -203,20 +231,47 @@ int OperandList::iterator::operate_sub(int other){
 	}
 	return abs_index;
 }
+int OperandList::const_iterator::operate_sub(int other){
+	int abs_index = this->index - 1;
+	int rel_index = 0;
+	while(abs_index > 0 && rel_index < other){
+		if(this->ref->fields.at(abs_index).getType() == iterative){
+			rel_index++;
+			if(rel_index == other)
+				break;
+		}
+		abs_index--;
+	}
+	return abs_index;
+}
 OperandList::iterator OperandList::iterator::operator+(int other){
 	return OperandList::iterator{this->ref, operate_add(other), this->iterative};
+}
+OperandList::const_iterator OperandList::const_iterator::operator+(int other){
+	return OperandList::const_iterator{this->ref, operate_add(other), this->iterative};
 }
 
 OperandList::iterator OperandList::iterator::operator-(int other){
 	return OperandList::iterator{this->ref, operate_sub(other), this->iterative};
+}
+OperandList::const_iterator OperandList::const_iterator::operator-(int other){
+	return OperandList::const_iterator{this->ref, operate_sub(other), this->iterative};
 }
 
 OperandList::iterator& OperandList::iterator::operator+=(int other){
 	this->index = operate_add(other);
 	return *this;
 }
+OperandList::const_iterator& OperandList::const_iterator::operator+=(int other){
+	this->index = operate_add(other);
+	return *this;
+}
 
 OperandList::iterator& OperandList::iterator::operator-=(int other){
+	this->index = operate_sub(other);
+	return *this;
+}
+OperandList::const_iterator& OperandList::const_iterator::operator-=(int other){
 	this->index = operate_sub(other);
 	return *this;
 }
@@ -226,7 +281,16 @@ OperandList::iterator& OperandList::iterator::operator++(){
 	this->index = operate_add(1);
 	return *this;
 }
+OperandList::const_iterator& OperandList::const_iterator::operator++(){
+	this->index = operate_add(1);
+	return *this;
+}
+
 OperandList::iterator& OperandList::iterator::operator--(){
+	this->index = operate_sub(1);
+	return *this;
+}
+OperandList::const_iterator& OperandList::const_iterator::operator--(){
 	this->index = operate_sub(1);
 	return *this;
 }
@@ -236,7 +300,15 @@ OperandList::iterator OperandList::iterator::operator++(int other){
 	++(*this);
 	return (*this) - 1;
 }
+OperandList::const_iterator OperandList::const_iterator::operator++(int other){
+	++(*this);
+	return (*this) - 1;
+}
 OperandList::iterator OperandList::iterator::operator--(int other){
+	++(*this);
+	return (*this) + 1;
+}
+OperandList::const_iterator OperandList::const_iterator::operator--(int other){
 	++(*this);
 	return (*this) + 1;
 }
@@ -244,12 +316,21 @@ OperandList::iterator OperandList::iterator::operator--(int other){
 Operand& OperandList::iterator::operator*(){
 	return ref->fields.at(index);
 }
+const Operand& OperandList::const_iterator::operator*(){
+	return ref->fields.at(index);
+}
 
 //Iterator comparison operators
 bool OperandList::iterator::operator==(const OperandList::iterator& ref) const {
 	return this->index == ref.index;
 }
+bool OperandList::const_iterator::operator==(const OperandList::const_iterator& ref) const {
+	return this->index == ref.index;
+}
 
 bool OperandList::iterator::operator!=(const OperandList::iterator& ref) const {
+	return this->index != ref.index;
+}
+bool OperandList::const_iterator::operator!=(const OperandList::const_iterator& ref) const {
 	return this->index != ref.index;
 }
