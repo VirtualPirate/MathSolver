@@ -105,13 +105,21 @@ void OperandList::insert(const Variable& ref){
 	is_simplified = false;
 	fields.push_back(Operand{ref});
 }
+void OperandList::insert(const Term& ref){
+	is_simplified = false;
+	fields.push_back(Operand{ref});
+}
+void OperandList::insert(const Expression& ref){
+	is_simplified = false;
+	fields.push_back(Operand{ref});
+}
 void OperandList::insert(const Operand& ref){
 	is_simplified = false;
 	fields.push_back(ref);
 }
 void OperandList::insert(Operand&& ref){
 	is_simplified = false;
-	fields.push_back(ref);
+	fields.push_back(std::move(ref));
 }
 
 void OperandList::insert_front(const Operand& ref){
