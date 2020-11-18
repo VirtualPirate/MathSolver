@@ -5,6 +5,6 @@ class Constant;
 class Variable;
 class Term;
 
-bool is_addable(Term&, Term&);
+bool is_addable(const Term&, const Term&);
 
 #endif

@@ -143,7 +143,7 @@ public:
 	iterator end(DataType);
 	const_iterator cbegin(DataType) const;
 	const_iterator cend(DataType) const;
-	unsigned int count(DataType);
+	unsigned int count(DataType) const;
 	/*
 	// OperandList to Constant comparison operators
 	bool operator==(const Constant&) const;

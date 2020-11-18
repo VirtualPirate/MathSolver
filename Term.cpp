@@ -100,9 +100,9 @@ bool Term::is_Variable() const {
 	return false;
 }
 
-std::vector<Variable> Term::getVars() {
+std::vector<Variable> Term::getVars() const {
 	std::vector<Variable> result;
-	for(auto each=begin(DataType::Variable); each != end(DataType::Variable); each++)
+	for(auto each=cbegin(DataType::Variable); each != cend(DataType::Variable); each++)
 		result.push_back((*each).get<Variable>());
 	return result;
 }

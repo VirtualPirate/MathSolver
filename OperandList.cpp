@@ -142,9 +142,9 @@ OperandList::const_iterator OperandList::cend(DataType type) const {
 	return OperandList::const_iterator{this, (int)this->fields.size(), type};
 }
 
-unsigned int OperandList::count(DataType type) {
+unsigned int OperandList::count(DataType type) const {
 	unsigned int count = 0;
-	for(auto each=begin(type); each!=end(type); each++)
+	for(auto each=cbegin(type); each!=cend(type); each++)
 		count++;
 	return count;
 }

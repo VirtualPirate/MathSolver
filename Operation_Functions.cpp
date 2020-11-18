@@ -350,9 +350,9 @@ Operand Expression::raise_pow(const Expression& other) const {
 	return Operand{};
 }
 
-bool is_addable(Term& first, Term& second) {
-	bool criteria = first.begin(DataType::Term) == first.end(DataType::Term)
-	&& first.begin(DataType::Expression) == first.end(DataType::Expression)
+bool is_addable(const Term& first,  const Term& second) {
+	bool criteria = first.cbegin(DataType::Term) == first.cend(DataType::Term)
+	&& first.cbegin(DataType::Expression) == first.cend(DataType::Expression)
 	&& first.count(DataType::Constant) == 1;
 
 	std::vector<Variable> first_vec = first.getVars();
