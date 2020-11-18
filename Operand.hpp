@@ -180,6 +180,36 @@ public:
 	Operand operator/(const Expression&) const;
 	Operand raise_pow(const Expression&) const;
 
+	//Operand to Constant +=
+	Operand& operator+=(const Constant&);
+	Operand& operator-=(const Constant&);
+	Operand& operator*=(const Constant&);
+	Operand& operator/=(const Constant&);
+
+	//Operand to Variable +=
+	Operand& operator+=(const Variable&);
+	Operand& operator-=(const Variable&);
+	Operand& operator*=(const Variable&);
+	Operand& operator/=(const Variable&);
+
+	//Operand to Term +=
+	Operand& operator+=(const Term&);
+	Operand& operator-=(const Term&);
+	Operand& operator*=(const Term&);
+	Operand& operator/=(const Term&);
+
+	//Operand to Expression +=
+	Operand& operator+=(const Expression&);
+	Operand& operator-=(const Expression&);
+	Operand& operator*=(const Expression&);
+	Operand& operator/=(const Expression&);
+
+	//Operand to Operand +=
+	Operand& operator+=(const Operand&);
+	Operand& operator-=(const Operand&);
+	Operand& operator*=(const Operand&);
+	Operand& operator/=(const Operand&);
+
 	Operand operator+() const;
 	Operand operator-() const;
 	//Operand to Operand comparison operators

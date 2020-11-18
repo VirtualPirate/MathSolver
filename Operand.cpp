@@ -359,6 +359,23 @@ Operand Operand::operator/(const Operand& other) const {
 Operand Operand::raise_pow(const Operand& other) const {
 	return pow_functions[func_hash(this->type, other.type)](*this, other);}
 
+Operand& Operand::operator+=(const Operand& other){
+	*this = *this + other;
+	return *this;
+}
+Operand& Operand::operator-=(const Operand& other){
+	*this = *this - other;
+	return *this;
+}
+Operand& Operand::operator*=(const Operand& other){
+	*this = *this * other;
+	return *this;
+}
+Operand& Operand::operator/=(const Operand& other){
+	*this = *this / other;
+	return *this;
+}
+
 //Operand to double arithmetic operators
 Operand Operand::operator+(const double& other) const {return *this + Operand{other};}
 Operand Operand::operator-(const double& other) const {return *this - Operand{other};}
@@ -383,27 +400,40 @@ Operand Operand::raise_pow(const Variable& other) const {return this->raise_pow(
 //Operand to Term arithmetic operators
 Operand Operand::operator+(const Term& other) const {return *this + Operand{other};}
 Operand Operand::operator-(const Term& other) const {return *this - Operand{other};}
-Operand Operand::operator*(const Term& other) const {
-	Term second{other};
-	second.insert(*this);
-	return second;
-}
+Operand Operand::operator*(const Term& other) const {return *this * Operand{other};}
 Operand Operand::operator/(const Term& other) const {return *this / Operand{other};}
 Operand Operand::raise_pow(const Term& other) const {return this->raise_pow(Operand{other});}
 
 //Operand to Expression arithmetic operators
 Operand Operand::operator+(const Expression& other) const {return *this + Operand{other};}
 Operand Operand::operator-(const Expression& other) const {return *this - Operand{other};}
-Operand Operand::operator*(const Expression& other) const {
-	Expression exp{};
-	exp.setNull(false);
-	for(auto iter=other.getFields().begin();iter!=other.getFields().end();iter++){
-		exp.insert((*this) * (*iter));
-	}
-	return exp;
-}
+Operand Operand::operator*(const Expression& other) const {return *this * Operand{other};}
 Operand Operand::operator/(const Expression& other) const {return *this / Operand{other};}
 Operand Operand::raise_pow(const Expression& other) const {return this->raise_pow(Operand{other});}
+
+//Operand to Constant +=
+Operand& Operand::operator+=(const Constant& other){*this += Operand{other};return *this;}
+Operand& Operand::operator-=(const Constant& other){*this -= Operand{other};return *this;}
+Operand& Operand::operator*=(const Constant& other){*this *= Operand{other};return *this;}
+Operand& Operand::operator/=(const Constant& other){*this /= Operand{other};return *this;}
+
+//Operand to Variable +=
+Operand& Operand::operator+=(const Variable& other){*this += Operand{other};return *this;}
+Operand& Operand::operator-=(const Variable& other){*this -= Operand{other};return *this;}
+Operand& Operand::operator*=(const Variable& other){*this *= Operand{other};return *this;}
+Operand& Operand::operator/=(const Variable& other){*this /= Operand{other};return *this;}
+
+//Operand to Term +=
+Operand& Operand::operator+=(const Term& other){*this += Operand{other};return *this;}
+Operand& Operand::operator-=(const Term& other){*this -= Operand{other};return *this;}
+Operand& Operand::operator*=(const Term& other){*this *= Operand{other};return *this;}
+Operand& Operand::operator/=(const Term& other){*this /= Operand{other};return *this;}
+
+//Operand to Expression +=
+Operand& Operand::operator+=(const Expression& other){*this += Operand{other};return *this;}
+Operand& Operand::operator-=(const Expression& other){*this -= Operand{other};return *this;}
+Operand& Operand::operator*=(const Expression& other){*this *= Operand{other};return *this;}
+Operand& Operand::operator/=(const Expression& other){*this /= Operand{other};return *this;}
 
 const Operand& Operand::getPower() const {
 	int index = (int)type;
