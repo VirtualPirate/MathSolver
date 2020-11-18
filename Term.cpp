@@ -12,6 +12,10 @@
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
 
+
+void Term::extend(const Term& ref){
+	fields.insert(fields.end(), ref.fields.begin(), ref.fields.end());
+}
 std::ostream& operator<<(std::ostream& os, const Term& ref){
 	if(!ref.isNull()){
 		bool brace = false;
@@ -120,3 +124,18 @@ Operand Term::operator-(const Operand& other) const {return Operand{*this} - oth
 Operand Term::operator*(const Operand& other) const {return Operand{*this} * other;}
 Operand Term::operator/(const Operand& other) const {return Operand{*this} / other;}
 Operand Term::raise_pow(const Operand& other) const {return Operand{*this}.raise_pow(other);}
+
+bool Term::operator==(const Term& ref) const {
+	if(fields.size() == ref.fields.size()){
+		for(auto each=fields.cbegin(); each!=fields.cend(); each++){
+			if(std::find(ref.fields.cbegin(), ref.fields.cend(), *each) == ref.fields.cend())
+				return false;
+		}
+		return true;
+	}
+	return false;
+}
+
+bool Term::operator!=(const Term& ref) const {
+	return !(*this == ref);
+}

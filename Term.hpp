@@ -16,6 +16,8 @@ class Term: public OperandList{
 	friend class Operand;
 	friend class Expression;
 	friend std::ostream& operator<<(std::ostream&, const Term&);
+
+	void extend(const Term&);
 public:
 	bool is_negative() const;
 	bool negative_power() const;
@@ -65,6 +67,9 @@ public:
 	Operand operator*(const Operand&) const;
 	Operand operator/(const Operand&) const;
 	Operand raise_pow(const Operand&) const;
+
+	bool operator==(const Term&) const;
+	bool operator!=(const Term&) const;
 };
 
 #endif
