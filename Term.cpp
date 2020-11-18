@@ -14,6 +14,7 @@
 
 
 void Term::extend(const Term& ref){
+	is_simplified = false;
 	fields.insert(fields.end(), ref.fields.begin(), ref.fields.end());
 }
 std::ostream& operator<<(std::ostream& os, const Term& ref){
