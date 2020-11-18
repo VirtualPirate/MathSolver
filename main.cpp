@@ -140,6 +140,8 @@ int main(){
 		cout << "Term to Term arithmetic - " << endl << endl;
 		add_test(term_4, term_5);
 		sub_test(term_4, term_5);
+		mul_test(term_4, term_5);
+		mul_test(term_4, term_4);
 		cout << "is_addable(term_4, term_5)  = " << is_addable(term_4, term_5) << endl << endl;
 		cout << "Term to Term eq " << endl;
 		eq_test(term_0, term_0);

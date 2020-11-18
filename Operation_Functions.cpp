@@ -266,13 +266,14 @@ Operand Term::operator-(const Term& other) const {
 	return Expression{{*this, other * (double)-1}};
 }
 Operand Term::operator*(const Term& other) const {
-	// if(*this == other)
-	// 	return Constant{this->value, this->getPower() + other.getPower()};
-	// else if(this->getPower() == other.getPower())
-	// 	return Constant{this->value * other.value, this->getPower()};
-	// else
-	// 	return Term{{*this, other}};
-	return Operand{};
+	Term result{*this};
+	if(same_operand_set(*this, other))
+		result.setPower(this->power + other.power);
+	else if(this->power == other.power)
+		result.extend(other);
+	else
+		result.insert(other);
+	return result;
 }
 Operand Term::operator/(const Term& other) const {
 	return Operand{};
