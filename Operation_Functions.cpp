@@ -23,7 +23,7 @@ Operand Constant::operator-(const Constant& other) const {
 		return Expression{{*this, other}};
 }
 Operand Constant::operator*(const Constant& other) const {
-	if(*this == other)
+	if(this->value == other.value)
 		return Constant{this->value, this->getPower() + other.getPower()};
 	else if(this->getPower() == other.getPower())
 		return Constant{this->value * other.value, this->getPower()};
@@ -266,6 +266,12 @@ Operand Term::operator-(const Term& other) const {
 	return Expression{{*this, other * (double)-1}};
 }
 Operand Term::operator*(const Term& other) const {
+	// if(*this == other)
+	// 	return Constant{this->value, this->getPower() + other.getPower()};
+	// else if(this->getPower() == other.getPower())
+	// 	return Constant{this->value * other.value, this->getPower()};
+	// else
+	// 	return Term{{*this, other}};
 	return Operand{};
 }
 Operand Term::operator/(const Term& other) const {
