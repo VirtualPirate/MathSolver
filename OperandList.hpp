@@ -13,7 +13,7 @@ protected:
 	Operand power;
 	bool is_simplified;
 	bool is_null;
-
+	OperandList internal_simplify() const;
 public:
 	friend class iterator;
 	class iterator{
