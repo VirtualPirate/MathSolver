@@ -351,3 +351,10 @@ bool OperandList::iterator::operator!=(const OperandList::iterator& ref) const {
 bool OperandList::const_iterator::operator!=(const OperandList::const_iterator& ref) const {
 	return this->index != ref.index;
 }
+
+void OperandList::internal_info() const {
+	for(const auto& each: fields){
+		std::cout << '(' << return_type_string(each.getType()) << ')' << each << " -- ";
+	}
+	std::cout << std::endl;
+}

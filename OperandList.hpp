@@ -186,6 +186,7 @@ public:
 	*/
 	operator bool() const;
 
+	void internal_info() const;
 	// std::string power_print() const;
 	// friend std::ostream& operator<<(std::ostream&, const OperandList&);
 
