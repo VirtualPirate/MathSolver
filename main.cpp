@@ -142,8 +142,7 @@ int main(){
 		sub_test(term_4, term_5);
 		mul_test(term_4, term_5);
 		mul_test(term_4, term_4);
-		term_4.internal_info();
-		(term_4 * term_5).simplify().get<Term>().internal_info();
+
 		cout << "is_addable(term_4, term_5)  = " << is_addable(term_4, term_5) << endl << endl;
 		cout << "Term to Term eq " << endl;
 		eq_test(term_0, term_0);

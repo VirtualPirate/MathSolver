@@ -276,10 +276,12 @@ Operand Term::operator*(const Term& other) const {
 	return result;
 }
 Operand Term::operator/(const Term& other) const {
-	return Operand{};
+	return *this * other.raise_pow(-1);
 }
 Operand Term::raise_pow(const Term& other) const {
-	return Operand{};
+	Term result = *this;
+	result.power = result.power * other;
+	return result;
 }
 
 //Term to Expression arithmetic operations
