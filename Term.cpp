@@ -90,6 +90,8 @@ Operand Term::simplify() const {
 		copy.simplify_();
 	if(copy.fields.size() == 1)
 		return copy.fields.at(0);
+	else if(this->power == Constant::power_zero)
+		return 1;
 	return *this;
 }
 
