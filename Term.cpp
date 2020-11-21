@@ -58,6 +58,7 @@ bool Term::negative_power() const {
 }
 void Term::simplify_() {
 	if(!is_simplified){
+		this->fields = this->internal_simplify();
 		Operand result;
 		for(auto i=fields.begin(); i != fields.end(); i++){
 			for(auto j=i+1; j != fields.end(); j++){
