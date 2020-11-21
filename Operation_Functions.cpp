@@ -389,3 +389,18 @@ bool is_addable(const Term& first,  const Term& second) {
 	}
 	return false;
 }
+
+std::string return_type_string(DataType type){
+	switch(type){
+		case DataType::Constant:
+			return "Constant";
+		case DataType::Variable:
+			return "Variable";
+		case DataType::Term:
+			return "Term";
+		case DataType::Expression:
+			return "Expression";
+		default:
+			return "None";
+	}
+}
