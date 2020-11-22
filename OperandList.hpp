@@ -13,7 +13,7 @@ protected:
 	Operand power;
 	bool is_simplified;
 	bool is_null;
-	std::vector<Operand> internal_simplify() const;
+	// std::vector<Operand> internal_simplify() const;
 public:
 	friend class iterator;
 	class iterator{

@@ -57,7 +57,6 @@ bool Term::negative_power() const {
 	return power.is_negative();
 }
 std::vector<Operand> Term::internal_simplify() const {
-	std::cout << "TErm::internal_simplify is called " << std::endl;
 	std::vector<Operand> result;
 	Operand operand;
 	for(const auto& each: fields){
@@ -73,6 +72,10 @@ std::vector<Operand> Term::internal_simplify() const {
 } 
 void Term::simplify_() {
 	if(!is_simplified){
+		if(power != Constant::power_one){
+			for(auto i=fields.begin(); i != fields.end(); i++)
+				*i = i->raise_pow(power);
+		}
 		this->fields = this->internal_simplify();
 		Operand result;
 		for(auto i=fields.begin(); i != fields.end(); i++){
@@ -95,10 +98,6 @@ void Term::simplify_() {
 		if(swap_iter != fields.end())
 			std::iter_swap(fields.begin(), swap_iter);
 		is_simplified = true;
-		if(power != Constant::power_one){
-			for(auto i=fields.begin(); i != fields.end(); i++)
-				*i = i->raise_pow(power);
-		}
 	}
 
 }
