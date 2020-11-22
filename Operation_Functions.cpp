@@ -323,21 +323,23 @@ Operand Term::operator/(const Expression& other) const {
 	return Operand_to_Expression_div(*this, other);
 }
 Operand Term::raise_pow(const Expression& other) const {
-	return Operand{};
+	Term result = *this;
+	result.power = result.power * other;
+	return result;
 }
 
 //Expression to Constant arithmetic operations
 Operand Expression::operator+(const Constant& other) const {
-	return Operand{};
+	return Expression_to_Operand_add(*this, other);
 }
 Operand Expression::operator-(const Constant& other) const {
-	return Operand{};
+	return Expression_to_Operand_sub(*this, other);
 }
 Operand Expression::operator*(const Constant& other) const {
-	return Operand{};
+	return Operand_to_Expression_mul(other, *this);
 }
 Operand Expression::operator/(const Constant& other) const {
-	return Operand{};
+	return Operand_to_Expression_div(other, *this);
 }
 Operand Expression::raise_pow(const Constant& other) const {
 	return Operand{};
@@ -345,16 +347,16 @@ Operand Expression::raise_pow(const Constant& other) const {
 
 //Expression to Variable arithmetic operations
 Operand Expression::operator+(const Variable& other) const {
-	return Operand{};
+	return Expression_to_Operand_add(*this, other);
 }
 Operand Expression::operator-(const Variable& other) const {
-	return Operand{};
+	return Expression_to_Operand_sub(*this, other);
 }
 Operand Expression::operator*(const Variable& other) const {
-	return Operand{};
+	return Operand_to_Expression_mul(other, *this);
 }
 Operand Expression::operator/(const Variable& other) const {
-	return Operand{};
+	return Operand_to_Expression_div(other, *this);
 }
 Operand Expression::raise_pow(const Variable& other) const {
 	return Operand{};
@@ -362,16 +364,16 @@ Operand Expression::raise_pow(const Variable& other) const {
 
 //Expression to Term arithmetic operations
 Operand Expression::operator+(const Term& other) const {
-	return Operand{};
+	return Expression_to_Operand_add(*this, other);
 }
 Operand Expression::operator-(const Term& other) const {
-	return Operand{};
+	return Expression_to_Operand_sub(*this, other);
 }
 Operand Expression::operator*(const Term& other) const {
-	return Operand{};
+	return Operand_to_Expression_mul(other, *this);
 }
 Operand Expression::operator/(const Term& other) const {
-	return Operand{};
+	return Operand_to_Expression_div(other, *this);
 }
 Operand Expression::raise_pow(const Term& other) const {
 	return Operand{};
