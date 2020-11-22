@@ -74,23 +74,21 @@ void Term::simplify_() {
 	if(!is_simplified){
 		if(power != Constant::power_one){
 			for(auto i=fields.begin(); i != fields.end(); i++)
-				*i = i->raise_pow(power);
+				*i = i->raise_pow(power.simplify());
 		}
 		this->fields = this->internal_simplify();
 		Operand result;
 		for(auto i=fields.begin(); i != fields.end(); i++){
 			for(auto j=i+1; j != fields.end(); j++){
-				// if(i->type == j->type){
-					result = (*i) * (*j);
-					if(result && result.type != DataType::Term){
-						std::cout << "*i = " << *i << "  " << "*j = " << *j << std::endl; 
-						fields.erase(i);
-						fields.erase(j-1);
-						fields.insert(fields.begin(), result);
-						i = fields.begin();
-						j = i+1;
-					}
-				// }
+				result = (*i) * (*j);
+				if(result && result.type != DataType::Term){
+					std::cout << "*i = " << *i << "  " << "*j = " << *j << std::endl; 
+					fields.erase(i);
+					fields.erase(j-1);
+					fields.insert(fields.begin(), result);
+					i = fields.begin();
+					j = i+1;
+				}
 			}
 		}
 		// Moves the Constant(coefficient) to the first index of the fields.
