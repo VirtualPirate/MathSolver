@@ -17,7 +17,7 @@ Operand Operand_to_Expression_add(const Operand& first, const Expression& second
 	}
 	return Expression{{first, second}};
 }
-Operand Operand_to_Expression_sub(const Operand& first, const Expression& second){
+inline Operand Operand_to_Expression_sub(const Operand& first, const Expression& second){
 	return first + (second * (double)-1);
 }
 Operand Operand_to_Expression_mul(const Operand& first, const Expression& second){
@@ -29,7 +29,7 @@ Operand Operand_to_Expression_mul(const Operand& first, const Expression& second
 	}
 	return Term{{first, second}};
 }
-Operand Operand_to_Expression_div(const Operand& first, const Expression& second){
+inline Operand Operand_to_Expression_div(const Operand& first, const Expression& second){
 	return first * second.raise_pow(-1);
 }
 
@@ -42,8 +42,21 @@ Operand Expression_to_Operand_add(const Expression& first, const Operand& second
 	return Expression{{first, second}};
 }
 
-Operand Expression_to_Operand_sub(const Expression& first, const Operand& second){
+inline Operand Expression_to_Operand_sub(const Expression& first, const Operand& second){
 	return first + (second * (double)-1);
+}
+
+Operand Operand_to_Term_mul(const Operand& first, const Term& second){
+	if(second.power == Constant::power_one){
+		Term result = second;
+		result.insert(first);
+		return result;
+	}else
+		return Term{{first, second}};
+}
+
+inline Operand Operand_to_Term_div(const Operand& first, const Term& second){
+	return first * second.raise_pow(-1);
 }
 
 
@@ -110,15 +123,10 @@ Operand Constant::operator-(const Term& other) const {
 	return Expression{{*this, other * (double)-1}};
 }
 Operand Constant::operator*(const Term& other) const {
-	if(other.power == Constant::power_one){
-		Term result = other;
-		result.insert(*this);
-		return result;
-	}else
-		return Term{{*this, other}};
+	return Operand_to_Term_mul(*this, other);
 }
 Operand Constant::operator/(const Term& other) const {
-	return *this * other.raise_pow(-1);
+	return Operand_to_Term_div(*this, other);
 }
 Operand Constant::raise_pow(const Term& other) const {
 	return Constant{this->value, this->getPower() * other};
@@ -143,16 +151,16 @@ Operand Constant::raise_pow(const Expression& other) const {
 
 //Variable to Constant artihmetic operations
 Operand Variable::operator+(const Constant& other) const {
-	return Expression{{*this, other}};;
+	return Expression{{*this, other}};
 }
 Operand Variable::operator-(const Constant& other) const {
-	return Expression{{*this, other * -1}};;
+	return Expression{{*this, other * -1}};
 }
 Operand Variable::operator*(const Constant& other) const {
 	return other * *this;
 }
 Operand Variable::operator/(const Constant& other) const {
-	return Term{{*this, other.raise_pow((double)-1)}};;
+	return Term{{*this, other.raise_pow((double)-1)}};
 }
 Operand Variable::raise_pow(const Constant& other) const {
 	return Variable{this->name, this->getPower() * other};
@@ -190,15 +198,10 @@ Operand Variable::operator-(const Term& other) const {
 	return Expression{{*this, other * (double)-1}};
 }
 Operand Variable::operator*(const Term& other) const {
-	if(other.power == Constant::power_one){
-		Term result = other;
-		result.insert(*this);
-		return result;
-	}else
-		return Term{{*this, other}};
+	return Operand_to_Term_mul(*this, other);
 }
 Operand Variable::operator/(const Term& other) const {
-	return *this * other.raise_pow(-1);
+	return Operand_to_Term_div(*this, other);
 }
 Operand Variable::raise_pow(const Term& other) const {
 	return Variable{this->name, this->getPower() * other};;;

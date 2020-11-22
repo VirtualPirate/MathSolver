@@ -60,6 +60,15 @@ void integrated_test(const Operand& first, const Operand& second){
 	cout << endl;
 }
 
+void integrated_test_simplify(const Operand& first, const Operand& second){
+	add_test_simplify(first, second);
+	sub_test_simplify(first, second);
+	mul_test_simplify(first, second);
+	div_test_simplify(first, second);
+	pow_test_simplify(first, second);
+	cout << endl;
+}
+
 int main(){
 	std::cout << "This is the initial project version" << std::endl;
 
