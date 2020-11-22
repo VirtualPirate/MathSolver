@@ -126,27 +126,16 @@ Operand Constant::raise_pow(const Term& other) const {
 
 //Constant to Expression arithmetic operations
 Operand Constant::operator+(const Expression& other) const {
-	Expression result = other;
-	result.insert_front(*this);
-	return result;
-	// return Operand{};
+	return Operand_to_Expression_add(*this, other);
 }
 Operand Constant::operator-(const Expression& other) const {
-	Operand result = other * (double)-1;
-	result.get_nonconst<Expression>().insert_front(*this);
-	return result;
-	// return Operand{};
+	return Operand_to_Expression_sub(*this, other);
 }
 Operand Constant::operator*(const Expression& other) const {
-	Expression result = other;
-	for(auto each=result.fields.begin(); each != result.fields.end(); each++)
-		*each = *this * *each;
-	return result;
+	return Operand_to_Expression_mul(*this, other);
 }
 Operand Constant::operator/(const Expression& other) const {
-	Operand result = other.raise_pow(-1);
-	return *this * result;
-	// return Operand{};
+	return Operand_to_Expression_div(*this, other);
 }
 Operand Constant::raise_pow(const Expression& other) const {
 	return Constant{this->value, this->getPower() * other};
@@ -217,24 +206,18 @@ Operand Variable::raise_pow(const Term& other) const {
 
 //Variable to Expression arithmetic operations
 Operand Variable::operator+(const Expression& other) const {
-	Expression result = other;
-	result.insert_front(*this);
-	return result;
+	return Operand_to_Expression_add(*this, other);
 }
 Operand Variable::operator-(const Expression& other) const {
-	Operand result = other * (double)-1;
-	result.get_nonconst<Expression>().insert_front(*this);
-	return result;
+	return Operand_to_Expression_sub(*this, other);
+	
 }
 Operand Variable::operator*(const Expression& other) const {
-	Expression result = other;
-	for(auto each=result.fields.begin(); each != result.fields.end(); each++)
-		*each = *this * *each;
-	return result;
+	return Operand_to_Expression_mul(*this, other);
+	
 }
 Operand Variable::operator/(const Expression& other) const {
-	Operand result = other.raise_pow(-1);
-	return *this * result;
+	return Operand_to_Expression_div(*this, other);
 }
 Operand Variable::raise_pow(const Expression& other) const {
 	return Variable{this->name, this->getPower() * other};
@@ -325,18 +308,16 @@ Operand Term::raise_pow(const Term& other) const {
 
 //Term to Expression arithmetic operations
 Operand Term::operator+(const Expression& other) const {
-	Expression result = other;
-	result.insert_front(*this);
-	return result;
+	return Operand_to_Expression_add(*this, other);
 }
 Operand Term::operator-(const Expression& other) const {
-	return Operand{};
+	return Operand_to_Expression_sub(*this, other);
 }
 Operand Term::operator*(const Expression& other) const {
-	return Operand{};
+	return Operand_to_Expression_mul(*this, other);
 }
 Operand Term::operator/(const Expression& other) const {
-	return Operand{};
+	return Operand_to_Expression_div(*this, other);
 }
 Operand Term::raise_pow(const Expression& other) const {
 	return Operand{};
