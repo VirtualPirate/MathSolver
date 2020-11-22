@@ -10,12 +10,12 @@
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
 
-std::vector<Operand> OperandList::internal_simplify() const {
-	std::vector<Operand> result;
-	for(const auto& each: fields)
-		result.push_back(each.simplify());
-	return result;
-}
+// std::vector<Operand> OperandList::internal_simplify() const {
+// 	std::vector<Operand> result;
+// 	for(const auto& each: fields)
+// 		result.push_back(each.simplify());
+// 	return result;
+// }
 OperandList::OperandList(): fields{}, power{1}, is_simplified{false}, is_null{true}{}
 
 OperandList::OperandList(const OperandList& ref): fields{ref.fields}, power{ref.power}, is_simplified{ref.is_simplified}, is_null{ref.is_null}{}

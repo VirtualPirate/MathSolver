@@ -9,6 +9,45 @@
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
 
+Operand Operand_to_Expression_add(const Operand& first, const Expression& second){
+	if(second.getPower() == Constant::power_one){
+		Expression result = second;
+		result.insert_front(first);
+		return result;
+	}
+	return Expression{{first, second}};
+}
+Operand Operand_to_Expression_sub(const Operand& first, const Expression& second){
+	return first + (second * (double)-1);
+}
+Operand Operand_to_Expression_mul(const Operand& first, const Expression& second){
+	if(second.getPower() == Constant::power_one){
+		Expression result = second;
+		for(auto each=result.fields.begin(); each != result.fields.end(); each++)
+			*each = first * *each;
+		return result;
+	}
+	return Term{{first, second}};
+}
+Operand Operand_to_Expression_div(const Operand& first, const Expression& second){
+	return first * second.raise_pow(-1);
+}
+
+Operand Expression_to_Operand_add(const Expression& first, const Operand& second){
+	if(second.getPower() == Constant::power_one){
+		Expression result = first;
+		result.insert(first);
+		return result;
+	}
+	return Expression{{first, second}};
+}
+
+Operand Expression_to_Operand_sub(const Expression& first, const Operand& second){
+	return first + (second * (double)-1);
+}
+
+
+
 // Constant to Constant arithmetic operators
 Operand Constant::operator+(const Constant& other) const {
 	if(this->getPower() == Constant::power_one && other.getPower() == Constant::power_one)
@@ -286,7 +325,9 @@ Operand Term::raise_pow(const Term& other) const {
 
 //Term to Expression arithmetic operations
 Operand Term::operator+(const Expression& other) const {
-	return Operand{};
+	Expression result = other;
+	result.insert_front(*this);
+	return result;
 }
 Operand Term::operator-(const Expression& other) const {
 	return Operand{};

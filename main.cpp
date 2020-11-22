@@ -28,6 +28,22 @@ void div_test(const Operand& first, const Operand& second){
 void pow_test(const Operand& first, const Operand& second){
 	cout << first << " ^ " << second << " = " << first.raise_pow(second) << endl;
 }
+
+void add_test_simplify(const Operand& first, const Operand& second){
+	cout << first << " + " << second << " = " << (first + second).simplify() << endl;
+}
+void sub_test_simplify(const Operand& first, const Operand& second){
+	cout << first << " - " << second << " = " << (first - second).simplify() << endl;
+}
+void mul_test_simplify(const Operand& first, const Operand& second){
+	cout << first << " * " << second << " = " << (first * second).simplify() << endl;
+}
+void div_test_simplify(const Operand& first, const Operand& second){
+	cout << first << " / " << second << " = " << (first / second).simplify() << endl;
+}
+void pow_test_simplify(const Operand& first, const Operand& second){
+	cout << first << " ^ " << second << " = " << first.raise_pow(second).simplify() << endl;
+}
 void eq_test(const Operand& first, const Operand& second){
 	cout << first << " == " << second << " = " << (first == second) << endl;
 }
@@ -142,6 +158,7 @@ int main(){
 		sub_test(term_4, term_5);
 		mul_test(term_4, term_5);
 		mul_test(term_4, term_4);
+		mul_test_simplify(term_4, term_5);
 
 		cout << "is_addable(term_4, term_5)  = " << is_addable(term_4, term_5) << endl << endl;
 		cout << "Term to Term eq " << endl;

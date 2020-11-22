@@ -19,7 +19,9 @@ class Term: public OperandList{
 	friend bool same_operand_set(const Term&, const Term&);
 
 	void extend(const Term&);
+	std::vector<Operand> internal_simplify() const; 
 public:
+	
 	bool is_negative() const;
 	bool negative_power() const;
 	std::string power_print() const;

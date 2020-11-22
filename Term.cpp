@@ -56,15 +56,30 @@ bool Term::is_negative() const {
 bool Term::negative_power() const {
 	return power.is_negative();
 }
+std::vector<Operand> Term::internal_simplify() const {
+	std::cout << "TErm::internal_simplify is called " << std::endl;
+	std::vector<Operand> result;
+	Operand operand;
+	for(const auto& each: fields){
+		operand = each.simplify();
+		if(operand.getType() == DataType::Term && operand.getPower() == Constant::power_one){
+			const Term& term =  operand.get<Term>();
+			result.insert(result.end(), term.fields.begin(), term.fields.end());
+		}
+		else
+			result.push_back(operand);
+	}
+	return result;
+} 
 void Term::simplify_() {
 	if(!is_simplified){
 		this->fields = this->internal_simplify();
 		Operand result;
 		for(auto i=fields.begin(); i != fields.end(); i++){
 			for(auto j=i+1; j != fields.end(); j++){
-				if(i->type == j->type){
+				// if(i->type == j->type){
 					result = (*i) * (*j);
-					if(result && result.type == i->type){
+					if(result && result.type != DataType::Term){
 						std::cout << "*i = " << *i << "  " << "*j = " << *j << std::endl; 
 						fields.erase(i);
 						fields.erase(j-1);
@@ -72,7 +87,7 @@ void Term::simplify_() {
 						i = fields.begin();
 						j = i+1;
 					}
-				}
+				// }
 			}
 		}
 		// Moves the Constant(coefficient) to the first index of the fields.
