@@ -9,6 +9,8 @@
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
 
+
+//Expression common arithmetic
 Operand Operand_to_Expression_add(const Operand& first, const Expression& second){
 	if(second.getPower() == Constant::power_one){
 		Expression result = second;
@@ -46,6 +48,7 @@ inline Operand Expression_to_Operand_sub(const Expression& first, const Operand&
 	return first + (second * (double)-1);
 }
 
+//Term common arithmetic
 Operand Operand_to_Term_mul(const Operand& first, const Term& second){
 	if(second.power == Constant::power_one){
 		Term result = second;
@@ -57,6 +60,13 @@ Operand Operand_to_Term_mul(const Operand& first, const Term& second){
 
 inline Operand Operand_to_Term_div(const Operand& first, const Term& second){
 	return first * second.raise_pow(-1);
+}
+
+//Operand common arithmetic
+Operand Operand_to_Operand_pow(const Operand& first, const Operand& second){
+	Operand result = first;
+	result.setPower(first.getPower() * second);
+	return result;
 }
 
 
@@ -186,7 +196,7 @@ Operand Variable::operator/(const Variable& other) const {
 	return *this * other.raise_pow((double)-1);
 }
 Operand Variable::raise_pow(const Variable& other) const {
-	return Variable{this->name, this->getPower() * other};;
+	return Variable{this->name, this->getPower() * other};
 }
 
 
@@ -204,7 +214,7 @@ Operand Variable::operator/(const Term& other) const {
 	return Operand_to_Term_div(*this, other);
 }
 Operand Variable::raise_pow(const Term& other) const {
-	return Variable{this->name, this->getPower() * other};;;
+	return Variable{this->name, this->getPower() * other};
 }
 
 //Variable to Expression arithmetic operations
@@ -342,7 +352,7 @@ Operand Expression::operator/(const Constant& other) const {
 	return Operand_to_Expression_div(other, *this);
 }
 Operand Expression::raise_pow(const Constant& other) const {
-	return Operand{};
+	return Operand_to_Operand_pow(*this, other);
 }
 
 //Expression to Variable arithmetic operations
@@ -359,7 +369,7 @@ Operand Expression::operator/(const Variable& other) const {
 	return Operand_to_Expression_div(other, *this);
 }
 Operand Expression::raise_pow(const Variable& other) const {
-	return Operand{};
+	return Operand_to_Operand_pow(*this, other);
 }
 
 //Expression to Term arithmetic operations
@@ -376,7 +386,7 @@ Operand Expression::operator/(const Term& other) const {
 	return Operand_to_Expression_div(other, *this);
 }
 Operand Expression::raise_pow(const Term& other) const {
-	return Operand{};
+	return Operand_to_Operand_pow(*this, other);
 }
 
 //Expression to Expression arithmetic operations

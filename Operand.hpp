@@ -37,6 +37,8 @@ class Operand
 	friend class Term;
 	friend class Expression;
 
+	friend Operand Operand_to_Operand_pow(const Operand&, const Operand&);
+
 	static OperationFunction add_functions[O_ARRAY_SIZE];
 	static OperationFunction sub_functions[O_ARRAY_SIZE];
 	static OperationFunction mul_functions[O_ARRAY_SIZE];

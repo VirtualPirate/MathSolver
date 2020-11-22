@@ -445,7 +445,8 @@ void Operand::setPower(const Operand& pow){
 	int index = (int)type;
 	if(index > -1)
 		set_power_functions[index](this, pow);
-	std::cout << "stdout: Operand::setPower() on nulltype" << std::endl;
+	else
+		std::cout << "stdout: Operand::setPower() on nulltype" << std::endl;
 
 }
 std::string Operand::power_print() const {
