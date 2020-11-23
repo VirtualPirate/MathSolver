@@ -73,8 +73,12 @@ Operand Operand_to_Operand_pow(const Operand& first, const Operand& second){
 
 // Constant to Constant arithmetic operators
 Operand Constant::operator+(const Constant& other) const {
-	if(this->getPower() == Constant::power_one && other.getPower() == Constant::power_one)
+	// std::cout << this->getPower() << std::endl;
+	// std::cout << other.getPower() << std::endl;
+	if(this->getPower() == Constant::power_one && other.getPower() == Constant::power_one){
+		// std::cout << "Inside if" << std::endl;
 		return Constant{value + other.value};
+	}
 	else
 		return Expression{{*this, other}};
 }

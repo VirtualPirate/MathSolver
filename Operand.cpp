@@ -461,7 +461,7 @@ void* Operand::allocate() const {
 	int index = (int)type;
 	if (index > -1)
 		return allocate_functions[index](this);
-	std::cout << "stdout: Unknown type allocate()";
+	// std::cout << "stdout: Unknown type allocate()";
 	return nullptr;
 }
 

@@ -16,8 +16,8 @@ Operand const Constant::power_null{};
 //Constructors
 Constant::Constant(void):value{0}{}
 Constant::Constant(double val): value{val}, power{}{}
-Constant::Constant(const Constant& ref): value{ref.value}, power{}{}
-Constant::Constant(const Constant* point): value{point->value}, power{}{}
+Constant::Constant(const Constant& ref): value{ref.value}, power{ref.power}{}
+Constant::Constant(const Constant* point): value{point->value}, power{point->power}{}
 
 Constant::Constant(double val, const Operand& pow): value{val}{
 	if(pow == (double)1)
@@ -27,7 +27,7 @@ Constant::Constant(double val, const Operand& pow): value{val}{
 
 // Constant to Constant assignment operators
 Constant& Constant::operator=(double val){value = val;return *this;}
-Constant& Constant::operator=(const Constant& ref){value = ref.value;return *this;}
+Constant& Constant::operator=(const Constant& ref){value = ref.value;power=ref.power;return *this;}
 
 //Constant to Constant comparison operators
 bool Constant::operator==(const Constant& other) const {return value == other.value && (power == other.power || (!power && !other.power));}
@@ -93,7 +93,7 @@ Constant Constant::operator-() const {return -value;}
 
 std::ostream& operator<<(std::ostream& os, const Constant& ref){
 	if(ref.power)
-		os << ref.value << " ^ " << ref.power;
+		os << ref.value << " ^ " << ref.getPower().power_print();
 	else
 		os << ref.value;
 	return os;
