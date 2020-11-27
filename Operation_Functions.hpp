@@ -1,6 +1,13 @@
 #ifndef Operation_Functions_H
 #define Operation_Functions_H
 
+#define DEBUG 1
+#if DEBUG==1
+	#define OPERATION_LOG(TYPE_1, TYPE_2, operation) std::cout << #TYPE_1 << "-" << #TYPE_2 << " arithmetic " << #operation << " is invoked" << std::endl;
+#else
+	#define OPERATION_LOG(TYPE_1, TYPE_2, operation)
+#endif
+
 class Constant;
 class Variable;
 class Term;

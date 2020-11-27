@@ -20,9 +20,7 @@ Constant::Constant(const Constant& ref): value{ref.value}, power{ref.power}{}
 Constant::Constant(const Constant* point): value{point->value}, power{point->power}{}
 
 Constant::Constant(double val, const Operand& pow): value{val}{
-	if(pow == (double)1)
-		power = Operand{};
-	power = pow;
+	setPower(pow);
 }
 
 // Constant to Constant assignment operators
@@ -51,10 +49,10 @@ Operand Constant::raise_pow(const Operand& other) const {return Operand{*this}.r
 
 // Some other functions
 Operand Constant::simplify() const {
-	if(!power)
-		return *this;
-	else
+	if(power && power!=Constant::power_one)
 		return Constant{this->value}.raise_pow(power.simplify());
+	else
+		return *this;
 }
 std::string Constant::power_print() const{
 	std::ostringstream stream;
@@ -92,8 +90,8 @@ Constant Constant::operator-() const {return -value;}
 
 
 std::ostream& operator<<(std::ostream& os, const Constant& ref){
-	if(ref.power)
-		os << ref.value << " ^ " << ref.getPower().power_print();
+	if(ref.power && ref.power!=(double)1)
+		os << ref.value << '^' << ref.getPower().power_print();
 	else
 		os << ref.value;
 	return os;

@@ -72,8 +72,14 @@ std::vector<Operand> Term::internal_simplify() const {
 } 
 void Term::simplify_() {
 	if(!is_simplified){
+		//This for loop eliminates all the ones inside the Term
+		for(auto i=fields.begin(); i != fields.end(); i++){
+			if(*i == Constant::power_one)
+				fields.erase(i);
+		}
+
 		if(power != Constant::power_one){
-			for(auto i=fields.begin(); i != fields.end(); i++)
+			for(auto i=fields.begin(); i != fields.end();i++)
 				*i = i->raise_pow(power.simplify());
 		}
 		this->fields = this->internal_simplify();
