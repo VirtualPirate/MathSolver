@@ -43,6 +43,7 @@ public:
 	std::string power_print() const;
 	bool is_negative() const;
 	bool negative_power() const;
+	bool is_pure() const;
 	Constant abs() const;
 
 	//Constant to double arithmetic operations

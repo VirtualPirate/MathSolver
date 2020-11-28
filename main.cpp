@@ -113,12 +113,5 @@ int main(){
 	Expression exp_0{var_0};
 	exp_0.insert(num1);
 	exp_0.insert(var_3);
-	cout << "Constant to Constant arithmetic" << endl;
-	// integrated_test_simplify(num1, num2);
-	mul_test_simplify(num1, num6);
-	cout << "Constant to Variable arithmetic" << endl;
-	// integrated_test_simplify(num1, var_0);
-	// integrated_test_simplify(num1, var_2);
-	// integrated_test_simplify(num6, var_0);
 	return 0;
 }

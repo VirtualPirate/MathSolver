@@ -76,10 +76,7 @@ Operand Variable::operator/(const Operand& other) const {return Operand{*this} /
 Operand Variable::raise_pow(const Operand& other) const {return Operand{*this}.raise_pow(other);}
 
 Operand Variable::simplify() const {
-	if(power == (double)0)
-		return 1;
-	else
-		return *this;
+	return *this;
 }
 std::string Variable::power_print() const{
 	std::ostringstream stream;

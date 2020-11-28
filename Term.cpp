@@ -70,51 +70,52 @@ std::vector<Operand> Term::internal_simplify() const {
 	}
 	return result;
 } 
-void Term::simplify_() {
-	if(!is_simplified){
-		//This for loop eliminates all the ones inside the Term
-		for(auto i=fields.begin(); i != fields.end(); i++){
-			if(*i == Constant::power_one)
-				fields.erase(i);
-		}
+// void Term::simplify_() {return *this;
+	// if(!is_simplified){
+	// 	//This for loop eliminates all the ones inside the Term
+	// 	for(auto i=fields.begin(); i != fields.end(); i++){
+	// 		if(*i == Constant::power_one)
+	// 			fields.erase(i);
+	// 	}
 
-		if(power != Constant::power_one){
-			for(auto i=fields.begin(); i != fields.end();i++)
-				*i = i->raise_pow(power.simplify());
-		}
-		this->fields = this->internal_simplify();
-		Operand result;
-		for(auto i=fields.begin(); i != fields.end(); i++){
-			for(auto j=i+1; j != fields.end(); j++){
-				result = (*i) * (*j);
-				if(result && result.type != DataType::Term){
-					std::cout << "*i = " << *i << "  " << "*j = " << *j << std::endl; 
-					fields.erase(i);
-					fields.erase(j-1);
-					fields.insert(fields.begin(), result);
-					i = fields.begin();
-					j = i+1;
-				}
-			}
-		}
-		// Moves the Constant(coefficient) to the first index of the fields.
-		auto swap_iter = fields.begin() + begin(DataType::Constant).getIndex();
-		if(swap_iter != fields.end())
-			std::iter_swap(fields.begin(), swap_iter);
-		is_simplified = true;
-	}
+	// 	if(power != Constant::power_one){
+	// 		for(auto i=fields.begin(); i != fields.end();i++)
+	// 			*i = i->raise_pow(power.simplify());
+	// 	}
+	// 	this->fields = this->internal_simplify();
+	// 	Operand result;
+	// 	for(auto i=fields.begin(); i != fields.end(); i++){
+	// 		for(auto j=i+1; j != fields.end(); j++){
+	// 			result = (*i) * (*j);
+	// 			if(result && result.type != DataType::Term){
+	// 				std::cout << "*i = " << *i << "  " << "*j = " << *j << std::endl; 
+	// 				fields.erase(i);
+	// 				fields.erase(j-1);
+	// 				fields.insert(fields.begin(), result);
+	// 				i = fields.begin();
+	// 				j = i+1;
+	// 			}
+	// 		}
+	// 	}
+	// 	// Moves the Constant(coefficient) to the first index of the fields.
+	// 	auto swap_iter = fields.begin() + begin(DataType::Constant).getIndex();
+	// 	if(swap_iter != fields.end())
+	// 		std::iter_swap(fields.begin(), swap_iter);
+	// 	is_simplified = true;
+	// }
 
-}
+// }
 
 Operand Term::simplify() const {
-	Term copy{*this};
-	if(!is_simplified)
-		copy.simplify_();
-	if(copy.fields.size() == 1)
-		return copy.fields.at(0);
-	else if(this->power == Constant::power_zero)
-		return 1;
-	return copy;
+	return *this;
+	// Term copy{*this};
+	// if(!is_simplified)
+	// 	copy.simplify_();
+	// if(copy.fields.size() == 1)
+	// 	return copy.fields.at(0);
+	// else if(this->power == Constant::power_zero)
+	// 	return 1;
+	// return copy;
 }
 
 bool Term::is_Constant() const {

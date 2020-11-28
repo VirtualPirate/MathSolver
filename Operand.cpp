@@ -342,20 +342,40 @@ bool Operand::same_type(const DataType& other) const {
 }
 //Operand to Operand arithmetic operators
 Operand Operand::operator+(const Operand& other) const {
-	return add_functions[func_hash(this->type, other.type)](*this, other);}
+	OPERATION_LOG(return_type_string(this->type), return_type_string(other.type), "addition");
+	OPERANDS(*this, other);
+	Operand result = add_functions[func_hash(this->type, other.type)](*this, other);
+	RESULT(result);
+	return result;}
 
 Operand Operand::operator-(const Operand& other) const {
-	return sub_functions[func_hash(this->type, other.type)](*this, other);}
+	OPERATION_LOG(return_type_string(this->type), return_type_string(other.type), "subtraction");
+	OPERANDS(*this, other);
+	Operand result = sub_functions[func_hash(this->type, other.type)](*this, other);
+	RESULT(result);
+	return result;}
 
 Operand Operand::operator*(const Operand& other) const {
 	// cout << "invoked Operand_Operand_mul func" << endl;
-	return mul_functions[func_hash(this->type, other.type)](*this, other);}
+	OPERATION_LOG(return_type_string(this->type), return_type_string(other.type), "multiplication");
+	OPERANDS(*this, other);
+	Operand result = mul_functions[func_hash(this->type, other.type)](*this, other);
+	RESULT(result);
+	return result;}
 
 Operand Operand::operator/(const Operand& other) const {
-	return div_functions[func_hash(this->type, other.type)](*this, other);}
+	OPERATION_LOG(return_type_string(this->type), return_type_string(other.type), "division");
+	OPERANDS(*this, other);
+	Operand result = div_functions[func_hash(this->type, other.type)](*this, other);
+	RESULT(result);
+	return result;}
 
 Operand Operand::raise_pow(const Operand& other) const {
-	return pow_functions[func_hash(this->type, other.type)](*this, other);}
+	OPERATION_LOG(return_type_string(this->type), return_type_string(other.type), "power");
+	OPERANDS(*this, other);
+	Operand result = pow_functions[func_hash(this->type, other.type)](*this, other);
+	RESULT(result);
+	return result;}
 
 Operand& Operand::operator+=(const Operand& other){
 	*this = *this + other;
@@ -482,8 +502,12 @@ bool Operand::negative_power() const {
 }
 Operand Operand::simplify() const {
 	int index = (int)type;
-	if (index > -1)
+	if (index > -1){
+		//If power is 0 then return 1
+		if(getPower() == Constant::power_zero)
+			return (double)1;
 		return simplify_functions[index](this);
+	}
 	std::cout << "stdout: Unknown type simplify";
 	return *this;
 }
