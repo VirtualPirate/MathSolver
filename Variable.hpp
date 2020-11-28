@@ -1,14 +1,10 @@
 #ifndef Variable_H
 #define Variable_H
 
-#include <unordered_map>
-
 class Constant;
 class Operand;
 class Term;
 class Expression;
-
-extern std::unordered_map<char, Constant> var_values;
 
 class Variable{
 	char name;
