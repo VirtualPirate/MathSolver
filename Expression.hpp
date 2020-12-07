@@ -3,6 +3,7 @@
 
 #include "OperandList.hpp"
 
+class Substitutor;
 class Constant;
 class Operand;
 class Variable;

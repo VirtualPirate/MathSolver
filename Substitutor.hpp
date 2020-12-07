@@ -1,7 +1,10 @@
 #ifndef Substitutor_H
 #define Substitutor_H
 
+#include "Operand.hpp"
+
 class Operand;
+
 
 class Substitutor{
 	Operand key_value;

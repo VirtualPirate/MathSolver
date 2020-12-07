@@ -3,6 +3,7 @@
 #include <sstream>
 #include <initializer_list>
 
+#include "Substitutor.hpp"
 #include "Operand.hpp"
 #include "Constant.hpp"
 #include "Variable.hpp"

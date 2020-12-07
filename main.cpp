@@ -3,6 +3,7 @@
 #include <string>
 #include <algorithm>
 
+#include "Substitutor.hpp"
 #include "Operand.hpp"
 #include "Constant.hpp"
 #include "Variable.hpp"
@@ -109,6 +110,8 @@ int main(){
 
 	Term term_6{Constant{1}};
 	term_6.insert(var_0);
+
+	Term term_7{OperandList{Constant{9}}};
 
 	Expression exp_0{var_0};
 	exp_0.insert(num1);

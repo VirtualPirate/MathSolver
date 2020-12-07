@@ -4,6 +4,7 @@
 #include <vector>
 #include "OperandList.hpp"
 
+class Substitutor;
 class Constant;
 class Variable;
 class Expression;

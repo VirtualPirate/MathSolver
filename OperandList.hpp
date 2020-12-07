@@ -4,6 +4,7 @@
 #include <vector>
 #include <initializer_list>
 
+class Substitutor;
 class Constant;
 class Variable;
 class Operand;
@@ -137,6 +138,7 @@ public:
 	bool var_exist(const char&) const;
 
 	void simplify();
+	OperandList substitute(const std::vector<Substitutor>&) const;
 
 	//Iterator functions
 	iterator begin(DataType);
