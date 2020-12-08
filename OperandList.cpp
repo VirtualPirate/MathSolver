@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 #include <initializer_list>
 
 #include "Substitutor.hpp"
@@ -155,6 +156,16 @@ OperandList::const_iterator OperandList::cbegin(DataType type) const {
 }
 OperandList::const_iterator OperandList::cend(DataType type) const {
 	return OperandList::const_iterator{this, (int)this->fields.size(), type};
+}
+
+std::vector<Operand> OperandList::substitute(const std::vector<Substitutor>& ref) const {
+	std::vector<Operand> vec = fields;
+	for(Operand& each: vec){
+		auto iter = std::find(ref.begin(), ref.end(), each);
+		if(iter != ref.end())
+			each = iter->getSubstitute();
+	}
+	return vec;
 }
 
 unsigned int OperandList::count(DataType type) const {

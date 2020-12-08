@@ -138,7 +138,7 @@ public:
 	bool var_exist(const char&) const;
 
 	void simplify();
-	OperandList substitute(const std::vector<Substitutor>&) const;
+	std::vector<Operand> substitute(const std::vector<Substitutor>&) const;
 
 	//Iterator functions
 	iterator begin(DataType);

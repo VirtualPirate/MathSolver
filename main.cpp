@@ -72,6 +72,9 @@ void integrated_test_simplify(const Operand& first, const Operand& second){
 
 int main(){
 
+	std::vector<Substitutor> sub;
+	sub.push_back(Substitutor{Variable{'x'}, (double)10});
+
 	Constant num1{10};
 	Constant num2{2};
 	Constant num3{num1};
@@ -116,5 +119,8 @@ int main(){
 	Expression exp_0{var_0};
 	exp_0.insert(num1);
 	exp_0.insert(var_3);
+
+	cout << "term_0 = " << term_0 << endl;
+	cout << "term_0 = " << Term{term_0.substitute(sub)} << endl;
 	return 0;
 }
