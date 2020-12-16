@@ -38,6 +38,8 @@ public:
 	// Variable to Variable comparison operators
 	bool operator==(const Variable&) const;
 	bool operator!=(const Variable&) const;
+	bool issame(const Variable&) const;
+	bool isnot_same(const Variable&) const;
 
 	Operand operator+(const double&) const;
 	Operand operator-(const double&) const;

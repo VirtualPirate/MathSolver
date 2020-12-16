@@ -108,6 +108,8 @@ public:
 	bool operator!=(const Operand&) const;
 
 
+
+
 	//Unary operators 
 	Constant operator+() const;
 	Constant operator-() const;

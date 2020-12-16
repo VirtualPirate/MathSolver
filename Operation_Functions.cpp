@@ -165,3 +165,27 @@ std::string return_type_string(DataType type){
 			return "None";
 	}
 }
+
+std::string match_number(std::string query){
+	std::string result;
+	bool period = false;
+	bool has_digit = false;
+	if(!query.empty() && query.at(0) == '-'){
+		result.push_back('-');
+		query.erase(query.begin());
+	}
+	for(auto each_char: query){
+		if(isdigit(each_char)){
+			result.push_back(each_char);
+			has_digit = true;
+		}
+		else if(each_char == '.' && !period){
+			period = true;
+			result.push_back(each_char);
+			has_digit = false;
+		}else break;
+	}
+	if(has_digit)
+	return result;
+	return "";
+}

@@ -122,5 +122,6 @@ int main(){
 
 	cout << "term_0 = " << term_0 << endl;
 	cout << "term_0 = " << Term{term_0.substitute(sub)} << endl;
+	cout << match_number("-200x^2") << endl;
 	return 0;
 }

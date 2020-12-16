@@ -19,4 +19,10 @@ public:
 	const Operand& getKey() const;
 };
 
+/*class Substitutor_List{
+	std::vector<Substitutor> sub_;
+public:
+	Substitutor_List(std::initializer_list<Substitutor>)
+}*/
+
 #endif
