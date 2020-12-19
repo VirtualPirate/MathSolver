@@ -15,11 +15,18 @@
 class Constant;
 class Variable;
 class Term;
+class Operand;
+class Expression;
+class Substitute;
 
 bool is_addable(const Term&, const Term&);
 std::string return_type_string(DataType);
 
 std::string match_number(std::string);
+
+namespace CONSTANTS{
+	extern const Substitutor null_substitutor;
+};
 
 
 #endif

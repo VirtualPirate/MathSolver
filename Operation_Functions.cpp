@@ -7,7 +7,10 @@
 #include "Variable.hpp"
 #include "Term.hpp"
 #include "Expression.hpp"
+#include "Substitutor.hpp"
 #include "Operation_Functions.hpp"
+
+const Substitutor CONSTANTS::null_substitutor = Substitutor{};
 
 
 // Constant to Constant arithmetic operators

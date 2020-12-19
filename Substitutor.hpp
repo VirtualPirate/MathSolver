@@ -3,6 +3,7 @@
 
 #include "Operand.hpp"
 #include <vector>
+#include <initializer_list>
 
 class Operand;
 
@@ -11,13 +12,25 @@ class Substitutor{
 	Operand key_value;
 	Operand substitute;
 
+	friend class Substitutor_List;
 public:
 	Substitutor(const Operand&, const Operand&);
+	Substitutor(const Substitutor&);
+	Substitutor(Substitutor&&);
+	Substitutor();
+
 	bool operator==(const Operand&) const;
 	bool operator!=(const Operand&) const;
+	bool operator==(const Substitutor&) const;
+	bool operator!=(const Substitutor&) const;
+
+	Substitutor& operator=(const Substitutor&);
+	Substitutor& operator=(Substitutor&&);
 
 	const Operand& getSubstitute() const;
 	const Operand& getKey() const;
+
+	inline operator bool() const;
 };
 
 class Substitutor_List{
@@ -30,13 +43,22 @@ public:
 	Substitutor_List& operator=(const std::vector<Substitutor>&);
 
 	// Substitutor List modifier
-	void append(Substitutor);
+	void append(const Substitutor&);
+	void replace(const Substitutor&);
 	void extend(std::initializer_list<Substitutor>);
-	void extend(std::vector<Substitutor>);
+	void extend(const std::vector<Substitutor>&);
+	void replace_all(std::initializer_list<Substitutor>);
+	void replace_all(const std::vector<Substitutor>&);
 
-	void erase(size_t index);
+	void erase(size_t);
 	void erase(const Substitutor&);
 	void clear();
+
+	size_t size() const;
+
+	//Getters and Setters
+	const Substitutor& get(const Substitutor&) const;
+	const Operand& get_substitute(const Substitutor&) const;
 };
 
 #endif

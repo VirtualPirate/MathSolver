@@ -120,6 +120,9 @@ int main(){
 	exp_0.insert(num1);
 	exp_0.insert(var_3);
 
+	Substitutor_List var_values = {Substitutor{var_0, num1}, Substitutor{var_1, num2}, Substitutor{var_1, num5}};
+	cout << "var_values.size() = " << var_values.size() << endl;
+
 	cout << "term_0 = " << term_0 << endl;
 	cout << "term_0 = " << Term{term_0.substitute(sub)} << endl;
 	cout << match_number("-200x^2") << endl;
