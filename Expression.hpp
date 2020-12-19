@@ -32,6 +32,7 @@ public:
 
 	void simplify_();
 	Operand simplify() const;
+	Operand substitute(const Substitutor_List& list) const;
 
 	Operand operator+(const double&) const;
 	Operand operator-(const double&) const;

@@ -7,6 +7,8 @@ class Operand;
 class Variable;
 class Term;
 class Expression;
+class Substitutor;
+class Substitutor_List;
 class Constant{
 	double value;
 	Operand power;
@@ -41,6 +43,7 @@ public:
 	void setPower(const Operand&);
 
 	Operand simplify() const;
+	Operand substitute(const Substitutor_List& list) const;
 	std::string power_print() const;
 	bool is_negative() const;
 	bool negative_power() const;

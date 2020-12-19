@@ -127,7 +127,8 @@ int main(){
 	cout << "var_values.size() = " << var_values.size() << endl;
 
 	cout << "term_0 = " << term_0 << endl;
-	cout << "term_0 = " << Term{term_0.substitute(sub)} << endl;
+	// cout << "term_0 = " << Term{term_0.substitute(sub)} << endl;
 	cout << match_number("-200x^2") << endl;
+	cout << "num6.getBase() = "<< num6.getBase() << endl;
 	return 0;
 }

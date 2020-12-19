@@ -5,6 +5,7 @@
 #include "OperandList.hpp"
 
 class Substitutor;
+class Substitutor_List;
 class Constant;
 class Variable;
 class Expression;
@@ -38,6 +39,7 @@ public:
 	std::string power_print() const;
 	void simplify_();
 	Operand simplify() const;
+	Operand substitute(const Substitutor_List& list) const;
 
 	bool is_Constant() const;
 	bool is_Variable() const;

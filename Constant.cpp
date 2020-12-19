@@ -9,6 +9,7 @@
 #include "Term.hpp"
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
+#include "Substitutor.hpp"
 
 Operand const Constant::power_one{(double)1};
 Operand const Constant::power_zero{(double)0};
@@ -64,6 +65,9 @@ Constant Constant::abs() const {return Constant{fabs(value)};}
 
 //Getter methods
 const double& Constant::getValue() const {
+	return value;
+}
+const double& Constant::getBase() const {
 	return value;
 }
 const Operand& Constant::getPower() const {

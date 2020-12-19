@@ -11,6 +11,7 @@
 #include "Term.hpp"
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
+#include "Substitutor.hpp"
 
 
 void Term::extend(const Term& ref){
@@ -135,6 +136,10 @@ std::vector<Variable> Term::getVars() const {
 	for(auto each=cbegin(DataType::Variable); each != cend(DataType::Variable); each++)
 		result.push_back((*each).get<Variable>());
 	return result;
+}
+
+Term Term::getBase() const {
+	return Term{fields};
 }
 
 //Term to double arithmetic operators

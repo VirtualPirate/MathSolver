@@ -9,6 +9,7 @@
 #include "Term.hpp"
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
+#include "Substitutor.hpp"
 
 std::ostream& operator<<(std::ostream& os, const Expression& ref){
 	if(!ref.isNull()){
@@ -50,6 +51,10 @@ bool Expression::negative_power() const {
 
 Operand Expression::simplify() const {
 	return *this;
+}
+
+Expression Expression::getBase() const{
+	return Expression{fields};
 }
 //Operand to double arithmetic operators
 Operand Expression::operator+(const double& other) const {return *this + Operand{other};}

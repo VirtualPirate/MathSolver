@@ -9,6 +9,7 @@
 #include "Term.hpp"
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
+#include "Substitutor.hpp"
 
 std::unordered_map<char, Constant> var_values;
 
@@ -34,6 +35,9 @@ Variable::Variable(char var_name, const Operand& pow): name{var_name}, power{pow
 
 //Getter and setter Methods
 const char& Variable::getName() const {
+	return name;
+}
+const char& Variable::getBase() const {
 	return name;
 }
 void Variable::setName(const char& ref){
