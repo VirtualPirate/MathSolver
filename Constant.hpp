@@ -32,6 +32,7 @@ public:
 	Constant& operator=(const Constant&);
 
 	//Getter Methods
+	const double& getBase() const;
 	const double& getValue() const;
 	const Operand& getPower() const;
 

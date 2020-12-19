@@ -42,6 +42,7 @@ public:
 	bool is_Constant() const;
 	bool is_Variable() const;
 
+	Term getBase() const;
 	std::vector<Variable> getVars() const;
 
 	Operand operator+(const double&) const;

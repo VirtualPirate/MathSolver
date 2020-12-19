@@ -29,6 +29,7 @@ public:
 	// Variable(char, Operand&&);
 
 	//Getter and Setter Methods
+	const char& getBase() const;
 	const char& getName() const;
 	void setName(const char&);
 
