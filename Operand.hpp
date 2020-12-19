@@ -103,6 +103,8 @@ public:
 
 	Operand(double);
 	Operand& operator=(double);
+	Operand(char);
+	Operand& operator=(char);
 	Operand(const Constant&);
 	Operand& operator=(const Constant&);
 	Operand(const Variable&);

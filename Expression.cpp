@@ -13,7 +13,7 @@
 std::ostream& operator<<(std::ostream& os, const Expression& ref){
 	if(!ref.isNull()){
 		bool brace = false;
-		if(ref.getPower() != Operand{1})
+		if(ref.getPower() != Operand{(double)1})
 			brace = true;
 		if(brace)
 			os << '(';

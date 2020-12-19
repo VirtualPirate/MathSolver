@@ -18,7 +18,7 @@
 // 		result.push_back(each.simplify());
 // 	return result;
 // }
-OperandList::OperandList(): fields{}, power{1}, is_simplified{false}, is_null{true}{}
+OperandList::OperandList(): fields{}, power{(double)1}, is_simplified{false}, is_null{true}{}
 
 OperandList::OperandList(const OperandList& ref): fields{ref.fields}, power{ref.power}, is_simplified{ref.is_simplified}, is_null{ref.is_null}{}
 OperandList& OperandList::operator=(const OperandList& ref){
@@ -43,39 +43,39 @@ OperandList& OperandList::operator=(OperandList&& ref){
 
 
 
-OperandList::OperandList(const Constant& ref): fields{{Operand{ref}}}, power{1}, is_simplified{true}, is_null{false}{}
+OperandList::OperandList(const Constant& ref): fields{{Operand{ref}}}, power{(double)1}, is_simplified{true}, is_null{false}{}
 OperandList& OperandList::operator=(const Constant& ref){
 	fields.clear();
 	fields.push_back(Operand{ref});
-	power = 1;
+	power = (double)1;
 	is_simplified = true;
 	is_null = false;
 	return *this;
 }
-OperandList::OperandList(const Variable& ref): fields{{Operand{ref}}}, power{1}, is_simplified{true}, is_null{false}{}
+OperandList::OperandList(const Variable& ref): fields{{Operand{ref}}}, power{(double)1}, is_simplified{true}, is_null{false}{}
 OperandList& OperandList::operator=(const Variable& ref){
 	fields.clear();
 	fields.push_back(Operand{ref});
-	power = 1;
+	power = (double)1;
 	is_simplified = true;
 	is_null = false;
 	return *this;
 }
-OperandList::OperandList(const Operand& ref): fields{{ref}}, power{1}, is_simplified{true}, is_null{false}{}
+OperandList::OperandList(const Operand& ref): fields{{ref}}, power{(double)1}, is_simplified{true}, is_null{false}{}
 OperandList& OperandList::operator=(const Operand& ref){
 	fields.clear();
 	fields.push_back(ref);
-	power = 1;
+	power = (double)1;
 	is_simplified = true;
 	is_null = false;
 	return *this;
 }
 
-OperandList::OperandList(const std::vector<Operand>& ref): fields{ref}, power{1}, is_simplified{false}, is_null{false}{}
-OperandList::OperandList(std::initializer_list<Operand> list): fields{list}, power{1}, is_simplified{false}, is_null{false}{}
+OperandList::OperandList(const std::vector<Operand>& ref): fields{ref}, power{(double)1}, is_simplified{false}, is_null{false}{}
+OperandList::OperandList(std::initializer_list<Operand> list): fields{list}, power{(double)1}, is_simplified{false}, is_null{false}{}
 OperandList& OperandList::operator=(std::initializer_list<Operand> list){
 	fields = list;
-	power = 1;
+	power = (double)1;
 	is_simplified = false;
 	is_null = false;
 	return *this;

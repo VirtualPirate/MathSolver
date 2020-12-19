@@ -20,7 +20,7 @@ void Term::extend(const Term& ref){
 std::ostream& operator<<(std::ostream& os, const Term& ref){
 	if(!ref.isNull()){
 		bool brace = false;
-		if(ref.getPower() != Operand{1})
+		if(ref.getPower() != Operand{(double)1})
 			brace = true;
 		const std::vector<Operand>& fields = ref.getFields();
 		if(brace)

@@ -120,6 +120,9 @@ int main(){
 	exp_0.insert(num1);
 	exp_0.insert(var_3);
 
+	Operand operand_0{'a'};
+	Operand operand_1{'x'};
+
 	Substitutor_List var_values = {Substitutor{var_0, num1}, Substitutor{var_1, num2}, Substitutor{var_1, num5}};
 	cout << "var_values.size() = " << var_values.size() << endl;
 

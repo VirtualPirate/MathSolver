@@ -232,6 +232,14 @@ Operand& Operand::operator=(double val){
 	is_null = false;
 	return *this;
 }
+Operand::Operand(char ch): value{(void*)(new Variable{ch})}, type{DataType::Variable}, is_null{false}{}
+Operand& Operand::operator=(char ch){
+	if(value) free(value);
+	value = (void*)(new Variable{ch});
+	type = DataType::Variable;
+	is_null = false;
+	return *this;
+}
 Operand::Operand(const Constant& val): value{(void*)(new Constant{val})}, type{DataType::Constant}, is_null{false}{}
 Operand& Operand::operator=(const Constant& ref){
 	if(value) free(value);

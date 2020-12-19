@@ -10,8 +10,8 @@
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
 
-Operand const Constant::power_one{1};
-Operand const Constant::power_zero{0};
+Operand const Constant::power_one{(double)1};
+Operand const Constant::power_zero{(double)0};
 Operand const Constant::power_null{};
 //Constructors
 Constant::Constant(void):value{0}{}
