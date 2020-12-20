@@ -4,6 +4,7 @@
 #include "OperandList.hpp"
 
 class Substitutor;
+class Substitutor_List;
 class Constant;
 class Operand;
 class Variable;

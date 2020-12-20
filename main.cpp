@@ -86,6 +86,7 @@ int main(){
 	Variable var_1{'y'};
 	Variable var_2{'x', -2};
 	Variable var_3{'y', 3};
+	Variable var_4 = 'a';
 
 	Term term_0{Variable{'a'}};
 	term_0.setNull(false);

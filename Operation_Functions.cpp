@@ -11,6 +11,9 @@
 #include "Operation_Functions.hpp"
 
 const Substitutor CONSTANTS::null_substitutor = Substitutor{};
+const Operand CONSTANTS::ONE = Operand{(double)1};
+const Operand CONSTANTS::ZERO = Operand{(double)0};
+const Operand CONSTANTS::NULL_OPERAND = Operand{};
 
 
 // Constant to Constant arithmetic operators

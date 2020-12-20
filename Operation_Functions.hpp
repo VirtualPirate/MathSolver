@@ -26,6 +26,9 @@ std::string match_number(std::string);
 
 namespace CONSTANTS{
 	extern const Substitutor null_substitutor;
+	extern const Operand ONE;
+	extern const Operand ZERO;
+	extern const Operand NULL_OPERAND;
 };
 
 

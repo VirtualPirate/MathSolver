@@ -23,6 +23,7 @@ public:
 	~Variable() = default;
 	Variable& operator=(const Variable&);
 	Variable& operator=(Variable&&);
+	Variable& operator=(char);
 
 	Variable(void);
 	Variable(char);

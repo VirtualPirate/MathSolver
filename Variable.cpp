@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <unordered_map>
+#include <cctype>
 
 #include "Operand.hpp"
 #include "Constant.hpp"
@@ -24,6 +25,17 @@ Variable& Variable::operator=(Variable&& ref){
 	name = std::move(ref.name);
 	power = std::move(ref.power);
 	return *this;
+}
+
+Variable& Variable::operator=(char ch){
+	if(isalpha(ch)){
+		name = ch;
+		power = CONSTANTS::ONE;
+		return *this;
+	}
+	else
+		throw std::runtime_error{"Variable is initialized by an illegal character"};
+
 }
 
 //Constructors
