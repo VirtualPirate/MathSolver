@@ -157,6 +157,13 @@ ComparisonFunction Operand::neq_functions[] = {
 	Operand_neq_bool
 };
 
+GetBaseFunction Operand::get_base_functions[] = {
+	getBase<Constant>,
+	getBase<Variable>,
+	getBase<Term>,
+	getBase<Expression>
+};
+
 GetPowerFunction Operand::get_power_functions[] = {
 	getPower<Constant>,
 	getPower<Variable>,
@@ -460,6 +467,14 @@ Operand& Operand::operator+=(const Expression& other){*this += Operand{other};re
 Operand& Operand::operator-=(const Expression& other){*this -= Operand{other};return *this;}
 Operand& Operand::operator*=(const Expression& other){*this *= Operand{other};return *this;}
 Operand& Operand::operator/=(const Expression& other){*this /= Operand{other};return *this;}
+
+Operand Operand::getBase() const {
+	int index = (int)type;
+	if (index > -1)
+		return get_base_functions[index](this);
+	std::cout << "stdout: the Operand::getBase() method failed for some reason " << std::endl;
+	return CONSTANTS::NULL_OPERAND;
+}
 
 const Operand& Operand::getPower() const {
 	int index = (int)type;
