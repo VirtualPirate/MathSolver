@@ -39,6 +39,7 @@ public:
 	const Operand& getPower() const;
 
 	//Setter Methods
+	void setBase(const double&) const;
 	void setValue(const double&);
 	void setPower(const Operand&);
 

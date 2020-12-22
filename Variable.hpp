@@ -34,9 +34,10 @@ public:
 	//Getter and Setter Methods
 	const char& getBase() const;
 	const char& getName() const;
-	void setName(const char&);
-
 	const Operand& getPower() const;
+
+	void setBase(const char&);
+	void setName(const char&);
 	void setPower(const Operand&);
 
 	// Variable to Variable comparison operators

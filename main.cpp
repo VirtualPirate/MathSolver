@@ -11,6 +11,7 @@
 #include "Term.hpp"
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
+#include "Parser.hpp"
 
 using namespace std;
 
@@ -130,6 +131,12 @@ int main(){
 	cout << "term_0 = " << term_0 << endl;
 	// cout << "term_0 = " << Term{term_0.substitute(sub)} << endl;
 	cout << match_number("-200x^2") << endl;
+
 	cout << "num6.getBase() = "<< (Operand{num6}).getBase() << endl;
+
+	std::string str_0 = "-200x^2";
+	Parser parser{str_0};
+	cout << "Mathced Number: "<< parser.match_number().getMatchedString() << endl;
+
 	return 0;
 }
