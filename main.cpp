@@ -134,9 +134,10 @@ int main(){
 
 	cout << "num6.getBase() = "<< (Operand{num6}).getBase() << endl;
 
-	std::string str_0 = "-200x^2";
+	std::string str_0 = " -200 x^ 2 ( 2.5x + 3y^z)";
 	Parser parser{str_0};
-	cout << "Mathced Number: "<< parser.match_number().getMatchedString() << endl;
+	parser.debug_info();
+	// cout << "Mathced Number: "<< parser.match_number().getMatchedString() << endl;
 
 	return 0;
 }

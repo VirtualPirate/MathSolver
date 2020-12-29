@@ -3,54 +3,24 @@
 
 #include <utility>
 #include <string>
+#include <variant>
+#include <optional>
 
-class MatchToken{
-	const std::string* context;
-	std::pair<size_t, size_t> indexes;
-	DataType token_type;
-	bool token_found;
-
-public:
-	MatchToken(const std::string* context);
-	//Setters
-	void setContext(const std::string*);
-	void setIndexes(size_t, size_t);
-	void setTokenType(DataType);
-	void setTokenFound(bool);
-
-	//Getters
-	const std::string* getContext() const;
-	const std::pair<size_t, size_t>& getIndexes() const;
-	DataType getTokenType() const;
-	operator bool() const;
-
-	std::string getMatchedString() const;
-	
-};
+using Token = std::variant<double, char>;
 
 class Parser{
 	std::string context;
 	size_t current_index;
-
-	friend class MatchToken;
-
-public:
-	MatchToken match_number();
-	MatchToken match_variable();
-	MatchToken match_term();
-	MatchToken match_expression();
+	std::vector<Token> tokens;
 
 public:
-	Parser(const std::string&);
+	Parser(std::string);
 	std::string getUnParsed() const;
-	Operand match();
+	std::optional<double> match_number();
+	std::optional<char> match_char();
+
+	void create_tokens();
+	void debug_info();
 };
-
-// MatchToken match_number(const std::string&);
-// MatchToken match_variable(const std::string&);
-// MatchToken match_term(const std::string&);
-// MatchToken match_expression(const std::string&);
-
-// Operand match_operand(const std::string&);
 
 #endif
