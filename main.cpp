@@ -13,6 +13,8 @@
 #include "Operation_Functions.hpp"
 #include "Parser.hpp"
 
+#include "Tests.hpp"
+
 using namespace std;
 
 void add_test(const Operand& first, const Operand& second){
@@ -75,6 +77,8 @@ int main(){
 
 	std::vector<Substitutor> sub;
 	sub.push_back(Substitutor{Variable{'x'}, (double)10});
+
+	test::show_sizes();
 
 	Constant num1{10};
 	Constant num2{2};
