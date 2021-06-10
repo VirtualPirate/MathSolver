@@ -12,6 +12,13 @@
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
 
+union DataType1{
+	Constant constant;
+	Variable variable;
+	Term term;
+	Expression expression;
+};
+
 Operand Operand_null(const Operand& first, const Operand& second){
 	return Operand{};}
 bool Operand_bool(const Operand& first, const Operand& second){

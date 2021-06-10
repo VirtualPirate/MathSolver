@@ -2,6 +2,7 @@
 #define Operand_H
 
 #include <functional>
+#include <iostream>
 
 #define O_ARRAY_SIZE 18
 #define TYPE_COUNT 4
@@ -27,6 +28,9 @@ class Constant;
 class Variable;
 class Term;
 class Expression;
+
+union DataType1;
+
 class Operand
 {
 	void* value;
