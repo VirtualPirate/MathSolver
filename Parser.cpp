@@ -16,7 +16,8 @@ std::string Parser::getUnParsed() const {
 }
 std::optional<double> Parser::match_number(){
 	size_t match_length = 0;
-	bool period, has_digit = false;
+	bool period = false;
+	bool has_digit = false;
 	auto iter = context.cbegin() + current_index;
 	if(*iter == '-'){
 		match_length++;
