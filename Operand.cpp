@@ -158,66 +158,66 @@ ComparisonFunction Operand::neq_functions[] = {
 };
 
 GetBaseFunction Operand::get_base_functions[] = {
-	getBase<Constant>,
-	getBase<Variable>,
-	getBase<Term>,
-	getBase<Expression>
+	&Operand::getBase<Constant>,
+	&Operand::getBase<Variable>,
+	&Operand::getBase<Term>,
+	&Operand::getBase<Expression>
 };
 
 GetPowerFunction Operand::get_power_functions[] = {
-	getPower<Constant>,
-	getPower<Variable>,
-	getPower<Term>,
-	getPower<Expression>
+	&Operand::getPower<Constant>,
+	&Operand::getPower<Variable>,
+	&Operand::getPower<Term>,
+	&Operand::getPower<Expression>
 };
 
 SetPowerFunction Operand::set_power_functions[] = {
-	setPower<Constant>,
-	setPower<Variable>,
-	setPower<Term>,
-	setPower<Expression>
+	&Operand::setPower<Constant>,
+	&Operand::setPower<Variable>,
+	&Operand::setPower<Term>,
+	&Operand::setPower<Expression>
 };
 
 CheckFunction Operand::is_negative_functions[] = {
-	is_negative<Constant>,
-	is_negative<Variable>,
-	is_negative<Term>,
-	is_negative<Expression>
+	&Operand::is_negative<Constant>,
+	&Operand::is_negative<Variable>,
+	&Operand::is_negative<Term>,
+	&Operand::is_negative<Expression>
 };
 
 CheckFunction Operand::negative_power_functions[] = {
-	negative_power<Constant>,
-	negative_power<Variable>,
-	negative_power<Term>,
-	negative_power<Expression>
+	&Operand::negative_power<Constant>,
+	&Operand::negative_power<Variable>,
+	&Operand::negative_power<Term>,
+	&Operand::negative_power<Expression>
 };
 
 PowerPrintFunc Operand::power_print_functions[] = {
-	power_print<Constant>,
-	power_print<Variable>,
-	power_print<Term>,
-	power_print<Expression>
+	&Operand::power_print<Constant>,
+	&Operand::power_print<Variable>,
+	&Operand::power_print<Term>,
+	&Operand::power_print<Expression>
 };
 
 AllocateFunction Operand::allocate_functions[] = {
-	allocate<Constant>,
-	allocate<Variable>,
-	allocate<Term>,
-	allocate<Expression>
+	&Operand::allocate<Constant>,
+	&Operand::allocate<Variable>,
+	&Operand::allocate<Term>,
+	&Operand::allocate<Expression>
 };
 
 CoutFunction Operand::operator_cout_functions[] = {
-	cout_<Constant>,
-	cout_<Variable>,
-	cout_<Term>,
-	cout_<Expression>
+	&Operand::cout_<Constant>,
+	&Operand::cout_<Variable>,
+	&Operand::cout_<Term>,
+	&Operand::cout_<Expression>
 };
 
 SimplifyFunction Operand::simplify_functions[] = {
-	simplify<Constant>,
-	simplify<Variable>,
-	simplify<Term>,
-	simplify<Expression>
+	&Operand::simplify<Constant>,
+	&Operand::simplify<Variable>,
+	&Operand::simplify<Term>,
+	&Operand::simplify<Expression>
 };
 
 unsigned func_hash(DataType first_type, DataType second_type){
