@@ -91,6 +91,9 @@ void Constant::setPower(const Operand& ref){
 Constant Constant::operator+() const {return +value;}
 Constant Constant::operator-() const {return -value;}
 
+Constant::~Constant() {
+	LOG_DESTRUCT();
+}
 
 std::ostream& operator<<(std::ostream& os, const Constant& ref){
 	if(ref.power && ref.power!=(double)1)

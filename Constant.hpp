@@ -112,7 +112,7 @@ public:
 	bool operator==(const Operand&) const;
 	bool operator!=(const Operand&) const;
 
-
+	~Constant();
 
 
 	//Unary operators 

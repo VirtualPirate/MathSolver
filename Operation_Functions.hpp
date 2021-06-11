@@ -9,7 +9,8 @@
 	#define LOG_CONSTRUCTOR(CONSTRUCTOR_TEXT) std::cout << "[Constructor]:" << CONSTRUCTOR_TEXT << std::endl;
 	#define LOG_DESTRUCTOR(DESTRUCTOR_TEXT)	std::cout << "[Destructor]:" << DESTRUCTOR_TEXT << std::endl;
 
-	#define LOG_CONSTRUCT(CONSTRUCTOR_SIGNATURE) LOG_CONSTRUCTOR(__FUNCTION__)
+	#define LOG_CONSTRUCT() LOG_CONSTRUCTOR(__FUNCTION__);
+	#define LOG_DESTRUCT() LOG_DESTRUCTOR(__FUNCTION__);
 #else
 	#define OPERATION_LOG(TYPE_1, TYPE_2, operation)
 	#define OPERANDS(FIRST, SECOND)
@@ -18,6 +19,7 @@
 	#define LOG_DESTRUCTOR(DESTRUCTOR_TEXT)
 
 	#define LOG_CONSTRUCT(CONSTRUCTOR_SIGNATURE)
+	#define LOG_DESTRUCT()
 #endif
 
 class Constant;
