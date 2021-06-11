@@ -6,10 +6,14 @@
 	#define OPERATION_LOG(TYPE_1, TYPE_2, operation) std::cout << TYPE_1 << "-" << TYPE_2 << " arithmetic " << operation << " is invoked" << std::endl;
 	#define OPERANDS(FIRST, SECOND) std::cout << "first = " << FIRST << "\t" << "second = " << SECOND << std::endl;
 	#define RESULT(result) std::cout << "result = " << result << std::endl;
+	#define LOG_CONSTRUCTOR(CONSTRUCTOR_TEXT) std::cout << "[Constructor]:" << CONSTRUCTOR_TEXT << std::endl;
+	#define LOG_DESTRUCTOR(DESTRUCTOR_TEXT)	std::cout << "[Destructor]:" << DESTRUCTOR_TEXT << std::endl;
 #else
 	#define OPERATION_LOG(TYPE_1, TYPE_2, operation)
 	#define OPERANDS(FIRST, SECOND)
 	#define RESULT(result)
+	#define LOG_CONSTRUCTOR(CONSTRUCTOR_TEXT)
+	#define LOG_DESTRUCTOR(DESTRUCTOR_TEXT)
 #endif
 
 class Constant;

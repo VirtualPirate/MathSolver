@@ -240,7 +240,7 @@ Operand::Operand(): value{nullptr}, type{DataType::None}, is_null{true}{}
 
 Operand::Operand(double value): value{(void*)(new Constant{value})}, type{DataType::Constant}, is_null{false}{}
 Operand& Operand::operator=(double val){
-	if(value) free(value);
+	if(value) deallocate();
 	value = (void*)(new Constant{val});
 	type = DataType::Constant;
 	is_null = false;
@@ -248,7 +248,7 @@ Operand& Operand::operator=(double val){
 }
 Operand::Operand(char ch): value{(void*)(new Variable{ch})}, type{DataType::Variable}, is_null{false}{}
 Operand& Operand::operator=(char ch){
-	if(value) free(value);
+	if(value) deallocate();
 	value = (void*)(new Variable{ch});
 	type = DataType::Variable;
 	is_null = false;
@@ -256,7 +256,7 @@ Operand& Operand::operator=(char ch){
 }
 Operand::Operand(const Constant& val): value{(void*)(new Constant{val})}, type{DataType::Constant}, is_null{false}{}
 Operand& Operand::operator=(const Constant& ref){
-	if(value) free(value);
+	if(value) deallocate();
 	value = (void*)(new Constant{ref});
 	type = DataType::Constant;
 	is_null = false;
@@ -265,7 +265,7 @@ Operand& Operand::operator=(const Constant& ref){
 
 Operand::Operand(const Variable& ref): value{(void*)(new Variable{ref})}, type{DataType::Variable}, is_null{false}{}
 Operand& Operand::operator=(const Variable& ref){
-	if(value) free(value);
+	if(value) deallocate();
 	value = (void*)(new Variable{ref});
 	type = DataType::Variable;
 	is_null = false;
@@ -273,7 +273,7 @@ Operand& Operand::operator=(const Variable& ref){
 }
 Operand::Operand(const Term& ref): value{(void*)(new Term{ref})}, type{DataType::Term}, is_null{ref.isNull()}{}
 Operand& Operand::operator=(const Term& ref){
-	if(value) free(value);
+	if(value) deallocate();
 	value = (void*)(new Term{ref});
 	type = DataType::Term;
 	is_null = ref.isNull();
@@ -281,7 +281,7 @@ Operand& Operand::operator=(const Term& ref){
 }
 Operand::Operand(const Expression& ref): value{(void*)(new Expression{ref})}, type{DataType::Expression}, is_null{ref.isNull()}{}
 Operand& Operand::operator=(const Expression& ref){
-	if(value) free(value);
+	if(value) deallocate();
 	value = (void*)(new Expression{ref});
 	type = DataType::Expression;
 	is_null = ref.isNull();
@@ -295,7 +295,7 @@ Operand::Operand(Operand&& ref): value{ref.value}, type{ref.type}, is_null{ref.i
 	ref.is_null = true;
 }
 Operand& Operand::operator=(const Operand& ref){
-	if(value) free(value);
+	if(value) deallocate();
 	value = ref.allocate();
 	type = ref.type;
 	is_null = ref.is_null;
@@ -303,7 +303,7 @@ Operand& Operand::operator=(const Operand& ref){
 
 }
 Operand& Operand::operator=(Operand&& ref){
-	if(value) free(value);
+	if(value) deallocate();
 	value = ref.value;
 	ref.value = nullptr;
 	type = ref.type;
@@ -312,7 +312,7 @@ Operand& Operand::operator=(Operand&& ref){
 	return *this;
 }
 //Destructor
-Operand::~Operand(){free(value);}
+Operand::~Operand(){deallocate();}
 
 //Getters setters
 
