@@ -22,6 +22,7 @@ using ComparisonFunction = bool (*)(const Operand&, const Operand&);
 using CheckFunction = std::function<bool(const Operand*)>;
 using PowerPrintFunc = std::function<std::string(const Operand*)>;
 using AllocateFunction = std::function<void*(const Operand*)>;
+using DeallocateFunction = std::function<void(const Operand*)>;
 using CoutFunction = std::function<std::ostream&(std::ostream&, const Operand&)>;
 using SimplifyFunction = std::function<Operand(const Operand*)>;
 
@@ -99,6 +100,10 @@ class Operand
 		return (void *)(new Type{get<Type>()});
 	}
 	template <typename Type>
+	void deallocate() const {
+		delete (Type*)value;
+	}
+	template <typename Type>
 	static std::ostream& cout_(std::ostream& os, const Operand& ref){
 		os << ref.get<Type>();
 		return os;
@@ -107,7 +112,9 @@ class Operand
 	Operand simplify() const {
 		return get<Type>().simplify();
 	}
+
 	void* allocate() const;
+	void deallocate() const;
 public:
 	Operand();
 
