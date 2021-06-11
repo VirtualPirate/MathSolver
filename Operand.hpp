@@ -11,6 +11,7 @@ enum class DataType
 {Constant=0, Variable=1, Term=2, Expression=3, None=-1};
 // const unsigned O_ARRAY_SIZE = 18;
 unsigned func_hash(DataType, DataType);
+
 class Operand;
 
 using GetBaseFunction = std::function<Operand(const Operand*)>;
@@ -29,7 +30,6 @@ class Variable;
 class Term;
 class Expression;
 
-union DataType1;
 
 class Operand
 {
