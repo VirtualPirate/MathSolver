@@ -206,6 +206,13 @@ AllocateFunction Operand::allocate_functions[] = {
 	&Operand::allocate<Expression>
 };
 
+DeallocateFunction Operand::deallocate_functions[] = {
+	&Operand::deallocate<Constant>,
+	&Operand::deallocate<Variable>,
+	&Operand::deallocate<Term>,
+	&Operand::deallocate<Expression>
+};
+
 CoutFunction Operand::operator_cout_functions[] = {
 	&Operand::cout_<Constant>,
 	&Operand::cout_<Variable>,
@@ -506,6 +513,12 @@ void* Operand::allocate() const {
 		return allocate_functions[index](this);
 	// std::cout << "stdout: Unknown type allocate()";
 	return nullptr;
+}
+
+void Operand::deallocate() const {
+	int index = (int)type;
+	if (index > -1)
+		deallocate_functions[index](this);
 }
 
 bool Operand::is_negative() const {
