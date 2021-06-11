@@ -61,6 +61,7 @@ class Operand
 	static CheckFunction negative_power_functions[TYPE_COUNT];
 	static PowerPrintFunc power_print_functions[TYPE_COUNT];
 	static AllocateFunction allocate_functions[TYPE_COUNT];
+	static DeallocateFunction deallocate_functions[TYPE_COUNT];
 	static CoutFunction operator_cout_functions[TYPE_COUNT];
 	static SimplifyFunction simplify_functions[TYPE_COUNT];
 
