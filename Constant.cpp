@@ -16,12 +16,13 @@ Operand const Constant::power_zero{(double)0};
 Operand const Constant::power_null{};
 //Constructors
 Constant::Constant(void):value{0}{}
-Constant::Constant(double val): value{val}, power{}{}
-Constant::Constant(const Constant& ref): value{ref.value}, power{ref.power}{}
-Constant::Constant(const Constant* point): value{point->value}, power{point->power}{}
+Constant::Constant(double val) : value{ val }, power{}{LOG_CONSTRUCT(); }
+Constant::Constant(const Constant& ref) : value{ ref.value }, power{ ref.power }{LOG_CONSTRUCT(); }
+Constant::Constant(const Constant* point) : value{ point->value }, power{ point->power }{LOG_CONSTRUCT(); }
 
 Constant::Constant(double val, const Operand& pow): value{val}{
 	setPower(pow);
+	LOG_CONSTRUCT();
 }
 
 // Constant to Constant assignment operators
