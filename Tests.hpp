@@ -76,6 +76,32 @@ class Expression;
 
 namespace test{
     void show_sizes();
+
+    int Constant_tests();
+    int Variable_tests();
+    int Term_tests();
+    int Expression_tests();
+    int Operand_tests();
+
+    int Integrated_tests();
+
+    void add_test(const Operand&, const Operand&);
+    void sub_test(const Operand&, const Operand&);
+    void mul_test(const Operand&, const Operand&);
+    void div_test(const Operand&, const Operand&);
+    void pow_test(const Operand&, const Operand&);
+
+    void add_test_simplify(const Operand&, const Operand&);
+    void sub_test_simplify(const Operand&, const Operand&);
+    void mul_test_simplify(const Operand&, const Operand&);
+    void div_test_simplify(const Operand&, const Operand&);
+    void pow_test_simplify(const Operand&, const Operand&);
+
+    void eq_test(const Operand&, const Operand&);
+    void neq_test(const Operand&, const Operand&);
+
+    void integrated_test(const Operand&, const Operand&);
+    void integrated_test_simplify(const Operand&, const Operand&);
 }
 
 #endif

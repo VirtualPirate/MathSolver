@@ -24,7 +24,7 @@ Constant::Constant(const Constant* point) : value{ point->value }, power{ point-
 
 Constant::Constant(double val, const Operand& pow): value{val}{
 	setPower(pow);
-	LOG_CONSTRUCT();
+	CONSTANT_LOG_CONSTRUCT();
 }
 
 // Constant to Constant assignment operators
