@@ -18,9 +18,9 @@ Operand const Constant::power_zero{(double)0};
 Operand const Constant::power_null{};
 //Constructors
 Constant::Constant(void):value{0}{}
-Constant::Constant(double val) : value{ val }, power{}{LOG_CONSTRUCT(); }
-Constant::Constant(const Constant& ref) : value{ ref.value }, power{ ref.power }{LOG_CONSTRUCT(); }
-Constant::Constant(const Constant* point) : value{ point->value }, power{ point->power }{LOG_CONSTRUCT(); }
+Constant::Constant(double val) : value{ val }, power{}{CONSTANT_LOG_CONSTRUCT(); }
+Constant::Constant(const Constant& ref) : value{ ref.value }, power{ ref.power }{CONSTANT_LOG_CONSTRUCT(); }
+Constant::Constant(const Constant* point) : value{ point->value }, power{ point->power }{CONSTANT_LOG_CONSTRUCT(); }
 
 Constant::Constant(double val, const Operand& pow): value{val}{
 	setPower(pow);
@@ -94,7 +94,7 @@ Constant Constant::operator+() const {return +value;}
 Constant Constant::operator-() const {return -value;}
 
 Constant::~Constant() {
-	LOG_DESTRUCT();
+	CONSTANT_LOG_DESTRUCT();
 }
 
 std::ostream& operator<<(std::ostream& os, const Constant& ref){
