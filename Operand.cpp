@@ -12,6 +12,8 @@
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
 
+#include "Tests.hpp"
+
 Operand Operand_null(const Operand& first, const Operand& second){
 	return Operand{};}
 bool Operand_bool(const Operand& first, const Operand& second){

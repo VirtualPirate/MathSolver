@@ -11,6 +11,8 @@
 #include "Operation_Functions.hpp"
 #include "Substitutor.hpp"
 
+#include "Tests.hpp"
+
 std::ostream& operator<<(std::ostream& os, const Expression& ref){
 	if(!ref.isNull()){
 		bool brace = false;

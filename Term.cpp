@@ -13,6 +13,8 @@
 #include "Operation_Functions.hpp"
 #include "Substitutor.hpp"
 
+#include "Tests.hpp"
+
 
 void Term::extend(const Term& ref){
 	is_simplified = false;

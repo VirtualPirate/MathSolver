@@ -10,6 +10,8 @@
 #include "Substitutor.hpp"
 #include "Operation_Functions.hpp"
 
+#include "Tests.hpp"
+
 const Substitutor CONSTANTS::null_substitutor = Substitutor{};
 const Operand CONSTANTS::ONE = Operand{(double)1};
 const Operand CONSTANTS::ZERO = Operand{(double)0};

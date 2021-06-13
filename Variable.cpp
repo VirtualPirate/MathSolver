@@ -12,6 +12,8 @@
 #include "Operation_Functions.hpp"
 #include "Substitutor.hpp"
 
+#include "Tests.hpp"
+
 std::unordered_map<char, Constant> var_values;
 
 //Copy Assignment operator

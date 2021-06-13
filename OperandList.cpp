@@ -12,6 +12,8 @@
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
 
+#include "Tests.hpp"
+
 // std::vector<Operand> OperandList::internal_simplify() const {
 // 	std::vector<Operand> result;
 // 	for(const auto& each: fields)
