@@ -27,10 +27,17 @@ std::unordered_map<std::pair<char, char>, char, pair_hash> const Parser::lookup_
 
 
 //Parser Implementation
-Parser::Parser(std::string val): context{val}, current_index{0}, tokens{}{
+Parser::Parser(const char* val) : context{ val }, current_index{ 0 }, tokens{}{
+	for (char each : " \f\n\r\t\v")
+		context.erase(std::remove(context.begin(), context.end(), each), context.end());
+	create_tokens();
+	remove_redundant_operators();
+}
+Parser::Parser(const std::string& val): context{val}, current_index{0}, tokens{}{
 	for(char each: " \f\n\r\t\v")
 		context.erase(std::remove(context.begin(), context.end(), each), context.end());
 	create_tokens();
+	remove_redundant_operators();
 }
 std::string Parser::getUnParsed() const {
 	return context.substr(current_index);

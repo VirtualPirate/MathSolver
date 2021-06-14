@@ -31,7 +31,8 @@ class Parser{
 
 	void remove_redundant_operators(); // This function strips out redundant operator characters. Example: "-+" is deduced to "-" only
 public:
-	Parser(std::string);
+	Parser(const char*);
+	Parser(const std::string&);
 	std::string getUnParsed() const;
 
 	void create_tokens();
