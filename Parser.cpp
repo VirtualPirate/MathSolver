@@ -91,17 +91,25 @@ void Parser::remove_redundant_operators() {
 			key_ = Parser::lookup_table_a.find(op_pair);
 			if (key_ != Parser::lookup_table_a.cend()) { // If the key is present
 				if (key_->second != '\0') { // if key_->second is a valid operator
-					*lower = key_->second;
-					tokens.erase(upper);
-					continue;
+					*upper = key_->second;
+					*lower = '\0';
 				}
 			}
 			else
-				throw std::runtime_error{ "Error parsing - Invoked from Parser::remove_redundant_operators()" };
+				throw std::runtime_error{ "Error parsing - Invoked from Parser::remap_tokens()" };
 		}
 		lower++;
 		upper++;
 	}
+
+	std::vector<Token> new_tokens;
+	new_tokens.reserve(tokens.size());
+	for (auto each = tokens.begin(); each != tokens.end(); each++) {
+		if (std::holds_alternative<char>(*each) && std::get<char>(*each) == '\0')
+			continue;
+		new_tokens.push_back(*each);
+	}
+	tokens = new_tokens;
 }
 
 void Parser::create_tokens(){
@@ -124,13 +132,15 @@ void Parser::debug_info(){
 		else
 			std::cout << '[' << std::get<char>(each) << "] ";
 	}
+	std::cout << std::endl;
 }
 
 //Checks if a chararter is an operator
 bool Parser::is_operator(const char& ref) {
-	for (char each : "*+-/^")
+	for (char each : "*+-/^") {
 		if (ref == each)
 			return true;
+	}
 
 	return false;
 }
