@@ -1,9 +1,30 @@
 #include <iostream>
 #include <cstdlib>
 #include <algorithm>
+#include <stack>
+
 
 #include "Operand.hpp"
 #include "Parser.hpp"
+
+std::ostream& operator<<(std::ostream& os, Token const& v) {
+	std::visit([&os](auto const& e) {os << e; }, v);
+	return os;
+}
+
+std::unordered_map<std::pair<char, char>, char, pair_hash> const Parser::lookup_table_a = {
+	{{'+', '+'}, '+'},
+	{{'+', '-'}, '-'},
+	{{'-', '+'}, '-'},
+	{{'-', '-'}, '+'},
+	{{'*', '+'}, '*'},
+	{{'*', '-'}, '\0'},
+	{{'/', '+'}, '/'},
+	{{'/', '-'}, '\0'},
+	{{'^', '+'}, '^'},
+	{{'^', '-'}, '\0'}
+};
+
 
 //Parser Implementation
 Parser::Parser(std::string val): context{val}, current_index{0}, tokens{}{
@@ -50,6 +71,32 @@ std::optional<char> Parser::match_char(){
 		}
 		return {};
 }
+
+void Parser::remove_redundant_operators() {
+	std::pair<char, char> op_pair;
+	auto lower = tokens.begin();
+	auto upper = tokens.begin() + 1;
+	std::unordered_map<std::pair<char, char>, char, pair_hash>::const_iterator key_;
+	while (upper != tokens.end()) {
+		if (Parser::is_operator(*lower) && Parser::is_operator(*upper)) {
+			op_pair.first = std::get<char>(*lower);
+			op_pair.second = std::get<char>(*upper);
+			key_ = Parser::lookup_table_a.find(op_pair);
+			if (key_ != Parser::lookup_table_a.cend()) { // If the key is present
+				if (key_->second != '\0') { // if key_->second is a valid operator
+					*lower = key_->second;
+					tokens.erase(upper);
+					continue;
+				}
+			}
+			else
+				throw std::runtime_error{ "Error parsing - Invoked from Parser::remove_redundant_operators()" };
+		}
+		lower++;
+		upper++;
+	}
+}
+
 void Parser::create_tokens(){
 	std::optional<double> number_match;
 	std::optional<char> char_match;
@@ -70,4 +117,29 @@ void Parser::debug_info(){
 		else
 			std::cout << '[' << std::get<char>(each) << "] ";
 	}
+}
+
+//Checks if a chararter is an operator
+bool Parser::is_operator(const char& ref) {
+	for (char each : "*+-/^")
+		if (ref == each)
+			return true;
+
+	return false;
+}
+
+// Checks if a Token is an operator.
+// Calls Parser::is_operator(const char& ref) internally
+bool Parser::is_operator(const Token& ref) {
+	if (std::holds_alternative<char>(ref))
+		return Parser::is_operator(std::get<char>(ref));
+	return false;
+}
+
+// Checks if a Token is double type
+bool Parser::is_operand(const Token& ref) {
+	if (std::holds_alternative<double>(ref))
+		return true;
+	else
+		return isalpha(std::get<char>(ref));
 }
