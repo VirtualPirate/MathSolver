@@ -121,7 +121,7 @@ void Parser::create_tokens(){
 		else if(char_match = match_char())
 			tokens.push_back(char_match.value());
 		else
-			std::runtime_error{"Parser::create_tokens(): Invalid token. Can't be parsed"};
+			throw std::runtime_error{"Parser::create_tokens(): Invalid token. Can't be parsed"};
 	}
 }
 
