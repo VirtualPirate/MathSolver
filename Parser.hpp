@@ -30,6 +30,7 @@ class Parser{
 	std::optional<char> match_char();
 
 	void remove_redundant_operators(); // This function strips out redundant operator characters. Example: "-+" is deduced to "-" only
+	void generalize_operators(); // Generalize the operator - and / to + and *
 public:
 	Parser(const char*);
 	Parser(const std::string&);

@@ -32,12 +32,16 @@ Parser::Parser(const char* val) : context{ val }, current_index{ 0 }, tokens{}{
 		context.erase(std::remove(context.begin(), context.end(), each), context.end());
 	create_tokens();
 	remove_redundant_operators();
+	std::cout << "debug info -> "; this->debug_info();
+	generalize_operators();
 }
 Parser::Parser(const std::string& val): context{val}, current_index{0}, tokens{}{
 	for(char each: " \f\n\r\t\v")
 		context.erase(std::remove(context.begin(), context.end(), each), context.end());
 	create_tokens();
 	remove_redundant_operators();
+	std::cout << "debug info -> "; this->debug_info();
+	generalize_operators();
 }
 std::string Parser::getUnParsed() const {
 	return context.substr(current_index);
@@ -109,7 +113,53 @@ void Parser::remove_redundant_operators() {
 			continue;
 		new_tokens.push_back(*each);
 	}
-	tokens = new_tokens;
+	tokens = std::move(new_tokens);
+}
+
+void Parser::generalize_operators() {
+	
+	Token token_minus{ '-' };
+	Token token_divide{ '/' };
+
+	bool has_operand = false;
+	std::vector<Token> new_tokens;
+	size_t minus_count = std::count(tokens.begin(), tokens.end(), token_minus);
+	size_t div_count = std::count(tokens.begin(), tokens.end(), token_divide);
+	new_tokens.reserve(tokens.size() + (minus_count + div_count) * 2);
+	for (const Token& each : tokens) {
+		if (each == token_minus) {
+			if (has_operand) {
+				new_tokens.push_back('+');
+				new_tokens.push_back((double)-1);
+			}
+			else
+				new_tokens.push_back((double)-1);
+			continue;
+		}
+		else if (Parser::is_operand(each)) {
+			has_operand = true;
+		}
+		else {
+			has_operand = false;
+		}
+		new_tokens.push_back(each);
+	}
+
+	size_t index = 0;
+	while (index < new_tokens.size()) {
+		if (new_tokens[index] == token_minus) {
+			if (index+1 >= new_tokens.size())
+				break;
+			new_tokens[index] = new_tokens[index + 1];
+			new_tokens[index + 1] = Token{ '^' };
+			new_tokens.insert(new_tokens.begin() + index + 2, (double)-1);
+			index++;
+		}
+		index++;
+	}
+
+	tokens = std::move(new_tokens);
+
 }
 
 void Parser::create_tokens(){
