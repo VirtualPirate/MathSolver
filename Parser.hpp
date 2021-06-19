@@ -42,6 +42,8 @@ public:
 	static bool is_operator(const char&);
 	static bool is_operator(const Token&);
 	static bool is_operand(const Token&);
+
+	static std::string remove_redundant_operators_2(std::string);
 };
 
 #endif

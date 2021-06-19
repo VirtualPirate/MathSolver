@@ -85,8 +85,13 @@ int main() {
 	Parser parser{ str_0 };
 	parser.debug_info();
 
-	Parser parser_0{ "-+--++-200 *+ x" };
+	std::string str_1 = "-+--++-200 *+ x";
+	Parser parser_0{str_1};
 	parser_0.debug_info();
+
+	std::cout << std::endl;
+	std::cout << Parser::remove_redundant_operators_2(str_0) << std::endl;
+	std::cout << Parser::remove_redundant_operators_2(str_1) << std::endl;
 	// cout << "Mathced Number: "<< parser.match_number().getMatchedString() << endl;
 
 	cin.get();
