@@ -29,6 +29,7 @@ class Parser{
 	std::optional<double> match_number();
 	std::optional<char> match_char();
 
+	void remove_whitespaces();
 	void remove_redundant_operators(); // This function strips out redundant operator characters. Example: "-+" is deduced to "-" only
 	void generalize_operators(); // Generalize the operator - and / to + and *
 public:

@@ -28,19 +28,17 @@ std::unordered_map<std::pair<char, char>, char, pair_hash> const Parser::lookup_
 
 //Parser Implementation
 Parser::Parser(const char* val) : context{ val }, current_index{ 0 }, tokens{}{
-	for (char each : " \f\n\r\t\v")
-		context.erase(std::remove(context.begin(), context.end(), each), context.end());
-	create_tokens();
+	remove_whitespaces();
 	remove_redundant_operators();
-	std::cout << "debug info -> "; this->debug_info();
+	create_tokens();
+	//std::cout << "debug info -> "; this->debug_info();
 	generalize_operators();
 }
 Parser::Parser(const std::string& val): context{val}, current_index{0}, tokens{}{
-	for(char each: " \f\n\r\t\v")
-		context.erase(std::remove(context.begin(), context.end(), each), context.end());
-	create_tokens();
+	remove_whitespaces();
 	remove_redundant_operators();
-	std::cout << "debug info -> "; this->debug_info();
+	create_tokens();
+	//std::cout << "debug info -> "; this->debug_info();
 	generalize_operators();
 }
 std::string Parser::getUnParsed() const {
@@ -51,7 +49,7 @@ std::optional<double> Parser::match_number(){
 	bool period = false;
 	bool has_digit = false;
 	auto iter = context.cbegin() + current_index;
-	if(*iter == '-'){
+	if(*iter == '-' || *iter == '+') {
 		match_length++;
 		iter++;
 	}
@@ -81,6 +79,11 @@ std::optional<char> Parser::match_char(){
 			return *iter;
 		}
 		return {};
+}
+
+void Parser::remove_whitespaces() {
+	for (char each : " \f\n\r\t\v")
+		context.erase(std::remove(context.begin(), context.end(), each), context.end());
 }
 
 std::string Parser::remove_redundant_operators_2(std::string expression) {
@@ -132,6 +135,7 @@ std::string Parser::remove_redundant_operators_2(std::string expression) {
 }
 
 void Parser::remove_redundant_operators() {
+	/*
 	std::pair<char, char> op_pair;
 	auto lower = tokens.begin();
 	auto upper = tokens.begin() + 1;
@@ -162,6 +166,51 @@ void Parser::remove_redundant_operators() {
 		new_tokens.push_back(*each);
 	}
 	tokens = std::move(new_tokens);
+	*/
+	size_t expression_length = context.size();
+
+	std::string str;
+	str.reserve(expression_length);
+
+	size_t lower_index = 0;
+	size_t upper_index = 1;
+
+	char lower_char = '\0';
+	char upper_char = '\0';
+	std::unordered_map<std::pair<char, char>, char, pair_hash>::const_iterator key_;
+	std::pair<char, char> op_pair;
+
+	while (upper_index < expression_length) {
+
+		lower_char = context[lower_index];
+		upper_char = context[upper_index];
+
+		if (Parser::is_operator(lower_char) && Parser::is_operator(upper_char)) {
+			op_pair.first = lower_char;
+			op_pair.second = upper_char;
+			key_ = Parser::lookup_table_a.find(op_pair);
+			if (key_ != Parser::lookup_table_a.cend() && key_->second != '\0') {
+				context[upper_index] = key_->second;
+				context[lower_index] = '\0';
+			}
+			else
+				throw std::runtime_error{ "Error parsing - Invoked from Parser::remove_redunadant_operators()" };
+
+		}
+
+		upper_index++;
+		lower_index++;
+	}
+
+	char each_char = '\0';
+	for (size_t index = 0; index < expression_length; index++) {
+		each_char = context[index];
+		if (each_char != '\0')
+			str.push_back(each_char);
+	}
+
+	context = std::move(str);
+
 }
 
 void Parser::generalize_operators() {
