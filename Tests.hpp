@@ -117,6 +117,8 @@ namespace test{
 
     void integrated_test(const Operand&, const Operand&);
     void integrated_test_simplify(const Operand&, const Operand&);
+
+    void expression_parsing_test();
 }
 
 #endif

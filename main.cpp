@@ -81,19 +81,7 @@ int main() {
 
 	cout << "num6.getBase() = " << (Operand{ num6 }).getBase() << endl;
 
-	std::string str_0 = " -200 +-x^ 2 ( 2.5x + 3y^z)";
-	Parser parser{ str_0 };
-	parser.debug_info();
-
-	std::string str_1 = "-+--++-200 *+ x";
-	Parser parser_0{str_1};
-	parser_0.debug_info();
-
-	std::cout << std::endl;
-	std::cout << Parser::remove_redundant_operators_2(str_0) << std::endl;
-	std::cout << Parser::remove_redundant_operators_2(str_1) << std::endl;
-	// cout << "Mathced Number: "<< parser.match_number().getMatchedString() << endl;
-
+	test::expression_parsing_test();
 	cin.get();
 	return 0;
 }

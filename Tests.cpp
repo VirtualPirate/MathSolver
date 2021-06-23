@@ -74,5 +74,22 @@ namespace test{
 		pow_test_simplify(first, second);
 		cout << endl;
 	}
+
+	void expression_parsing_test() {
+		const char* exp_0 = " -200 +-x^ 2 ( 2.5x + 3y^z)";
+		const char* exp_1 = "-+--++-200 *+ x";
+		const char* exp_2 = "(a + b - c) ^ 3";
+		const char* exp_3 = "a^2 + b^2 - 2ab";
+
+		Parser parser_0{ exp_0 };
+		Parser parser_1{ exp_1 };
+		Parser parser_2{ exp_2 };
+		Parser parser_3{ exp_3 };
+
+		parser_0.debug_info();
+		parser_1.debug_info();
+		parser_2.debug_info();
+		parser_3.debug_info();
+	}
 }
 

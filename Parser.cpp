@@ -31,14 +31,12 @@ Parser::Parser(const char* val) : context{ val }, current_index{ 0 }, tokens{}{
 	remove_whitespaces();
 	remove_redundant_operators();
 	create_tokens();
-	//std::cout << "debug info -> "; this->debug_info();
 	generalize_operators();
 }
 Parser::Parser(const std::string& val): context{val}, current_index{0}, tokens{}{
 	remove_whitespaces();
 	remove_redundant_operators();
 	create_tokens();
-	//std::cout << "debug info -> "; this->debug_info();
 	generalize_operators();
 }
 std::string Parser::getUnParsed() const {
@@ -48,10 +46,12 @@ std::optional<double> Parser::match_number(){
 	size_t match_length = 0;
 	bool period = false;
 	bool has_digit = false;
+	bool matched_operator = false;
 	auto iter = context.cbegin() + current_index;
 	if(*iter == '-' || *iter == '+') {
 		match_length++;
 		iter++;
+		matched_operator = true;
 	}
 	for(;iter!=context.cend(); iter++){
 		if(isdigit(*iter)){
@@ -67,6 +67,8 @@ std::optional<double> Parser::match_number(){
 	if(has_digit){
 		double value = std::stod(context.substr(current_index, match_length));
 		current_index += match_length;
+		if (matched_operator)
+			tokens.emplace_back('+');
 		return value;
 	}
 	return {};
