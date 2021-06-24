@@ -137,38 +137,6 @@ std::string Parser::remove_redundant_operators_2(std::string expression) {
 }
 
 void Parser::remove_redundant_operators() {
-	/*
-	std::pair<char, char> op_pair;
-	auto lower = tokens.begin();
-	auto upper = tokens.begin() + 1;
-	std::unordered_map<std::pair<char, char>, char, pair_hash>::const_iterator key_;
-	while (upper != tokens.end()) {
-		if (Parser::is_operator(*lower) && Parser::is_operator(*upper)) {
-			op_pair.first = std::get<char>(*lower);
-			op_pair.second = std::get<char>(*upper);
-			key_ = Parser::lookup_table_a.find(op_pair);
-			if (key_ != Parser::lookup_table_a.cend()) { // If the key is present
-				if (key_->second != '\0') { // if key_->second is a valid operator
-					*upper = key_->second;
-					*lower = '\0';
-				}
-			}
-			else
-				throw std::runtime_error{ "Error parsing - Invoked from Parser::remap_tokens()" };
-		}
-		lower++;
-		upper++;
-	}
-
-	std::vector<Token> new_tokens;
-	new_tokens.reserve(tokens.size());
-	for (auto each = tokens.begin(); each != tokens.end(); each++) {
-		if (std::holds_alternative<char>(*each) && std::get<char>(*each) == '\0')
-			continue;
-		new_tokens.push_back(*each);
-	}
-	tokens = std::move(new_tokens);
-	*/
 	size_t expression_length = context.size();
 
 	std::string str;
@@ -316,22 +284,39 @@ inline bool Parser::is_brace(const Token& ref, const char& brace) {
 	return false;
 }
 
+// checks if a Token is '('
 bool Parser::is_leftbrace(const Token& ref) {
 	return Parser::is_brace(ref, '(');
 }
 
+// checks if a Token is ')'
 bool Parser::is_rightbrace(const Token& ref) {
 	return Parser::is_brace(ref, ')');
 }
 
-/*
+
 TokensConstIteratorPair grab_group(TokensConstIterator begin, TokensConstIterator end) {
 	bool group_started = false;
 	unsigned brace_count = 0;
 	TokensConstIteratorPair group;
 
 	for ( ;begin < end; begin++) {
-		if(*begin == '(')
+		if (Parser::is_leftbrace(*begin)) {
+			if (brace_count != 0)
+				group.first = begin;
+			brace_count++;
+			continue;
+		}
+		else if (Parser::is_rightbrace(*begin))
+			brace_count--;
+		if (brace_count > 0) {
+			group.second = begin;
+			group_started = true;
+		}
+		else if (group_started)
+			break;
+			
 	}
+
+	return group;
 }
-*/

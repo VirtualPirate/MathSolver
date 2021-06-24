@@ -48,9 +48,9 @@ public:
 	static bool is_operator(const Token&);
 	static bool is_operand(const Token&);
 
-	inline bool is_brace(const Token&, const char&);
-	bool is_leftbrace(const Token&);
-	bool is_rightbrace(const Token&);
+	static inline bool is_brace(const Token&, const char&);
+	static bool is_leftbrace(const Token&);
+	static bool is_rightbrace(const Token&);
 
 	TokensConstIteratorPair grab_group(TokensConstIterator begin, TokensConstIterator end);
 
