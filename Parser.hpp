@@ -9,6 +9,8 @@
 #include <vector>
 
 using Token = std::variant<double, char>;
+using TokensConstIterator = std::vector<Token>::const_iterator;
+using TokensConstIteratorPair = std::pair<TokensConstIterator, TokensConstIterator>;
 
 //This hash struct is used by the lookup_table
 struct pair_hash {
@@ -32,6 +34,8 @@ class Parser{
 	void remove_whitespaces();
 	void remove_redundant_operators(); // This function strips out redundant operator characters. Example: "-+" is deduced to "-" only
 	void generalize_operators(); // Generalize the operator - and / to + and *
+
+	Operand Parse_Expression(TokensConstIterator begin, TokensConstIterator end);
 public:
 	Parser(const char*);
 	Parser(const std::string&);
@@ -43,6 +47,12 @@ public:
 	static bool is_operator(const char&);
 	static bool is_operator(const Token&);
 	static bool is_operand(const Token&);
+
+	inline bool is_brace(const Token&, const char&);
+	bool is_leftbrace(const Token&);
+	bool is_rightbrace(const Token&);
+
+	TokensConstIteratorPair grab_group(TokensConstIterator begin, TokensConstIterator end);
 
 	static std::string remove_redundant_operators_2(std::string);
 };

@@ -246,7 +246,7 @@ void Parser::generalize_operators() {
 
 	size_t index = 0;
 	while (index < new_tokens.size()) {
-		if (new_tokens[index] == token_minus) {
+		if (new_tokens[index] == token_divide) {
 			if (index+1 >= new_tokens.size())
 				break;
 			new_tokens[index] = new_tokens[index + 1];
@@ -309,3 +309,29 @@ bool Parser::is_operand(const Token& ref) {
 	else
 		return isalpha(std::get<char>(ref));
 }
+
+inline bool Parser::is_brace(const Token& ref, const char& brace) {
+	if (std::holds_alternative<char>(ref) && std::get<char>(ref) == brace)
+		return true;
+	return false;
+}
+
+bool Parser::is_leftbrace(const Token& ref) {
+	return Parser::is_brace(ref, '(');
+}
+
+bool Parser::is_rightbrace(const Token& ref) {
+	return Parser::is_brace(ref, ')');
+}
+
+/*
+TokensConstIteratorPair grab_group(TokensConstIterator begin, TokensConstIterator end) {
+	bool group_started = false;
+	unsigned brace_count = 0;
+	TokensConstIteratorPair group;
+
+	for ( ;begin < end; begin++) {
+		if(*begin == '(')
+	}
+}
+*/
