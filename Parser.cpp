@@ -32,15 +32,21 @@ Parser::Parser(const char* val) : context{ val }, current_index{ 0 }, tokens{}{
 	remove_redundant_operators();
 	create_tokens();
 	generalize_operators();
+	strip_operators();
 }
 Parser::Parser(const std::string& val): context{val}, current_index{0}, tokens{}{
 	remove_whitespaces();
 	remove_redundant_operators();
 	create_tokens();
 	generalize_operators();
+	strip_operators();
 }
 std::string Parser::getUnParsed() const {
 	return context.substr(current_index);
+}
+
+const std::vector<Token>& Parser::getTokens() const {
+	return tokens;
 }
 std::optional<double> Parser::match_number(){
 	size_t match_length = 0;
@@ -252,6 +258,14 @@ void Parser::debug_info(){
 	std::cout << std::endl;
 }
 
+void Parser::test_grab_group() {
+	auto iter = Parser::grab_group(tokens.cbegin(), tokens.cend());
+	std::cout << "{ ";
+	for (; iter.first < iter.second; (iter.first)++)
+		std::cout << *(iter.first);
+	std::cout << "}\n";
+}
+
 //Checks if a chararter is an operator
 bool Parser::is_operator(const char& ref) {
 	for (char each : "*+-/^") {
@@ -295,28 +309,49 @@ bool Parser::is_rightbrace(const Token& ref) {
 }
 
 
-TokensConstIteratorPair grab_group(TokensConstIterator begin, TokensConstIterator end) {
+TokensConstIteratorPair Parser::grab_group(TokensConstIterator begin, TokensConstIterator end) {
+	bool group_continuing = false;
 	bool group_started = false;
 	unsigned brace_count = 0;
 	TokensConstIteratorPair group;
 
 	for ( ;begin < end; begin++) {
 		if (Parser::is_leftbrace(*begin)) {
+			if (!group_started) {
+				group.first = begin+1;
+				group_started = true;
+			}
+
 			if (brace_count != 0)
-				group.first = begin;
+				group.second = begin+1;
 			brace_count++;
 			continue;
 		}
 		else if (Parser::is_rightbrace(*begin))
 			brace_count--;
 		if (brace_count > 0) {
-			group.second = begin;
-			group_started = true;
+			group.second = begin+1;
+			group_continuing = true;
 		}
-		else if (group_started)
+		else if (group_continuing)
 			break;
 			
 	}
 
 	return group;
+}
+
+inline void Parser::lstrip_operators() {
+	while (Parser::is_operator(*(tokens.begin())))
+		tokens.erase(tokens.begin());
+}
+
+inline void Parser::rstrip_operators() {
+	while (Parser::is_operator(*(tokens.rbegin())))
+		tokens.erase((tokens.rbegin()+1).base());
+}
+
+void Parser::strip_operators() {
+	lstrip_operators();
+	rstrip_operators();
 }

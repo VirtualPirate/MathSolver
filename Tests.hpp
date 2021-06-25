@@ -1,6 +1,10 @@
 #ifndef Tests_H
 #define Tests_H
 
+#include <variant>
+#include <vector>
+#include <utility>
+
 class Operand;
 class Constant;
 class Variable;
@@ -119,6 +123,7 @@ namespace test{
     void integrated_test_simplify(const Operand&, const Operand&);
 
     void expression_parsing_test();
+    void parsing_group_test();
 }
 
 #endif

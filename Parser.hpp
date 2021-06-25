@@ -12,6 +12,8 @@ using Token = std::variant<double, char>;
 using TokensConstIterator = std::vector<Token>::const_iterator;
 using TokensConstIteratorPair = std::pair<TokensConstIterator, TokensConstIterator>;
 
+std::ostream& operator<<(std::ostream&, Token const&);
+
 //This hash struct is used by the lookup_table
 struct pair_hash {
 	template <class T1, class T2>
@@ -30,6 +32,9 @@ class Parser{
 
 	std::optional<double> match_number();
 	std::optional<char> match_char();
+	inline void lstrip_operators(); // Strips out all the operators on the left
+	inline void rstrip_operators(); // Strips out all the operators on the right
+	void strip_operators(); // Strips out all the operators on the left and right
 
 	void remove_whitespaces();
 	void remove_redundant_operators(); // This function strips out redundant operator characters. Example: "-+" is deduced to "-" only
@@ -41,8 +46,11 @@ public:
 	Parser(const std::string&);
 	std::string getUnParsed() const;
 
+	const std::vector<Token>& getTokens() const;
+
 	void create_tokens();
 	void debug_info();
+	void test_grab_group();
 
 	static bool is_operator(const char&);
 	static bool is_operator(const Token&);
@@ -52,7 +60,7 @@ public:
 	static bool is_leftbrace(const Token&);
 	static bool is_rightbrace(const Token&);
 
-	TokensConstIteratorPair grab_group(TokensConstIterator begin, TokensConstIterator end);
+	static TokensConstIteratorPair grab_group(TokensConstIterator begin, TokensConstIterator end);
 
 	static std::string remove_redundant_operators_2(std::string);
 };

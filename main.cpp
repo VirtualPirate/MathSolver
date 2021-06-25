@@ -82,6 +82,7 @@ int main() {
 	cout << "num6.getBase() = " << (Operand{ num6 }).getBase() << endl;
 
 	test::expression_parsing_test();
+	test::parsing_group_test();
 	cin.get();
 	return 0;
 }
