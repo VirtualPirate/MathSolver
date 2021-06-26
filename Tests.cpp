@@ -129,6 +129,34 @@ namespace test{
 
 	void grab_term_test()
 	{
+
+		std::cout << "\n\n[test] grab_term_test started \n\n";
+		const char* exp_0 = " -200 +-x^ 2 ( 2.5x + 3y^z)";
+		const char* exp_1 = "(a + b - c) ^ 3";
+		const char* exp_2 = "(a/b)^2 + 3/4";
+		const char* exp_3 = "((a+b)c + (c + a)) + h";
+
+		Parser parser_0{ exp_0 };
+		Parser parser_1{ exp_1 };
+		Parser parser_2{ exp_2 };
+		Parser parser_3{ exp_3 };
+
+		auto tokens_0 = parser_0.getTokens();
+		auto tokens_1 = parser_1.getTokens();
+		auto tokens_2 = parser_2.getTokens();
+		auto tokens_3 = parser_3.getTokens();
+
+		auto iter_pair_0 = Parser::grab_term(tokens_0.cbegin(), tokens_0.cend());
+		print_constiteratorpair(iter_pair_0);
+
+		auto iter_pair_1 = Parser::grab_term(tokens_1.cbegin(), tokens_1.cend());
+		print_constiteratorpair(iter_pair_1);
+
+		auto iter_pair_2 = Parser::grab_term(tokens_2.cbegin(), tokens_2.cend());
+		print_constiteratorpair(iter_pair_2);
+
+		auto iter_pair_3 = Parser::grab_term(tokens_3.cbegin(), tokens_3.cend());
+		print_constiteratorpair(iter_pair_3);
 	}
 
 	void print_constiteratorpair(TokensConstIteratorPair ref) {

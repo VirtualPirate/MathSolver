@@ -83,6 +83,7 @@ int main() {
 
 	test::expression_parsing_test();
 	test::parsing_group_test();
+	test::grab_term_test();
 	cin.get();
 	return 0;
 }
