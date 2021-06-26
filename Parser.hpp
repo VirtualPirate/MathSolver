@@ -13,6 +13,8 @@ using TokensConstIterator = std::vector<Token>::const_iterator;
 using TokensConstIteratorPair = std::pair<TokensConstIterator, TokensConstIterator>;
 
 std::ostream& operator<<(std::ostream&, Token const&);
+bool operator==(const Token&, const char&);
+bool operator!=(const Token&, const char&);
 
 //This hash struct is used by the lookup_table
 struct pair_hash {
@@ -61,6 +63,7 @@ public:
 	static bool is_rightbrace(const Token&);
 
 	static TokensConstIteratorPair grab_group(TokensConstIterator begin, TokensConstIterator end);
+	static TokensConstIteratorPair grab_term(TokensConstIterator begin, TokensConstIterator end);
 
 	static std::string remove_redundant_operators_2(std::string);
 };

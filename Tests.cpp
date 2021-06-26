@@ -113,38 +113,29 @@ namespace test{
 		auto tokens_3 = parser_3.getTokens();
 
 		auto iter_pair_0 = Parser::grab_group(tokens_0.cbegin(), tokens_0.cend());
-
-		std::cout << "{ ";
-		for (; iter_pair_0.first < iter_pair_0.second; iter_pair_0.first++) {
-			std::cout << *(iter_pair_0.first);
-		}
-		std::cout << "}\n";
+		print_constiteratorpair(iter_pair_0);
 
 		auto iter_pair_1 = Parser::grab_group(tokens_1.cbegin(), tokens_1.cend());
-
-		std::cout << "{ ";
-		for (; iter_pair_1.first < iter_pair_1.second; iter_pair_1.first++) {
-			std::cout << *(iter_pair_1.first);
-		}
-		std::cout << "}\n";
+		print_constiteratorpair(iter_pair_1);
 
 		auto iter_pair_2 = Parser::grab_group(tokens_2.cbegin(), tokens_2.cend());
+		print_constiteratorpair(iter_pair_2);
 
-		std::cout << "{ ";
-		for (; iter_pair_2.first < iter_pair_2.second; iter_pair_2.first++) {
-			std::cout << *(iter_pair_2.first);
-		}
-		std::cout << "}\n";
 		auto iter_pair_3 = Parser::grab_group(tokens_3.cbegin(), tokens_3.cend());	
-		///*
+		print_constiteratorpair(iter_pair_3);
+
+
+	}
+
+	void grab_term_test()
+	{
+	}
+
+	void print_constiteratorpair(TokensConstIteratorPair ref) {
 		std::cout << "{ ";
-		for (; iter_pair_3.first < iter_pair_3.second; iter_pair_3.first++) {
-			std::cout << *(iter_pair_3.first);
-		}
+		for (; ref.first < ref.second; ref.first++)
+			std::cout << *(ref.first);
 		std::cout << "}\n";
-		//*/
-
-
 	}
 }
 

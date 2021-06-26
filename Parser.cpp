@@ -12,6 +12,16 @@ std::ostream& operator<<(std::ostream& os, Token const& v) {
 	return os;
 }
 
+bool operator==(const Token& first, const char& second) {
+	if (std::holds_alternative<char>(first) && std::get<char>(first) == second)
+		return true;
+	return false;
+}
+
+bool operator!=(const Token& first, const char& second) {
+	return !(first == second);
+}
+
 std::unordered_map<std::pair<char, char>, char, pair_hash> const Parser::lookup_table_a = {
 	{{'+', '+'}, '+'},
 	{{'+', '-'}, '-'},
@@ -340,6 +350,28 @@ TokensConstIteratorPair Parser::grab_group(TokensConstIterator begin, TokensCons
 
 	return group;
 }
+
+TokensConstIteratorPair Parser::grab_term(TokensConstIterator begin, TokensConstIterator end) {
+	bool term_started = false;
+	TokensConstIteratorPair group;
+
+	for (; begin < end; begin++) {
+		if (*begin != '+') {
+			if (!term_started) {
+				term_started = false;
+				group.first = begin;
+			}
+			if (Parser::is_leftbrace(*begin))
+				begin = Parser::grab_group(begin, end).second;
+			group.second = begin + 1;
+		}
+		else
+			return group;
+	}
+
+	return group;
+}
+
 
 inline void Parser::lstrip_operators() {
 	while (Parser::is_operator(*(tokens.begin())))
