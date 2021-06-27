@@ -11,6 +11,11 @@ class Variable;
 class Term;
 class OperandList;
 class Expression: public OperandList{
+
+	bool is_subexpression = false;
+
+	using OperandList::OperandList;
+
 	friend class Constant;
 	friend class Operand;
 	friend class Variable;
@@ -30,6 +35,9 @@ public:
 	bool negative_power() const;
 
 	Expression getBase() const;
+
+	void setSubexpression(bool);
+	bool isSubexpression() const;
 
 	void simplify_();
 	Operand simplify() const;

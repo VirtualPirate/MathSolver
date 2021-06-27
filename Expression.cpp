@@ -58,6 +58,8 @@ Operand Expression::simplify() const {
 Expression Expression::getBase() const{
 	return Expression{fields};
 }
+void Expression::setSubexpression(bool is_sub) { is_subexpression = is_sub; }
+bool Expression::isSubexpression() const { return is_subexpression; }
 //Operand to double arithmetic operators
 Operand Expression::operator+(const double& other) const {return *this + Operand{other};}
 Operand Expression::operator-(const double& other) const {return *this - Operand{other};}
