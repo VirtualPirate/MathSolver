@@ -5,6 +5,10 @@
 
 
 #include "Operand.hpp"
+#include "Constant.hpp"
+#include "Variable.hpp"
+#include "Term.hpp"
+#include "Expression.hpp"
 #include "Parser.hpp"
 
 std::ostream& operator<<(std::ostream& os, Token const& v) {
@@ -97,6 +101,40 @@ std::optional<char> Parser::match_char(){
 			return *iter;
 		}
 		return {};
+}
+
+OperandAndTokensIterator Parser::match_power(TokensConstIterator begin, TokensConstIterator end) {
+	OperandAndTokensIterator return_value;
+	TokensConstIteratorPair group_iter;
+	std::stack<Operand> power_stack;
+	while (begin < end && *begin == '^') {
+		if (Parser::is_double(*(begin + 1)))
+			power_stack.push(std::get<double>(*(begin + 1)));
+		else if (Parser::is_variable(*(begin + 1)))
+			power_stack.push(std::get<char>(*(begin + 1)));
+		else if (Parser::is_leftbrace(*(begin + 1))) {
+			group_iter = Parser::grab_group(begin+1, end);
+			//test::print_constiteratorpair(group_iter);
+			//std::cout << "*(group_iter.second + 1)" << *(group_iter.second + 1) << std::endl;
+			power_stack.push(Parse_Expression(group_iter.first, group_iter.second, true));
+			//std::cout << "power_stack.top() = " << power_stack.top() << std::endl;
+			begin = group_iter.second + 1;
+			continue;
+		}
+		begin += 2;
+	}
+	//begin++;
+
+	Operand each_operand{};
+	while (!power_stack.empty()) {
+		if (each_operand) 
+			each_operand = power_stack.top().setPowerN_return(each_operand);
+		else
+			each_operand = power_stack.top().setPowerN_return((double)1);
+		power_stack.pop();
+	}
+
+	return { each_operand, begin };
 }
 
 void Parser::remove_whitespaces() {
@@ -245,6 +283,53 @@ void Parser::generalize_operators() {
 
 }
 
+
+Operand Parser::Parse_Expression(TokensConstIterator begin, TokensConstIterator end, bool is_sub) {
+	Expression result{};
+	result.setNull(false);
+	std::vector<Operand> fields;
+
+	result.setSubexpression(is_sub);
+
+	TokensConstIteratorPair group_iter;
+	while (begin < end) {
+		auto[first, second] = Parser::grab_term(begin, end);
+
+		//std::cout << "each_term = ";
+		//test::print_constiteratorpair({ first ,second });
+		//std::cout << std::endl;
+		begin = second;
+		fields.clear();
+
+		while (first < second) {
+			if (Parser::is_double(*first))
+				fields.push_back(std::get<double>(*first));
+			else if (Parser::is_variable(*first))
+				fields.push_back(std::get<char>(*first));
+			else if (Parser::is_leftbrace(*first)) {
+				group_iter = Parser::grab_group(begin, end);
+				fields.push_back(Parse_Expression(group_iter.first, group_iter.second, true));
+				first = group_iter.second;
+				continue;
+			}
+			else if (*first == '^') {
+				OperandAndTokensIterator power_return = Parser::match_power(first, second);
+				fields.back() = fields.back().setPowerN_return(power_return.first);
+				first = power_return.second;
+			}
+			first++;
+		}
+
+		//std::cout << "Term{fields} = " << Term{ fields } << std::endl;
+		//std::cout << "fields.size() = " << fields.size() << std::endl;
+
+		result.insert(Term{ fields });
+	}
+
+	return result;
+
+}
+
 void Parser::create_tokens(){
 	std::optional<double> number_match;
 	std::optional<char> char_match;
@@ -301,20 +386,25 @@ bool Parser::is_operand(const Token& ref) {
 	else
 		return isalpha(std::get<char>(ref));
 }
+inline bool Parser::is_double(const Token& ref) {
+	return std::holds_alternative<double>(ref);
+}
+
+inline bool Parser::is_variable(const Token& ref) {
+	return std::holds_alternative<char>(ref) && isalpha(std::get<char>(ref));
+}
 
 inline bool Parser::is_brace(const Token& ref, const char& brace) {
-	if (std::holds_alternative<char>(ref) && std::get<char>(ref) == brace)
-		return true;
-	return false;
+	return std::holds_alternative<char>(ref) && std::get<char>(ref) == brace;
 }
 
 // checks if a Token is '('
-bool Parser::is_leftbrace(const Token& ref) {
+inline bool Parser::is_leftbrace(const Token& ref) {
 	return Parser::is_brace(ref, '(');
 }
 
 // checks if a Token is ')'
-bool Parser::is_rightbrace(const Token& ref) {
+inline bool Parser::is_rightbrace(const Token& ref) {
 	return Parser::is_brace(ref, ')');
 }
 
@@ -355,17 +445,19 @@ TokensConstIteratorPair Parser::grab_term(TokensConstIterator begin, TokensConst
 	bool term_started = false;
 	TokensConstIteratorPair group;
 
+	if (*begin == '+')
+		begin++;
 	for (; begin < end; begin++) {
 		if (*begin != '+') {
 			if (!term_started) {
-				term_started = false;
+				term_started = true;
 				group.first = begin;
 			}
 			if (Parser::is_leftbrace(*begin))
 				begin = Parser::grab_group(begin, end).second;
 			group.second = begin + 1;
 		}
-		else
+		else 
 			return group;
 	}
 

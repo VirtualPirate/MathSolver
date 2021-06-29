@@ -15,6 +15,8 @@ using Token = std::variant<double, char>;
 using TokensConstIterator = std::vector<Token>::const_iterator;
 using TokensConstIteratorPair = std::pair<TokensConstIterator, TokensConstIterator>;
 
+using OperandAndTokensIterator = std::pair<Operand, TokensConstIterator>;
+
 #define DEBUG
 #ifdef DEBUG
     #define OPERATION_LOG(TYPE_1, TYPE_2, operation) std::cout << TYPE_1 << "-" << TYPE_2 << " arithmetic " << operation << " is invoked" << std::endl;
@@ -129,6 +131,8 @@ namespace test{
     void expression_parsing_test();
     void parsing_group_test();
     void grab_term_test();
+    void match_power_test();
+    void parse_expression_test();
 
     void print_constiteratorpair(TokensConstIteratorPair);
 }

@@ -501,6 +501,10 @@ void Operand::setPower(const Operand& pow){
 		std::cout << "stdout: Operand::setPower() on nulltype" << std::endl;
 
 }
+const Operand& Operand::setPowerN_return(const Operand& pow) {
+	setPower(pow);
+	return *this;
+}
 std::string Operand::power_print() const {
 	int index = (int)type;
 	if (index > -1)

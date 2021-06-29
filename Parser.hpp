@@ -7,10 +7,13 @@
 #include <optional>
 #include <unordered_map>
 #include <vector>
+#include "Tests.hpp"
 
 using Token = std::variant<double, char>;
 using TokensConstIterator = std::vector<Token>::const_iterator;
 using TokensConstIteratorPair = std::pair<TokensConstIterator, TokensConstIterator>;
+
+using OperandAndTokensIterator = std::pair<Operand, TokensConstIterator>;
 
 std::ostream& operator<<(std::ostream&, Token const&);
 bool operator==(const Token&, const char&);
@@ -34,6 +37,7 @@ class Parser{
 
 	std::optional<double> match_number();
 	std::optional<char> match_char();
+
 	inline void lstrip_operators(); // Strips out all the operators on the left
 	inline void rstrip_operators(); // Strips out all the operators on the right
 	void strip_operators(); // Strips out all the operators on the left and right
@@ -42,7 +46,6 @@ class Parser{
 	void remove_redundant_operators(); // This function strips out redundant operator characters. Example: "-+" is deduced to "-" only
 	void generalize_operators(); // Generalize the operator - and / to + and *
 
-	Operand Parse_Expression(TokensConstIterator begin, TokensConstIterator end);
 public:
 	Parser(const char*);
 	Parser(const std::string&);
@@ -54,13 +57,18 @@ public:
 	void debug_info();
 	void test_grab_group();
 
+	static OperandAndTokensIterator match_power(TokensConstIterator, TokensConstIterator);
+	static Operand Parse_Expression(TokensConstIterator, TokensConstIterator, bool = false);
+
 	static bool is_operator(const char&);
 	static bool is_operator(const Token&);
 	static bool is_operand(const Token&);
+	inline static bool is_double(const Token&);
+	inline static bool is_variable(const Token&);
 
 	static inline bool is_brace(const Token&, const char&);
-	static bool is_leftbrace(const Token&);
-	static bool is_rightbrace(const Token&);
+	inline static bool is_leftbrace(const Token&);
+	inline static bool is_rightbrace(const Token&);
 
 	static TokensConstIteratorPair grab_group(TokensConstIterator begin, TokensConstIterator end);
 	static TokensConstIteratorPair grab_term(TokensConstIterator begin, TokensConstIterator end);

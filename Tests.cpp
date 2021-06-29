@@ -165,5 +165,33 @@ namespace test{
 			std::cout << *(ref.first);
 		std::cout << "}\n";
 	}
+
+	void match_power_test() {
+		const char* exp_0 = "2^2^x^2.3";
+		Parser parser_0{ exp_0 };
+		auto tokens_0 = parser_0.getTokens();
+		auto Operand_pair = Parser::match_power(tokens_0.cbegin() + 1, tokens_0.cend());
+		Operand operand_0 = Operand_pair.first;
+		std::cout << "operand_0 = " << operand_0 << std::endl;
+
+		const char* exp_1 = "x^(2x)^(3x + 1)";
+		Parser parser_1{ exp_1 };
+		auto tokens_1 = parser_1.getTokens();
+		auto Operand_pair_1 = Parser::match_power(tokens_1.cbegin() + 1, tokens_1.cend());
+		Operand operand_1 = Operand_pair_1.first;
+		std::cout << "operand_1 = " << operand_1 << std::endl;
+
+	}
+
+	void parse_expression_test() {
+		const char* exp_0 = "3x + 1";
+
+		Parser parser_0{ exp_0 };
+		auto tokens_0 = parser_0.getTokens();
+		Operand operand_0 = Parser::Parse_Expression(tokens_0.cbegin(), tokens_0.cend());
+
+		std::cout << "parse_expression_test() started" << std::endl;
+		std::cout << "operand_0 = " << operand_0 << std::endl;
+	}
 }
 

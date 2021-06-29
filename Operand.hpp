@@ -158,6 +158,7 @@ public:
 	Operand getBase() const;
 	const Operand& getPower() const;
 	void setPower(const Operand&);
+	const Operand& setPowerN_return(const Operand&);
 	std::string power_print() const;
 	bool is_negative() const;
 	bool negative_power() const;
