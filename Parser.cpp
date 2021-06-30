@@ -142,54 +142,6 @@ void Parser::remove_whitespaces() {
 		context.erase(std::remove(context.begin(), context.end(), each), context.end());
 }
 
-std::string Parser::remove_redundant_operators_2(std::string expression) {
-
-	size_t expression_length = expression.size();
-
-	std::string str;
-	str.reserve(expression_length);
-
-	size_t lower_index = 0;
-	size_t upper_index = 1;
-
-	char lower_char = '\0';
-	char upper_char = '\0';
-	std::unordered_map<std::pair<char, char>, char, pair_hash>::const_iterator key_;
-	std::pair<char, char> op_pair;
-
-	while (upper_index < expression_length) {
-
-		lower_char = expression[lower_index];
-		upper_char = expression[upper_index];
-
-		if (Parser::is_operator(lower_char) && Parser::is_operator(upper_char)) {
-			op_pair.first = lower_char;
-			op_pair.second = upper_char;
-			key_ = Parser::lookup_table_a.find(op_pair);
-			if (key_ != Parser::lookup_table_a.cend() && key_->second != '\0') {
-				expression[upper_index] = key_->second;
-				expression[lower_index] = '\0';
-			}
-			else
-				throw std::runtime_error{ "Error parsing - Invoked from Parser::remove_redunadant_operators_2()" };
-
-		}
-
-		upper_index++;
-		lower_index++;
-	}
-
-	char each_char = '\0';
-	for (size_t index = 0; index < expression_length; index++) {
-		each_char = expression[index];
-		if (each_char != '\0')
-			str.push_back(each_char);
-	}
-
-	return str;
-
-}
-
 void Parser::remove_redundant_operators() {
 	size_t expression_length = context.size();
 
