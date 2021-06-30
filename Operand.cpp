@@ -509,7 +509,7 @@ std::string Operand::power_print() const {
 	int index = (int)type;
 	if (index > -1)
 		return power_print_functions[index](this);
-	return "stdout: Unknown type power_print";
+	return "[Operand::power_print()]:[stdout]: Unknown type power_print";
 
 	}
 

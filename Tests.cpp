@@ -184,6 +184,7 @@ namespace test{
 	}
 
 	void parse_expression_test() {
+		/*
 		const char* exp_0 = "3x + 1";
 
 		Parser parser_0{ exp_0 };
@@ -192,6 +193,23 @@ namespace test{
 
 		std::cout << "parse_expression_test() started" << std::endl;
 		std::cout << "operand_0 = " << operand_0 << std::endl;
+		*/
+
+		std::cout << "\n\n";
+		Parser parser_1{ "-200 +-x^ 2 ( 2.5x + 3y^z) ^ (2xy) ^ (xyz)" };
+		parser_1.debug_info();
+		auto tokens_1 = parser_1.getTokens();
+		Operand operand_1 = Parser::Parse_Expression(tokens_1.cbegin(), tokens_1.cend());
+		std::cout << "operand_1 = " << operand_1 << std::endl;
+
+		Operand operand_2 = Parser::Parse_Expression("((a+b)c + (c + a)) + h");
+		std::cout << "operand_2 = " << operand_2 << std::endl;
+
+		Operand operand_3 = Parser::Parse_Expression("(a/b)^2 + 3/4");
+		std::cout << "operand_3 = " << operand_3 << std::endl;
+
+		Operand operand_4 = Parser::Parse_Expression("(a + b - c) ^ 3");
+		std::cout << "operand_4 = " << operand_4 << std::endl;
 	}
 }
 

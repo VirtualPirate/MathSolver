@@ -287,9 +287,9 @@ void Parser::generalize_operators() {
 Operand Parser::Parse_Expression(TokensConstIterator begin, TokensConstIterator end, bool is_sub) {
 	Expression result{};
 	result.setNull(false);
-	std::vector<Operand> fields;
-
 	result.setSubexpression(is_sub);
+
+	std::vector<Operand> fields;
 
 	TokensConstIteratorPair group_iter;
 	while (begin < end) {
@@ -302,20 +302,30 @@ Operand Parser::Parse_Expression(TokensConstIterator begin, TokensConstIterator 
 		fields.clear();
 
 		while (first < second) {
-			if (Parser::is_double(*first))
+			if (Parser::is_double(*first)) {
+				//std::cout << "Parse Expression inserted double -> " << std::get<double>(*first) << std::endl;
 				fields.push_back(std::get<double>(*first));
-			else if (Parser::is_variable(*first))
+			}
+			else if (Parser::is_variable(*first)) {
+				//std::cout << "Parse Expression inserted variable -> " << std::get<char>(*first) << std::endl;
 				fields.push_back(std::get<char>(*first));
+			}
 			else if (Parser::is_leftbrace(*first)) {
-				group_iter = Parser::grab_group(begin, end);
+				group_iter = Parser::grab_group(first, second);
 				fields.push_back(Parse_Expression(group_iter.first, group_iter.second, true));
 				first = group_iter.second;
 				continue;
 			}
 			else if (*first == '^') {
 				OperandAndTokensIterator power_return = Parser::match_power(first, second);
-				fields.back() = fields.back().setPowerN_return(power_return.first);
+				//std::cout << "power_return -> " << *(power_return.second) << std::endl;
+				//test::print_constiteratorpair({ first, power_return.second });
+				//std::cout << "set power n return = " << fields.back().setPowerN_return(power_return.first) << std::endl;
+				//std::cout << "power return + 1 -> " << *(power_return.second + 1) << std::endl;;
+				fields.back().setPower(power_return.first);
+				//std::cout << "fields.back() = " << fields.back() << std::endl;
 				first = power_return.second;
+				continue;
 			}
 			first++;
 		}
@@ -328,6 +338,11 @@ Operand Parser::Parse_Expression(TokensConstIterator begin, TokensConstIterator 
 
 	return result;
 
+}
+
+Operand Parser::Parse_Expression(const std::string& expression) {
+	Parser parser{ expression };
+	return Parser::Parse_Expression(parser.tokens.cbegin(), parser.tokens.cend());
 }
 
 void Parser::create_tokens(){

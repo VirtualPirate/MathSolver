@@ -59,6 +59,7 @@ public:
 
 	static OperandAndTokensIterator match_power(TokensConstIterator, TokensConstIterator);
 	static Operand Parse_Expression(TokensConstIterator, TokensConstIterator, bool = false);
+	static Operand Parse_Expression(const std::string&);
 
 	static bool is_operator(const char&);
 	static bool is_operator(const Token&);

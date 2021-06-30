@@ -15,7 +15,7 @@
 
 std::ostream& operator<<(std::ostream& os, const Expression& ref){
 	if(!ref.isNull()){
-		bool brace = false;
+		bool brace = ref.isSubexpression();
 		if(ref.getPower() != Operand{(double)1})
 			brace = true;
 		if(brace)
@@ -26,10 +26,12 @@ std::ostream& operator<<(std::ostream& os, const Expression& ref){
 			if(!each->is_negative())
 				os << " + " << *each;
 			else
-				os << *each;
+				os << ' ' << *each;
 		}
-		if(brace)
+		if (brace && ref.getPower() != CONSTANTS::ONE)
 			os << ")^" << ref.getPower().power_print();
+		else if (brace)
+			os << ')';
 	}
 	else{
 		os << "null_expression{}";
@@ -39,9 +41,7 @@ std::ostream& operator<<(std::ostream& os, const Expression& ref){
 
 std::string Expression::power_print() const{
 	std::ostringstream stream;
-	stream << '(';
 	stream << *this;
-	stream << ')';
 	return stream.str();
 }
 bool Expression::is_negative() const {
