@@ -46,10 +46,10 @@ public:
 	Operand simplify() const;
 	Operand substitute(const Substitutor_List& list) const;
 	std::string power_print() const;
-	bool is_negative() const;
+	bool is_negative() const; // Checks if the Constant is negative
 	bool negative_power() const;
-	bool is_pure() const;
-	Constant abs() const;
+	bool is_pure() const; // Checks if the Constant has power 1
+	Constant abs() const; // Returns the absolute value of the Constant without power included
 
 	//Constant to double arithmetic operations
 	Operand operator+(const double&) const;

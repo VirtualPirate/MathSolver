@@ -263,9 +263,14 @@ public:
 	bool operator==(const Expression&) const;
 	bool operator!=(const Expression&) const;
 
+	inline bool is_constant() const;
+	inline bool is_variable() const;
+	inline bool is_term() const;
+	inline bool is_expression() const;
+
 	operator bool() const;
-	bool same_type(const Operand&) const;
-	bool same_type(const DataType&) const;
+	bool is_type(const Operand&) const;
+	bool is_type(const DataType&) const;
 
 	friend std::ostream& operator<<(std::ostream&, const Operand&);
 

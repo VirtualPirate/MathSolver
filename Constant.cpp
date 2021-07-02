@@ -62,7 +62,6 @@ Operand Constant::raise_pow(const Operand& other) const {return Operand{*this}.r
 // Some other functions
 Operand Constant::simplify() const {
 	return *this;
-
 }
 std::string Constant::power_print() const{
 	std::ostringstream stream;
@@ -71,7 +70,7 @@ std::string Constant::power_print() const{
 }
 bool Constant::is_negative() const {return value < 0;}
 bool Constant::negative_power() const {return false;}
-bool Constant::is_pure() const {return getPower() == Constant::power_one;}
+bool Constant::is_pure() const { return power == CONSTANTS::NULL_OPERAND; }
 Constant Constant::abs() const {return Constant{fabs(value)};}
 
 

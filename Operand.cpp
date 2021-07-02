@@ -366,10 +366,15 @@ Operand::operator bool() const{
 	return false;
 }
 
-bool Operand::same_type(const Operand& other) const {
+inline bool Operand::is_constant() const {return type == DataType::Constant;}
+inline bool Operand::is_variable() const {return type == DataType::Variable;}
+inline bool Operand::is_term() const { return type == DataType::Term; }
+inline bool Operand::is_expression() const { return type == DataType::Expression; }
+
+bool Operand::is_type(const Operand& other) const {
 	return type == other.type;
 }
-bool Operand::same_type(const DataType& other) const {
+bool Operand::is_type(const DataType& other) const {
 	return type == other;
 }
 //Operand to Operand arithmetic operators
