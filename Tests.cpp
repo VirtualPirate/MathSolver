@@ -220,5 +220,11 @@ namespace test{
 			std::cout << "The operand is constant" << std::endl;
 		std::cout << "operand = " << operand << std::endl;
 	}
+
+	void variable_simplify_test() {
+		Constant constant{ (double)2, Constant{(double)2, Variable{'x', Constant{(double)2, Constant{(double)3, (double)2}}}} };
+		std::cout << "constant before simplification = " << constant << std::endl;
+		std::cout << "constant after simplification = " << constant.simplify() << std::endl;
+	}
 }
 

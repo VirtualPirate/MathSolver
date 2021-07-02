@@ -88,6 +88,7 @@ int main() {
 	//test::match_power_test();
 	test::parse_expression_test();
 	test::constant_simplify_tests();
+	test::variable_simplify_test();
 	//cin.get();
 	return 0;
 }

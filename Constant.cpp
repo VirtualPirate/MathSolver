@@ -65,7 +65,6 @@ Operand Constant::simplify() const {
 		return *this;
 	else {
 		Operand simplified_power{ this->power.simplify() };
-		std::cout << "simplified_power = " << simplified_power << std::endl;
 		if (simplified_power.is_constant() && simplified_power.get<Constant>().is_pure())
 			return Constant{ pow(value, simplified_power.get<Constant>().value) };
 		return Constant{ value, simplified_power };

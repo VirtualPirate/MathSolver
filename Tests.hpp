@@ -137,6 +137,8 @@ namespace test{
     void print_constiteratorpair(TokensConstIteratorPair);
 
     void constant_simplify_tests();
+
+    void variable_simplify_test();
 }
 
 #endif
