@@ -263,10 +263,10 @@ public:
 	bool operator==(const Expression&) const;
 	bool operator!=(const Expression&) const;
 
-	inline bool is_constant() const;
-	inline bool is_variable() const;
-	inline bool is_term() const;
-	inline bool is_expression() const;
+	bool is_constant() const;
+	bool is_variable() const;
+	bool is_term() const;
+	bool is_expression() const;
 
 	operator bool() const;
 	bool is_type(const Operand&) const;

@@ -85,8 +85,9 @@ int main() {
 	//test::parsing_group_test();
 	//test::grab_term_test();
 
-	test::match_power_test();
+	//test::match_power_test();
 	test::parse_expression_test();
-	cin.get();
+	test::constant_simplify_tests();
+	//cin.get();
 	return 0;
 }

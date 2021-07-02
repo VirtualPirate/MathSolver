@@ -211,5 +211,14 @@ namespace test{
 		Operand operand_4 = Parser::Parse_Expression("(a + b - c) ^ 3");
 		std::cout << "operand_4 = " << operand_4 << std::endl;
 	}
+
+	void constant_simplify_tests() {
+		Constant con_0{ (double)2, Constant{(double)2, (double)2} };
+		Constant con_1{ 2, con_0 };
+		Operand operand{ con_1.simplify() };
+		if (operand.is_constant())
+			std::cout << "The operand is constant" << std::endl;
+		std::cout << "operand = " << operand << std::endl;
+	}
 }
 

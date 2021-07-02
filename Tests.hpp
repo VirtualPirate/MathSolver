@@ -135,6 +135,8 @@ namespace test{
     void parse_expression_test();
 
     void print_constiteratorpair(TokensConstIteratorPair);
+
+    void constant_simplify_tests();
 }
 
 #endif

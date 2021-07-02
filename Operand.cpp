@@ -366,15 +366,15 @@ Operand::operator bool() const{
 	return false;
 }
 
-inline bool Operand::is_constant() const {return type == DataType::Constant;}
-inline bool Operand::is_variable() const {return type == DataType::Variable;}
-inline bool Operand::is_term() const { return type == DataType::Term; }
-inline bool Operand::is_expression() const { return type == DataType::Expression; }
+bool Operand::is_constant() const {return type == DataType::Constant;}
+bool Operand::is_variable() const {return type == DataType::Variable;}
+bool Operand::is_term() const { return type == DataType::Term; }
+bool Operand::is_expression() const { return type == DataType::Expression; }
 
-bool Operand::is_type(const Operand& other) const {
+inline bool Operand::is_type(const Operand& other) const {
 	return type == other.type;
 }
-bool Operand::is_type(const DataType& other) const {
+inline bool Operand::is_type(const DataType& other) const {
 	return type == other;
 }
 //Operand to Operand arithmetic operators
@@ -557,13 +557,15 @@ bool Operand::negative_power() const {
 }
 Operand Operand::simplify() const {
 	int index = (int)type;
+	//std::cout << "index = " << index << std::endl;
+	//std::cout << "this = " << *this << std::endl;
 	if (index > -1){
 		//If power is 0 then return 1
 		if(getPower() == Constant::power_zero)
 			return (double)1;
 		return simplify_functions[index](this);
 	}
-	std::cout << "stdout: Unknown type simplify";
+	//std::cout << "stdout: Unknown type simplify";
 	return *this;
 }
 std::ostream& operator<<(std::ostream& os, const Operand& ref){

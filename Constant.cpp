@@ -28,7 +28,7 @@ Constant::Constant(double val, const Operand& pow): value{val}{
 }
 
 // Constant to Constant assignment operators
-Constant& Constant::operator=(double val){value = val;return *this;}
+Constant& Constant::operator=(double val) { value = val;return *this; }
 Constant& Constant::operator=(const Constant& ref){value = ref.value;power=ref.power;return *this;}
 
 //Constant to Constant comparison operators
@@ -61,7 +61,15 @@ Operand Constant::raise_pow(const Operand& other) const {return Operand{*this}.r
 
 // Some other functions
 Operand Constant::simplify() const {
-	return *this;
+	if(this->is_pure())
+		return *this;
+	else {
+		Operand simplified_power{ this->power.simplify() };
+		std::cout << "simplified_power = " << simplified_power << std::endl;
+		if (simplified_power.is_constant() && simplified_power.get<Constant>().is_pure())
+			return Constant{ pow(value, simplified_power.get<Constant>().value) };
+		return Constant{ value, simplified_power };
+	}
 }
 std::string Constant::power_print() const{
 	std::ostringstream stream;
@@ -70,7 +78,7 @@ std::string Constant::power_print() const{
 }
 bool Constant::is_negative() const {return value < 0;}
 bool Constant::negative_power() const {return false;}
-bool Constant::is_pure() const { return power == CONSTANTS::NULL_OPERAND; }
+bool Constant::is_pure() const { return !power; }
 Constant Constant::abs() const {return Constant{fabs(value)};}
 
 
