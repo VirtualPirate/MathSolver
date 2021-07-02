@@ -32,6 +32,14 @@ Constant& Constant::operator=(double val){value = val;return *this;}
 Constant& Constant::operator=(const Constant& ref){value = ref.value;power=ref.power;return *this;}
 
 //Constant to Constant comparison operators
+
+bool Constant::operator==(const double& other) const {
+	if (power == CONSTANTS::NULL_OPERAND)
+		return value == other;
+	return false;
+}
+bool Constant::operator!=(const double& other) const { return !(*this == other); }
+
 bool Constant::operator==(const Constant& other) const {return value == other.value && (power == other.power || (!power && !other.power));}
 bool Constant::operator!=(const Constant& other) const {return !(*this == other);}
 
@@ -54,6 +62,7 @@ Operand Constant::raise_pow(const Operand& other) const {return Operand{*this}.r
 // Some other functions
 Operand Constant::simplify() const {
 	return *this;
+
 }
 std::string Constant::power_print() const{
 	std::ostringstream stream;

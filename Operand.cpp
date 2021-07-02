@@ -273,20 +273,28 @@ Operand& Operand::operator=(const Variable& ref){
 	is_null = false;
 	return *this;
 }
-Operand::Operand(const Term& ref): value{(void*)(new Term{ref})}, type{DataType::Term}, is_null{ref.isNull()}{}
+Operand::Operand(const Term& ref) : value{}, type{}, is_null{}{*this = ref; }
 Operand& Operand::operator=(const Term& ref){
-	if(value) deallocate();
-	value = (void*)(new Term{ref});
-	type = DataType::Term;
-	is_null = ref.isNull();
+	if (ref.fields.size() == 1)
+		*this = ref.fields[0];
+	else {
+		if (value) deallocate();
+		value = (void*)(new Term{ ref });
+		type = DataType::Term;
+		is_null = ref.isNull();
+	}
 	return *this;
 }
 Operand::Operand(const Expression& ref): value{(void*)(new Expression{ref})}, type{DataType::Expression}, is_null{ref.isNull()}{}
 Operand& Operand::operator=(const Expression& ref){
-	if(value) deallocate();
-	value = (void*)(new Expression{ref});
-	type = DataType::Expression;
-	is_null = ref.isNull();
+	if (ref.fields.size() == 1)
+		*this = ref.fields[0];
+	else {
+		if (value) deallocate();
+		value = (void*)(new Expression{ ref });
+		type = DataType::Expression;
+		is_null = ref.isNull();
+	}
 	return *this;
 }
 
