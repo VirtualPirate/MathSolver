@@ -13,6 +13,7 @@ class Operand;
 class OperandList;
 
 class Term: public OperandList{
+	using OperandList::OperandList;
 	friend class Constant;
 	friend class Variable;
 	friend class Operand;

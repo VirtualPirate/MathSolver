@@ -17,6 +17,7 @@ namespace CONSTANTS{
 	extern const Substitutor null_substitutor;
 	extern const Operand ONE;
 	extern const Operand ZERO;
+	extern const Operand MINUS_ONE;
 	extern const Operand NULL_OPERAND;
 };
 

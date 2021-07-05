@@ -99,15 +99,17 @@ public:
 	OperandList& operator=(const Constant&);
 	OperandList(const Variable&);
 	OperandList& operator=(const Variable&);
-	OperandList(const Term&);
-	OperandList& operator=(const Term&);
-	OperandList(const Expression&);
-	OperandList& operator=(const Expression&);
+	//OperandList(const Term&);
+	//OperandList& operator=(const Term&);
+	//OperandList(const Expression&);
+	//OperandList& operator=(const Expression&);
 	OperandList(const Operand&);
 	OperandList& operator=(const Operand&);
 
 	OperandList(const std::vector<Operand>&);
+	OperandList(const std::vector<Operand>&, const Operand&);
 	OperandList(std::initializer_list<Operand>);
+	OperandList(std::initializer_list<Operand>, const Operand&);
 	OperandList& operator=(std::initializer_list<Operand>);
 
 	OperandList(std::string);

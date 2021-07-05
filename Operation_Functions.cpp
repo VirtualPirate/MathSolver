@@ -15,6 +15,7 @@
 const Substitutor CONSTANTS::null_substitutor = Substitutor{};
 const Operand CONSTANTS::ONE = Operand{(double)1};
 const Operand CONSTANTS::ZERO = Operand{(double)0};
+const Operand CONSTANTS::MINUS_ONE = Operand{ (double)-1 };
 const Operand CONSTANTS::NULL_OPERAND = Operand{};
 
 
@@ -67,11 +68,27 @@ Operand Constant::raise_pow(const Variable& other) const{
 
 //Constant to Term arithmetic operations
 
-Operand Constant::operator+(const Term& other) const{return Operand{};}
-Operand Constant::operator-(const Term& other) const{return Operand{};}
-Operand Constant::operator*(const Term& other) const{return Operand{};}
-Operand Constant::operator/(const Term& other) const{return Operand{};}
-Operand Constant::raise_pow(const Term& other) const{return Operand{};}
+Operand Constant::operator+(const Term& other) const{
+	return CONSTANTS::NULL_OPERAND;
+}
+Operand Constant::operator-(const Term& other) const{
+	return CONSTANTS::NULL_OPERAND;
+}
+Operand Constant::operator*(const Term& other) const{
+	if (other.power == CONSTANTS::ONE) {
+		Term result{ other };
+		result.insert_front(*this);
+		return result;
+	}
+	else
+		return Term{ {*this, other} };
+}
+Operand Constant::operator/(const Term& other) const{
+	return *this * other.operator*((double)-1);
+}
+Operand Constant::raise_pow(const Term& other) const{
+	return Constant{ value, getPower() * other };
+}
 
 //Constant to Expression arithmetic operations
 Operand Constant::operator+(const Expression& other) const{return Operand{};}
@@ -125,11 +142,27 @@ Operand Variable::raise_pow(const Variable& other) const{
 
 
 //Variable to Term arithmetic operations
-Operand Variable::operator+(const Term& other) const{return Operand{};}
-Operand Variable::operator-(const Term& other) const{return Operand{};}
-Operand Variable::operator*(const Term& other) const{return Operand{};}
-Operand Variable::operator/(const Term& other) const{return Operand{};}
-Operand Variable::raise_pow(const Term& other) const{return Operand{};}
+Operand Variable::operator+(const Term& other) const{
+	return CONSTANTS::NULL_OPERAND;
+}
+Operand Variable::operator-(const Term& other) const{
+	return CONSTANTS::NULL_OPERAND;
+}
+Operand Variable::operator*(const Term& other) const{
+	if (other.power == CONSTANTS::ONE) {
+		Term result{ other };
+		result.insert_front(*this);
+		return result;
+	}
+	else
+		return Term{ {*this, other} };
+}
+Operand Variable::operator/(const Term& other) const{
+	return CONSTANTS::NULL_OPERAND;
+}
+Operand Variable::raise_pow(const Term& other) const{
+	return Variable{ name, power * other };
+}
 
 //Variable to Expression arithmetic operations
 Operand Variable::operator+(const Expression& other) const{return Operand{};}
@@ -140,18 +173,38 @@ Operand Variable::raise_pow(const Expression& other) const{return Operand{};}
 
 
 //Term to Constant arithmetic operations
-Operand Term::operator+(const Constant& other) const{return Operand{};}
-Operand Term::operator-(const Constant& other) const{return Operand{};}
-Operand Term::operator*(const Constant& other) const{return Operand{};}
-Operand Term::operator/(const Constant& other) const{return Operand{};}
-Operand Term::raise_pow(const Constant& other) const{return Operand{};}
+Operand Term::operator+(const Constant& other) const{
+	return CONSTANTS::NULL_OPERAND;
+}
+Operand Term::operator-(const Constant& other) const{
+	return CONSTANTS::NULL_OPERAND;
+}
+Operand Term::operator*(const Constant& other) const{
+	return other.operator*(*this);
+}
+Operand Term::operator/(const Constant& other) const{
+	return other.operator*((double)-1).operator*(*this);
+}
+Operand Term::raise_pow(const Constant& other) const {
+	return Term{ fields, power.operator*(other) };
+}
 
 //Term to Variable arithmetic operations
-Operand Term::operator+(const Variable& other) const{return Operand{};}
-Operand Term::operator-(const Variable& other) const{return Operand{};}
-Operand Term::operator*(const Variable& other) const{return Operand{};}
-Operand Term::operator/(const Variable& other) const{return Operand{};}
-Operand Term::raise_pow(const Variable& other) const{return Operand{};}
+Operand Term::operator+(const Variable& other) const{
+	return CONSTANTS::NULL_OPERAND;
+}
+Operand Term::operator-(const Variable& other) const{
+	return CONSTANTS::NULL_OPERAND;
+}
+Operand Term::operator*(const Variable& other) const{
+	return other.operator*(*this);
+}
+Operand Term::operator/(const Variable& other) const{
+	return other.operator*((double)-1).operator*(*this);
+}
+Operand Term::raise_pow(const Variable& other) const {
+	return Term{ fields, power.operator*(other) };
+}
 
 //Term to Term arithmetic operations
 Operand Term::operator+(const Term& other) const{return Operand{};}

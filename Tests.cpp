@@ -291,6 +291,9 @@ namespace test{
 		test::mul_test(var_2, num2);
 		test::div_test(var_3, num6);
 		test::pow_test(var_2, num5);
+
+		std::cout << "\n\n";
+
 	}
 
 	void variable_variable_test() {

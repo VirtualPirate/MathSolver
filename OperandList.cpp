@@ -74,7 +74,9 @@ OperandList& OperandList::operator=(const Operand& ref){
 }
 
 OperandList::OperandList(const std::vector<Operand>& ref): fields{ref}, power{(double)1}, is_simplified{false}, is_null{false}{}
+OperandList::OperandList(const std::vector<Operand>& ref, const Operand& power_) : fields{ ref }, power{ power_ }, is_simplified{ false }, is_null{ false }{}
 OperandList::OperandList(std::initializer_list<Operand> list): fields{list}, power{(double)1}, is_simplified{false}, is_null{false}{}
+OperandList::OperandList(std::initializer_list<Operand> list, const Operand& power_) : fields{ list }, power{ power_ }, is_simplified{ false }, is_null{ false }{}
 OperandList& OperandList::operator=(std::initializer_list<Operand> list){
 	fields = list;
 	power = (double)1;
