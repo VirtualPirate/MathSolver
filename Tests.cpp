@@ -321,5 +321,63 @@ namespace test{
 		std::cout << "\n\n";
 
 	}
+
+	void constant_term_test() {
+		std::cout << "[Constant to Term] arithmetic tests\n\n";
+		Constant num1{ 10 };
+		Constant num2{ 2, (double)4 };
+		Constant num3{ num1 };
+		Constant num4{ 1.5 };
+		Constant num5{ -1 };
+		Constant num6{ 10, Variable{'x'} };
+		Constant num7{ 5 };
+
+		Variable var_0{ 'x' };
+		Variable var_1{ 'y' };
+		Variable var_2{ 'x', -2 };
+		Variable var_3{ 'y', 3 };
+		Variable var_4 = 'a';
+
+		Term term0{ {num1, var_0} }; // 10x
+		Term term1{ {num2, var_3} };  // 2^4y^3
+		Term term2{ {num7, var_0}, (double)2 }; // 5x
+
+		test::mul_test(num1, term0);
+		test::mul_test(num2, term2);
+		test::div_test(num7, term2);
+		test::pow_test(num1, term0);
+
+		std::cout << "\n\n";
+
+	}
+
+	void variable_term_test() {
+		std::cout << "[Variable to Term] arithmetic tests\n\n";
+		Constant num1{ 10 };
+		Constant num2{ 2, (double)4 };
+		Constant num3{ num1 };
+		Constant num4{ 1.5 };
+		Constant num5{ -1 };
+		Constant num6{ 10, Variable{'x'} };
+		Constant num7{ 5 };
+
+		Variable var_0{ 'x' };
+		Variable var_1{ 'y' };
+		Variable var_2{ 'x', -2 };
+		Variable var_3{ 'y', 3 };
+		Variable var_4 = 'a';
+
+		Term term0{ {num1, var_0} }; // 10x
+		Term term1{ {num2, var_3} };  // 2^4y^3
+		Term term2{ {num7, var_0}, (double)2 }; // (5x)^2
+
+		test::mul_test(var_0, term0);
+		test::mul_test(var_3, term2);
+		test::div_test(var_0, term0);
+		test::pow_test(var_1, term0);
+
+		std::cout << "\n\n";
+
+	}
 }
 

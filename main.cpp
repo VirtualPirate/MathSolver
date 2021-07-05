@@ -45,6 +45,9 @@ int main() {
 	test::variable_constant_test();
 	test::variable_variable_test();
 
+	test::constant_term_test();
+	test::variable_term_test();
+
 	Term term_0{ Variable{'a'} };
 	term_0.setNull(false);
 	term_0.insert(num1);

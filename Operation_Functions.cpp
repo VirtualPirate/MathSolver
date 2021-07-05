@@ -84,7 +84,7 @@ Operand Constant::operator*(const Term& other) const{
 		return Term{ {*this, other} };
 }
 Operand Constant::operator/(const Term& other) const{
-	return *this * other.operator*((double)-1);
+	return *this * other.raise_pow((double)-1);
 }
 Operand Constant::raise_pow(const Term& other) const{
 	return Constant{ value, getPower() * other };
@@ -158,7 +158,7 @@ Operand Variable::operator*(const Term& other) const{
 		return Term{ {*this, other} };
 }
 Operand Variable::operator/(const Term& other) const{
-	return CONSTANTS::NULL_OPERAND;
+	return *this * other.raise_pow((double)-1);
 }
 Operand Variable::raise_pow(const Term& other) const{
 	return Variable{ name, power * other };

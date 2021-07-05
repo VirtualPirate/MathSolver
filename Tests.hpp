@@ -145,6 +145,11 @@ namespace test{
     void constant_variable_test();
     void variable_constant_test();
     void variable_variable_test();
+
+    void constant_term_test();
+    void variable_term_test();
+    void term_constant_test();
+    void term_variable_test();
 }
 
 #endif
