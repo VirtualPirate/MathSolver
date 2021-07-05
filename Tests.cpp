@@ -226,5 +226,97 @@ namespace test{
 		std::cout << "constant before simplification = " << constant << std::endl;
 		std::cout << "constant after simplification = " << constant.simplify() << std::endl;
 	}
+
+	void constant_constant_test() {
+		Constant num1{ 10 };
+		Constant num2{ 2, (double)4 };
+		Constant num3{ num1 };
+		Constant num4{ 1.5 };
+		Constant num5{ -1 };
+		Constant num6{ 10, Variable{'x'} };
+		Constant num7{ 5 };
+		Constant num8{ (double)10, (double)5 };
+
+		std::cout << "[Constant to Constant] arithmetic tests\n\n";
+		test::add_test(num1, num4);
+		test::sub_test(num1, num2.simplify());
+		test::mul_test(num1, num1);
+		test::mul_test(num1, num8);
+		test::div_test(num1, num7);
+		test::pow_test(num1, num2);
+
+		std::cout << "\n\n";
+
+
+	}
+
+	void constant_variable_test() {
+		std::cout << "[Constant to Variable] arithmetic tests\n\n";
+		Constant num1{ 10 };
+		Constant num2{ 2, (double)4 };
+		Constant num3{ num1 };
+		Constant num4{ 1.5 };
+		Constant num5{ -1 };
+		Constant num6{ 10, Variable{'x'} };
+		Constant num7{ 5 };
+
+		Variable var_0{ 'x' };
+		Variable var_1{ 'y' };
+		Variable var_2{ 'x', -2 };
+		Variable var_3{ 'y', 3 };
+		Variable var_4 = 'a';
+
+		test::mul_test(num2, var_3);
+		test::div_test(num2, var_3);
+		test::pow_test(num2, var_0);
+		std::cout << "\n\n";
+
+	}
+	void variable_constant_test() {
+		std::cout << "[Variable to Constant] arithmetic tests\n\n";
+		Constant num1{ 10 };
+		Constant num2{ 2, (double)4 };
+		Constant num3{ num1 };
+		Constant num4{ 1.5 };
+		Constant num5{ -1 };
+		Constant num6{ 10, Variable{'x'} };
+		Constant num7{ 5 };
+
+		Variable var_0{ 'x' };
+		Variable var_1{ 'y' };
+		Variable var_2{ 'x', -2 };
+		Variable var_3{ 'y', 3 };
+		Variable var_4 = 'a';
+
+		test::mul_test(var_2, num2);
+		test::div_test(var_3, num6);
+		test::pow_test(var_2, num5);
+	}
+
+	void variable_variable_test() {
+		Variable var_0{ 'x' };
+		Variable var_1{ 'y' };
+		Variable var_2{ 'x', -2 };
+		Variable var_3{ 'y', 3 };
+		Variable var_4 = 'a';
+
+		std::cout << "[Variable to Variable] arithmetic testsn\n\n";
+		test::add_test(var_2, var_2);
+		test::add_test(var_3, var_3);
+		test::add_test(var_4, var_4);
+
+		test::sub_test(var_3, var_3);
+		test::sub_test(var_4, var_4);
+
+		test::mul_test(var_0, var_2);
+		test::mul_test(var_1, var_3);
+		test::mul_test(var_2, var_3);
+
+		test::div_test(var_0, var_1);
+		test::div_test(var_0, var_2);
+
+		std::cout << "\n\n";
+
+	}
 }
 

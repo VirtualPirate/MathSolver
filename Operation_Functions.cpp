@@ -32,7 +32,7 @@ Operand Constant::operator-(const Constant& other) const{
 Operand Constant::operator*(const Constant& other) const{
 	if (!power && !other.power)
 		return Constant{ value * other.value };
-	Operand power_add{ power +other.power };
+	Operand power_add{ getPower() +other.getPower() };
 	if (value == other.value && power_add)
 		return Constant{ value, power_add };
 
@@ -42,7 +42,7 @@ Operand Constant::operator/(const Constant& other) const{
 	return this->operator*(other.raise_pow((double)-1));
 }
 Operand Constant::raise_pow(const Constant& other) const{
-	return Constant{ value, power * other };
+	return Constant{ value, getPower() * other };
 }
 
 
@@ -61,7 +61,7 @@ Operand Constant::operator/(const Variable& other) const{
 	return this->operator*(other.raise_pow((double)-1));
 }
 Operand Constant::raise_pow(const Variable& other) const{
-	return Constant{ value, power * other };
+	return Constant{ value, getPower() * other };
 }
 
 

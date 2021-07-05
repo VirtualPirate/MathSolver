@@ -40,12 +40,10 @@ int main() {
 	Variable var_3{ 'y', 3 };
 	Variable var_4 = 'a';
 
-	
-	test::add_test(num1, num4);
-	test::sub_test(num1, num2.simplify());
-	test::mul_test(num1, num1);
-	test::div_test(num1, num7);
-	test::pow_test(num1, num2);
+	test::constant_constant_test();
+	test::constant_variable_test();
+	test::variable_constant_test();
+	test::variable_variable_test();
 
 	Term term_0{ Variable{'a'} };
 	term_0.setNull(false);
@@ -84,7 +82,7 @@ int main() {
 	Operand operand_1{ 'x' };
 
 	Substitutor_List var_values = { Substitutor{var_0, num1}, Substitutor{var_1, num2}, Substitutor{var_1, num5} };
-	cout << "var_values.size() = " << var_values.size() << endl;
+	cout << "\n\nvar_values.size() = " << var_values.size() << endl;
 
 	cout << "term_0 = " << term_0 << endl;
 	// cout << "term_0 = " << Term{term_0.substitute(sub)} << endl;

@@ -141,10 +141,10 @@ namespace test{
     void variable_simplify_test();
 
 
-    void constant_constant_tests();
-    void constant_variable_tests();
-    void variable_constant_tests();
-    void variable_variable_tests();
+    void constant_constant_test();
+    void constant_variable_test();
+    void variable_constant_test();
+    void variable_variable_test();
 }
 
 #endif
