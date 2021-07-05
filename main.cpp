@@ -48,6 +48,8 @@ int main() {
 	test::constant_term_test();
 	test::variable_term_test();
 
+	test::term_term_test();
+
 	Term term_0{ Variable{'a'} };
 	term_0.setNull(false);
 	term_0.insert(num1);

@@ -150,6 +150,8 @@ namespace test{
     void variable_term_test();
     void term_constant_test();
     void term_variable_test();
+
+    void term_term_test();
 }
 
 #endif

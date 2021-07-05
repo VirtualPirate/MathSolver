@@ -207,8 +207,22 @@ Operand Term::raise_pow(const Variable& other) const {
 }
 
 //Term to Term arithmetic operations
-Operand Term::operator+(const Term& other) const{return Operand{};}
-Operand Term::operator-(const Term& other) const{return Operand{};}
+Operand Term::operator+(const Term& other) const{
+	if (is_addable(*this, other)) {
+		Term result{ *this };
+		*(result.begin(DataType::Constant)) = *(this->cbegin(DataType::Constant)) + *(other.cbegin(DataType::Constant));
+		return result;
+	}
+	return CONSTANTS::NULL_OPERAND;
+}
+Operand Term::operator-(const Term& other) const{
+	if (is_addable(*this, other)) {
+		Term result{ *this };
+		*(result.begin(DataType::Constant)) = *(this->cbegin(DataType::Constant)) - *(other.cbegin(DataType::Constant));
+		return result;
+	}
+	return CONSTANTS::NULL_OPERAND;
+}
 Operand Term::operator*(const Term& other) const{return Operand{};}
 Operand Term::operator/(const Term& other) const{return Operand{};}
 Operand Term::raise_pow(const Term& other) const{return Operand{};}
@@ -251,7 +265,8 @@ Operand Expression::raise_pow(const Expression& other) const {return Operand{};}
 bool is_addable(const Term& first,  const Term& second) {
 	bool criteria = first.cbegin(DataType::Term) == first.cend(DataType::Term)
 	&& first.cbegin(DataType::Expression) == first.cend(DataType::Expression)
-	&& first.count(DataType::Constant) == 1;
+	&& first.count(DataType::Constant) == 1 && first.getPower() == CONSTANTS::ONE
+	&& second.getPower() == CONSTANTS::ONE;
 
 	std::vector<Variable> first_vec = first.getVars();
 	std::vector<Variable> second_vec = second.getVars();
