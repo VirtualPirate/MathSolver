@@ -17,8 +17,8 @@ using TokensConstIteratorPair = std::pair<TokensConstIterator, TokensConstIterat
 
 using OperandAndTokensIterator = std::pair<Operand, TokensConstIterator>;
 
-#define DEBUG
-#ifdef DEBUG
+#define DEBUG 0
+#if DEBUG == 1
     #define OPERATION_LOG(TYPE_1, TYPE_2, operation) std::cout << TYPE_1 << "-" << TYPE_2 << " arithmetic " << operation << " is invoked" << std::endl;
     #define OPERANDS(FIRST, SECOND) std::cout << "first = " << FIRST << "\t" << "second = " << SECOND << std::endl;
     #define RESULT(result) std::cout << "result = " << result << std::endl;
@@ -139,6 +139,12 @@ namespace test{
     void constant_simplify_tests();
 
     void variable_simplify_test();
+
+
+    void constant_constant_tests();
+    void constant_variable_tests();
+    void variable_constant_tests();
+    void variable_variable_tests();
 }
 
 #endif

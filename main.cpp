@@ -24,17 +24,28 @@ int main() {
 	//test::show_sizes();
 
 	Constant num1{ 10 };
-	Constant num2{ 2 };
+	Constant num2{ 2, (double)4 };
 	Constant num3{ num1 };
 	Constant num4{ 1.5 };
 	Constant num5{ -1 };
 	Constant num6{ 10, Variable{'x'} };
+	Constant num7{ 5 };
+	//Constant num8{ num1 + num7 };
+
+	cout << "num8 = " << (num1 + num7) << endl;
 
 	Variable var_0{ 'x' };
 	Variable var_1{ 'y' };
 	Variable var_2{ 'x', -2 };
 	Variable var_3{ 'y', 3 };
 	Variable var_4 = 'a';
+
+	
+	test::add_test(num1, num4);
+	test::sub_test(num1, num2.simplify());
+	test::mul_test(num1, num1);
+	test::div_test(num1, num7);
+	test::pow_test(num1, num2);
 
 	Term term_0{ Variable{'a'} };
 	term_0.setNull(false);

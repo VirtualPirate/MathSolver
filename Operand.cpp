@@ -275,7 +275,7 @@ Operand& Operand::operator=(const Variable& ref){
 }
 Operand::Operand(const Term& ref) : value{}, type{}, is_null{}{*this = ref; }
 Operand& Operand::operator=(const Term& ref){
-	if (ref.fields.size() == 1)
+	if (ref.fields.size() == 1 && ref.power == CONSTANTS::ONE)
 		*this = ref.fields[0];
 	else {
 		if (value) deallocate();
@@ -287,7 +287,7 @@ Operand& Operand::operator=(const Term& ref){
 }
 Operand::Operand(const Expression& ref): value{(void*)(new Expression{ref})}, type{DataType::Expression}, is_null{ref.isNull()}{}
 Operand& Operand::operator=(const Expression& ref){
-	if (ref.fields.size() == 1)
+	if (ref.fields.size() == 1 && ref.power == CONSTANTS::ONE)
 		*this = ref.fields[0];
 	else {
 		if (value) deallocate();
