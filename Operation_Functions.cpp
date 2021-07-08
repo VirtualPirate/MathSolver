@@ -183,10 +183,10 @@ Operand Term::operator*(const Constant& other) const{
 	return other.operator*(*this);
 }
 Operand Term::operator/(const Constant& other) const{
-	return other.operator*((double)-1).operator*(*this);
+	return *this * other.raise_pow((double)-1);
 }
 Operand Term::raise_pow(const Constant& other) const {
-	return Term{ fields, power.operator*(other) };
+	return Term{ fields, power * other };
 }
 
 //Term to Variable arithmetic operations

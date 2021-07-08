@@ -8,6 +8,7 @@
 class Operand;
 class Constant;
 class Variable;
+class OperandList;
 class Term;
 class Expression;
 
@@ -98,7 +99,6 @@ using OperandAndTokensIterator = std::pair<Operand, TokensConstIterator>;
     #define OPERAND_LOG_MOVE()
 #endif
 
-
 namespace test{
     void show_sizes();
 
@@ -140,6 +140,10 @@ namespace test{
 
     void variable_simplify_test();
 
+
+    extern Constant num1, num2, num3, num4, num5, num6, num7, num8;
+    extern Variable var0, var1, var2, var3, var4;
+    extern Term term0, term1, term2, term3, term4, term5;
 
     void constant_constant_test();
     void constant_variable_test();
