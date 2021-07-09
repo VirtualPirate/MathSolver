@@ -33,6 +33,11 @@ class Term: public OperandList{
 
 	void extend(const Term&);
 	std::vector<Operand> internal_simplify() const; 
+
+	void simplify_internal(DataType type); // used by simplify_constants and simplify_variable functions only
+	inline void simplify_constants();
+	inline void simplify_variables();
+	void remove_ones();
 public:
 
 	bool is_negative() const;

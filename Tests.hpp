@@ -100,6 +100,9 @@ using OperandAndTokensIterator = std::pair<Operand, TokensConstIterator>;
 #endif
 
 namespace test{
+    extern Constant num1, num2, num3, num4, num5, num6, num7, num8;
+    extern Variable var0, var1, var2, var3, var4;
+    extern Term term0, term1, term2, term3, term4, term5;
     void show_sizes();
 
     int Constant_tests();
@@ -140,10 +143,7 @@ namespace test{
 
     void variable_simplify_test();
 
-
-    extern Constant num1, num2, num3, num4, num5, num6, num7, num8;
-    extern Variable var0, var1, var2, var3, var4;
-    extern Term term0, term1, term2, term3, term4, term5;
+    void term_simplify_test();
 
     void constant_constant_test();
     void constant_variable_test();

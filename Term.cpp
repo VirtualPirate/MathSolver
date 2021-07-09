@@ -109,16 +109,39 @@ std::vector<Operand> Term::internal_simplify() const {
 
 // }
 
+void Term::simplify_internal(DataType type) {
+	Operand each_operand;
+	for (auto i = this->cbegin(type); i != this->cend(type); i++) {
+		for (auto j = this->cbegin(type) + 1; (j != this->cend(type) && i != j);) {
+			//std::cout << "i = " << *i << std::endl;
+			//std::cout << "j = " << *j << std::endl;
+			each_operand = std::move(i->simplify() * j->simplify());
+			if (!each_operand.is_term()) // if each_operand is not a term
+			{
+				each_operand = std::move(each_operand.simplify());
+				this->fields.erase(this->fields.begin() + j.getIndex());
+				*(this->fields.begin() + i.getIndex()) = std::move(each_operand);
+				//std::cout << "result = " << result << std::endl;
+			}
+			else
+				j++;
+		}
+	}
+}
+
+void Term::simplify_constants() {
+	this->simplify_internal(DataType::Constant);
+}
+void Term::simplify_variables() {
+	this->simplify_internal(DataType::Variable);
+}
+
 Operand Term::simplify() const {
-	return *this;
-	// Term copy{*this};
-	// if(!is_simplified)
-	// 	copy.simplify_();
-	// if(copy.fields.size() == 1)
-	// 	return copy.fields.at(0);
-	// else if(this->power == Constant::power_zero)
-	// 	return 1;
-	// return copy;
+	//return *this;
+	Term result{ *this };
+	result.simplify_constants();
+	result.simplify_variables();
+	return result;
 }
 
 bool Term::is_Constant() const {

@@ -355,8 +355,16 @@ OperandList::const_iterator OperandList::const_iterator::operator--(int other){
 Operand& OperandList::iterator::operator*(){
 	return ref->fields.at(index);
 }
-const Operand& OperandList::const_iterator::operator*(){
+Operand* OperandList::iterator::operator->() {
+	return &(ref->fields.at(index));
+}
+
+
+const Operand& OperandList::const_iterator::operator*() const {
 	return ref->fields.at(index);
+}
+const Operand* OperandList::const_iterator::operator->() const {
+	return &(ref->fields.at(index));
 }
 
 //Iterator comparison operators

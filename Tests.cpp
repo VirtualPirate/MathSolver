@@ -11,6 +11,33 @@
 
 namespace test{
 	using namespace std;
+
+	Constant num1{ 10 };
+	Constant num2{ 2, (double)4 };
+	Constant num3{ num1 };
+	Constant num4{ 1.5 };
+	Constant num5{ -1 };
+	Constant num6{ 10, Variable{'x'} };
+	Constant num7{ 5 };
+	Constant num8{ (double)10, (double)5 };
+
+	Variable var_0{ 'x' };
+	Variable var_1{ 'y' };
+	Variable var_2{ 'x', -2 };
+	Variable var_3{ 'y', 3 };
+	Variable var_4 = 'a';
+
+	Term term0{ {num1, var_0} }; // 10x
+	Term term1{ {num2, var_3} };  // 2^4y^3
+	Term term2{ {num7, var_0}, (double)2 }; // (5x)^2
+	Term term3{ {num7, var_0} }; // 5x
+	Term term4{ {num1, var_0, var_1, var_3, var_2} }; // 10xyy^3x^-2
+	Term term5{ {num7, var_1, var_0, var_2, var_3} }; // 5xyy^3x^-2
+	Term term6{ {var_0, var_1} };
+	Term term7{ {num1, var_0, num2, var_1} };
+	Term term8{ {num1, num6, num7, var_2, var_3} };
+	Term term9{ {num1, var_0, var_0, var_2} };
+
     void show_sizes(){
         cout << "sizeof Constant is -> " << sizeof(Constant) << endl;
         cout << "sizeof Variable is -> " << sizeof(Variable) << endl;
@@ -233,28 +260,14 @@ namespace test{
 		std::cout << "constant after simplification = " << constant.simplify() << std::endl;
 	}
 
-	Constant num1{ 10 };
-	Constant num2{ 2, (double)4 };
-	Constant num3{ num1 };
-	Constant num4{ 1.5 };
-	Constant num5{ -1 };
-	Constant num6{ 10, Variable{'x'} };
-	Constant num7{ 5 };
-	Constant num8{ (double)10, (double)5 };
-
-	Variable var_0{ 'x' };
-	Variable var_1{ 'y' };
-	Variable var_2{ 'x', -2 };
-	Variable var_3{ 'y', 3 };
-	Variable var_4 = 'a';
-
-	Term term0{ {num1, var_0} }; // 10x
-	Term term1{ {num2, var_3} };  // 2^4y^3
-	Term term2{ {num7, var_0}, (double)2 }; // (5x)^2
-	Term term3{ {num7, var_0} }; // 5x
-	Term term4{ {num1, var_0, var_1, var_3, var_2} }; // 10xyy^3x^-2
-	Term term5{ {num7, var_1, var_0, var_2, var_3} }; // 5xyy^3x^-2
-	Term term6{ {var_0, var_1} };
+	void term_simplify_test() {
+		std::cout << "term before simplification (term7) = " << term7 << std::endl;
+		std::cout << "term after simplification (term7) = " << term7.simplify() << std::endl;
+		std::cout << "term before simplification (term8) = " << term8 << std::endl;
+		std::cout << "term after simplification (term8) = " << term8.simplify() << std::endl;
+		std::cout << "term before simplification (term9) = " << term9 << std::endl;
+		std::cout << "term after simplification (term9) = " << term9.simplify() << std::endl;
+	}
 
 	void constant_constant_test() {
 		std::cout << "[Constant to Constant] arithmetic tests\n\n";

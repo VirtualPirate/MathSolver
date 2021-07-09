@@ -103,6 +103,8 @@ int main() {
 	test::parse_expression_test();
 	test::constant_simplify_tests();
 	test::variable_simplify_test();
+
+	test::term_simplify_test();
 	//cin.get();
 	return 0;
 }

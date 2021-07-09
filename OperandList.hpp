@@ -46,6 +46,7 @@ public:
 		iterator operator--(int);
 
 		Operand& operator*();
+		Operand* operator->();
 
 		//Comparison operator
 		bool operator==(const iterator&) const;
@@ -80,7 +81,8 @@ public:
 		const_iterator operator++(int);
 		const_iterator operator--(int);
 
-		const Operand& operator*();
+		const Operand& operator*() const;
+		const Operand* operator->() const;
 
 		//Comparison operator
 		bool operator==(const const_iterator&) const;
