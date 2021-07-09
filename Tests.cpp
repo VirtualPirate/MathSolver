@@ -210,6 +210,12 @@ namespace test{
 
 		Operand operand_4 = Parser::Parse_Expression("(a + b - c) ^ 3");
 		std::cout << "operand_4 = " << operand_4 << std::endl;
+
+		Operand operand_5 = Parser::Parse_Expression("1 / (2 + 1)");
+		std::cout << "oeprand_5 = " << operand_5 << std::endl;
+
+		Operand oeprand_6 = Parser::Parse_Expression("1 / (x  +y) / (200 + 2xy)");
+		std::cout << "operand_6 = " << oeprand_6 << std::endl;
 	}
 
 	void constant_simplify_tests() {

@@ -194,6 +194,8 @@ void Parser::generalize_operators() {
 	Token token_minus{ '-' };
 	Token token_divide{ '/' };
 
+	std::vector<Token> raise_minus_one{ {Token{'^'}, (double)-1} };
+
 	bool has_operand = false;
 	std::vector<Token> new_tokens;
 	size_t minus_count = std::count(tokens.begin(), tokens.end(), token_minus);
@@ -220,13 +222,25 @@ void Parser::generalize_operators() {
 
 	size_t index = 0;
 	while (index < new_tokens.size()) {
+		//If the token is a divide operator
 		if (new_tokens[index] == token_divide) {
 			if (index+1 >= new_tokens.size())
 				break;
-			new_tokens[index] = new_tokens[index + 1];
-			new_tokens[index + 1] = Token{ '^' };
-			new_tokens.insert(new_tokens.begin() + index + 2, (double)-1);
-			index++;
+			// if the operand after divide operator is a group
+			if (Parser::is_leftbrace(new_tokens[index + 1])) {
+				new_tokens[index] = Token{ '*' };
+				TokensConstIteratorPair iter_pair = Parser::grab_group(new_tokens.cbegin() + index + 1, new_tokens.cend());
+				size_t end_index = std::distance(new_tokens.cbegin(), iter_pair.second) + 1;
+				new_tokens.insert(new_tokens.begin() + end_index, raise_minus_one.begin(), raise_minus_one.end());
+				index = end_index + raise_minus_one.size();
+			}
+			else {
+				new_tokens[index] = new_tokens[index + 1];
+				new_tokens[index + 1] = Token{ '^' };
+				new_tokens.insert(new_tokens.begin() + index + 2, (double)-1);
+				index += raise_minus_one.size();
+			}
+			continue;
 		}
 		index++;
 	}
