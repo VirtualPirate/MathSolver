@@ -21,17 +21,17 @@ const Operand CONSTANTS::NULL_OPERAND = Operand{};
 
 // Constant to Constant arithmetic operators
 Operand Constant::operator+(const Constant& other) const{
-	if (!power && !other.power)
+	if (!power && !other.power) // power == other.power == 1
 		return Constant{ value + other.value };
 	return CONSTANTS::NULL_OPERAND;
 }
 Operand Constant::operator-(const Constant& other) const{
-	if (!power&& !other.power)
+	if (!power&& !other.power) // power == other.power == 1
 		return Constant{ value - other.value };
 	return CONSTANTS::NULL_OPERAND;
 }
 Operand Constant::operator*(const Constant& other) const{
-	if (!power && !other.power)
+	if (!power && !other.power) // power == other.power == 1
 		return Constant{ value * other.value };
 	Operand power_add{ getPower() +other.getPower() };
 	if (value == other.value && power_add)
@@ -208,24 +208,48 @@ Operand Term::raise_pow(const Variable& other) const {
 
 //Term to Term arithmetic operations
 Operand Term::operator+(const Term& other) const{
-	if (is_addable(*this, other)) {
+	if (is_addable(*this, other)) { // if the terms *this and other contain same variable sets
 		Term result{ *this };
-		*(result.begin(DataType::Constant)) = *(this->cbegin(DataType::Constant)) + *(other.cbegin(DataType::Constant));
+		if (this->count(DataType::Constant) == 0) // if the terms does not contain any constants
+			result.insert_front((double)2);
+		else
+			*(result.begin(DataType::Constant)) = *(this->cbegin(DataType::Constant)) + *(other.cbegin(DataType::Constant));
 		return result;
 	}
 	return CONSTANTS::NULL_OPERAND;
 }
 Operand Term::operator-(const Term& other) const{
-	if (is_addable(*this, other)) {
+	if (is_addable(*this, other)) { // if the terms *this and other contain same variable sets
 		Term result{ *this };
-		*(result.begin(DataType::Constant)) = *(this->cbegin(DataType::Constant)) - *(other.cbegin(DataType::Constant));
+		if (this->count(DataType::Constant) == 0) // if the terms does not contain any constants
+			return CONSTANTS::ZERO;
+		else
+			*(result.begin(DataType::Constant)) = *(this->cbegin(DataType::Constant)) - *(other.cbegin(DataType::Constant));
 		return result;
 	}
 	return CONSTANTS::NULL_OPERAND;
 }
-Operand Term::operator*(const Term& other) const{return Operand{};}
+Operand Term::operator*(const Term& other) const{
+	if (this->power == CONSTANTS::ONE && other.power == CONSTANTS::ONE) {
+		std::vector<Operand> result;
+		result.reserve(this->fields.size() + other.fields.size());
+
+		for (const auto& each : this->fields)
+			result.push_back(each);
+		for (const auto& each : other.fields)
+			result.push_back(each);
+
+		return Term{ result };
+	}
+	else
+	{
+		return Term{ *this, other };
+	}
+}
 Operand Term::operator/(const Term& other) const{return Operand{};}
-Operand Term::raise_pow(const Term& other) const{return Operand{};}
+Operand Term::raise_pow(const Term& other) const{
+	return Term{ fields, power.operator*(other) };
+}
 
 //Term to Expression arithmetic operations
 Operand Term::operator+(const Expression& other) const{return Operand{};}
@@ -265,7 +289,7 @@ Operand Expression::raise_pow(const Expression& other) const {return Operand{};}
 bool is_addable(const Term& first,  const Term& second) {
 	bool criteria = first.cbegin(DataType::Term) == first.cend(DataType::Term)
 	&& first.cbegin(DataType::Expression) == first.cend(DataType::Expression)
-	&& first.count(DataType::Constant) == 1 && first.getPower() == CONSTANTS::ONE
+	&& (first.count(DataType::Constant) == 1 || first.count(DataType::Constant) == 0) && first.getPower() == CONSTANTS::ONE
 	&& second.getPower() == CONSTANTS::ONE;
 
 	std::vector<Variable> first_vec = first.getVars();

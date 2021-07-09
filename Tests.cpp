@@ -254,6 +254,7 @@ namespace test{
 	Term term3{ {num7, var_0} }; // 5x
 	Term term4{ {num1, var_0, var_1, var_3, var_2} }; // 10xyy^3x^-2
 	Term term5{ {num7, var_1, var_0, var_2, var_3} }; // 5xyy^3x^-2
+	Term term6{ {var_0, var_1} };
 
 	void constant_constant_test() {
 		std::cout << "[Constant to Constant] arithmetic tests\n\n";
@@ -336,7 +337,11 @@ namespace test{
 
 		test::add_test(term0, term3);
 		test::add_test(term4, term5);
+		test::add_test(term6, term6);
 		test::sub_test(term4, term5);
+
+		test::mul_test(term0, term3);
+		test::mul_test(term0, term6);
 
 		std::cout << "\n\n";
 
