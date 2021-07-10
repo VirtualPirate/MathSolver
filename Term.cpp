@@ -111,16 +111,16 @@ std::vector<Operand> Term::internal_simplify() const {
 
 void Term::simplify_internal(DataType type) {
 	Operand each_operand;
-	for (auto i = this->cbegin(type); i != this->cend(type); i++) {
-		for (auto j = this->cbegin(type) + 1; (j != this->cend(type) && i != j);) {
+	for (auto i = this->begin(type); i != this->end(type); i++) {
+		for (auto j = this->begin(type) + 1; (j != this->end(type) && i != j);) {
 			//std::cout << "i = " << *i << std::endl;
 			//std::cout << "j = " << *j << std::endl;
 			each_operand = std::move(i->simplify() * j->simplify());
 			if (!each_operand.is_term()) // if each_operand is not a term
 			{
 				each_operand = std::move(each_operand.simplify());
-				this->fields.erase(this->fields.begin() + j.getIndex());
-				*(this->fields.begin() + i.getIndex()) = std::move(each_operand);
+				this->erase(j);
+				*i = std::move(each_operand);
 				//std::cout << "result = " << result << std::endl;
 			}
 			else

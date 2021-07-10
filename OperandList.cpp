@@ -134,6 +134,10 @@ void OperandList::insert(Operand&& ref){
 	fields.push_back(std::move(ref));
 }
 
+void OperandList::erase(const const_iterator& iter) {
+	fields.erase(fields.begin() + iter.getIndex());
+}
+
 void OperandList::insert_front(const Operand& ref){
 	is_simplified = false;
 	fields.insert(fields.begin(), ref);
@@ -200,6 +204,7 @@ OperandList::iterator::iterator(): index{0}{}
 OperandList::const_iterator::const_iterator(): index{0}{}
 OperandList::iterator::iterator(const OperandList::iterator& ref): ref{ref.ref}, index{ref.index}, iterative{ref.iterative}{}
 OperandList::const_iterator::const_iterator(const OperandList::const_iterator& ref): ref{ref.ref}, index{ref.index}, iterative{ref.iterative}{}
+OperandList::const_iterator::const_iterator(const OperandList::iterator& ref) : ref{ ref.ref }, index{ ref.index }, iterative{ ref.iterative }{}
 OperandList::iterator::iterator(OperandList* point, int index_, DataType type): ref{point}, index{index_}, iterative{type}{}
 OperandList::const_iterator::const_iterator(const OperandList* point, int index_, DataType type): ref{point}, index{index_}, iterative{type}{}
 

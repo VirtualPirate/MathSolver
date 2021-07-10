@@ -66,6 +66,7 @@ public:
 		int operate_add(int);
 		int operate_sub(int);
 	public:
+		const_iterator(const iterator&);
 		const_iterator& operator=(const const_iterator&);
 		void set_iterative(const DataType&);
 		int getIndex() const;
@@ -136,6 +137,8 @@ public:
 
 	void insert_front(const Operand&);
 	void insert_front(Operand&&);
+
+	void erase(const const_iterator&);
 
 	// bool is_Constant() const;
 	// bool is_Variable() const;
