@@ -15,6 +15,21 @@
 
 #include "Tests.hpp"
 
+Term::Term(const Operand& ref) {
+	if (ref.is_term())
+		*this = ref.get<Term>();
+	else
+		OperandList(ref);
+}
+
+Term& Term::operator=(const Operand& ref) {
+	if (ref.is_term())
+		*this = ref.get<Term>();
+	else
+		*(OperandList*)this = ref;
+
+	return *this;
+}
 
 void Term::extend(const Term& ref){
 	is_simplified = false;
@@ -129,6 +144,28 @@ void Term::simplify_internal(DataType type) {
 	}
 }
 
+template <typename Type>
+void showvector(const Type& vec) {
+	std::cout << "{ ";
+	for (auto& each : vec)
+		std::cout << each << ", ";
+	std::cout << " }\n";
+}
+
+void Term::simplify_internal_terms() {
+	Term simplified_term;
+	for (size_t each = 0; each < fields.size();) {
+		if (fields.at(each).is_term()) {
+			simplified_term = std::move(fields.at(each).simplify());
+			fields.erase(fields.begin() + each);;
+			fields.insert(fields.begin() + each, simplified_term.fields.begin(), simplified_term.fields.end());
+			each += simplified_term.fields.size();
+		}
+		else
+			each++;
+	}
+}
+
 
 void Term::remove_ones() {
 	for (auto each = 0; each < fields.size();) {
@@ -161,6 +198,7 @@ Operand Term::simplify() const {
 		return CONSTANTS::ZERO;
 
 	Term result{ *this };
+	result.simplify_internal_terms();
 	result.simplify_constants();
 	result.simplify_variables();
 	result.remove_ones();

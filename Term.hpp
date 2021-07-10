@@ -35,11 +35,14 @@ class Term: public OperandList{
 	std::vector<Operand> internal_simplify() const; 
 
 	void simplify_internal(DataType type); // used by simplify_constants and simplify_variable functions only
+	void simplify_internal_terms();
 	inline void simplify_constants();
 	inline void simplify_variables();
 	void remove_ones();
 	bool has_zero() const;
 public:
+	Term(const Operand&);
+	Term& operator=(const Operand&);
 
 	bool is_negative() const;
 	bool negative_power() const;
