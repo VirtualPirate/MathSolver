@@ -139,6 +139,14 @@ void Term::remove_ones() {
 	}
 }
 
+bool Term::has_zero() const {
+	for (auto each = this->cbegin(DataType::Constant); each != this->cend(DataType::Constant); each++) {
+		if (each->get<Constant>() == Constant::ZERO)
+			return true;
+	}
+	return false;
+}
+
 
 void Term::simplify_constants() {
 	this->simplify_internal(DataType::Constant);
@@ -149,11 +157,24 @@ void Term::simplify_variables() {
 
 Operand Term::simplify() const {
 	//return *this;
+	if (has_zero())
+		return CONSTANTS::ZERO;
+
 	Term result{ *this };
 	result.simplify_constants();
 	result.simplify_variables();
 	result.remove_ones();
-	return result;
+
+	if (power != CONSTANTS::ONE) {
+		for (Operand& each_operand : result.fields)
+			each_operand = std::move(each_operand.raise_pow(power).simplify());
+		result.setPower(CONSTANTS::ONE);
+	}
+
+	if (has_zero())
+		return CONSTANTS::ZERO;
+	else
+		return result;
 }
 
 bool Term::is_Constant() const {

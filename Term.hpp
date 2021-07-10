@@ -38,6 +38,7 @@ class Term: public OperandList{
 	inline void simplify_constants();
 	inline void simplify_variables();
 	void remove_ones();
+	bool has_zero() const;
 public:
 
 	bool is_negative() const;

@@ -33,10 +33,11 @@ namespace test{
 	Term term3{ {num7, var_0} }; // 5x
 	Term term4{ {num1, var_0, var_1, var_3, var_2} }; // 10xyy^3x^-2
 	Term term5{ {num7, var_1, var_0, var_2, var_3} }; // 5xyy^3x^-2
-	Term term6{ {var_0, var_1} };
-	Term term7{ {num1, var_0, num2, var_1} };
+	Term term6{ {var_0, var_1} }; // xy
+	Term term7{ {num1, var_0, num2, var_1} }; // 10x * 2^4x
 	Term term8{ {num1, num6, num7, var_2, var_3} };
 	Term term9{ {num1, var_0, var_0, var_2} };
+	Term term10{ {num1, var_0, var_0, var_2}, num7 };
 
     void show_sizes(){
         cout << "sizeof Constant is -> " << sizeof(Constant) << endl;
@@ -261,12 +262,15 @@ namespace test{
 	}
 
 	void term_simplify_test() {
+		std::cout << "[Term simplification tests]\n\n";
 		std::cout << "term before simplification (term7) = " << term7 << std::endl;
 		std::cout << "term after simplification (term7) = " << term7.simplify() << std::endl;
 		std::cout << "term before simplification (term8) = " << term8 << std::endl;
 		std::cout << "term after simplification (term8) = " << term8.simplify() << std::endl;
 		std::cout << "term before simplification (term9) = " << term9 << std::endl;
 		std::cout << "term after simplification (term9) = " << term9.simplify() << std::endl;
+		std::cout << "term before simplification (term10) = " << term10 << std::endl;
+		std::cout << "term after simplification (term10) = " << term10.simplify() << std::endl;
 	}
 
 	void constant_constant_test() {
