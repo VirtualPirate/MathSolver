@@ -13,6 +13,8 @@
 
 #include "Tests.hpp"
 
+Constant const Constant::ONE{ 1 };
+Constant const Constant::ZERO{ 0.0 };
 Operand const Constant::power_one{(double)1};
 Operand const Constant::power_zero{(double)0};
 Operand const Constant::power_null{};

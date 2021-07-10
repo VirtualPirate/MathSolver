@@ -129,6 +129,17 @@ void Term::simplify_internal(DataType type) {
 	}
 }
 
+
+void Term::remove_ones() {
+	for (auto each = 0; each < fields.size();) {
+		if (fields.at(each).is_constant() && fields.at(each) == CONSTANTS::ONE)
+			fields.erase(fields.cbegin() + each);
+		else
+			each++;
+	}
+}
+
+
 void Term::simplify_constants() {
 	this->simplify_internal(DataType::Constant);
 }
@@ -141,6 +152,7 @@ Operand Term::simplify() const {
 	Term result{ *this };
 	result.simplify_constants();
 	result.simplify_variables();
+	result.remove_ones();
 	return result;
 }
 
