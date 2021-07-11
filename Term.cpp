@@ -15,6 +15,17 @@
 
 #include "Tests.hpp"
 
+Term::Term(const Term& lvalue) : OperandList(lvalue) {}
+Term& Term::operator=(const Term& lvalue) {
+	OperandList::operator=(lvalue);
+	return *this;
+}
+Term::Term(Term&& rvalue) : OperandList(std::move(rvalue)) {}
+Term& Term::operator=(Term&& rvalue) {
+	OperandList::operator=(std::move(rvalue));
+	return *this;
+}
+
 Term::Term(const Operand& ref) {
 	if (ref.is_term())
 		*this = ref.get<Term>();

@@ -41,6 +41,12 @@ class Term: public OperandList{
 	void remove_ones();
 	bool has_zero() const;
 public:
+
+	Term(const Term&);
+	Term& operator=(const Term&);
+	Term(Term&&);
+	Term& operator=(Term&&);
+
 	Term(const Operand&);
 	Term& operator=(const Operand&);
 
