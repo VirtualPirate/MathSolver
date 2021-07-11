@@ -29,6 +29,7 @@ class Expression: public OperandList{
 
 	friend Operand Expression_to_Operand_add(const Operand&, const Expression&);
 	friend inline Operand Expression_to_Operand_sub(const Operand&, const Expression&);
+
 public:
 
 	Expression(const Expression&);
@@ -51,6 +52,8 @@ public:
 	void simplify_();
 	Operand simplify() const;
 	Operand substitute(const Substitutor_List& list) const;
+
+	static Operand Operand_Expression_mul(const Operand&, const Expression&);
 
 	Operand operator+(const double&) const;
 	Operand operator-(const double&) const;

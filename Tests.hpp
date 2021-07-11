@@ -156,6 +156,8 @@ namespace test{
     void term_variable_test();
 
     void term_term_test();
+
+    void operand_expression_test();
 }
 
 #endif

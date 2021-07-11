@@ -368,5 +368,10 @@ namespace test{
 		std::cout << "\n\n";
 
 	}
+
+	void operand_expression_test() {
+		Expression expression = Parser::Parse_Expression("1 + 2x + 2").get<Expression>();
+		std::cout << "operand_expression_test = " << Expression::Operand_Expression_mul(Operand{ (double)2 }, expression) << std::endl;
+	}
 }
 

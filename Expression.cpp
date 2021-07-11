@@ -103,3 +103,15 @@ Operand Expression::operator-(const Operand& other) const {return Operand{*this}
 Operand Expression::operator*(const Operand& other) const {return Operand{*this} * other;}
 Operand Expression::operator/(const Operand& other) const {return Operand{*this} / other;}
 Operand Expression::raise_pow(const Operand& other) const {return Operand{*this}.raise_pow(other);}
+
+Operand Expression::Operand_Expression_mul(const Operand& first, const Expression& second) {
+	if (second.power == CONSTANTS::ONE) {
+		std::vector<Operand> result_fields;
+		result_fields.reserve(second.fields.size());
+		for (const Operand& each_operand : second.fields)
+			result_fields.push_back(first * each_operand);
+		return Expression{ result_fields };
+	}
+	else
+		return Term{ first, second };
+}
