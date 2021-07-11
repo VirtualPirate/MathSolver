@@ -97,7 +97,9 @@ Operand Constant::operator+(const Expression& other) const {
 Operand Constant::operator-(const Expression& other) const{
 	return CONSTANTS::NULL_OPERAND;
 }
-Operand Constant::operator*(const Expression& other) const{return Operand{};}
+Operand Constant::operator*(const Expression& other) const{
+	return Expression::Operand_Expression_mul(*this, other);
+}
 Operand Constant::operator/(const Expression& other) const{return Operand{};}
 Operand Constant::raise_pow(const Expression& other) const{return Operand{};}
 
@@ -175,7 +177,9 @@ Operand Variable::operator+(const Expression& other) const{
 Operand Variable::operator-(const Expression& other) const{
 	return CONSTANTS::NULL_OPERAND;
 }
-Operand Variable::operator*(const Expression& other) const{return Operand{};}
+Operand Variable::operator*(const Expression& other) const{
+	return Expression::Operand_Expression_mul(*this, other);
+}
 Operand Variable::operator/(const Expression& other) const{return Operand{};}
 Operand Variable::raise_pow(const Expression& other) const{return Operand{};}
 
@@ -266,7 +270,9 @@ Operand Term::operator+(const Expression& other) const{
 Operand Term::operator-(const Expression& other) const{
 	return CONSTANTS::NULL_OPERAND;
 }
-Operand Term::operator*(const Expression& other) const{return Operand{};}
+Operand Term::operator*(const Expression& other) const{
+	return Expression::Operand_Expression_mul(*this, other);
+}
 Operand Term::operator/(const Expression& other) const{return Operand{};}
 Operand Term::raise_pow(const Expression& other) const{return Operand{};}
 
@@ -277,7 +283,9 @@ Operand Expression::operator+(const Constant& other) const{
 Operand Expression::operator-(const Constant& other) const{
 	return CONSTANTS::NULL_OPERAND;
 }
-Operand Expression::operator*(const Constant& other) const { return Operand{}; }
+Operand Expression::operator*(const Constant& other) const {
+	return Expression::Operand_Expression_mul(other, *this);
+}
 Operand Expression::operator/(const Constant& other) const{return Operand{};}
 Operand Expression::raise_pow(const Constant& other) const{return Operand{};}
 
@@ -288,7 +296,9 @@ Operand Expression::operator+(const Variable& other) const{
 Operand Expression::operator-(const Variable& other) const{
 	return CONSTANTS::NULL_OPERAND;
 }
-Operand Expression::operator*(const Variable& other) const{return Operand{};}
+Operand Expression::operator*(const Variable& other) const{
+	return Expression::Operand_Expression_mul(other, *this);
+}
 Operand Expression::operator/(const Variable& other) const{return Operand{};}
 Operand Expression::raise_pow(const Variable& other) const{return Operand{};}
 
@@ -299,7 +309,9 @@ Operand Expression::operator+(const Term& other) const{
 Operand Expression::operator-(const Term& other) const{
 	return CONSTANTS::NULL_OPERAND;
 }
-Operand Expression::operator*(const Term& other) const{return Operand{};}
+Operand Expression::operator*(const Term& other) const{
+	return Expression::Operand_Expression_mul(other, *this);
+}
 Operand Expression::operator/(const Term& other) const{return Operand{};}
 Operand Expression::raise_pow(const Term& other) const{return Operand{};}
 
