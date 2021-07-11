@@ -26,7 +26,7 @@ Term& Term::operator=(const Operand& ref) {
 	if (ref.is_term())
 		*this = ref.get<Term>();
 	else
-		*(OperandList*)this = ref;
+		OperandList::operator=(ref);
 
 	return *this;
 }

@@ -30,6 +30,15 @@ class Expression: public OperandList{
 	friend Operand Expression_to_Operand_add(const Operand&, const Expression&);
 	friend inline Operand Expression_to_Operand_sub(const Operand&, const Expression&);
 public:
+
+	Expression(const Expression&);
+	Expression& operator=(const Expression&);
+	Expression(Expression&&);
+	Expression& operator=(Expression&&);
+
+	Expression(const Operand&);
+	Expression& operator= (const Operand&);
+
 	std::string power_print() const;
 	bool is_negative() const;
 	bool negative_power() const;

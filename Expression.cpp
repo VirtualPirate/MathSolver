@@ -13,6 +13,36 @@
 
 #include "Tests.hpp"
 
+
+Expression::Expression(const Expression& lvalue) : OperandList(lvalue), is_subexpression{ lvalue.is_subexpression }{}
+Expression& Expression::operator=(const Expression& lvalue) {
+	OperandList::operator=(lvalue);
+	is_subexpression = lvalue.is_subexpression;
+	return *this;
+}
+Expression::Expression(Expression&& rvalue) : OperandList(std::move(rvalue)), is_subexpression{ rvalue.is_subexpression }{}
+Expression& Expression::operator=(Expression&& rvalue) {
+	OperandList::operator=(std::move(rvalue));
+	is_subexpression = rvalue.is_subexpression;
+	return *this;
+}
+
+Expression::Expression(const Operand& ref) {
+	if(ref.is_expression())
+		*this = ref.get<Expression>();
+	else
+		OperandList(ref);
+}
+
+Expression& Expression::operator=(const Operand& ref) {
+	if (ref.is_expression())
+		*this = ref.get<Expression>();
+	else
+		OperandList::operator=(ref);
+
+	return *this;
+}
+
 std::ostream& operator<<(std::ostream& os, const Expression& ref){
 	if(!ref.isNull()){
 		bool brace = ref.isSubexpression();
