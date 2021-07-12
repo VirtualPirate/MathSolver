@@ -157,6 +157,14 @@ namespace test{
 
     void term_term_test();
 
+    void constant_expression_test();
+    void variable_expression_test();
+    void term_expression_test();
+
+    void expression_constant_test();
+    void expression_variable_test();
+    void expression_term_test();
+
     void operand_expression_test();
 }
 

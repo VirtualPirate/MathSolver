@@ -40,6 +40,9 @@ namespace test{
 	Term term10{ {num1, var_0, var_0, var_2}, num7 }; // (10xxx^-2)^5
 	Term term11{ {num1, term2} };
 
+	Expression exp0(Parser::Parse_Expression("1 + 2x -y"));
+	Expression exp1(Parser::Parse_Expression("x + 2xy + x^2"));
+
     void show_sizes(){
         cout << "sizeof Constant is -> " << sizeof(Constant) << endl;
         cout << "sizeof Variable is -> " << sizeof(Variable) << endl;
@@ -369,6 +372,39 @@ namespace test{
 
 	}
 
+	void constant_expression_test() {
+		std::cout << "[Constant to Expression] arithmetic tests\n\n";
+
+		std::cout << "\n\n";
+	}
+
+	void variable_expression_test() {
+		std::cout << "[Variable to Expression] arithemtic tests\n\n";
+
+		std::cout << "\n\n";
+	}
+
+	void term_expression_test() {
+		std::cout << "[Term to Expression] arithmetic tests\n\n";
+
+		std::cout << "\n\n";
+	}
+
+	void expression_constant_test() {
+		std::cout << "[Expression to Constant] arithmetic tests\n\n";
+
+		std::cout << "\n\n";
+	}
+	void expression_variable_test() {
+		std::cout << "[Expression to Variable] arithmetic tests\n\n";
+
+		std::cout << "\n\n";
+	}
+	void expression_term_test() {
+		std::cout << "[Expression to Term] arithemtic tests\n\n";
+
+		std::cout << "\n\n";
+	}
 	void operand_expression_test() {
 		Expression expression = Parser::Parse_Expression("1 + 2x + 2").get<Expression>();
 		std::cout << "operand_expression_test = " << Expression::Operand_Expression_mul(Operand{ (double)2 }, expression) << std::endl;
