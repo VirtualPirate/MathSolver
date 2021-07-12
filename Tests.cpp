@@ -42,6 +42,7 @@ namespace test{
 
 	Expression exp0(Parser::Parse_Expression("1 + 2x -y"));
 	Expression exp1(Parser::Parse_Expression("x + 2xy + x^2"));
+	Expression exp2(Parser::Parse_Expression("a + b"));
 
     void show_sizes(){
         cout << "sizeof Constant is -> " << sizeof(Constant) << endl;
@@ -426,6 +427,14 @@ namespace test{
 	}
 	void expression_term_test() {
 		std::cout << "[Expression to Term] arithemtic tests\n\n";
+
+		std::cout << "\n\n";
+	}
+
+	void expression_expression_test() {
+		std::cout << "[Expression to Expression] arithemtic tests\n\n";
+
+		test::mul_test(exp2, exp2);
 
 		std::cout << "\n\n";
 	}

@@ -334,7 +334,18 @@ Operand Expression::operator+(const Expression& other) const {
 Operand Expression::operator-(const Expression& other) const {
 	return CONSTANTS::NULL_OPERAND;
 }
-Operand Expression::operator*(const Expression& other) const {return Operand{};}
+Operand Expression::operator*(const Expression& other) const {
+	if (power == CONSTANTS::ONE && other.power == CONSTANTS::ONE) {
+		std::vector<Operand> result_fields;
+		result_fields.reserve(fields.size() + other.fields.size());
+		for (const Operand& first : fields) {
+			for (const Operand& second : other.fields)
+				result_fields.push_back(first * second);
+		}
+		return Expression{ result_fields };
+	}
+	return Term{ {*this, other} };
+}
 Operand Expression::operator/(const Expression& other) const {return Operand{};}
 Operand Expression::raise_pow(const Expression& other) const {
 	return Expression(this->fields, power * other);

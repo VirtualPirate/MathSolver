@@ -165,6 +165,8 @@ namespace test{
     void expression_variable_test();
     void expression_term_test();
 
+    void expression_expression_test();
+
     void operand_expression_test();
 }
 

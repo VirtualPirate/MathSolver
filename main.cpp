@@ -49,6 +49,7 @@ int main() {
 	test::variable_term_test();
 
 	test::term_term_test();
+	test::expression_expression_test();
 
 	test::constant_expression_test();
 	test::variable_expression_test();
