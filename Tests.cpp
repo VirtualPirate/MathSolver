@@ -374,16 +374,40 @@ namespace test{
 
 	void constant_expression_test() {
 		std::cout << "[Constant to Expression] arithmetic tests\n\n";
+		exp0.setSubexpression(true);
+		exp1.setSubexpression(true);
+
+		test::mul_test(num1, exp0);
+		test::mul_test(num2, exp0);
+		test::mul_test(num3, exp0);
+		test::mul_test(num4, exp0);
+		test::mul_test(num5, exp0);
+
+		test::mul_test(num1, exp1);
+		test::mul_test(num2, exp1);
+		test::mul_test(num3, exp1);
+		test::mul_test(num4, exp1);
+		test::mul_test(num5, exp1);
 
 		std::cout << "\n\n";
 	}
-
 	void variable_expression_test() {
 		std::cout << "[Variable to Expression] arithemtic tests\n\n";
 
+		test::mul_test(var_0, exp0);
+		test::mul_test(var_1, exp0);
+		test::mul_test(var_2, exp0);
+		test::mul_test(var_3, exp0);
+		test::mul_test(var_4, exp0);
+
+		test::mul_test(var_0, exp1);
+		test::mul_test(var_1, exp1);
+		test::mul_test(var_2, exp1);
+		test::mul_test(var_3, exp1);
+		test::mul_test(var_4, exp1);
+
 		std::cout << "\n\n";
 	}
-
 	void term_expression_test() {
 		std::cout << "[Term to Expression] arithmetic tests\n\n";
 

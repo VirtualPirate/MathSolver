@@ -12,7 +12,7 @@ class Term;
 class OperandList;
 class Expression: public OperandList{
 
-	bool is_subexpression = false;
+	bool is_subexpression = true;
 
 	using OperandList::OperandList;
 

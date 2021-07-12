@@ -50,6 +50,9 @@ int main() {
 
 	test::term_term_test();
 
+	test::constant_expression_test();
+	test::variable_expression_test();
+
 	Term term_0{ Variable{'a'} };
 	term_0.setNull(false);
 	term_0.insert(num1);
