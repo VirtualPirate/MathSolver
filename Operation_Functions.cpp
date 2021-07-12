@@ -101,7 +101,9 @@ Operand Constant::operator*(const Expression& other) const{
 	return Expression::Operand_Expression_mul(*this, other);
 }
 Operand Constant::operator/(const Expression& other) const{return Operand{};}
-Operand Constant::raise_pow(const Expression& other) const{return Operand{};}
+Operand Constant::raise_pow(const Expression& other) const{
+	return Constant{ value, getPower() * other };
+}
 
 //Variable to Constant artihmetic operations
 Operand Variable::operator+(const Constant& other) const{
@@ -181,7 +183,9 @@ Operand Variable::operator*(const Expression& other) const{
 	return Expression::Operand_Expression_mul(*this, other);
 }
 Operand Variable::operator/(const Expression& other) const{return Operand{};}
-Operand Variable::raise_pow(const Expression& other) const{return Operand{};}
+Operand Variable::raise_pow(const Expression& other) const{
+	return Variable{ name, power * other };
+}
 
 
 //Term to Constant arithmetic operations
@@ -274,7 +278,9 @@ Operand Term::operator*(const Expression& other) const{
 	return Expression::Operand_Expression_mul(*this, other);
 }
 Operand Term::operator/(const Expression& other) const{return Operand{};}
-Operand Term::raise_pow(const Expression& other) const{return Operand{};}
+Operand Term::raise_pow(const Expression& other) const{
+	return Term{ fields, power.operator*(other) };
+}
 
 //Expression to Constant arithmetic operations
 Operand Expression::operator+(const Constant& other) const{
@@ -287,7 +293,9 @@ Operand Expression::operator*(const Constant& other) const {
 	return Expression::Operand_Expression_mul(other, *this);
 }
 Operand Expression::operator/(const Constant& other) const{return Operand{};}
-Operand Expression::raise_pow(const Constant& other) const{return Operand{};}
+Operand Expression::raise_pow(const Constant& other) const{
+	return Expression(this->fields, power * other);
+}
 
 //Expression to Variable arithmetic operations
 Operand Expression::operator+(const Variable& other) const{
@@ -300,7 +308,9 @@ Operand Expression::operator*(const Variable& other) const{
 	return Expression::Operand_Expression_mul(other, *this);
 }
 Operand Expression::operator/(const Variable& other) const{return Operand{};}
-Operand Expression::raise_pow(const Variable& other) const{return Operand{};}
+Operand Expression::raise_pow(const Variable& other) const{
+	return Expression(this->fields, power * other);
+}
 
 //Expression to Term arithmetic operations
 Operand Expression::operator+(const Term& other) const{
@@ -313,7 +323,9 @@ Operand Expression::operator*(const Term& other) const{
 	return Expression::Operand_Expression_mul(other, *this);
 }
 Operand Expression::operator/(const Term& other) const{return Operand{};}
-Operand Expression::raise_pow(const Term& other) const{return Operand{};}
+Operand Expression::raise_pow(const Term& other) const{
+	return Expression(this->fields, power * other);
+}
 
 //Expression to Expression arithmetic operations
 Operand Expression::operator+(const Expression& other) const {
@@ -324,7 +336,9 @@ Operand Expression::operator-(const Expression& other) const {
 }
 Operand Expression::operator*(const Expression& other) const {return Operand{};}
 Operand Expression::operator/(const Expression& other) const {return Operand{};}
-Operand Expression::raise_pow(const Expression& other) const {return Operand{};}
+Operand Expression::raise_pow(const Expression& other) const {
+	return Expression(this->fields, power * other);
+}
 
 bool is_addable(const Term& first,  const Term& second) {
 	bool criteria = first.cbegin(DataType::Term) == first.cend(DataType::Term)
