@@ -85,6 +85,8 @@ public:
 	Operand operator/(const Operand&) const;
 	Operand raise_pow(const Operand&) const;
 
+	bool is_addable(const Term&) const;
+
 	std::string power_print() const;
 	bool is_negative() const;
 	bool negative_power() const;

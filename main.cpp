@@ -111,6 +111,7 @@ int main() {
 	test::term_simplify_test();
 	test::expression_simplify_test();
 	test::operand_expression_test();
+	test::variable_isaddable_test();
 	//cin.get();
 	return 0;
 }

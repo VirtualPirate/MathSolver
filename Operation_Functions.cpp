@@ -151,6 +151,8 @@ Operand Variable::raise_pow(const Variable& other) const{
 
 //Variable to Term arithmetic operations
 Operand Variable::operator+(const Term& other) const{
+	if (this->is_addable(other))
+		return Term{ {*(other.cbegin(DataType::Constant)) + (double)1, *this} };
 	return CONSTANTS::NULL_OPERAND;
 }
 Operand Variable::operator-(const Term& other) const{
@@ -207,7 +209,7 @@ Operand Term::raise_pow(const Constant& other) const {
 
 //Term to Variable arithmetic operations
 Operand Term::operator+(const Variable& other) const{
-	return CONSTANTS::NULL_OPERAND;
+	return other.operator+(*this);
 }
 Operand Term::operator-(const Variable& other) const{
 	return CONSTANTS::NULL_OPERAND;

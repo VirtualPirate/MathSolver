@@ -45,7 +45,7 @@ namespace test{
 	Expression exp2(Parser::Parse_Expression("a + b"));
 	Expression exp3(Parser::Parse_Expression("2 + 3^4"));
 	Expression exp4(Parser::Parse_Expression("x + x + y + y + a + b + a"));
-	Expression exp5(Parser::Parse_Expression("2x + y + 2x"));
+	Expression exp5(Parser::Parse_Expression("2x + y + x"));
 
     void show_sizes(){
         cout << "sizeof Constant is -> " << sizeof(Constant) << endl;
@@ -458,6 +458,17 @@ namespace test{
 	void operand_expression_test() {
 		Expression expression = Parser::Parse_Expression("1 + 2x + 2").get<Expression>();
 		std::cout << "operand_expression_test = " << Expression::Operand_Expression_mul(Operand{ (double)2 }, expression) << std::endl;
+	}
+
+	void variable_isaddable_test() {
+		std::cout << "variable_isaddable_test()" << std::endl << std::endl;
+
+		cout << "var_0 = " << var_0 << endl;
+		cout << "term0 = " << term0 << endl;
+
+		cout << boolalpha << var_0.is_addable(term0) << endl;
+		cout << (var_0 + term0 )<< endl;
+
 	}
 }
 

@@ -170,6 +170,8 @@ namespace test{
     void expression_expression_test();
 
     void operand_expression_test();
+
+    void variable_isaddable_test();
 }
 
 #endif

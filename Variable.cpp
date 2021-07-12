@@ -93,6 +93,17 @@ Operand Variable::operator*(const Operand& other) const {return Operand{*this} *
 Operand Variable::operator/(const Operand& other) const {return Operand{*this} / other;}
 Operand Variable::raise_pow(const Operand& other) const {return Operand{*this}.raise_pow(other);}
 
+bool Variable::is_addable(const Term& term) const {
+	bool criteria = term.count(DataType::Term) == 0 &&
+		term.count(DataType::Expression) == 0 &&
+		term.count(DataType::Variable) == 1 &&
+		term.count(DataType::Constant) == 1 &&
+		term.cbegin(DataType::Constant)->getPower() == CONSTANTS::ONE &&
+		*(term.cbegin(DataType::Variable)) == *this;
+
+	return criteria;
+}
+
 Operand Variable::simplify() const {
 	return Variable{name, power.simplify()};
 }
