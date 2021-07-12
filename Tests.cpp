@@ -43,6 +43,9 @@ namespace test{
 	Expression exp0(Parser::Parse_Expression("1 + 2x -y"));
 	Expression exp1(Parser::Parse_Expression("x + 2xy + x^2"));
 	Expression exp2(Parser::Parse_Expression("a + b"));
+	Expression exp3(Parser::Parse_Expression("2 + 3^4"));
+	Expression exp4(Parser::Parse_Expression("x + x + y + y + a + b + a"));
+	Expression exp5(Parser::Parse_Expression("2x + y + 2x"));
 
     void show_sizes(){
         cout << "sizeof Constant is -> " << sizeof(Constant) << endl;
@@ -280,6 +283,20 @@ namespace test{
 		std::cout << "term after simplification (term10) = " << term10.simplify() << std::endl;
 		std::cout << "term before simplification (term11) = " << term11 << std::endl;
 		std::cout << "term after simplification (term11) = " << term11.simplify() << std::endl;
+		std::cout << "\n\n";
+
+	}
+
+	void expression_simplify_test() {
+		std::cout << "[Expression simplification tests]\n\n";
+		std::cout << "expression before simplification (exp3) =" << exp3 << std::endl;
+		std::cout << "expression after simplification (exp3) =" << exp3.simplify() << std::endl;
+		std::cout << "expression before simplification (exp4) =" << exp4 << std::endl;
+		std::cout << "expression after simplification (exp4) =" << exp4.simplify() << std::endl;
+		std::cout << "expression before simplification (exp5) =" << exp5 << std::endl;
+		std::cout << "expression after simplification (exp5) =" << exp5.simplify() << std::endl;
+		std::cout << "\n\n";
+
 	}
 
 	void constant_constant_test() {

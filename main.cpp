@@ -109,6 +109,7 @@ int main() {
 	test::variable_simplify_test();
 
 	test::term_simplify_test();
+	test::expression_simplify_test();
 	test::operand_expression_test();
 	//cin.get();
 	return 0;

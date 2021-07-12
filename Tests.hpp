@@ -145,6 +145,8 @@ namespace test{
 
     void term_simplify_test();
 
+    void expression_simplify_test();
+
     void constant_constant_test();
     void constant_variable_test();
     void variable_constant_test();

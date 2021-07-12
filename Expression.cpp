@@ -82,7 +82,33 @@ bool Expression::negative_power() const {
 }
 
 Operand Expression::simplify() const {
-	return *this;
+	//return *this;
+
+	Expression result{ *this };
+	auto upper_iter = result.fields.begin();
+	auto lower_iter = result.fields.begin() + 1;
+
+	Operand each_operand;
+	while (upper_iter != result.fields.end()-1) {
+		each_operand = upper_iter->simplify() + lower_iter->simplify();
+		//std::cout << "upper_iter = " << *upper_iter << std::endl;
+		//std::cout << "lower_iter = " << *lower_iter << std::endl;
+		if (each_operand)
+		{
+			*lower_iter = each_operand;
+			result.fields.erase(upper_iter);
+			upper_iter = result.fields.begin();
+			lower_iter = result.fields.begin() + 1;
+			continue;
+		}
+		else if (++lower_iter == result.fields.end()) {
+			upper_iter++;
+			lower_iter = upper_iter + 1;
+		}
+	}
+
+	return result;
+
 }
 
 Expression Expression::getBase() const{
