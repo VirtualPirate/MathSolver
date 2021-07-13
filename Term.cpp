@@ -135,13 +135,18 @@ std::vector<Operand> Term::internal_simplify() const {
 
 // }
 
+void Term::simplify_each() {
+	for (Operand& each : fields)
+		each = std::move(each.simplify());
+}
+
 void Term::simplify_internal(DataType type) {
 	Operand each_operand;
 	for (auto i = this->begin(type); i != this->end(type); i++) {
 		for (auto j = this->begin(type) + 1; (j != this->end(type) && i != j);) {
 			//std::cout << "i = " << *i << std::endl;
 			//std::cout << "j = " << *j << std::endl;
-			each_operand = std::move(i->simplify() * j->simplify());
+			each_operand = std::move(*i * *j);
 			if (!each_operand.is_term()) // if each_operand is not a term
 			{
 				each_operand = std::move(each_operand.simplify());
@@ -153,14 +158,6 @@ void Term::simplify_internal(DataType type) {
 				j++;
 		}
 	}
-}
-
-template <typename Type>
-void showvector(const Type& vec) {
-	std::cout << "{ ";
-	for (auto& each : vec)
-		std::cout << each << ", ";
-	std::cout << " }\n";
 }
 
 void Term::simplify_internal_terms() {
@@ -209,6 +206,7 @@ Operand Term::simplify() const {
 		return CONSTANTS::ZERO;
 
 	Term result{ *this };
+	result.simplify_each();
 	result.simplify_internal_terms();
 	result.simplify_constants();
 	result.simplify_variables();

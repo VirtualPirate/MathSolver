@@ -81,23 +81,28 @@ bool Expression::negative_power() const {
 	return power.is_negative();
 }
 
+void Expression::simplify_each() {
+	for (Operand& each : fields)
+		each = std::move(each.simplify());
+}
+
 Operand Expression::simplify() const {
 	//return *this;
 
 	Expression result{ *this };
+	result.simplify_each();
+
 	auto upper_iter = result.fields.begin();
 	auto lower_iter = result.fields.begin() + 1;
 
 	Operand each_operand;
 	while (upper_iter != result.fields.end()-1) {
-		*upper_iter = std::move(upper_iter->simplify());
-		*lower_iter = std::move(lower_iter->simplify());
 		each_operand = *upper_iter + *lower_iter;
 		//std::cout << "upper_iter = " << *upper_iter << std::endl;
 		//std::cout << "lower_iter = " << *lower_iter << std::endl;
 		if (each_operand)
 		{
-			*lower_iter = each_operand;
+			*lower_iter = std::move(each_operand.simplify());
 			result.fields.erase(upper_iter);
 			upper_iter = result.fields.begin();
 			lower_iter = result.fields.begin() + 1;

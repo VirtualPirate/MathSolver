@@ -34,6 +34,7 @@ class Term: public OperandList{
 	void extend(const Term&);
 	std::vector<Operand> internal_simplify() const; 
 
+	void simplify_each();
 	void simplify_internal(DataType type); // used by simplify_constants and simplify_variable functions only
 	void simplify_internal_terms();
 	inline void simplify_constants();

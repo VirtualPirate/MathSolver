@@ -30,6 +30,7 @@ class Expression: public OperandList{
 	friend Operand Expression_to_Operand_add(const Operand&, const Expression&);
 	friend inline Operand Expression_to_Operand_sub(const Operand&, const Expression&);
 
+	void simplify_each();
 	void simplify_internal_expressions();
 
 public:
