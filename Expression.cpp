@@ -90,7 +90,9 @@ Operand Expression::simplify() const {
 
 	Operand each_operand;
 	while (upper_iter != result.fields.end()-1) {
-		each_operand = upper_iter->simplify() + lower_iter->simplify();
+		*upper_iter = std::move(upper_iter->simplify());
+		*lower_iter = std::move(lower_iter->simplify());
+		each_operand = *upper_iter + *lower_iter;
 		//std::cout << "upper_iter = " << *upper_iter << std::endl;
 		//std::cout << "lower_iter = " << *lower_iter << std::endl;
 		if (each_operand)
