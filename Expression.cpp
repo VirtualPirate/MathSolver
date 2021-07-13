@@ -100,6 +100,15 @@ void Expression::simplify_internal_expressions() {
 	}
 }
 
+void Expression::remove_zeroes() {
+	for (auto each = fields.begin(); each != fields.end(); ) {
+		if (each->is_constant() && *each == CONSTANTS::ZERO)
+			fields.erase(each);
+		else
+			each++;
+	}
+}
+
 Operand Expression::simplify() const {
 	//return *this;
 
@@ -128,6 +137,8 @@ Operand Expression::simplify() const {
 			lower_iter = upper_iter + 1;
 		}
 	}
+
+	result.remove_zeroes();
 
 	return result;
 

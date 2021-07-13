@@ -32,6 +32,7 @@ class Expression: public OperandList{
 
 	void simplify_each();
 	void simplify_internal_expressions();
+	void remove_zeroes();
 
 public:
 

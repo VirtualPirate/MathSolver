@@ -290,14 +290,14 @@ namespace test{
 
 	void expression_simplify_test() {
 		std::cout << "[Expression simplification tests]\n\n";
-		std::cout << "expression before simplification (exp3) =" << exp3 << std::endl;
-		std::cout << "expression after simplification (exp3) =" << exp3.simplify() << std::endl;
-		std::cout << "expression before simplification (exp4) =" << exp4 << std::endl;
-		std::cout << "expression after simplification (exp4) =" << exp4.simplify() << std::endl;
-		std::cout << "expression before simplification (exp5) =" << exp5 << std::endl;
-		std::cout << "expression after simplification (exp5) =" << exp5.simplify() << std::endl;
-		std::cout << "expression before simplification (exp6) =" << exp6 << std::endl;
-		std::cout << "expression after simplification (exp6) =" << exp6.simplify() << std::endl;
+		std::cout << "expression before simplification (exp3)= " << exp3 << std::endl;
+		std::cout << "expression after simplification (exp3) = " << exp3.simplify() << std::endl;
+		std::cout << "expression before simplification (exp4)= " << exp4 << std::endl;
+		std::cout << "expression after simplification (exp4) = " << exp4.simplify() << std::endl;
+		std::cout << "expression before simplification (exp5)= " << exp5 << std::endl;
+		std::cout << "expression after simplification (exp5) = " << exp5.simplify() << std::endl;
+		std::cout << "expression before simplification (exp6)= " << exp6 << std::endl;
+		std::cout << "expression after simplification (exp6) = " << exp6.simplify() << std::endl;
 
 		std::cout << "\n\n";
 
