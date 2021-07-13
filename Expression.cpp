@@ -86,11 +86,26 @@ void Expression::simplify_each() {
 		each = std::move(each.simplify());
 }
 
+void Expression::simplify_internal_expressions() {
+	Expression simplified_expression;
+	for (size_t each = 0; each < fields.size();) {
+		if (fields.at(each).is_expression() && fields.at(each).getPower() == CONSTANTS::ONE) {
+			simplified_expression = std::move(fields.at(each).simplify());
+			fields.erase(fields.begin() + each);;
+			fields.insert(fields.begin() + each, simplified_expression.fields.begin(), simplified_expression.fields.end());
+			each += simplified_expression.fields.size();
+		}
+		else
+			each++;
+	}
+}
+
 Operand Expression::simplify() const {
 	//return *this;
 
 	Expression result{ *this };
 	result.simplify_each();
+	result.simplify_internal_expressions();
 
 	auto upper_iter = result.fields.begin();
 	auto lower_iter = result.fields.begin() + 1;
