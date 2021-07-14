@@ -285,7 +285,7 @@ Operand& Operand::operator=(const Term& ref){
 	}
 	return *this;
 }
-Operand::Operand(const Expression& ref): value{(void*)(new Expression{ref})}, type{DataType::Expression}, is_null{ref.isNull()}{}
+Operand::Operand(const Expression& ref): value{}, type{}, is_null{}{*this = ref; }
 Operand& Operand::operator=(const Expression& ref){
 	if (ref.fields.size() == 1 && ref.power == CONSTANTS::ONE)
 		*this = ref.fields[0];

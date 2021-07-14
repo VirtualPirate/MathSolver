@@ -20,7 +20,7 @@
 // 		result.push_back(each.simplify());
 // 	return result;
 // }
-OperandList::OperandList(): fields{}, power{(double)1}, is_simplified{false}, is_null{true}{}
+OperandList::OperandList() : fields{}, power{ (double)1 }, is_simplified{ false }, is_null{ true }{}
 
 OperandList::OperandList(const OperandList& ref): fields{ref.fields}, power{ref.power}, is_simplified{ref.is_simplified}, is_null{ref.is_null}{}
 OperandList& OperandList::operator=(const OperandList& ref){

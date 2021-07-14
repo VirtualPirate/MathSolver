@@ -228,10 +228,18 @@ Operand Term::raise_pow(const Variable& other) const {
 Operand Term::operator+(const Term& other) const{
 	if (is_addable(*this, other)) { // if the terms *this and other contain same variable sets
 		Term result{ *this };
-		if (this->count(DataType::Constant) == 0) // if the terms does not contain any constants
-			result.insert_front((double)2);
-		else
-			*(result.begin(DataType::Constant)) = *(this->cbegin(DataType::Constant)) + *(other.cbegin(DataType::Constant));
+
+		Constant first_coefficient{Constant::ONE};
+		Constant second_coefficient{Constant::ONE};
+
+		if (result.count(DataType::Constant) == 0)
+			result.insert_front((double)1);
+		if (this->count(DataType::Constant) != 0)
+			first_coefficient = this->cbegin(DataType::Constant)->get<Constant>();
+		if (other.count(DataType::Constant) != 0)
+			second_coefficient = other.cbegin(DataType::Constant)->get<Constant>();
+
+		*(result.begin(DataType::Constant)) = first_coefficient + second_coefficient;
 		return result;
 	}
 	return CONSTANTS::NULL_OPERAND;
@@ -414,4 +422,44 @@ std::string match_number(std::string query){
 	if(has_digit)
 	return result;
 	return "";
+}
+
+Operand expression_constant_power(const Expression& first, int second) {
+	std::cout << "expression constant power is called on = " << first << std::endl;
+	if (first.getPower() == CONSTANTS::ONE) {
+		//std::cout << "power = " << second << std::endl;
+		Expression multiplicative{};
+		if (second == 0 || second == 1) {
+			if (!multiplicative) {
+				//std::cout << "inside multiplicative" << std::endl;
+				return (first * multiplicative).simplify();
+			}
+			else
+				return first.simplify();
+		}
+		if ((second % 2) != 0 && second != 0) { // if second is odd
+			//std::cout << "second is odd " << std::endl;
+			//std::cout << "(second - 1) / 2 = " << ((second - 1) / 2) << std::endl;
+			//std::cout << "first = " << first << std::endl;
+			//std::cout << "(first * first).get<Expression>() = " << (first * first).get<Expression>() << std::endl;
+			multiplicative = first;
+			return (expression_constant_power((first * first).simplify().get<Expression>(), (second - 1) / 2) * multiplicative).simplify();
+		}
+		else if ((second % 2) == 0 && second != 0) { // if second is even
+			//std::cout << "second is even " << std::endl;
+
+			return expression_constant_power((first * first).simplify().get<Expression>(), second / 2).simplify();
+		}
+	}
+	return Operand{};
+}
+
+
+Operand expression_constant_power_nonoptimized(const Expression& first, int second) {
+	Operand expression{first};
+	while (second > 1) {
+		expression = (expression * first).simplify();
+		second--;
+	}
+	return expression;
 }

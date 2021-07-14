@@ -124,6 +124,7 @@ Operand Expression::simplify() const {
 		each_operand = *upper_iter + *lower_iter;
 		//std::cout << "upper_iter = " << *upper_iter << std::endl;
 		//std::cout << "lower_iter = " << *lower_iter << std::endl;
+		//std::cout << "result = " << result << std::endl;
 		if (each_operand)
 		{
 			*lower_iter = std::move(each_operand.simplify());

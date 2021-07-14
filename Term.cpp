@@ -141,18 +141,16 @@ void Term::simplify_each() {
 }
 
 void Term::simplify_internal(DataType type) {
+	//std::cout << "Term = " << *this << std::endl;
 	Operand each_operand;
 	for (auto i = this->begin(type); i != this->end(type); i++) {
-		for (auto j = this->begin(type) + 1; (j != this->end(type) && i != j);) {
-			//std::cout << "i = " << *i << std::endl;
-			//std::cout << "j = " << *j << std::endl;
+		for (auto j = i + 1; (j != this->end(type) && i != j);) {
 			each_operand = std::move(*i * *j);
 			if (!each_operand.is_term()) // if each_operand is not a term
 			{
 				each_operand = std::move(each_operand.simplify());
 				this->erase(j);
 				*i = std::move(each_operand);
-				//std::cout << "result = " << result << std::endl;
 			}
 			else
 				j++;
@@ -192,13 +190,13 @@ bool Term::has_zero() const {
 	return false;
 }
 
-
 void Term::simplify_constants() {
 	this->simplify_internal(DataType::Constant);
 }
 void Term::simplify_variables() {
 	this->simplify_internal(DataType::Variable);
 }
+
 
 Operand Term::simplify() const {
 	//return *this;
@@ -216,6 +214,12 @@ Operand Term::simplify() const {
 		for (Operand& each_operand : result.fields)
 			each_operand = std::move(each_operand.raise_pow(power).simplify());
 		result.setPower(CONSTANTS::ONE);
+	}
+
+	if (result.count(DataType::Constant) == 1) {
+		auto swap_iter = result.fields.begin() + this->cbegin(DataType::Constant).getIndex();
+		if (swap_iter != result.fields.end())
+			std::iter_swap(result.fields.begin(), swap_iter);
 	}
 
 	if (has_zero())

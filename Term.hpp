@@ -36,9 +36,11 @@ class Term: public OperandList{
 
 	void simplify_each();
 	void simplify_internal(DataType type); // used by simplify_constants and simplify_variable functions only
+	void simplify_constants();
+	void simplify_variables();
 	void simplify_internal_terms();
-	inline void simplify_constants();
-	inline void simplify_variables();
+	//inline void simplify_constants();
+	//inline void simplify_variables();
 	void remove_ones();
 	bool has_zero() const;
 public:
