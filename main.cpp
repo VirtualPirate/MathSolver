@@ -117,11 +117,16 @@ int main() {
 	std::cout << "exp0^ 2 = " << expression_constant_power(exp0, 2) << std::endl;
 	//std::cout << "exp0^ 4 = " << expression_constant_power(exp0, 3) << std::endl;
 	//std::cout << "exp0^ 11" << expression_constant_power(exp0, 11) << std::endl;
-
-	Operand operand_2{ expression_constant_power(exp0, 20) };
-	std::cout << "operand_2 = " << operand_2 << std::endl;
-	//Operand operand_3{ expression_constant_power_nonoptimized(exp0, 50) };
-	//std::cout << "operand_3 = " << operand_3 << std::endl;
+	{
+		Timer timer{};
+		Operand operand_2{ expression_constant_power(exp0, 100) };
+		std::cout << "operand_2 = " << operand_2 << std::endl;
+	}
+	{
+		Timer timer{};
+		Operand operand_3{ expression_constant_power_nonoptimized(exp0, 100) };
+		std::cout << "operand_3 = " << operand_3 << std::endl;
+	}
 
 	//Operand operand_3{ Parser::Parse_Expression("a^4a^2abab") };
 	//return_type_string(operand_3);

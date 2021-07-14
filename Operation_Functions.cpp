@@ -425,7 +425,6 @@ std::string match_number(std::string query){
 }
 
 Operand expression_constant_power(const Expression& first, int second) {
-	std::cout << "expression constant power is called on = " << first << std::endl;
 	if (first.getPower() == CONSTANTS::ONE) {
 		//std::cout << "power = " << second << std::endl;
 		Expression multiplicative{};

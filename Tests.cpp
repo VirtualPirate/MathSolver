@@ -9,6 +9,17 @@
 #include "Parser.hpp"
 #include "Tests.hpp"
 
+Timer::Timer() {
+	start = std::chrono::high_resolution_clock::now();
+}
+
+Timer::~Timer() {
+	end = std::chrono::high_resolution_clock::now();
+	duration = end - start;
+	std::cout << "Timer took " << duration.count() << " s" << std::endl;
+}
+
+
 namespace test{
 	using namespace std;
 

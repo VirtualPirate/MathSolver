@@ -4,6 +4,7 @@
 #include <variant>
 #include <vector>
 #include <utility>
+#include <chrono>
 
 class Operand;
 class Constant;
@@ -98,6 +99,14 @@ using OperandAndTokensIterator = std::pair<Operand, TokensConstIterator>;
     #define OPERAND_LOG_DESTRUCT()
     #define OPERAND_LOG_MOVE()
 #endif
+
+struct Timer {
+    std::chrono::time_point<std::chrono::steady_clock> start, end;
+    std::chrono::duration<float> duration;
+
+    Timer();
+    ~Timer();
+};
 
 namespace test{
     extern Constant num1, num2, num3, num4, num5, num6, num7, num8;
