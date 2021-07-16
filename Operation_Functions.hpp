@@ -13,8 +13,8 @@ std::string return_type_string(DataType);
 
 std::string match_number(std::string);
 
+//Operand expression_constant_power(const Expression&, int);
 Operand expression_constant_power(const Expression&, int);
-Operand expression_constant_power_nonoptimized(const Expression&, int);
 
 namespace CONSTANTS{
 	extern const Substitutor null_substitutor;

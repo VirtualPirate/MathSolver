@@ -116,6 +116,7 @@ Operand Expression::simplify() const {
 	result.simplify_each();
 	result.simplify_internal_expressions();
 
+	//std::cout << "*this expression = " << *this << std::endl;
 	auto upper_iter = result.fields.begin();
 	auto lower_iter = result.fields.begin() + 1;
 
@@ -140,6 +141,14 @@ Operand Expression::simplify() const {
 	}
 
 	result.remove_zeroes();
+
+	if (result.power.is_constant()) {
+		double power_value = result.power.get<Constant>().value;
+		if (power_value == (int)power_value) {// if power_value does not have a decimal part
+			result.power = CONSTANTS::ONE;
+			result = expression_constant_power(result, (int)power_value);
+		}
+	}
 
 	return result;
 

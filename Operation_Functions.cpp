@@ -247,10 +247,18 @@ Operand Term::operator+(const Term& other) const{
 Operand Term::operator-(const Term& other) const{
 	if (is_addable(*this, other)) { // if the terms *this and other contain same variable sets
 		Term result{ *this };
-		if (this->count(DataType::Constant) == 0) // if the terms does not contain any constants
-			return CONSTANTS::ZERO;
-		else
-			*(result.begin(DataType::Constant)) = *(this->cbegin(DataType::Constant)) - *(other.cbegin(DataType::Constant));
+
+		Constant first_coefficient{ Constant::ONE };
+		Constant second_coefficient{ Constant::ONE };
+
+		if (result.count(DataType::Constant) == 0)
+			result.insert_front((double)1);
+		if (this->count(DataType::Constant) != 0)
+			first_coefficient = this->cbegin(DataType::Constant)->get<Constant>();
+		if (other.count(DataType::Constant) != 0)
+			second_coefficient = other.cbegin(DataType::Constant)->get<Constant>();
+
+		*(result.begin(DataType::Constant)) = first_coefficient - second_coefficient;
 		return result;
 	}
 	return CONSTANTS::NULL_OPERAND;
@@ -424,6 +432,7 @@ std::string match_number(std::string query){
 	return "";
 }
 
+/*
 Operand expression_constant_power(const Expression& first, int second) {
 	if (first.getPower() == CONSTANTS::ONE) {
 		//std::cout << "power = " << second << std::endl;
@@ -452,13 +461,17 @@ Operand expression_constant_power(const Expression& first, int second) {
 	}
 	return Operand{};
 }
+*/
 
 
-Operand expression_constant_power_nonoptimized(const Expression& first, int second) {
-	Operand expression{first};
-	while (second > 1) {
-		expression = (expression * first).simplify();
-		second--;
+Operand expression_constant_power(const Expression& first, int second) {
+	if (first.getPower() == CONSTANTS::ONE) {
+		Operand expression{ first };
+		while (second > 1) {
+			expression = (expression * first).simplify();
+			second--;
+		}
+		return expression;
 	}
-	return expression;
+	return CONSTANTS::NULL_OPERAND;
 }

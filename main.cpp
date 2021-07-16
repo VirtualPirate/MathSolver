@@ -113,28 +113,11 @@ int main() {
 	test::operand_expression_test();
 
 	Expression exp0(Parser::Parse_Expression("a + b"));
-	std::cout << "exp0 * exp0" << (exp0 * exp0) << std::endl;
-	std::cout << "exp0^ 2 = " << expression_constant_power(exp0, 2) << std::endl;
-	//std::cout << "exp0^ 4 = " << expression_constant_power(exp0, 3) << std::endl;
-	//std::cout << "exp0^ 11" << expression_constant_power(exp0, 11) << std::endl;
 	{
 		Timer timer{};
-		Operand operand_2{ expression_constant_power(exp0, 100) };
+		Operand operand_2{ expression_constant_power(exp0, 10) };
 		std::cout << "operand_2 = " << operand_2 << std::endl;
 	}
-	{
-		Timer timer{};
-		Operand operand_3{ expression_constant_power_nonoptimized(exp0, 100) };
-		std::cout << "operand_3 = " << operand_3 << std::endl;
-	}
-
-	//Operand operand_3{ Parser::Parse_Expression("a^4a^2abab") };
-	//return_type_string(operand_3);
-	//std::cout << "operand_3 = " << return_type_string operand_3.return_ty << std::endl;
-	//Term term8{ operand_3.get<Term>() };
-	//std::cout << "term8 = " << term8 << std::endl;
-	//for (auto each = term8.cbegin(DataType::Variable); each != term8.cend(DataType::Term); each++)
-		//std::cout << *each << std::endl;
 
 	//cin.get();
 	return 0;
