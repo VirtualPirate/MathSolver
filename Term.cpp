@@ -158,6 +158,31 @@ void Term::simplify_internal(DataType type) {
 	}
 }
 
+void Term::simplify_internal() {
+	auto upper_iter = fields.begin();
+	auto lower_iter = fields.begin() + 1;
+
+	Operand each_operand;
+	while (upper_iter != fields.end() - 1) {
+		each_operand = *upper_iter * *lower_iter;
+		//std::cout << "upper_iter = " << *upper_iter << std::endl;
+		//std::cout << "lower_iter = " << *lower_iter << std::endl;
+		//std::cout << "result = " << result << std::endl;
+		if (!(each_operand.is_term()))
+		{
+			*lower_iter = std::move(each_operand.simplify());
+			fields.erase(upper_iter);
+			upper_iter = fields.begin();
+			lower_iter = fields.begin() + 1;
+			continue;
+		}
+		else if (++lower_iter == fields.end()) {
+			upper_iter++;
+			lower_iter = upper_iter + 1;
+		}
+	}
+}
+
 void Term::simplify_internal_terms() {
 	Term simplified_term;
 	for (size_t each = 0; each < fields.size();) {
@@ -196,6 +221,9 @@ void Term::simplify_constants() {
 void Term::simplify_variables() {
 	this->simplify_internal(DataType::Variable);
 }
+void Term::simplify_expressions() {
+	this->simplify_internal(DataType::Expression);
+}
 
 
 Operand Term::simplify() const {
@@ -206,8 +234,9 @@ Operand Term::simplify() const {
 	Term result{ *this };
 	result.simplify_each();
 	result.simplify_internal_terms();
-	result.simplify_constants();
-	result.simplify_variables();
+	result.simplify_internal();
+	//result.simplify_constants();
+	//result.simplify_variables();
 	result.remove_ones();
 
 	if (power != CONSTANTS::ONE) {
@@ -217,9 +246,10 @@ Operand Term::simplify() const {
 	}
 
 	if (result.count(DataType::Constant) == 1) {
-		auto swap_iter = result.fields.begin() + this->cbegin(DataType::Constant).getIndex();
+		auto swap_iter = result.fields.begin() + result.cbegin(DataType::Constant).getIndex();
 		if (swap_iter != result.fields.end())
 			std::iter_swap(result.fields.begin(), swap_iter);
+
 	}
 
 	if (has_zero())

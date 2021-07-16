@@ -28,10 +28,10 @@ Expression& Expression::operator=(Expression&& rvalue) {
 }
 
 Expression::Expression(const Operand& ref) {
-	if(ref.is_expression())
+	if (ref.is_expression())
 		*this = ref.get<Expression>();
-	else
-		OperandList(ref);
+	else 
+		OperandList::operator=(ref);
 }
 
 Expression& Expression::operator=(const Operand& ref) {
@@ -82,8 +82,35 @@ bool Expression::negative_power() const {
 }
 
 void Expression::simplify_each() {
-	for (Operand& each : fields)
+	for (Operand& each : fields) {
+		//std::cout << "each = " << each << std::endl;
 		each = std::move(each.simplify());
+	}
+}
+
+void Expression::simplify_internal() {
+	auto upper_iter = fields.begin();
+	auto lower_iter = fields.begin() + 1;
+
+	Operand each_operand;
+	while (upper_iter != fields.end() - 1) {
+		each_operand = *upper_iter + *lower_iter;
+		//std::cout << "upper_iter = " << *upper_iter << std::endl;
+		//std::cout << "lower_iter = " << *lower_iter << std::endl;
+		//std::cout << "result = " << result << std::endl;
+		if (each_operand)
+		{
+			*lower_iter = std::move(each_operand.simplify());
+			fields.erase(upper_iter);
+			upper_iter = fields.begin();
+			lower_iter = fields.begin() + 1;
+			continue;
+		}
+		else if (++lower_iter == fields.end()) {
+			upper_iter++;
+			lower_iter = upper_iter + 1;
+		}
+	}
 }
 
 void Expression::simplify_internal_expressions() {
@@ -115,11 +142,13 @@ Operand Expression::simplify() const {
 	Expression result{ *this };
 	result.simplify_each();
 	result.simplify_internal_expressions();
+	result.simplify_internal();
 
 	//std::cout << "*this expression = " << *this << std::endl;
-	auto upper_iter = result.fields.begin();
-	auto lower_iter = result.fields.begin() + 1;
+	//auto upper_iter = result.fields.begin();
+	//auto lower_iter = result.fields.begin() + 1;
 
+	/*
 	Operand each_operand;
 	while (upper_iter != result.fields.end()-1) {
 		each_operand = *upper_iter + *lower_iter;
@@ -139,6 +168,7 @@ Operand Expression::simplify() const {
 			lower_iter = upper_iter + 1;
 		}
 	}
+	*/
 
 	result.remove_zeroes();
 

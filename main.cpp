@@ -104,13 +104,14 @@ int main() {
 	//test::grab_term_test();
 
 	//test::match_power_test();
-	test::parse_expression_test();
 	test::constant_simplify_tests();
 	test::variable_simplify_test();
 
 	test::term_simplify_test();
 	test::expression_simplify_test();
 	test::operand_expression_test();
+
+	test::parse_expression_test();
 
 	Expression exp0(Parser::Parse_Expression("a + b"));
 	{

@@ -31,6 +31,7 @@ class Expression: public OperandList{
 	friend inline Operand Expression_to_Operand_sub(const Operand&, const Expression&);
 
 	void simplify_each();
+	void simplify_internal();
 	void simplify_internal_expressions();
 	void remove_zeroes();
 

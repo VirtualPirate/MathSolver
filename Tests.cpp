@@ -58,7 +58,7 @@ namespace test{
 	Expression exp4(Parser::Parse_Expression("x + x + y + y + a + b + a"));
 	Expression exp5(Parser::Parse_Expression("2x + y + x"));
 	Expression exp6(Parser::Parse_Expression("2x + (5y + 6y + (2 + 1) + 3) + 98"));
-	Expression exp7(Parser::Parse_Expression("2 (a + b)^3"));
+	Expression exp7(Parser::Parse_Expression("a (a + b)^3"));
 
     void show_sizes(){
         cout << "sizeof Constant is -> " << sizeof(Constant) << endl;
@@ -267,7 +267,7 @@ namespace test{
 		std::cout << "operand_6 = " << oeprand_6 << std::endl;
 
 		//Expression exp(Parser::Parse_Expression("2 (a + b)^3"));
-		std::cout << "operand_7 = " << Parser::Parse_Expression("2 (a + b)^3") << std::endl;
+		std::cout << "operand_7 = " << Expression(Parser::Parse_Expression("2 (a + b)^3")) << std::endl;
 	}
 
 	void constant_simplify_tests() {
@@ -313,8 +313,8 @@ namespace test{
 		std::cout << "expression after simplification (exp5) = " << exp5.simplify() << std::endl;
 		std::cout << "expression before simplification (exp6)= " << exp6 << std::endl;
 		std::cout << "expression after simplification (exp6) = " << exp6.simplify() << std::endl;
-		//std::cout << "expression before simplification (exp7)= " << exp7 << std::endl;
-		//std::cout << "expression after simplification (exp7) = " << exp7.simplify() << std::endl;
+		std::cout << "expression before simplification (exp7)= " << exp7 << std::endl;
+		std::cout << "expression after simplification (exp7) = " << exp7.simplify() << std::endl;
 
 		std::cout << "\n\n";
 

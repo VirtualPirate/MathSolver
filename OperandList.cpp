@@ -63,7 +63,7 @@ OperandList& OperandList::operator=(const Variable& ref){
 	is_null = false;
 	return *this;
 }
-OperandList::OperandList(const Operand& ref): fields{{ref}}, power{(double)1}, is_simplified{true}, is_null{false}{}
+OperandList::OperandList(const Operand& ref) : fields{ {ref} }, power{ (double)1 }, is_simplified{ true }, is_null{ false }{}
 OperandList& OperandList::operator=(const Operand& ref){
 	fields.clear();
 	fields.push_back(ref);
