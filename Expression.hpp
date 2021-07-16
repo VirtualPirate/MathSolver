@@ -22,14 +22,6 @@ class Expression: public OperandList{
 	friend class Term;
 	friend std::ostream& operator<<(std::ostream&, const Expression&);
 
-	friend Operand Operand_to_Expression_add(const Operand&, const Expression&);
-	friend inline Operand Operand_to_Expression_sub(const Operand&, const Expression&);
-	friend Operand Operand_to_Expression_mul(const Operand&, const Expression&);
-	friend inline Operand Operand_to_Expression_div(const Operand&, const Expression&);
-
-	friend Operand Expression_to_Operand_add(const Operand&, const Expression&);
-	friend inline Operand Expression_to_Operand_sub(const Operand&, const Expression&);
-
 	void simplify_each();
 	void simplify_internal();
 	void simplify_internal_expressions();
@@ -54,7 +46,6 @@ public:
 	void setSubexpression(bool);
 	bool isSubexpression() const;
 
-	void simplify_();
 	Operand simplify() const;
 	Operand substitute(const Substitutor_List& list) const;
 

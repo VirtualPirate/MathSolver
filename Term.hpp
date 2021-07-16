@@ -21,25 +21,10 @@ class Term: public OperandList{
 	friend std::ostream& operator<<(std::ostream&, const Term&);
 	friend bool same_operand_set(const Term&, const Term&);
 
-	friend Operand Operand_to_Term_add(const Operand&, const Term&);
-	friend inline Operand Operand_to_Term_sub(const Operand&, const Term&);
-	friend Operand Operand_to_Term_mul(const Operand&, const Term&);
-	friend inline Operand Operand_to_Term_div(const Operand&, const Term&);
-
-	friend Operand Term_to_Operand_add(const Term&, const Operand&);
-	friend inline Operand Term_to_Operand_sub(const Term&, const Operand&);
-	friend Operand Term_to_Operand_mul(const Term&, const Operand&);
-	friend inline Operand Term_to_Operand_div(const Term&, const Operand&);
-
 	void extend(const Term&);
-	std::vector<Operand> internal_simplify() const; 
 
 	void simplify_each();
-	void simplify_internal(DataType type); // used by simplify_constants and simplify_variable functions only
 	void simplify_internal();
-	void simplify_constants();
-	void simplify_variables();
-	void simplify_expressions();
 	void simplify_internal_terms();
 	//inline void simplify_constants();
 	//inline void simplify_variables();
@@ -58,7 +43,6 @@ public:
 	bool is_negative() const;
 	bool negative_power() const;
 	std::string power_print() const;
-	void simplify_();
 	Operand simplify() const;
 	Operand substitute(const Substitutor_List& list) const;
 

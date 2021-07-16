@@ -85,77 +85,10 @@ bool Term::is_negative() const {
 bool Term::negative_power() const {
 	return power.is_negative();
 }
-std::vector<Operand> Term::internal_simplify() const {
-	std::vector<Operand> result;
-	Operand operand;
-	for(const auto& each: fields){
-		operand = each.simplify();
-		if(operand.getType() == DataType::Term && operand.getPower() == Constant::power_one){
-			const Term& term =  operand.get<Term>();
-			result.insert(result.end(), term.fields.begin(), term.fields.end());
-		}
-		else
-			result.push_back(operand);
-	}
-	return result;
-} 
-// void Term::simplify_() {return *this;
-	// if(!is_simplified){
-	// 	//This for loop eliminates all the ones inside the Term
-	// 	for(auto i=fields.begin(); i != fields.end(); i++){
-	// 		if(*i == Constant::power_one)
-	// 			fields.erase(i);
-	// 	}
-
-	// 	if(power != Constant::power_one){
-	// 		for(auto i=fields.begin(); i != fields.end();i++)
-	// 			*i = i->raise_pow(power.simplify());
-	// 	}
-	// 	this->fields = this->internal_simplify();
-	// 	Operand result;
-	// 	for(auto i=fields.begin(); i != fields.end(); i++){
-	// 		for(auto j=i+1; j != fields.end(); j++){
-	// 			result = (*i) * (*j);
-	// 			if(result && result.type != DataType::Term){
-	// 				std::cout << "*i = " << *i << "  " << "*j = " << *j << std::endl; 
-	// 				fields.erase(i);
-	// 				fields.erase(j-1);
-	// 				fields.insert(fields.begin(), result);
-	// 				i = fields.begin();
-	// 				j = i+1;
-	// 			}
-	// 		}
-	// 	}
-	// 	// Moves the Constant(coefficient) to the first index of the fields.
-	// 	auto swap_iter = fields.begin() + begin(DataType::Constant).getIndex();
-	// 	if(swap_iter != fields.end())
-	// 		std::iter_swap(fields.begin(), swap_iter);
-	// 	is_simplified = true;
-	// }
-
-// }
 
 void Term::simplify_each() {
 	for (Operand& each : fields)
 		each = std::move(each.simplify());
-}
-
-void Term::simplify_internal(DataType type) {
-	//std::cout << "Term = " << *this << std::endl;
-	Operand each_operand;
-	for (auto i = this->begin(type); i != this->end(type); i++) {
-		for (auto j = i + 1; (j != this->end(type) && i != j);) {
-			each_operand = std::move(*i * *j);
-			if (!each_operand.is_term()) // if each_operand is not a term
-			{
-				each_operand = std::move(each_operand.simplify());
-				this->erase(j);
-				*i = std::move(each_operand);
-			}
-			else
-				j++;
-		}
-	}
 }
 
 void Term::simplify_internal() {
@@ -215,16 +148,6 @@ bool Term::has_zero() const {
 	return false;
 }
 
-void Term::simplify_constants() {
-	this->simplify_internal(DataType::Constant);
-}
-void Term::simplify_variables() {
-	this->simplify_internal(DataType::Variable);
-}
-void Term::simplify_expressions() {
-	this->simplify_internal(DataType::Expression);
-}
-
 
 Operand Term::simplify() const {
 	//return *this;
@@ -235,8 +158,6 @@ Operand Term::simplify() const {
 	result.simplify_each();
 	result.simplify_internal_terms();
 	result.simplify_internal();
-	//result.simplify_constants();
-	//result.simplify_variables();
 	result.remove_ones();
 
 	if (power != CONSTANTS::ONE) {

@@ -143,33 +143,6 @@ Operand Expression::simplify() const {
 	result.simplify_each();
 	result.simplify_internal_expressions();
 	result.simplify_internal();
-
-	//std::cout << "*this expression = " << *this << std::endl;
-	//auto upper_iter = result.fields.begin();
-	//auto lower_iter = result.fields.begin() + 1;
-
-	/*
-	Operand each_operand;
-	while (upper_iter != result.fields.end()-1) {
-		each_operand = *upper_iter + *lower_iter;
-		//std::cout << "upper_iter = " << *upper_iter << std::endl;
-		//std::cout << "lower_iter = " << *lower_iter << std::endl;
-		//std::cout << "result = " << result << std::endl;
-		if (each_operand)
-		{
-			*lower_iter = std::move(each_operand.simplify());
-			result.fields.erase(upper_iter);
-			upper_iter = result.fields.begin();
-			lower_iter = result.fields.begin() + 1;
-			continue;
-		}
-		else if (++lower_iter == result.fields.end()) {
-			upper_iter++;
-			lower_iter = upper_iter + 1;
-		}
-	}
-	*/
-
 	result.remove_zeroes();
 
 	if (result.power.is_constant()) {
