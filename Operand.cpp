@@ -393,7 +393,6 @@ Operand Operand::operator-(const Operand& other) const {
 	return result;}
 
 Operand Operand::operator*(const Operand& other) const {
-	// cout << "invoked Operand_Operand_mul func" << endl;
 	OPERATION_LOG(return_type_string(this->type), return_type_string(other.type), "multiplication");
 	OPERANDS(*this, other);
 	Operand result = mul_functions[func_hash(this->type, other.type)](*this, other);
@@ -557,8 +556,6 @@ bool Operand::negative_power() const {
 }
 Operand Operand::simplify() const {
 	int index = (int)type;
-	//std::cout << "index = " << index << std::endl;
-	//std::cout << "this = " << *this << std::endl;
 	if (index > -1){
 		//If power is 0 then return 1
 		if(getPower() == Constant::power_zero)

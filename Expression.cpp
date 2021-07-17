@@ -136,22 +136,24 @@ void Expression::remove_zeroes() {
 	}
 }
 
+void Expression::constant_raise_power() {
+	if (power.is_constant()) {
+		double power_value = power.get<Constant>().value;
+		if (power_value = (int)power_value) {
+			power = CONSTANTS::ONE;
+			*this = expression_constant_power(*this, (int)power_value);
+		}
+	}
+}
+
 Operand Expression::simplify() const {
-	//return *this;
 
 	Expression result{ *this };
 	result.simplify_each();
 	result.simplify_internal_expressions();
 	result.simplify_internal();
 	result.remove_zeroes();
-
-	if (result.power.is_constant()) {
-		double power_value = result.power.get<Constant>().value;
-		if (power_value == (int)power_value) {// if power_value does not have a decimal part
-			result.power = CONSTANTS::ONE;
-			result = expression_constant_power(result, (int)power_value);
-		}
-	}
+	result.constant_raise_power();
 
 	return result;
 

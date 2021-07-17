@@ -22,10 +22,11 @@ class Expression: public OperandList{
 	friend class Term;
 	friend std::ostream& operator<<(std::ostream&, const Expression&);
 
-	void simplify_each();
-	void simplify_internal();
-	void simplify_internal_expressions();
-	void remove_zeroes();
+	void simplify_each(); // Simplifies each Operand in the Expression
+	void simplify_internal(); // Calculates all the operands in the Expression with each other if possible
+	void simplify_internal_expressions(); // Extends the Expressions inside the Expression if possible
+	void remove_zeroes(); // Removes all the zeroes inside the Expression
+	void constant_raise_power(); // Raises the Expression to power if the Power is a Number which has no decimal part
 
 public:
 
