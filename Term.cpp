@@ -30,7 +30,7 @@ Term::Term(const Operand& ref) {
 	if (ref.is_term())
 		*this = ref.get<Term>();
 	else
-		OperandList(ref);
+		OperandList::operator=(ref);
 }
 
 Term& Term::operator=(const Operand& ref) {
@@ -140,6 +140,22 @@ void Term::remove_ones() {
 	}
 }
 
+void Term::raise_power() {
+	if (power != CONSTANTS::ONE) {
+		for (Operand& each_operand : fields)
+			each_operand = std::move(each_operand.raise_pow(power).simplify());
+		power = CONSTANTS::ONE;
+	}
+}
+
+void Term::swap_constant() {
+	if (count(DataType::Constant) == 1) {
+		auto swap_iter = fields.begin() + cbegin(DataType::Constant).getIndex();
+		if (swap_iter != fields.end())
+			std::iter_swap(fields.begin(), swap_iter);
+	}
+}
+
 bool Term::has_zero() const {
 	for (auto each = this->cbegin(DataType::Constant); each != this->cend(DataType::Constant); each++) {
 		if (each->get<Constant>() == Constant::ZERO)
@@ -150,30 +166,18 @@ bool Term::has_zero() const {
 
 
 Operand Term::simplify() const {
-	//return *this;
 	if (has_zero())
 		return CONSTANTS::ZERO;
 
 	Term result{ *this };
-	result.simplify_each();
-	result.simplify_internal_terms();
-	result.simplify_internal();
-	result.remove_ones();
+	result.simplify_each(); // Simplifies each operand in the Term
+	result.simplify_internal_terms(); // Extends the Terms inside the Term if possible
+	result.simplify_internal(); // Calculates all the operands in the Term with each other if possible
+	result.remove_ones(); // Removes all the ones in the Term
+	result.raise_power(); // Raises each operand in the Term to the power
+	result.swap_constant(); // If Term contains one constant then it is swapped into the front of the Term
 
-	if (power != CONSTANTS::ONE) {
-		for (Operand& each_operand : result.fields)
-			each_operand = std::move(each_operand.raise_pow(power).simplify());
-		result.setPower(CONSTANTS::ONE);
-	}
-
-	if (result.count(DataType::Constant) == 1) {
-		auto swap_iter = result.fields.begin() + result.cbegin(DataType::Constant).getIndex();
-		if (swap_iter != result.fields.end())
-			std::iter_swap(result.fields.begin(), swap_iter);
-
-	}
-
-	if (has_zero())
+	if (has_zero()) // If the term contains a zero
 		return CONSTANTS::ZERO;
 	else
 		return result;

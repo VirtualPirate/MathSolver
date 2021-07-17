@@ -23,12 +23,13 @@ class Term: public OperandList{
 
 	void extend(const Term&);
 
+	//These functions are used by Term::simplify()
 	void simplify_each();
 	void simplify_internal();
 	void simplify_internal_terms();
-	//inline void simplify_constants();
-	//inline void simplify_variables();
-	void remove_ones();
+	void remove_ones(); // Removes all the ones
+	void raise_power(); // Raises each operand in the Term to the power
+	void swap_constant(); // Swaps the constant to the front of the Term
 	bool has_zero() const;
 public:
 
