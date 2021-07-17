@@ -148,6 +148,7 @@ namespace test{
 
     void print_constiteratorpair(TokensConstIteratorPair);
 
+    void simplify_test(const Operand&);
     void constant_simplify_tests();
 
     void variable_simplify_test();

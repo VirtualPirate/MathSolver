@@ -169,7 +169,7 @@ void Parser::remove_redundant_operators() {
 				context[upper_index] = key_->second;
 				context[lower_index] = '\0';
 			}
-			else
+			else if(key_ == Parser::lookup_table_a.cend())
 				throw std::runtime_error{ "Error parsing - Invoked from Parser::remove_redunadant_operators()" };
 
 		}
@@ -186,8 +186,14 @@ void Parser::remove_redundant_operators() {
 	}
 
 	context = std::move(str);
+	//std::cout << "context = " << context << std::endl;
 
 }
+/*
+void Parser::remove_redundant_operator_tokens() {
+
+}
+*/
 
 void Parser::generalize_operators() {
 	

@@ -59,6 +59,14 @@ namespace test{
 	Expression exp5(Parser::Parse_Expression("2x + y + x"));
 	Expression exp6(Parser::Parse_Expression("2x + (5y + 6y + (2 + 1) + 3) + 98"));
 	Expression exp7(Parser::Parse_Expression("a (a + b)^3"));
+	Expression exp8(Parser::Parse_Expression(" -200 +-x^ 2 ( 2.5x + 3y^z)"));
+	Expression exp9(Parser::Parse_Expression("((a+b)c + (c + a)) + h"));
+	Expression exp10(Parser::Parse_Expression("1 / (x  +y) / (200 + 2xy)"));
+	Expression exp11(Parser::Parse_Expression("(a/b)^2 + 3/4"));
+	Expression exp12(Parser::Parse_Expression("(a + b)^2"));
+	Expression exp13(Parser::Parse_Expression("2(a + b) + 2a + 2b"));
+	Expression exp14(Parser::Parse_Expression("(a + b)^-2"));
+
 
     void show_sizes(){
         cout << "sizeof Constant is -> " << sizeof(Constant) << endl;
@@ -251,6 +259,9 @@ namespace test{
 		Operand operand_1 = Parser::Parse_Expression(tokens_1.cbegin(), tokens_1.cend());
 		std::cout << "operand_1 = " << operand_1 << std::endl;
 
+		Parser parser_2{ "(a + b)^-2" };
+		parser_2.debug_info();
+
 		Operand operand_2 = Parser::Parse_Expression("((a+b)c + (c + a)) + h");
 		std::cout << "operand_2 = " << operand_2 << std::endl;
 
@@ -270,6 +281,10 @@ namespace test{
 		std::cout << "operand_7 = " << Expression(Parser::Parse_Expression("2 (a + b)^3")) << std::endl;
 	}
 
+	void simplify_test(const Operand& operand) {
+		std::cout << operand << "\n" << operand.simplify() << "\n\n";
+	}
+
 	void constant_simplify_tests() {
 		Constant con_0{ (double)2, Constant{(double)2, (double)2} };
 		Constant con_1{ 2, con_0 };
@@ -287,34 +302,36 @@ namespace test{
 
 	void term_simplify_test() {
 		std::cout << "[Term simplification tests]\n\n";
-		std::cout << "term before simplification (term2) = " << term2 << std::endl;
-		std::cout << "term after simplification (term2) = " << term2.simplify() << std::endl;
-		std::cout << "term before simplification (term7) = " << term7 << std::endl;
-		std::cout << "term after simplification (term7) = " << term7.simplify() << std::endl;
-		std::cout << "term before simplification (term8) = " << term8 << std::endl;
-		std::cout << "term after simplification (term8) = " << term8.simplify() << std::endl;
-		std::cout << "term before simplification (term9) = " << term9 << std::endl;
-		std::cout << "term after simplification (term9) = " << term9.simplify() << std::endl;
-		std::cout << "term before simplification (term10) = " << term10 << std::endl;
-		std::cout << "term after simplification (term10) = " << term10.simplify() << std::endl;
-		std::cout << "term before simplification (term11) = " << term11 << std::endl;
-		std::cout << "term after simplification (term11) = " << term11.simplify() << std::endl;
+
+		simplify_test(term2);
+		simplify_test(term7);
+		simplify_test(term8);
+		simplify_test(term9);
+		simplify_test(term10);
+		simplify_test(term11);
+
 		std::cout << "\n\n";
 
 	}
 
 	void expression_simplify_test() {
 		std::cout << "[Expression simplification tests]\n\n";
-		std::cout << "expression before simplification (exp3)= " << exp3 << std::endl;
-		std::cout << "expression after simplification (exp3) = " << exp3.simplify() << std::endl;
-		std::cout << "expression before simplification (exp4)= " << exp4 << std::endl;
-		std::cout << "expression after simplification (exp4) = " << exp4.simplify() << std::endl;
-		std::cout << "expression before simplification (exp5)= " << exp5 << std::endl;
-		std::cout << "expression after simplification (exp5) = " << exp5.simplify() << std::endl;
-		std::cout << "expression before simplification (exp6)= " << exp6 << std::endl;
-		std::cout << "expression after simplification (exp6) = " << exp6.simplify() << std::endl;
-		std::cout << "expression before simplification (exp7)= " << exp7 << std::endl;
-		std::cout << "expression after simplification (exp7) = " << exp7.simplify() << std::endl;
+
+		simplify_test(exp0);
+		simplify_test(exp1);
+		simplify_test(exp2);
+		simplify_test(exp3);
+		simplify_test(exp4);
+		simplify_test(exp5);
+		simplify_test(exp6);
+		simplify_test(exp7);
+		simplify_test(exp8);
+		simplify_test(exp9);
+		simplify_test(exp10);
+		simplify_test(exp11);
+		simplify_test(exp12);
+		simplify_test(exp13);
+		//simplify_test(exp14);
 
 		std::cout << "\n\n";
 

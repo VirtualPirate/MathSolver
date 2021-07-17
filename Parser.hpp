@@ -44,6 +44,7 @@ class Parser{
 
 	void remove_whitespaces();
 	void remove_redundant_operators(); // This function strips out redundant operator characters. Example: "-+" is deduced to "-" only
+	void remove_redundant_operator_tokens();
 	void generalize_operators(); // Generalize the operator - and / to + and *
 
 public:

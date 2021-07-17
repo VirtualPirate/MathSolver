@@ -15,6 +15,7 @@ std::string match_number(std::string);
 
 //Operand expression_constant_power(const Expression&, int);
 Operand expression_constant_power(const Expression&, int);
+Operand expression_constant_power_minus(const Expression&, int);
 
 namespace CONSTANTS{
 	extern const Substitutor null_substitutor;

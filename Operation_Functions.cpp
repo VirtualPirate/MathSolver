@@ -468,8 +468,20 @@ Operand expression_constant_power(const Expression& first, int second) {
 	if (first.getPower() == CONSTANTS::ONE) {
 		Operand expression{ first };
 		while (second > 1) {
-			expression = (expression * first).simplify();
+			expression = std::move((expression * first).simplify());
 			second--;
+		}
+		return expression;
+	}
+	return CONSTANTS::NULL_OPERAND;
+}
+
+Operand expression_constant_power_minus(const Expression& first, int second) {
+	if (first.getPower() == CONSTANTS::ONE) {
+		Operand expression{ first };
+		while (second > -1) {
+			expression = std::move((expression * first).simplify());
+			second++;
 		}
 		return expression;
 	}
