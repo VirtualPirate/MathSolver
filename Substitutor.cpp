@@ -1,7 +1,31 @@
 #include "Operand.hpp"
 #include "Substitutor.hpp"
 #include "Constant.hpp"
+#include "Variable.hpp"
 #include "Operation_Functions.hpp"
+#include <cstdlib>
+
+Variable_Subtitutor::Variable_Subtitutor(char name_, double value_) {
+	if (isalpha(name_)) {
+		name = name_;
+		value = value_;
+	}
+	else {
+		name = '\0';
+		value = 0.0;
+	}
+}
+
+bool Variable_Subtitutor::operator==(const Variable_Subtitutor& ref) const {
+	return name == ref.name;
+}
+bool Variable_Subtitutor::operator!=(const Variable_Subtitutor& ref) const {
+	return name != ref.name;
+}
+
+char Variable_Subtitutor::getName() const { return name; }
+double Variable_Subtitutor::getValue() const { return value; }
+
 
 Substitutor::Substitutor(const Operand& k_, const Operand& s_): key_value{k_}, substitute{s_}{}
 Substitutor::Substitutor(const Substitutor& ref): key_value{ref.key_value}, substitute{ref.substitute}{}

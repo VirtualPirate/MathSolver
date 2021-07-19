@@ -7,6 +7,20 @@
 
 class Operand;
 
+class Variable_Subtitutor {
+	char name;
+	double value;
+
+public:
+	Variable_Subtitutor(char, double);
+
+	bool operator==(const Variable_Subtitutor&) const;
+	bool operator!=(const Variable_Subtitutor&) const;
+
+	char getName() const;
+	double getValue() const;
+};
+
 class Substitutor{
 	Operand key_value;
 	Operand substitute;
