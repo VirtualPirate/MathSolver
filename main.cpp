@@ -113,13 +113,6 @@ int main() {
 
 	test::parse_expression_test();
 
-	Expression exp0(Parser::Parse_Expression("a + b"));
-	{
-		Timer timer{};
-		Operand operand_2{ expression_constant_power(exp0, 10) };
-		std::cout << "operand_2 = " << operand_2 << std::endl;
-	}
-
 	//cin.get();
 	return 0;
 }

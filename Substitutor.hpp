@@ -7,7 +7,6 @@
 
 class Operand;
 
-
 class Substitutor{
 	Operand key_value;
 	Operand substitute;

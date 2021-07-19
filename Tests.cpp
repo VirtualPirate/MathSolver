@@ -66,6 +66,7 @@ namespace test{
 	Expression exp12(Parser::Parse_Expression("(a + b)^2"));
 	Expression exp13(Parser::Parse_Expression("2(a + b) + 2a + 2b"));
 	Expression exp14(Parser::Parse_Expression("(a + b)^-2"));
+	Expression exp15(Parser::Parse_Expression("(2 + 1)^x"));
 
 
     void show_sizes(){
@@ -332,6 +333,8 @@ namespace test{
 		simplify_test(exp12);
 		simplify_test(exp13);
 		simplify_test(exp14);
+		simplify_test(exp15);
+
 
 		std::cout << "\n\n";
 

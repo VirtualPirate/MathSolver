@@ -150,6 +150,12 @@ void Expression::constant_raise_power() {
 	}
 }
 
+Operand Expression::raise_power_if_size_is_1() {
+	if (fields.size() == 1)
+		return fields[0].raise_pow(power).simplify();
+	return *this;
+}
+
 Operand Expression::simplify() const {
 
 	Expression result{ *this };
@@ -159,7 +165,7 @@ Operand Expression::simplify() const {
 	result.remove_zeroes();
 	result.constant_raise_power();
 
-	return result;
+	return result.raise_power_if_size_is_1();
 
 }
 

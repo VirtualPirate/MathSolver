@@ -27,6 +27,7 @@ class Expression: public OperandList{
 	void simplify_internal_expressions(); // Extends the Expressions inside the Expression if possible
 	void remove_zeroes(); // Removes all the zeroes inside the Expression
 	void constant_raise_power(); // Raises the Expression to power if the Power is a Number which has no decimal part
+	Operand raise_power_if_size_is_1(); // If the size of fields in the Expression then fields.at(0).raise_pow(power;)
 
 public:
 
