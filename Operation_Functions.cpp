@@ -353,14 +353,17 @@ Operand Expression::operator-(const Expression& other) const {
 	return CONSTANTS::NULL_OPERAND;
 }
 Operand Expression::operator*(const Expression& other) const {
-	if (power == CONSTANTS::ONE && other.power == CONSTANTS::ONE) {
+	if ((power == CONSTANTS::ONE && other.power == CONSTANTS::ONE) || (power == CONSTANTS::MINUS_ONE && other.power == CONSTANTS::MINUS_ONE)) {
 		std::vector<Operand> result_fields;
 		result_fields.reserve(fields.size() + other.fields.size());
 		for (const Operand& first : fields) {
 			for (const Operand& second : other.fields)
 				result_fields.push_back(first * second);
 		}
-		return Expression{ result_fields };
+		if (power == CONSTANTS::ONE)
+			return Expression{ result_fields };
+		else
+			return Expression{ result_fields, CONSTANTS::MINUS_ONE };
 	}
 	return Term{ {*this, other} };
 }
@@ -477,9 +480,9 @@ Operand expression_constant_power(const Expression& first, int second) {
 }
 
 Operand expression_constant_power_minus(const Expression& first, int second) {
-	if (first.getPower() == CONSTANTS::ONE) {
+	if (first.getPower() == CONSTANTS::MINUS_ONE) {
 		Operand expression{ first };
-		while (second > -1) {
+		while (second < -1) {
 			expression = std::move((expression * first).simplify());
 			second++;
 		}

@@ -46,6 +46,7 @@ Parser::Parser(const char* val) : context{ val }, current_index{ 0 }, tokens{}{
 	remove_redundant_operators();
 	create_tokens();
 	generalize_operators();
+	remove_redundant_operator_tokens();
 	strip_operators();
 }
 Parser::Parser(const std::string& val): context{val}, current_index{0}, tokens{}{
@@ -53,6 +54,7 @@ Parser::Parser(const std::string& val): context{val}, current_index{0}, tokens{}
 	remove_redundant_operators();
 	create_tokens();
 	generalize_operators();
+	remove_redundant_operator_tokens();
 	strip_operators();
 }
 std::string Parser::getUnParsed() const {
@@ -189,11 +191,34 @@ void Parser::remove_redundant_operators() {
 	//std::cout << "context = " << context << std::endl;
 
 }
-/*
-void Parser::remove_redundant_operator_tokens() {
 
+void Parser::remove_redundant_operator_tokens() {
+	auto lower_index = 0;
+	auto upper_index = 1;
+
+	std::unordered_map<std::pair<char, char>, char, pair_hash>::const_iterator key_;
+	std::pair<char, char> op_pair;
+	while (upper_index < tokens.size()) {
+		//std::cout << "lower_iter = " << tokens.at(lower_index) << std::endl;
+		//std::cout << "upper_iter = " << tokens.at(upper_index) << std::endl;
+		if (Parser::is_operator(tokens[upper_index]) && Parser::is_operator(tokens[lower_index])) {
+			op_pair.first = std::get<char>(tokens[lower_index]);
+			op_pair.second = std::get<char>(tokens[upper_index]);
+			key_ = Parser::lookup_table_a.find(op_pair);
+			if (key_ != Parser::lookup_table_a.cend() && key_->second != '\0') {
+				tokens[upper_index] = key_->second;
+				tokens.erase(tokens.begin() + lower_index);
+				continue;
+			}
+			else if (key_ == Parser::lookup_table_a.cend())
+				throw std::runtime_error{ "Error parsing - Invoked from Parser::remove_redunadant_operators()" };
+		}
+
+		lower_index++;
+		upper_index++;
+	}
 }
-*/
+
 
 void Parser::generalize_operators() {
 	

@@ -331,7 +331,7 @@ namespace test{
 		simplify_test(exp11);
 		simplify_test(exp12);
 		simplify_test(exp13);
-		//simplify_test(exp14);
+		simplify_test(exp14);
 
 		std::cout << "\n\n";
 
