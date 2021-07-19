@@ -21,6 +21,34 @@ public:
 	double getValue() const;
 };
 
+class Variable_Subtitutor_List { 
+	std::vector<Variable_Subtitutor> substitute;
+public:
+	Variable_Subtitutor_List(std::initializer_list<Variable_Subtitutor>);
+	Variable_Subtitutor_List& operator=(std::initializer_list<Variable_Subtitutor>);
+
+	Variable_Subtitutor_List(const std::vector<Variable_Subtitutor>&);
+	Variable_Subtitutor_List& operator=(const std::vector<Variable_Subtitutor>&);
+
+	// Substitutor List modifier
+	void append(const Variable_Subtitutor&);
+	void replace(const Variable_Subtitutor&);
+	void extend(std::initializer_list<Variable_Subtitutor>);
+	void extend(const std::vector<Variable_Subtitutor>&);
+	void replace_all(std::initializer_list<Variable_Subtitutor>);
+	void replace_all(const std::vector<Variable_Subtitutor>&);
+
+	void erase(size_t);
+	void erase(const Variable_Subtitutor&);
+	void clear();
+
+	size_t size() const;
+
+	//Getters and Setters
+	const Variable_Subtitutor& get(const Variable_Subtitutor&) const;
+	const Operand& get_substitute(const Variable_Subtitutor&) const;
+};
+
 class Substitutor{
 	Operand key_value;
 	Operand substitute;
