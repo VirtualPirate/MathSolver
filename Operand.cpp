@@ -11,6 +11,7 @@
 #include "Term.hpp"
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
+#include "Substitutor.hpp"
 
 #include "Tests.hpp"
 
@@ -227,6 +228,13 @@ SimplifyFunction Operand::simplify_functions[] = {
 	&Operand::simplify<Variable>,
 	&Operand::simplify<Term>,
 	&Operand::simplify<Expression>
+};
+
+VariableSubtitutorFunction Operand::variable_subtitutor_function[] = {
+	&Operand::subtitute<Constant>,
+	&Operand::subtitute<Variable>,
+	&Operand::subtitute<Term>,
+	&Operand::subtitute<Expression>
 };
 
 unsigned func_hash(DataType first_type, DataType second_type){

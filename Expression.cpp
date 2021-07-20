@@ -169,6 +169,10 @@ Operand Expression::simplify() const {
 
 }
 
+Operand Expression::subtitute(const Variable_Subtitutor_List& list) const {
+	return *this;
+}
+
 Expression Expression::getBase() const{
 	return Expression{fields};
 }

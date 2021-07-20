@@ -107,6 +107,9 @@ bool Variable::is_addable(const Term& term) const {
 Operand Variable::simplify() const {
 	return Variable{name, power.simplify()};
 }
+Operand Variable::subtitute(const Variable_Subtitutor_List& list) const {
+	return *this;
+}
 std::string Variable::power_print() const{
 	std::ostringstream stream;
 	stream << *this;

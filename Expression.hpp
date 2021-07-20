@@ -3,6 +3,7 @@
 
 #include "OperandList.hpp"
 
+class Variable_Subtitutor_List;
 class Substitutor;
 class Substitutor_List;
 class Constant;
@@ -50,6 +51,7 @@ public:
 
 	Operand simplify() const;
 	Operand substitute(const Substitutor_List& list) const;
+	Operand subtitute(const Variable_Subtitutor_List& list) const;
 
 	static Operand Operand_Expression_mul(const Operand&, const Expression&);
 

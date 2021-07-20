@@ -4,6 +4,7 @@
 #include <vector>
 #include "OperandList.hpp"
 
+class Variable_Subtitutor_List;
 class Substitutor;
 class Substitutor_List;
 class Constant;
@@ -46,6 +47,7 @@ public:
 	std::string power_print() const;
 	Operand simplify() const;
 	Operand substitute(const Substitutor_List& list) const;
+	Operand subtitute(const Variable_Subtitutor_List& list) const;
 
 	bool is_Constant() const;
 	bool is_Variable() const;

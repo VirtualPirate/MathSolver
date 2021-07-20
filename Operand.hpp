@@ -12,6 +12,7 @@ enum class DataType
 // const unsigned O_ARRAY_SIZE = 18;
 unsigned func_hash(DataType, DataType);
 
+class Variable_Subtitutor_List;
 class Operand;
 
 using GetBaseFunction = std::function<Operand(const Operand*)>;
@@ -25,6 +26,7 @@ using AllocateFunction = std::function<void*(const Operand*)>;
 using DeallocateFunction = std::function<void(const Operand*)>;
 using CoutFunction = std::function<std::ostream&(std::ostream&, const Operand&)>;
 using SimplifyFunction = std::function<Operand(const Operand*)>;
+using VariableSubtitutorFunction = std::function<Operand(const Operand*, const Variable_Subtitutor_List&)>;
 
 class Constant;
 class Variable;
@@ -64,6 +66,7 @@ class Operand
 	static DeallocateFunction deallocate_functions[TYPE_COUNT];
 	static CoutFunction operator_cout_functions[TYPE_COUNT];
 	static SimplifyFunction simplify_functions[TYPE_COUNT];
+	static VariableSubtitutorFunction variable_subtitutor_function[TYPE_COUNT];
 
 	template<typename Type>
 	Type& get_nonconst() const{
@@ -112,6 +115,10 @@ class Operand
 	template <typename Type>
 	Operand simplify() const {
 		return get<Type>().simplify();
+	}
+	template <typename Type>
+	Operand subtitute(const Variable_Subtitutor_List& list) const {
+		return get<Type>().subtitute(list);
 	}
 
 	void* allocate() const;

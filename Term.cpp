@@ -183,6 +183,10 @@ Operand Term::simplify() const {
 		return result;
 }
 
+Operand Term::subtitute(const Variable_Subtitutor_List& list) const {
+	return *this;
+}
+
 bool Term::is_Constant() const {
 	if(fields.size() == 1 && fields.at(0).getType() == DataType::Constant)
 		return true;

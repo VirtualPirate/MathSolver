@@ -7,6 +7,7 @@ class Term;
 class Expression;
 class Substitutor;
 class Substitutor_List;
+class Variable_Subtitutor_List;
 
 class Variable{
 	char name;
@@ -92,6 +93,7 @@ public:
 	bool negative_power() const;
 	Operand simplify() const;
 	Operand substitute(const Substitutor_List& list) const;
+	Operand subtitute(const Variable_Subtitutor_List& list) const;
 	friend std::ostream& operator<<(std::ostream&, const Variable&);
 };
 

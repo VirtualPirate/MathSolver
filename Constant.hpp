@@ -9,6 +9,7 @@ class Term;
 class Expression;
 class Substitutor;
 class Substitutor_List;
+class Variable_Subtiutor_List;
 class Constant{
 	double value;
 	Operand power;
@@ -47,6 +48,7 @@ public:
 
 	Operand simplify() const;
 	Operand substitute(const Substitutor_List& list) const;
+	Operand subtitute(const Variable_Subtitutor_List&) const;
 	std::string power_print() const;
 	bool is_negative() const; // Checks if the Constant is negative
 	bool negative_power() const;

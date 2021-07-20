@@ -72,6 +72,11 @@ Operand Constant::simplify() const {
 		return Constant{ value, simplified_power };
 	}
 }
+
+Operand Constant::subtitute(const Variable_Subtitutor_List& list) const {
+	return *this;
+}
+
 std::string Constant::power_print() const{
 	std::ostringstream stream;
 	stream << *this;
