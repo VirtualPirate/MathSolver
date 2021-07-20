@@ -13,6 +13,8 @@ class OperandList;
 class Term;
 class Expression;
 
+class Variable_Subtitutor_List;
+
 using Token = std::variant<double, char>;
 using TokensConstIterator = std::vector<Token>::const_iterator;
 using TokensConstIteratorPair = std::pair<TokensConstIterator, TokensConstIterator>;
@@ -149,6 +151,7 @@ namespace test{
     void print_constiteratorpair(TokensConstIteratorPair);
 
     void simplify_test(const Operand&);
+    void subtitute_test(const Operand&, const Variable_Subtitutor_List&);
     void constant_simplify_tests();
 
     void variable_simplify_test();
@@ -182,6 +185,8 @@ namespace test{
     void operand_expression_test();
 
     void variable_isaddable_test();
+
+    void subtitution_tests();
 }
 
 #endif

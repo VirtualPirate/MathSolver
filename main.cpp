@@ -112,6 +112,7 @@ int main() {
 	test::operand_expression_test();
 
 	test::parse_expression_test();
+	test::subtitution_tests();
 
 	//cin.get();
 	return 0;
