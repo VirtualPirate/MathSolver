@@ -6,7 +6,8 @@ class Variable;
 class Term;
 class Operand;
 class Expression;
-class Substitute;
+class Substitutor;
+class Variable_Subtitutor;
 
 bool is_addable(const Term&, const Term&);
 std::string return_type_string(DataType);
@@ -18,6 +19,7 @@ Operand expression_constant_power(const Expression&, int);
 Operand expression_constant_power_minus(const Expression&, int);
 
 namespace CONSTANTS{
+	extern const Variable_Subtitutor VAR_NULL_SUBTITUTE;
 	extern const Substitutor null_substitutor;
 	extern const Operand ONE;
 	extern const Operand ZERO;

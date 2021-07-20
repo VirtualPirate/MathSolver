@@ -12,8 +12,11 @@ class Variable_Subtitutor {
 	double value;
 
 public:
+	Variable_Subtitutor();
 	Variable_Subtitutor(char, double);
 
+	bool operator==(char) const;
+	bool operator!=(char) const;
 	bool operator==(const Variable_Subtitutor&) const;
 	bool operator!=(const Variable_Subtitutor&) const;
 
@@ -22,7 +25,7 @@ public:
 };
 
 class Variable_Subtitutor_List { 
-	std::vector<Variable_Subtitutor> substitute;
+	std::vector<Variable_Subtitutor> subtitute;
 public:
 	Variable_Subtitutor_List(std::initializer_list<Variable_Subtitutor>);
 	Variable_Subtitutor_List& operator=(std::initializer_list<Variable_Subtitutor>);
@@ -45,8 +48,7 @@ public:
 	size_t size() const;
 
 	//Getters and Setters
-	const Variable_Subtitutor& get(const Variable_Subtitutor&) const;
-	const Operand& get_substitute(const Variable_Subtitutor&) const;
+	const Variable_Subtitutor& get_substitute(char) const;
 };
 
 class Substitutor{

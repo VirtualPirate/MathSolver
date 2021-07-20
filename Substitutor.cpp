@@ -5,6 +5,8 @@
 #include "Operation_Functions.hpp"
 #include <cstdlib>
 
+Variable_Subtitutor::Variable_Subtitutor() : name{ '\0' }, value{ 0.0 }{}
+
 Variable_Subtitutor::Variable_Subtitutor(char name_, double value_) {
 	if (isalpha(name_)) {
 		name = name_;
@@ -16,6 +18,12 @@ Variable_Subtitutor::Variable_Subtitutor(char name_, double value_) {
 	}
 }
 
+bool Variable_Subtitutor::operator==(char name_) const {
+	return name == name_;
+}
+bool Variable_Subtitutor::operator!=(char name_) const {
+	return name != name_;
+}
 bool Variable_Subtitutor::operator==(const Variable_Subtitutor& ref) const {
 	return name == ref.name;
 }
@@ -25,6 +33,88 @@ bool Variable_Subtitutor::operator!=(const Variable_Subtitutor& ref) const {
 
 char Variable_Subtitutor::getName() const { return name; }
 double Variable_Subtitutor::getValue() const { return value; }
+
+
+
+
+
+
+
+Variable_Subtitutor_List::Variable_Subtitutor_List(std::initializer_list<Variable_Subtitutor> list) : subtitute{} { this->extend(list); }
+Variable_Subtitutor_List& Variable_Subtitutor_List::operator=(std::initializer_list<Variable_Subtitutor> list) {
+	subtitute = std::vector<Variable_Subtitutor>{};
+	this->extend(list);
+	return *this;
+}
+Variable_Subtitutor_List::Variable_Subtitutor_List(const std::vector<Variable_Subtitutor>& vec) : subtitute{} { this->extend(vec); }
+Variable_Subtitutor_List& Variable_Subtitutor_List::operator=(const std::vector<Variable_Subtitutor>& vec) {
+	subtitute = std::vector<Variable_Subtitutor>{};
+	this->extend(vec);
+	return *this;
+}
+
+void Variable_Subtitutor_List::append(const Variable_Subtitutor& val) {
+	if (std::find(subtitute.begin(), subtitute.end(), val) == subtitute.end())
+		subtitute.push_back(val);
+}
+
+void Variable_Subtitutor_List::replace(const Variable_Subtitutor& val) {
+	auto iter = std::find(subtitute.begin(), subtitute.end(), val);
+	if (iter == subtitute.end())
+		subtitute.push_back(val);
+	else
+		*iter = val;
+}
+
+void Variable_Subtitutor_List::extend(std::initializer_list<Variable_Subtitutor> list) {
+	for (auto each = list.begin(); each != list.end(); each++)
+		this->append(*each);
+}
+void Variable_Subtitutor_List::extend(const std::vector<Variable_Subtitutor>& vec) {
+	for (const Variable_Subtitutor& each : vec)
+		this->append(each);
+}
+
+void Variable_Subtitutor_List::replace_all(std::initializer_list<Variable_Subtitutor> list) {
+	for (auto each = list.begin(); each != list.end(); each++)
+		this->replace(*each);
+}
+void Variable_Subtitutor_List::replace_all(const std::vector<Variable_Subtitutor>& vec) {
+	for (const Variable_Subtitutor& each : vec)
+		this->append(each);
+}
+
+void Variable_Subtitutor_List::erase(size_t index) {
+	subtitute.erase(subtitute.begin() + index);
+}
+void Variable_Subtitutor_List::erase(const Variable_Subtitutor& ref) {
+	auto iter = std::find(subtitute.begin(), subtitute.end(), ref);
+	if (iter != subtitute.end())
+		subtitute.erase(iter);
+}
+
+inline void Variable_Subtitutor_List::clear() {
+	subtitute.clear();
+}
+
+size_t Variable_Subtitutor_List::size() const {
+	return subtitute.size();
+}
+
+const Variable_Subtitutor& Variable_Subtitutor_List::get_substitute(char name_) const {
+	auto iter = std::find(subtitute.begin(), subtitute.end(), name_);
+	if (iter != subtitute.end())
+		return *iter;
+	else
+		return CONSTANTS::VAR_NULL_SUBTITUTE;
+}
+
+
+
+
+
+
+
 
 
 Substitutor::Substitutor(const Operand& k_, const Operand& s_): key_value{k_}, substitute{s_}{}
