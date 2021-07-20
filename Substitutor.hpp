@@ -22,6 +22,8 @@ public:
 
 	char getName() const;
 	double getValue() const;
+
+	inline operator bool() const;
 };
 
 class Variable_Subtitutor_List { 

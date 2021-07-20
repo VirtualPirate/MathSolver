@@ -108,7 +108,10 @@ Operand Variable::simplify() const {
 	return Variable{name, power.simplify()};
 }
 Operand Variable::subtitute(const Variable_Subtitutor_List& list) const {
-	return *this;
+	const Variable_Subtitutor& subtitutor = list.get_substitute(name);
+	if (subtitutor.getName() == name)
+		return Constant{ subtitutor.getValue(), power.subtitute(list) };
+	return Variable{name, power.subtitute(list)};
 }
 std::string Variable::power_print() const{
 	std::ostringstream stream;

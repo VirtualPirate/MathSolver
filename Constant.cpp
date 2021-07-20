@@ -74,7 +74,7 @@ Operand Constant::simplify() const {
 }
 
 Operand Constant::subtitute(const Variable_Subtitutor_List& list) const {
-	return *this;
+	return Constant{this->value, power.subtitute(list)};
 }
 
 std::string Constant::power_print() const{

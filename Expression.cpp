@@ -170,7 +170,11 @@ Operand Expression::simplify() const {
 }
 
 Operand Expression::subtitute(const Variable_Subtitutor_List& list) const {
-	return *this;
+	Term copy_{ *this };
+	for (Operand& each : copy_.fields)
+		each = std::move(each.subtitute(list));
+	copy_.power = std::move(copy_.power.subtitute(list));
+	return copy_;
 }
 
 Expression Expression::getBase() const{
