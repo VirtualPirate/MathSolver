@@ -171,6 +171,7 @@ public:
 	bool negative_power() const;
 	Operand substitute() const;
 	Operand simplify() const;
+	Operand subtitute(const Variable_Subtitutor_List&) const;
 
 	// Operand to Operand arithmetic operators
 	Operand operator+(const Operand&) const;

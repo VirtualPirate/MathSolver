@@ -573,6 +573,13 @@ Operand Operand::simplify() const {
 	//std::cout << "stdout: Unknown type simplify";
 	return *this;
 }
+Operand Operand::subtitute(const Variable_Subtitutor_List& list) const {
+	int index = (int)type;
+	if (index > -1)
+		return variable_subtitutor_function[index](this, list);
+	//std::cout << "stdout: Subtitution on a NULL_OPERAND";
+	return CONSTANTS::NULL_OPERAND;
+}
 std::ostream& operator<<(std::ostream& os, const Operand& ref){
 	if(!ref.is_null){
 		int index = (int)ref.type;
