@@ -187,6 +187,8 @@ namespace test{
     void variable_isaddable_test();
 
     void subtitution_tests();
+    void subtitute_simplify_test(const Operand&, const Variable_Subtitutor_List&);
+    void subtitution_simplify_tests();
 }
 
 #endif

@@ -113,6 +113,7 @@ int main() {
 
 	test::parse_expression_test();
 	test::subtitution_tests();
+	test::subtitution_simplify_tests();
 
 	//cin.get();
 	return 0;

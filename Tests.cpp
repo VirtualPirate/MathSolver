@@ -514,6 +514,9 @@ namespace test{
 	void subtitute_test(const Operand& operand, const Variable_Subtitutor_List& list) {
 		std::cout << operand << " = " << operand.subtitute(list) << std::endl;
 	}
+	void subtitute_simplify_test(const Operand& operand, const Variable_Subtitutor_List& list) {
+		std::cout << operand << " = " << operand.subtitute(list).simplify() << std::endl;
+	}
 	void subtitution_tests() {
 
 		std::cout << "\n\n[Subtitution Tests]\n\n";
@@ -524,10 +527,17 @@ namespace test{
 		subtitute_test(exp4, list);
 		subtitute_test(exp1, list);
 		subtitute_test(exp6, list);
+	}
 
-
-
-
+	void subtitution_simplify_tests() {
+		std::cout << "\n\n[Subtitution Simplify Tests]\n\n";
+		Variable_Subtitutor_List list{ Variable_Subtitutor('x', 10), Variable_Subtitutor('y', 20) };
+		//list.append(Variable_Subtitutor('y', 20));
+		subtitute_simplify_test(var_0, list);
+		subtitute_simplify_test(term2, list);
+		subtitute_simplify_test(exp4, list);
+		subtitute_simplify_test(exp1, list);
+		subtitute_simplify_test(exp6, list);
 	}
 }
 
