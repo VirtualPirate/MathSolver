@@ -1,6 +1,8 @@
 #ifndef Expression_H
 #define Expression_H
 
+#include <sstream>
+
 #include "OperandList.hpp"
 
 class Variable_Subtitutor_List;
@@ -30,6 +32,13 @@ class Expression: public OperandList{
 	void constant_raise_power(); // Raises the Expression to power if the Power is a Number which has no decimal part
 	Operand raise_power_if_size_is_1(); // If the size of fields in the Expression then fields.at(0).raise_pow(power;)
 
+	void simplify_each(std::ostringstream&);
+	void simplify_internal(std::ostringstream&);
+	void simplify_internal_expressions(std::ostringstream&);
+	void remove_zeroes(std::ostringstream&);
+	void constant_raise_power(std::ostringstream&);
+	Operand raise_power_if_size_is_1(std::ostringstream&);
+
 public:
 
 	Expression(const Expression&);
@@ -50,6 +59,7 @@ public:
 	bool isSubexpression() const;
 
 	Operand simplify() const;
+	Operand simplify(std::ostringstream&) const;
 	Operand substitute(const Substitutor_List& list) const;
 	Operand subtitute(const Variable_Subtitutor_List& list) const;
 

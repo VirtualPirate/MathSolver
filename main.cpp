@@ -115,6 +115,8 @@ int main() {
 	test::subtitution_tests();
 	test::subtitution_simplify_tests();
 
+	test::simplify_stream_tests();
+
 	//cin.get();
 	return 0;
 }

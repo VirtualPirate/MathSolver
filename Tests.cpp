@@ -9,6 +9,8 @@
 #include "Parser.hpp"
 #include "Tests.hpp"
 
+#include <sstream>
+
 Timer::Timer() {
 	start = std::chrono::high_resolution_clock::now();
 }
@@ -538,6 +540,35 @@ namespace test{
 		subtitute_simplify_test(exp4, list);
 		subtitute_simplify_test(exp1, list);
 		subtitute_simplify_test(exp6, list);
+		subtitute_simplify_test(exp8, list);
+
+	}
+
+	void simplify_stream_tests() {
+		std::cout << "\n\n[Expression stream Simplify Tests]\n\n";
+
+		simplify_stream_expression_print(exp0);
+		simplify_stream_expression_print(exp1);
+		simplify_stream_expression_print(exp2);
+		simplify_stream_expression_print(exp3);
+		simplify_stream_expression_print(exp4);
+		simplify_stream_expression_print(exp5);
+		simplify_stream_expression_print(exp6);
+		simplify_stream_expression_print(exp7);
+		simplify_stream_expression_print(exp8);
+		simplify_stream_expression_print(exp9);
+		simplify_stream_expression_print(exp10);
+		simplify_stream_expression_print(exp11);
+		simplify_stream_expression_print(exp12);
+		simplify_stream_expression_print(exp13);
+		simplify_stream_expression_print(exp14);
+		simplify_stream_expression_print(exp15);
+	}
+
+	void simplify_stream_expression_print(const Expression& expression) {
+		std::ostringstream stream_;
+		expression.simplify(stream_);
+		std::cout << stream_.str() << "\n\n";
 	}
 }
 

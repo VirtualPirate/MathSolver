@@ -366,7 +366,7 @@ Operand Expression::operator*(const Expression& other) const {
 		else
 			return Expression{ result_fields, CONSTANTS::MINUS_ONE };
 	}
-	return Term{ {*this, other} };
+	return Term{ *this, other };
 }
 Operand Expression::operator/(const Expression& other) const {return Operand{};}
 Operand Expression::raise_pow(const Expression& other) const {

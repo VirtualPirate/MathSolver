@@ -1,6 +1,8 @@
 #ifndef Operation_Functions_H
 #define Operation_Functions_H
 
+#include <sstream>
+
 class Constant;
 class Variable;
 class Term;
@@ -11,6 +13,13 @@ class Variable_Subtitutor;
 
 bool is_addable(const Term&, const Term&);
 std::string return_type_string(DataType);
+
+template <typename Type>
+std::string get_cout_string(const Type& lvalue) {
+	std::ostringstream stream_;
+	stream_ << lvalue;
+	return stream_.str();
+}
 
 std::string match_number(std::string);
 

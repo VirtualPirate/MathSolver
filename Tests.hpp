@@ -189,6 +189,9 @@ namespace test{
     void subtitution_tests();
     void subtitute_simplify_test(const Operand&, const Variable_Subtitutor_List&);
     void subtitution_simplify_tests();
+
+    void simplify_stream_tests();
+    void simplify_stream_expression_print(const Expression&);
 }
 
 #endif
