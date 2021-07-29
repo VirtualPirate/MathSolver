@@ -333,6 +333,8 @@ Operand Parser::Parse_Expression(TokensConstIterator begin, TokensConstIterator 
 		result.insert(Term{ fields });
 	}
 
+	//std::cout << "result = " << result << std::endl;
+
 	return result;
 
 }
@@ -373,6 +375,9 @@ void Parser::test_grab_group() {
 	std::cout << "}\n";
 }
 
+bool Parser::is_valid_expression(const std::string& str) {
+	return static_cast<bool>(Operand{ str });
+}
 //Checks if a chararter is an operator
 bool Parser::is_operator(const char& ref) {
 	for (char each : "*+-/^") {

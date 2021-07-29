@@ -62,6 +62,7 @@ public:
 	static Operand Parse_Expression(TokensConstIterator, TokensConstIterator, bool = false);
 	static Operand Parse_Expression(const std::string&);
 
+	static bool is_valid_expression(const std::string&);
 	static bool is_operator(const char&);
 	static bool is_operator(const Token&);
 	static bool is_operand(const Token&);

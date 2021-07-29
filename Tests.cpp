@@ -265,6 +265,12 @@ namespace test{
 		Parser parser_2{ "(a + b)^-2" };
 		parser_2.debug_info();
 
+		Parser parser_3{ "-+" };
+		parser_3.debug_info();
+
+		Parser parser_4{ "-1" };
+		parser_3.debug_info();
+
 		Operand operand_2 = Parser::Parse_Expression("((a+b)c + (c + a)) + h");
 		std::cout << "operand_2 = " << operand_2 << std::endl;
 
@@ -589,7 +595,16 @@ namespace test{
 		Operand operand_1{ "::;" };
 		cout << "operand_1 = " << operand_1 << std::endl;
 		Operand operand_2{ "-+"  };
-		cout << "operand_2 = " << operand_1 << std::endl;
+		cout << "operand_2 = " << operand_2 << std::endl;
+		Operand operand_3{ "-1" };
+		cout << "operand_3 = " << operand_3 << std::endl;
+	}
+
+	void is_valid_expression_test() {
+		cout << boolalpha << Parser::is_valid_expression("1 + 2x + y^2") << endl;
+		cout << boolalpha << Parser::is_valid_expression("::;") << endl;
+		cout << boolalpha << Parser::is_valid_expression("-+") << endl;
+
 	}
 }
 

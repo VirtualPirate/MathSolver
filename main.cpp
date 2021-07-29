@@ -119,6 +119,8 @@ int main() {
 
 	test::operand_string_construction_test();
 
+	//test::is_valid_expression_test();
+
 	//cin.get();
 	return 0;
 }
