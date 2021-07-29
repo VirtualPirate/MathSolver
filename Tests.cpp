@@ -529,6 +529,12 @@ namespace test{
 		subtitute_test(exp4, list);
 		subtitute_test(exp1, list);
 		subtitute_test(exp6, list);
+
+		Variable_Subtitutor_List list2{ Variable_Subtitutor('y', 11) };
+		Operand operand_0{ "56 - 2xy" };
+		Operand operand_1{ "(56 - x)(2y)^-1" };
+		subtitute_test(operand_0, list2);
+		subtitute_test(operand_1, list2);
 	}
 
 	void subtitution_simplify_tests() {
@@ -541,6 +547,12 @@ namespace test{
 		subtitute_simplify_test(exp1, list);
 		subtitute_simplify_test(exp6, list);
 		subtitute_simplify_test(exp8, list);
+
+		Variable_Subtitutor_List list2{ Variable_Subtitutor('y', 1), Variable_Subtitutor('x', 6) };
+		Operand operand_0{ "56 - 2xy" };
+		Operand operand_1{ "(56 - x)(2y)^-1" };
+		subtitute_simplify_test(operand_0, list2);
+		subtitute_simplify_test(operand_1, list2);
 
 	}
 
@@ -569,6 +581,15 @@ namespace test{
 		std::ostringstream stream_;
 		expression.simplify(stream_);
 		std::cout << stream_.str() << "\n\n";
+	}
+
+	void operand_string_construction_test() {
+		Operand operand_0{ "1 + 2x + y^2" };
+		cout << "operand_0 = " << operand_0 << std::endl;
+		Operand operand_1{ "::;" };
+		cout << "operand_1 = " << operand_1 << std::endl;
+		Operand operand_2{ "-+"  };
+		cout << "operand_2 = " << operand_1 << std::endl;
 	}
 }
 

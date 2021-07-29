@@ -192,6 +192,8 @@ namespace test{
 
     void simplify_stream_tests();
     void simplify_stream_expression_print(const Expression&);
+
+    void operand_string_construction_test();
 }
 
 #endif

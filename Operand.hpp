@@ -319,9 +319,4 @@ bool Operand_Operand_neq(const Operand& first, const Operand& second){
 
 //Operand is_negative template
 
-template <class Type>
-Type& Return_Internal_Ref(const Operand& ref){
-	return *(Type*)ref.value;
-}
-
 #endif

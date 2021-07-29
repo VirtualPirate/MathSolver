@@ -12,6 +12,7 @@
 #include "Expression.hpp"
 #include "Operation_Functions.hpp"
 #include "Substitutor.hpp"
+#include "Parser.hpp"
 
 #include "Tests.hpp"
 
@@ -302,6 +303,27 @@ Operand& Operand::operator=(const Expression& ref){
 		value = (void*)(new Expression{ ref });
 		type = DataType::Expression;
 		is_null = ref.isNull();
+	}
+	return *this;
+}
+
+Operand::Operand(const std::string& str) {
+	try {
+		*this = std::move(Parser::Parse_Expression(str));
+	}
+	catch (const std::runtime_error& e) {
+		std::cerr << e.what() << std::endl;
+		*this = CONSTANTS::NULL_OPERAND;
+	}
+}
+
+Operand& Operand::operator==(const std::string& str) {
+	try {
+		*this = std::move(Parser::Parse_Expression(str));
+	}
+	catch (const std::runtime_error& e) {
+		std::cerr << e.what() << std::endl;
+		*this = CONSTANTS::NULL_OPERAND;
 	}
 	return *this;
 }

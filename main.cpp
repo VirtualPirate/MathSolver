@@ -99,11 +99,11 @@ int main() {
 
 	cout << "num6.getBase() = " << (Operand{ num6 }).getBase() << endl;
 
-	//test::expression_parsing_test();
-	//test::parsing_group_test();
-	//test::grab_term_test();
+	test::expression_parsing_test();
+	test::parsing_group_test();
+	test::grab_term_test();
 
-	//test::match_power_test();
+	test::match_power_test();
 	test::constant_simplify_tests();
 	test::variable_simplify_test();
 
@@ -116,6 +116,8 @@ int main() {
 	test::subtitution_simplify_tests();
 
 	test::simplify_stream_tests();
+
+	test::operand_string_construction_test();
 
 	//cin.get();
 	return 0;
