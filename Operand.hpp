@@ -140,7 +140,7 @@ public:
 	Operand& operator=(const Expression&);
 
 	Operand(const std::string&);
-	Operand& operator==(const std::string&);
+	Operand& operator=(const std::string&);
 
 	// Copy and Move semantics
 	Operand(const Operand&);

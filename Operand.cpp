@@ -307,17 +307,16 @@ Operand& Operand::operator=(const Expression& ref){
 	return *this;
 }
 
-Operand::Operand(const std::string& str) {
+Operand::Operand(const std::string& str) : value{ nullptr }, type{ DataType::None }, is_null{true} {
 	try {
 		*this = std::move(Parser::Parse_Expression(str));
 	}
 	catch (const std::runtime_error& e) {
 		std::cerr << e.what() << std::endl;
-		*this = CONSTANTS::NULL_OPERAND;
 	}
 }
 
-Operand& Operand::operator==(const std::string& str) {
+Operand& Operand::operator=(const std::string& str) {
 	try {
 		*this = std::move(Parser::Parse_Expression(str));
 	}
