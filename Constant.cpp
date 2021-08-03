@@ -112,8 +112,8 @@ void Constant::setPower(const Operand& ref){
 }
 
 
-Constant Constant::operator+() const {return +value;}
-Constant Constant::operator-() const {return -value;}
+Operand Constant::operator+() const {return *this;}
+Operand Constant::operator-() const {return *this * CONSTANTS::MINUS_ONE;}
 
 Constant::~Constant() {
 	CONSTANT_LOG_DESTRUCT();

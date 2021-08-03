@@ -120,8 +120,8 @@ public:
 
 
 	//Unary operators 
-	Constant operator+() const;
-	Constant operator-() const;
+	Operand operator+() const;
+	Operand operator-() const;
 
 	friend std::ostream& operator<<(std::ostream&, const Constant&);
 

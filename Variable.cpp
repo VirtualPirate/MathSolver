@@ -124,6 +124,12 @@ bool Variable::is_negative() const {
 bool Variable::negative_power() const {
 	return power.is_negative();
 }
+
+
+Operand Variable::operator+() const { return *this; }
+Operand Variable::operator-() const { return *this * CONSTANTS::MINUS_ONE; }
+
+
 std::ostream& operator<<(std::ostream& os, const Variable& ref){
 	if(ref.power == Operand{Constant{1}})
 		os << ref.name;

@@ -94,6 +94,11 @@ public:
 	Operand simplify() const;
 	Operand substitute(const Substitutor_List& list) const;
 	Operand subtitute(const Variable_Subtitutor_List& list) const;
+
+	//Unary operators 
+	Operand operator+() const;
+	Operand operator-() const;
+
 	friend std::ostream& operator<<(std::ostream&, const Variable&);
 };
 
