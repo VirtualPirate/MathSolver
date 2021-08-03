@@ -113,6 +113,8 @@ void Constant::setPower(const Operand& ref){
 Operand Constant::operator+() const {return *this;}
 Operand Constant::operator-() const {return *this * CONSTANTS::MINUS_ONE;}
 
+Operand Constant::multiplicative_inverse() const { return this->raise_pow(CONSTANTS::MINUS_ONE); }
+
 Constant::~Constant() {
 	CONSTANT_LOG_DESTRUCT();
 }

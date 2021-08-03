@@ -129,6 +129,7 @@ bool Variable::negative_power() const {
 Operand Variable::operator+() const { return *this; }
 Operand Variable::operator-() const { return *this * CONSTANTS::MINUS_ONE; }
 
+Operand Variable::multiplicative_inverse() const { return this->raise_pow(CONSTANTS::MINUS_ONE); }
 
 std::ostream& operator<<(std::ostream& os, const Variable& ref){
 	if(ref.power == Operand{Constant{1}})
