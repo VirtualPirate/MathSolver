@@ -243,5 +243,5 @@ const Operand& Substitutor_List::get_substitute(const Substitutor& ref) const{
 	if(iter != sub_.end())
 		return iter->substitute;
 	else
-		return Constant::power_null;
+		return CONSTANTS::NULL_OPERAND;
 }

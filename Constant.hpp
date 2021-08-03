@@ -21,9 +21,7 @@ class Constant{
 public:
 	static Constant const ONE;
 	static Constant const ZERO;
-	static Operand const power_one;
-	static Operand const power_zero;
-	static Operand const power_null;
+
 	//Constructors
 	Constant(void);
 	Constant(double);
