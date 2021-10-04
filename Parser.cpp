@@ -341,7 +341,10 @@ Operand Parser::Parse_Expression(TokensConstIterator begin, TokensConstIterator 
 
 Operand Parser::Parse_Expression(const std::string& expression) {
 	Parser parser{ expression };
-	return Parser::Parse_Expression(parser.tokens.cbegin(), parser.tokens.cend());
+	if (parser.tokens.size() > 0)
+		return Parser::Parse_Expression(parser.tokens.cbegin(), parser.tokens.cend());
+	else
+		return Operand{};
 }
 
 void Parser::create_tokens(){
@@ -483,12 +486,12 @@ TokensConstIteratorPair Parser::grab_term(TokensConstIterator begin, TokensConst
 
 
 inline void Parser::lstrip_operators() {
-	while (Parser::is_operator(*(tokens.begin())))
+	while (tokens.begin() != tokens.end() && Parser::is_operator(*(tokens.begin())))
 		tokens.erase(tokens.begin());
 }
 
 inline void Parser::rstrip_operators() {
-	while (Parser::is_operator(*(tokens.rbegin())))
+	while (tokens.begin() != tokens.end() && Parser::is_operator(*(tokens.rbegin())))
 		tokens.erase((tokens.rbegin()+1).base());
 }
 

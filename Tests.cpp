@@ -598,6 +598,8 @@ namespace test{
 		cout << "operand_2 = " << operand_2 << std::endl;
 		Operand operand_3{ "-1" };
 		cout << "operand_3 = " << operand_3 << std::endl;
+		Operand operand_4{ "   " };
+		cout << "operand_4 = " << operand_4 << std::endl;
 	}
 
 	void is_valid_expression_test() {
