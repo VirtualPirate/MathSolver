@@ -112,12 +112,18 @@ int main() {
 	test::operand_expression_test();
 
 	test::parse_expression_test();
-	test::subtitution_tests();
-	test::subtitution_simplify_tests();
+	//test::subtitution_tests();
+	//test::subtitution_simplify_tests();
 
-	test::simplify_stream_tests();
+	//test::simplify_stream_tests();
 
-	test::operand_string_construction_test();
+	//test::operand_string_construction_test();
+
+	//test::parse_expression_test();
+	//test::match_power_test();
+
+
+	cout << endl << endl << endl << endl;
 
 	//test::is_valid_expression_test();
 
