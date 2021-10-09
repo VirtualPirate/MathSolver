@@ -614,6 +614,9 @@ namespace test{
 		cout << "operand_6 = " << operand_6.simplify() << endl;
 		Operand operand_7{ "((a + b)^x)^y" };
 		cout << "operand_7 = " << operand_7 << std::endl;
+		Operand operand_8{ "((a + b)^4" };
+		cout << "operand_8 = " << operand_8 << std::endl;
+		cout << "operand_8 = " << operand_8.simplify() << endl;
 	}
 
 	void is_valid_expression_test() {
