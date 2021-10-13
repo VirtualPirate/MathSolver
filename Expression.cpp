@@ -129,7 +129,7 @@ void Expression::simplify_internal_expressions() {
 
 void Expression::remove_zeroes() {
 	for (auto each = fields.begin(); each != fields.end(); ) {
-		if (each->is_constant() && *each == CONSTANTS::ZERO)
+		if (each->is_constant() && *each == CONSTANTS::ZERO && fields.size() > 1)
 			fields.erase(each);
 		else
 			each++;
@@ -270,7 +270,7 @@ void Expression::remove_zeroes(std::ostringstream& output) {
 	std::string prev_output = get_cout_string(*this);
 
 	for (auto each = fields.begin(); each != fields.end(); ) {
-		if (each->is_constant() && *each == CONSTANTS::ZERO)
+		if (each->is_constant() && *each == CONSTANTS::ZERO && fields.size() > 1)
 			fields.erase(each);
 		else
 			each++;
