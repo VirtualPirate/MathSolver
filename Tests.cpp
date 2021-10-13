@@ -69,6 +69,7 @@ namespace test{
 	Expression exp13(Parser::Parse_Expression("2(a + b) + 2a + 2b"));
 	Expression exp14(Parser::Parse_Expression("(a + b)^-2"));
 	Expression exp15(Parser::Parse_Expression("(2 + 1)^x"));
+	Expression exp16(Parser::Parse_Expression("x / x"));
 
 
     void show_sizes(){
@@ -348,6 +349,7 @@ namespace test{
 		simplify_test(exp13);
 		simplify_test(exp14);
 		simplify_test(exp15);
+		simplify_test(exp16);
 
 
 		std::cout << "\n\n";
@@ -563,8 +565,12 @@ namespace test{
 		Variable_Subtitutor_List list2{ Variable_Subtitutor('y', 1), Variable_Subtitutor('x', 6) };
 		Operand operand_0{ "56 - 2xy" };
 		Operand operand_1{ "(56 - x)(2y)^-1" };
+		Operand operand_2{ "(x + y)^2^2" };
+		Operand operand_3{ "((x + y)^2)^2" };
 		subtitute_simplify_test(operand_0, list2);
 		subtitute_simplify_test(operand_1, list2);
+		subtitute_simplify_test(operand_2, list2);
+		subtitute_simplify_test(operand_3, list2);
 
 	}
 
