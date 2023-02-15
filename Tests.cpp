@@ -567,10 +567,12 @@ namespace test{
 		Operand operand_1{ "(56 - x)(2y)^-1" };
 		Operand operand_2{ "(x + y)^2^2" };
 		Operand operand_3{ "((x + y)^2)^2" };
+		Operand operand_4{ " x / x * x" };
 		subtitute_simplify_test(operand_0, list2);
 		subtitute_simplify_test(operand_1, list2);
 		subtitute_simplify_test(operand_2, list2);
 		subtitute_simplify_test(operand_3, list2);
+		subtitute_simplify_test(operand_4, list2);
 
 	}
 
