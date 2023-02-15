@@ -196,6 +196,8 @@ namespace test{
     void operand_string_construction_test();
 
     void is_valid_expression_test();
+
+    void simplify_vector_output();
 }
 
 #endif

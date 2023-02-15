@@ -122,6 +122,8 @@ int main() {
 	test::parse_expression_test();
 	test::match_power_test();
 
+	test::simplify_vector_output();
+
 
 	cout << endl << endl << endl << endl;
 

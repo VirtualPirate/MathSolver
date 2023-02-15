@@ -10,6 +10,8 @@
 #include "Tests.hpp"
 
 #include <sstream>
+#include <vector>
+#include <string>
 
 Timer::Timer() {
 	start = std::chrono::high_resolution_clock::now();
@@ -632,6 +634,16 @@ namespace test{
 		cout << boolalpha << Parser::is_valid_expression("::;") << endl;
 		cout << boolalpha << Parser::is_valid_expression("-+") << endl;
 
+	}
+
+	void simplify_vector_output() {
+		std::cout << "\n\n Simplify Vector Output \n\n";
+		std::vector<std::string> vec{};
+		exp4.simplify(vec);
+
+		for (auto& element : vec) {
+			std::cout << element << "\n";
+		}
 	}
 }
 

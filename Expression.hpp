@@ -2,6 +2,8 @@
 #define Expression_H
 
 #include <sstream>
+#include <vector>
+#include <string>
 
 #include "OperandList.hpp"
 
@@ -39,6 +41,13 @@ class Expression: public OperandList{
 	void constant_raise_power(std::ostringstream&);
 	Operand raise_power_if_size_is_1(std::ostringstream&);
 
+	void simplify_each(std::vector<std::string>&);
+	void simplify_internal(std::vector<std::string>&);
+	void simplify_internal_expressions(std::vector<std::string>&);
+	void remove_zeroes(std::vector<std::string>&);
+	void constant_raise_power(std::vector<std::string>&);
+	Operand raise_power_if_size_is_1(std::vector<std::string>&);
+
 public:
 
 	Expression(const Expression&);
@@ -60,6 +69,7 @@ public:
 
 	Operand simplify() const;
 	Operand simplify(std::ostringstream&) const;
+	Operand simplify(std::vector<std::string>&) const;
 	Operand substitute(const Substitutor_List& list) const;
 	Operand subtitute(const Variable_Subtitutor_List& list) const;
 

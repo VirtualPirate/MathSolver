@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <string>
 
 #include "Operand.hpp"
 #include "Constant.hpp"
@@ -330,5 +331,136 @@ Operand Expression::simplify(std::ostringstream& output) const {
 	result.constant_raise_power(output);
 
 	return result.raise_power_if_size_is_1(output);
+
+}
+
+
+void Expression::simplify_each(std::vector<std::string>& vec) {
+	std::string prev_output = get_cout_string(*this);
+
+	for (Operand& each : fields)
+		each = std::move(each.simplify());
+
+	std::string next_output = get_cout_string(*this);
+	if (prev_output != next_output)
+		vec.push_back(next_output);
+		//output << next_output << '\n';
+}
+
+void Expression::simplify_internal(std::vector<std::string>& vec) {
+	auto upper_iter = fields.begin();
+	auto lower_iter = fields.begin() + 1;
+
+	Operand each_operand;
+	while (upper_iter != fields.end() - 1) {
+		each_operand = *upper_iter + *lower_iter;
+		if (each_operand)
+		{
+			*lower_iter = std::move(each_operand.simplify());
+			fields.erase(upper_iter);
+			upper_iter = fields.begin();
+			lower_iter = fields.begin() + 1;
+			vec.push_back(get_cout_string(*this));
+			//output << *this << '\n'; // Modifies the output
+			continue;
+		}
+		else if (++lower_iter == fields.end()) {
+			upper_iter++;
+			lower_iter = upper_iter + 1;
+		}
+	}
+}
+
+void Expression::simplify_internal_expressions(std::vector<std::string>& vec) {
+	std::string prev_output = get_cout_string(*this);
+
+	Expression simplified_expression;
+	for (size_t each = 0; each < fields.size();) {
+		if (fields.at(each).is_expression() && fields.at(each).getPower() == CONSTANTS::ONE) {
+			simplified_expression = std::move(fields.at(each).simplify());
+			fields.erase(fields.begin() + each);;
+			fields.insert(fields.begin() + each, simplified_expression.fields.begin(), simplified_expression.fields.end());
+			each += simplified_expression.fields.size();
+		}
+		else
+			each++;
+	}
+
+	std::string next_output = get_cout_string(*this);
+	if (prev_output != next_output)
+		vec.push_back(next_output);
+		//output << next_output << '\n';
+}
+
+void Expression::remove_zeroes(std::vector<std::string>& vec) {
+
+	std::string prev_output = get_cout_string(*this);
+
+	for (auto each = fields.begin(); each != fields.end(); ) {
+		if (each->is_constant() && *each == CONSTANTS::ZERO && fields.size() > 1)
+			fields.erase(each);
+		else
+			each++;
+	}
+
+	std::string next_output = get_cout_string(*this);
+	if (prev_output != next_output)
+		vec.push_back(next_output);
+		//output << next_output << '\n';
+}
+
+void Expression::constant_raise_power(std::vector<std::string>& vec) {
+
+	std::string prev_output = get_cout_string(*this);
+
+	if (power.is_constant()) {
+		Operand power_simplified{ power.simplify() };
+		if (power_simplified.getPower() == CONSTANTS::ONE) {
+			double power_value = power.simplify().get<Constant>().value;
+			if (power_value == (int)power_value && power_value > 1) {
+				power = CONSTANTS::ONE;
+				*this = expression_constant_power(*this, (int)power_value);
+			}
+			else if (power_value == (int)power_value && power_value < -1) {
+				power = CONSTANTS::MINUS_ONE;
+				*this = expression_constant_power_minus(*this, (int)power_value);
+			}
+		}
+	}
+
+	std::string next_output = get_cout_string(*this);
+	if (prev_output != next_output)
+		vec.push_back(next_output);
+		//output << next_output << '\n';
+}
+
+Operand Expression::raise_power_if_size_is_1(std::vector<std::string>& vec) {
+	std::string prev_output = get_cout_string(*this);
+	if (fields.size() == 1) {
+		Operand result{ fields[0].raise_pow(power).simplify() };
+		std::string next_output = get_cout_string(result);
+		if (prev_output != next_output)
+			vec.push_back(next_output);
+			//output << next_output << '\n';
+		return result;
+	}
+	return *this;
+}
+
+Operand Expression::simplify(std::vector<std::string>& vec) const {
+
+	//output.str(""); // Clearing the string stream
+	//output << *this << '\n';
+	vec.push_back(get_cout_string(*this));
+
+
+	Expression result{ *this };
+	result.simplify_each(vec);
+	result.simplify_internal_expressions(vec);
+	result.simplify_internal(vec);
+	result.remove_zeroes(vec);
+	result.constant_raise_power(vec);
+
+	return result.raise_power_if_size_is_1(vec);
 
 }
